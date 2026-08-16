@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: "Aegis • Privacy-Preserving Identity & Security Engine",
   description:
     "High-assurance Privacy-Preserving Identity and Security engine with zero PII retention, Merkle receipts, and SIMD Blake3 evaluation. Engineered by Rony M. (@ronderins).",
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({

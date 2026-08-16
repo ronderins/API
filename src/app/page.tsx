@@ -33,6 +33,7 @@ import { SecurityInspector } from "@/components/SecurityInspector";
 import { RustZKPEcosystem } from "@/components/RustZKPEcosystem";
 import { VisualFlowExplainer } from "@/components/VisualFlowExplainer";
 import { FooterModal, FooterModalType } from "@/components/FooterModal";
+import { AegisLogo } from "@/components/AegisLogo";
 import { animateViewTransition, animateHeaderEntrance } from "@/lib/gsap-animations";
 import type { VerifyResponse, HealthResponse } from "@/types";
 
@@ -177,9 +178,7 @@ export default function HomePage() {
       <header ref={headerRef} id="main-header" className="border-b border-zinc-800/80 bg-zinc-900/50 backdrop-blur sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-700 flex items-center justify-center shadow-lg shadow-emerald-950/50 text-zinc-950">
-              <ShieldCheck className="w-5 h-5 text-white" />
-            </div>
+            <AegisLogo size={38} animated id="header-logo" />
             <div>
               <div className="flex items-center gap-2">
                 <h1 className="font-bold text-base text-zinc-100 tracking-tight">Aegis</h1>
@@ -604,11 +603,12 @@ npm run dev`}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center justify-between">
             {/* Left: Brand, Guarantee & Dynamic Date */}
-            <div className="space-y-1.5 text-center md:text-left">
+            <div className="space-y-2 text-center md:text-left">
               <button
                 onClick={() => setActiveFooterModal("zero_pii")}
-                className="flex items-center justify-center md:justify-start gap-2 hover:text-zinc-100 transition cursor-pointer group text-left"
+                className="flex items-center justify-center md:justify-start gap-2.5 hover:text-zinc-100 transition cursor-pointer group text-left"
               >
+                <AegisLogo size={22} id="footer-logo" />
                 <span className="font-semibold text-zinc-200 group-hover:text-emerald-400 transition">Aegis Engine</span>
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                 <span className="text-[11px] font-mono text-emerald-400 underline underline-offset-2">Zero PII Architecture</span>

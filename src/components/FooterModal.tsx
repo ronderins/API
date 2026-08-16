@@ -24,6 +24,7 @@ import {
   Database,
   KeyRound,
 } from "lucide-react";
+import { AegisLogo } from "./AegisLogo";
 
 export type FooterModalType =
   | "how_it_works"
@@ -115,9 +116,7 @@ export function FooterModal({ type, onClose, onNavigateTab }: FooterModalProps) 
         <div className="px-6 py-4 border-b border-zinc-800 flex items-center justify-between bg-zinc-950/60 sticky top-0 z-10">
           <div className="flex items-center gap-3">
             {type === "how_it_works" && (
-              <div className="p-2 rounded-xl bg-teal-500/10 border border-teal-500/30 text-teal-400">
-                <Sparkles className="w-5 h-5" />
-              </div>
+              <AegisLogo size={32} animated id="modal-how-logo" />
             )}
             {type === "api_docs" && (
               <div className="p-2 rounded-xl bg-indigo-500/10 border border-indigo-500/30 text-indigo-400">
@@ -135,9 +134,7 @@ export function FooterModal({ type, onClose, onNavigateTab }: FooterModalProps) 
               </div>
             )}
             {type === "zero_pii" && (
-              <div className="p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
-                <ShieldCheck className="w-5 h-5" />
-              </div>
+              <AegisLogo size={32} animated id="modal-zero-pii-logo" />
             )}
             {type === "creator_profile" && (
               <div className="p-2 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-400">
