@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Lock, EyeOff, ShieldCheck, KeyRound, Cpu } from "lucide-react";
+import { Lock, EyeOff, ShieldCheck, KeyRound, Cpu, Terminal, Binary, CheckCircle2 } from "lucide-react";
 
 export const SecuritySpec: React.FC = () => {
   return (
@@ -11,8 +11,8 @@ export const SecuritySpec: React.FC = () => {
           <Lock className="w-5 h-5" />
         </div>
         <div>
-          <h2 className="text-lg font-semibold text-zinc-100">Privacy-Preserving Architecture</h2>
-          <p className="text-xs text-zinc-400">Cryptographic isolation & security guarantees enforced by this API</p>
+          <h2 className="text-lg font-semibold text-zinc-100">Privacy-Preserving Architecture &amp; Security Invariants</h2>
+          <p className="text-xs text-zinc-400">Cryptographic isolation, formal invariants, and zero-trust memory security enforced in native Rust</p>
         </div>
       </div>
 
@@ -43,8 +43,46 @@ export const SecuritySpec: React.FC = () => {
             <span>Constant-Time Security</span>
           </div>
           <p className="text-zinc-400 leading-relaxed">
-            API key verification uses constant-time byte comparisons (<code className="text-zinc-300 font-mono">crypto.timingSafeEqual</code>) to prevent side-channel timing attacks.
+            API key verification uses constant-time byte comparisons (<code className="text-zinc-300 font-mono">subtle::ConstantTimeEq</code> / <code className="text-zinc-300 font-mono">crypto.timingSafeEqual</code>) to prevent side-channel timing attacks.
           </p>
+        </div>
+      </div>
+
+      {/* Rust Security Guarantee Matrix */}
+      <div className="p-4 bg-zinc-950/90 border border-emerald-500/30 rounded-xl space-y-3 text-xs">
+        <div className="flex items-center justify-between">
+          <span className="font-bold text-emerald-400 flex items-center gap-1.5 font-mono">
+            <Terminal className="w-4 h-4" /> Native Rust Cryptographic &amp; Security Invariants
+          </span>
+          <span className="px-2 py-0.5 rounded bg-emerald-950 border border-emerald-700/60 text-[10px] text-emerald-300 font-mono">
+            #![forbid(unsafe_code)]
+          </span>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 font-mono text-[11px]">
+          <div className="p-2.5 rounded bg-zinc-900 border border-zinc-800 space-y-1">
+            <span className="text-emerald-400 font-bold block flex items-center gap-1">
+              <CheckCircle2 className="w-3.5 h-3.5" /> RAII Zeroization
+            </span>
+            <span className="text-zinc-400 text-[10px]">zeroize::ZeroizeOnDrop scrubs witness memory from RAM upon drop.</span>
+          </div>
+          <div className="p-2.5 rounded bg-zinc-900 border border-zinc-800 space-y-1">
+            <span className="text-blue-400 font-bold block flex items-center gap-1">
+              <CheckCircle2 className="w-3.5 h-3.5" /> Branchless Execution
+            </span>
+            <span className="text-zinc-400 text-[10px]">subtle::ConstantTimeEq eliminates cache-timing and branch leaks.</span>
+          </div>
+          <div className="p-2.5 rounded bg-zinc-900 border border-zinc-800 space-y-1">
+            <span className="text-purple-400 font-bold block flex items-center gap-1">
+              <CheckCircle2 className="w-3.5 h-3.5" /> SIMD Merkle Chains
+            </span>
+            <span className="text-zinc-400 text-[10px]">AVX-512 Blake3 tree hashing guarantees tamper-evident receipts.</span>
+          </div>
+          <div className="p-2.5 rounded bg-zinc-900 border border-zinc-800 space-y-1">
+            <span className="text-amber-400 font-bold block flex items-center gap-1">
+              <CheckCircle2 className="w-3.5 h-3.5" /> Zero Unsafe Code
+            </span>
+            <span className="text-zinc-400 text-[10px]">100% safe Rust preventing buffer overflows and use-after-free bugs.</span>
+          </div>
         </div>
       </div>
 
@@ -60,7 +98,7 @@ export const SecuritySpec: React.FC = () => {
           </p>
         </div>
         <span className="px-2.5 py-1 rounded-full bg-emerald-950 border border-emerald-700/60 font-mono text-[10px] text-emerald-300 whitespace-nowrap">
-          Plug & Play Autonomous
+          Plug &amp; Play Autonomous
         </span>
       </div>
 
