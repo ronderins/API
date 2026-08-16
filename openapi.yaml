@@ -1,0 +1,110 @@
+openapi: 3.1.0
+info:
+  title: Privacy-Preserving Identity & Age Verification API
+  version: 0.1.0
+  description: |
+    Creates privacy-preserving proof commitments and exposes their audit trails.
+    The service does not persist raw user identifiers or document files.
+servers:
+  - url: http://localhost:8080
+paths:
+  /healthz:
+    get:
+      operationId: health
+      responses:
+        "200":
+          description: Service is healthy.
+  /api/v1/verify:
+    post:
+      operationId: createVerificationProof
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VerifyRequest"
+      responses:
+        "201":
+          description: Proof commitment created.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VerifyResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "422":
+          $ref: "#/components/responses/ValidationError"
+  /api/v1/proofs/{id}:
+    get:
+      operationId: getProofAuditTrail
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Proof and audit trail.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProofResponse"
+        "404":
+          $ref: "#/components/responses/NotFound"
+components:
+  responses:
+    BadRequest:
+      description: Malformed JSON.
+    ValidationError:
+      description: Invalid request fields.
+    NotFound:
+      description: Proof does not exist.
+  schemas:
+    VerifyRequest:
+      type: object
+      required: [user_id, doc_hash, age_threshold]
+      properties:
+        user_id:
+          type: string
+          minLength: 1
+          maxLength: 256
+        doc_hash:
+          type: string
+          pattern: "^[a-fA-F0-9]{64}$"
+          description: SHA-256 digest of the document; the document is never uploaded.
+        age_threshold:
+          type: integer
+          minimum: 0
+          maximum: 130
+    VerifyResponse:
+      type: object
+      required: [verified, criteria_met, proof_signature]
+      properties:
+        verified:
+          type: boolean
+          description: Boolean confirmation that criteria was satisfied via Privacy-Preserving proof.
+          example: true
+        criteria_met:
+          type: string
+          description: String identifier for verified condition.
+          example: "age_over_18"
+        proof_signature:
+          type: string
+          description: Cryptographically signed payload token issued via jwt-simple HS256.
+          example: "eyJhbGciOiJIUzI1NiJ9..."
+    ProofResponse:
+      allOf:
+        - $ref: "#/components/schemas/VerifyResponse"
+        - type: object
+          required: [user_id_digest, document_hash, audit_trail]
+          properties:
+            user_id_digest:
+              type: string
+            document_hash:
+              type: string
+            audit_trail:
+              type: array
+              items:
+                type: object

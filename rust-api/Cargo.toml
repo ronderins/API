@@ -1,0 +1,38 @@
+[package]
+name = "zk-identity-api-rust"
+version = "0.2.0"
+edition = "2021"
+description = "High-Performance Zero-Knowledge Identity and Age Verification REST API with Zeroize, Blake3 Ledger, and Blind QR Sessions"
+
+[lib]
+name = "zk_identity_microservice"
+path = "src/lib.rs"
+
+[[bin]]
+name = "zk-identity-microservice"
+path = "src/main.rs"
+
+[[bench]]
+name = "proof_benchmarks"
+harness = false
+path = "benches/proof_benchmarks.rs"
+
+[dependencies]
+axum = "0.7.5"
+tokio = { version = "1.38", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+sha2 = "0.10.8"
+hex = "0.4.3"
+uuid = { version = "1.9", features = ["v4", "serde"] }
+chrono = { version = "0.4.38", features = ["serde"] }
+tower-http = { version = "0.5.2", features = ["cors", "trace"] }
+tracing = "0.1.40"
+tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
+subtle = "2.5.0"
+jwt-simple = "0.12.9"
+sqlx = { version = "0.7", features = ["runtime-tokio", "sqlite"] }
+zeroize = { version = "1.8", features = ["derive"] }
+blake3 = "1.5"
+sysinfo = "0.30"
+
