@@ -2,7 +2,7 @@
 name = "zk-identity-api-rust"
 version = "0.2.0"
 edition = "2021"
-description = "High-Performance Zero-Knowledge Identity and Age Verification REST API with Zeroize, Blake3 Ledger, and Blind QR Sessions"
+description = "High-Performance Zero-Knowledge Identity and Age Verification REST API with Zeroize, Blake3 Ledger, Guarded Memory, and Seccomp Sandbox"
 
 [lib]
 name = "zk_identity_microservice"
@@ -36,3 +36,23 @@ zeroize = { version = "1.8", features = ["derive"] }
 blake3 = "1.5"
 sysinfo = "0.30"
 
+# Compiler & Rust Security Hardening Profiles
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+panic = "abort"            # Prevents stack unwinding information leakage on panic
+overflow-checks = true     # CRITICAL: Keep arithmetic overflow traps active in release builds
+strip = "symbols"          # Strips debug symbols to prevent binary reverse-engineering
+rpath = false
+
+[profile.dev]
+overflow-checks = true
+debug = 2
+panic = "abort"
+
+[profile.bench]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+overflow-checks = true

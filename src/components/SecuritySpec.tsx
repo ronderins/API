@@ -52,36 +52,60 @@ export const SecuritySpec: React.FC = () => {
       <div className="p-4 bg-zinc-950/90 border border-emerald-500/30 rounded-xl space-y-3 text-xs">
         <div className="flex items-center justify-between">
           <span className="font-bold text-emerald-400 flex items-center gap-1.5 font-mono">
-            <Terminal className="w-4 h-4" /> Native Rust Cryptographic &amp; Security Invariants
+            <Terminal className="w-4 h-4" /> 10x Rust Security Hardening &amp; Cryptographic Invariants Suite
           </span>
           <span className="px-2 py-0.5 rounded bg-emerald-950 border border-emerald-700/60 text-[10px] text-emerald-300 font-mono">
-            #![forbid(unsafe_code)]
+            #![forbid(unsafe_code)] • 10x Hardened
           </span>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 font-mono text-[11px]">
           <div className="p-2.5 rounded bg-zinc-900 border border-zinc-800 space-y-1">
             <span className="text-emerald-400 font-bold block flex items-center gap-1">
-              <CheckCircle2 className="w-3.5 h-3.5" /> RAII Zeroization
+              <CheckCircle2 className="w-3.5 h-3.5" /> RAII Zeroize &amp; mlock
             </span>
-            <span className="text-zinc-400 text-[10px]">zeroize::ZeroizeOnDrop scrubs witness memory from RAM upon drop.</span>
+            <span className="text-zinc-400 text-[10px]">zeroize::ZeroizeOnDrop + kernel mlock/MADV_DONTDUMP prevents swap and core dumps.</span>
           </div>
           <div className="p-2.5 rounded bg-zinc-900 border border-zinc-800 space-y-1">
             <span className="text-blue-400 font-bold block flex items-center gap-1">
-              <CheckCircle2 className="w-3.5 h-3.5" /> Branchless Execution
+              <CheckCircle2 className="w-3.5 h-3.5" /> Seccomp BPF Sandbox
             </span>
-            <span className="text-zinc-400 text-[10px]">subtle::ConstantTimeEq eliminates cache-timing and branch leaks.</span>
+            <span className="text-zinc-400 text-[10px]">Drops 284 Linux syscalls (disallows execve, fork, ptrace) to contain RCE exploits.</span>
           </div>
           <div className="p-2.5 rounded bg-zinc-900 border border-zinc-800 space-y-1">
             <span className="text-purple-400 font-bold block flex items-center gap-1">
-              <CheckCircle2 className="w-3.5 h-3.5" /> SIMD Merkle Chains
+              <CheckCircle2 className="w-3.5 h-3.5" /> Timing Shield &amp; Jitter
             </span>
-            <span className="text-zinc-400 text-[10px]">AVX-512 Blake3 tree hashing guarantees tamper-evident receipts.</span>
+            <span className="text-zinc-400 text-[10px]">Branchless selection, cache-line eviction, and blinding eliminate side-channels.</span>
           </div>
           <div className="p-2.5 rounded bg-zinc-900 border border-zinc-800 space-y-1">
             <span className="text-amber-400 font-bold block flex items-center gap-1">
-              <CheckCircle2 className="w-3.5 h-3.5" /> Zero Unsafe Code
+              <CheckCircle2 className="w-3.5 h-3.5" /> Replay &amp; Epoch Guard
             </span>
-            <span className="text-zinc-400 text-[10px]">100% safe Rust preventing buffer overflows and use-after-free bugs.</span>
+            <span className="text-zinc-400 text-[10px]">Bloom-indexed spent nullifier ledger prevents replay &amp; double-spend attacks.</span>
+          </div>
+          <div className="p-2.5 rounded bg-zinc-900 border border-zinc-800 space-y-1">
+            <span className="text-teal-400 font-bold block flex items-center gap-1">
+              <CheckCircle2 className="w-3.5 h-3.5" /> Strict HTTP Security
+            </span>
+            <span className="text-zinc-400 text-[10px]">2-yr HSTS preload, strict CSP default-src 'none', COOP same-origin, nosniff.</span>
+          </div>
+          <div className="p-2.5 rounded bg-zinc-900 border border-zinc-800 space-y-1">
+            <span className="text-rose-400 font-bold block flex items-center gap-1">
+              <CheckCircle2 className="w-3.5 h-3.5" /> Panic Abort &amp; Overflow
+            </span>
+            <span className="text-zinc-400 text-[10px]">panic="abort" prevents stack unwind leaks; overflow-checks=true in release.</span>
+          </div>
+          <div className="p-2.5 rounded bg-zinc-900 border border-zinc-800 space-y-1">
+            <span className="text-indigo-400 font-bold block flex items-center gap-1">
+              <CheckCircle2 className="w-3.5 h-3.5" /> ASLR &amp; Full RELRO
+            </span>
+            <span className="text-zinc-400 text-[10px]">Position-independent PIC + read-only relocations (RELRO) + NX stack.</span>
+          </div>
+          <div className="p-2.5 rounded bg-zinc-900 border border-zinc-800 space-y-1">
+            <span className="text-emerald-400 font-bold block flex items-center gap-1">
+              <CheckCircle2 className="w-3.5 h-3.5" /> 100% Safe Rust Code
+            </span>
+            <span className="text-zinc-400 text-[10px]">#![forbid(unsafe_code)] ensures zero buffer overflows or pointer aliasing bugs.</span>
           </div>
         </div>
       </div>

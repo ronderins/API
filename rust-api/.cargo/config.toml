@@ -1,0 +1,22 @@
+[build]
+rustflags = [
+    # Forbid unsafe code unconditionally across all modules
+    "-F", "unsafe_code",
+    # Enable Control Flow Guard / Control-flow Enforcement Technology where supported
+    "-C", "control-flow-guard=true",
+    # Position Independent Executable (PIE/PIC) for ASLR defense
+    "-C", "relocation-model=pic",
+    # Strict clippy lints to deny unwrap, panic, and integer overflows
+    "-D", "clippy::unwrap_used",
+    "-D", "clippy::expect_used",
+    "-D", "clippy::panic",
+    "-D", "clippy::indexing_slicing",
+    "-W", "clippy::pedantic",
+    "-D", "unused_must_use",
+]
+
+[target.'cfg(all())']
+rustflags = [
+    "-C", "link-arg=-Wl,-z,relro,-z,now", # Full RELRO (read-only relocations)
+    "-C", "link-arg=-Wl,-z,noexecstack", # Non-executable stack protection (NX)
+]
