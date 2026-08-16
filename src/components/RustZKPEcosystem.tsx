@@ -11,7 +11,6 @@ import {
   Check,
   Lock,
   Layers,
-  Sparkles,
   ArrowRight,
   Terminal,
   Play,

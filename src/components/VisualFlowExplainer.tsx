@@ -11,7 +11,8 @@ import {
   CheckCircle2,
   FileText,
   KeyRound,
-  Sparkles,
+  Binary,
+  Lightbulb,
   Info,
   Play,
   Pause,
@@ -44,7 +45,7 @@ export const VisualFlowExplainer: React.FC = () => {
       id: 2,
       title: "2. Privacy-Preserving Witness Evaluation",
       subtitle: "Verifying criteria without revealing exact data",
-      icon: Sparkles,
+      icon: Binary,
       color: "blue",
       badge: "Cryptographic Circuit",
       description:
@@ -243,7 +244,7 @@ export const VisualFlowExplainer: React.FC = () => {
 
               <div className="p-3 bg-blue-950/20 border border-blue-900/40 rounded-lg space-y-1">
                 <span className="text-blue-400 font-semibold flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5" /> Real-World Analogy
+                  <Lightbulb className="w-3.5 h-3.5" /> Real-World Analogy
                 </span>
                 <p className="text-zinc-300 text-[11px] leading-normal">{current.analogy}</p>
               </div>

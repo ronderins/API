@@ -8,7 +8,8 @@ import {
   Copy,
   Check,
   Hash,
-  Sparkles,
+  Shuffle,
+  CheckCircle2,
   AlertCircle,
   Code2,
   Terminal,
@@ -369,7 +370,7 @@ bytes memory calldata = abi.encodeWithSelector(
               onClick={handleGenerateRandomHex}
               className="text-[11px] text-emerald-400 hover:text-emerald-300 flex items-center gap-1 font-mono"
             >
-              <Sparkles className="w-3 h-3" /> Random SHA-256
+              <Shuffle className="w-3 h-3" /> Random SHA-256
             </button>
           </div>
           <input
@@ -503,7 +504,7 @@ bytes memory calldata = abi.encodeWithSelector(
 
           <div className="p-3 bg-emerald-950/20 border border-emerald-800/40 rounded-lg flex items-center justify-between text-xs">
             <span className="text-emerald-300 font-medium flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
               Compliance Status: <strong className="text-emerald-200 font-mono">{response.criteria_met}</strong> (Zero PII Stored)
             </span>
             <div className="flex items-center gap-1.5">

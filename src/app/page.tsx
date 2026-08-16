@@ -17,7 +17,8 @@ import {
   Copy,
   Zap,
   Layers,
-  Sparkles,
+  Compass,
+  Workflow,
   UserCheck,
   Code2,
   ExternalLink,
@@ -32,13 +33,14 @@ import { ApiDocsViewer } from "@/components/ApiDocsViewer";
 import { SecurityInspector } from "@/components/SecurityInspector";
 import { RustZKPEcosystem } from "@/components/RustZKPEcosystem";
 import { VisualFlowExplainer } from "@/components/VisualFlowExplainer";
+import { WhyAegisMission } from "@/components/WhyAegisMission";
 import { FooterModal, FooterModalType } from "@/components/FooterModal";
 import { AegisLogo } from "@/components/AegisLogo";
 import { animateViewTransition, animateHeaderEntrance } from "@/lib/gsap-animations";
 import type { VerifyResponse, HealthResponse } from "@/types";
 
-type ViewTab = "playground" | "explainer" | "rust_ecosystem" | "security" | "lookup" | "docs" | "download";
-type Persona = "all" | "visual_guide" | "interactive_api" | "rust_deep_dive" | "security_audit";
+type ViewTab = "playground" | "mission" | "explainer" | "rust_ecosystem" | "security" | "lookup" | "docs" | "download";
+type Persona = "all" | "consumers" | "developers" | "enterprises" | "auditors" | "visual_guide" | "interactive_api" | "rust_deep_dive" | "security_audit";
 
 export default function HomePage() {
   const [activeView, setActiveView] = useState<ViewTab>("playground");
@@ -161,6 +163,8 @@ export default function HomePage() {
       handleSelectTab("rust_ecosystem");
     } else if (persona === "security_audit") {
       handleSelectTab("security");
+    } else if (persona === "consumers" || persona === "developers" || persona === "enterprises" || persona === "auditors") {
+      handleSelectTab("mission");
     }
   };
 
@@ -195,13 +199,23 @@ export default function HomePage() {
           {/* Actions & Health Status */}
           <div className="flex items-center gap-2 sm:gap-3 text-xs">
             <button
+              id="header-why-built-btn"
+              onClick={() => handleSelectTab("mission")}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-850 border border-emerald-500/40 text-emerald-300 font-medium transition active:scale-95 cursor-pointer"
+              title="Learn Why Aegis Was Built & Public Utility"
+            >
+              <Compass className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="hidden sm:inline">Why Aegis?</span>
+            </button>
+
+            <button
               id="header-public-testing-btn"
               onClick={() => setActiveFooterModal("public_testing_guide")}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-850 border border-emerald-500/40 text-emerald-300 font-medium transition active:scale-95 cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-850 border border-zinc-700 text-zinc-300 font-medium transition active:scale-95 cursor-pointer"
               title="View Public Testing & Verification Guide"
             >
               <Zap className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="hidden sm:inline">Public Testing</span>
+              <span className="hidden sm:inline">Testing Guide</span>
             </button>
 
             <a
@@ -238,7 +252,7 @@ export default function HomePage() {
           <div className="flex items-center gap-2 text-xs">
             <span className="text-zinc-400 font-mono text-[11px] flex items-center gap-1">
               <UserCheck className="w-3.5 h-3.5 text-emerald-400" />
-              Tailored View:
+              Audience Filter:
             </span>
             <div className="flex items-center gap-1 bg-zinc-950 p-1 rounded-lg border border-zinc-850 overflow-x-auto">
               <button
@@ -247,43 +261,39 @@ export default function HomePage() {
                   activePersona === "all" ? "bg-zinc-800 text-zinc-100 shadow-sm" : "text-zinc-400 hover:text-zinc-200"
                 }`}
               >
-                Overview
+                All Views
               </button>
               <button
-                onClick={() => handleSelectPersona("visual_guide")}
+                onClick={() => handleSelectPersona("consumers")}
                 className={`px-2.5 py-1 rounded text-xs font-medium transition duration-200 cursor-pointer flex items-center gap-1 ${
-                  activePersona === "visual_guide" ? "bg-emerald-950 text-emerald-300 border border-emerald-800 shadow-sm" : "text-zinc-400 hover:text-zinc-200"
+                  activePersona === "consumers" ? "bg-emerald-950 text-emerald-300 border border-emerald-800 shadow-sm" : "text-zinc-400 hover:text-zinc-200"
                 }`}
               >
-                <Sparkles className="w-3 h-3 text-emerald-400" />
-                <span>Visual Explainer</span>
+                <span>For Consumers</span>
               </button>
               <button
-                onClick={() => handleSelectPersona("interactive_api")}
+                onClick={() => handleSelectPersona("developers")}
                 className={`px-2.5 py-1 rounded text-xs font-medium transition duration-200 cursor-pointer flex items-center gap-1 ${
-                  activePersona === "interactive_api" ? "bg-blue-950 text-blue-300 border border-blue-800 shadow-sm" : "text-zinc-400 hover:text-zinc-200"
+                  activePersona === "developers" ? "bg-blue-950 text-blue-300 border border-blue-800 shadow-sm" : "text-zinc-400 hover:text-zinc-200"
                 }`}
               >
-                <Code2 className="w-3 h-3 text-blue-400" />
-                <span>API & Playground</span>
+                <span>For Developers</span>
               </button>
               <button
-                onClick={() => handleSelectPersona("rust_deep_dive")}
+                onClick={() => handleSelectPersona("enterprises")}
                 className={`px-2.5 py-1 rounded text-xs font-medium transition duration-200 cursor-pointer flex items-center gap-1 ${
-                  activePersona === "rust_deep_dive" ? "bg-orange-950 text-orange-300 border border-orange-800 shadow-sm" : "text-zinc-400 hover:text-zinc-200"
+                  activePersona === "enterprises" ? "bg-purple-950 text-purple-300 border border-purple-800 shadow-sm" : "text-zinc-400 hover:text-zinc-200"
                 }`}
               >
-                <Cpu className="w-3 h-3 text-orange-400" />
-                <span>Rust Privacy-Preserving Core</span>
+                <span>For Enterprises</span>
               </button>
               <button
-                onClick={() => handleSelectPersona("security_audit")}
+                onClick={() => handleSelectPersona("auditors")}
                 className={`px-2.5 py-1 rounded text-xs font-medium transition duration-200 cursor-pointer flex items-center gap-1 ${
-                  activePersona === "security_audit" ? "bg-purple-950 text-purple-300 border border-purple-800 shadow-sm" : "text-zinc-400 hover:text-zinc-200"
+                  activePersona === "auditors" ? "bg-amber-950 text-amber-300 border border-amber-800 shadow-sm" : "text-zinc-400 hover:text-zinc-200"
                 }`}
               >
-                <Lock className="w-3 h-3 text-purple-400" />
-                <span>Security & Crypto Lab</span>
+                <span>For Auditors</span>
               </button>
             </div>
           </div>
@@ -305,6 +315,22 @@ export default function HomePage() {
           ref={navContainerRef}
           className="flex items-center gap-2 border-b border-zinc-800/80 pb-3 mb-6 overflow-x-auto relative"
         >
+          <button
+            id="nav-tab-mission"
+            ref={(el) => { tabRefs.current["mission"] = el; }}
+            onClick={() => handleSelectTab("mission")}
+            onMouseEnter={(e) => handleNavButtonHover(e, true)}
+            onMouseLeave={(e) => handleNavButtonHover(e, false)}
+            className={`px-4 py-2 rounded-lg text-xs font-medium transition-colors duration-200 cursor-pointer flex items-center gap-2 whitespace-nowrap will-change-transform ${
+              activeView === "mission"
+                ? "bg-emerald-600 text-white shadow-lg shadow-emerald-950/60 font-semibold"
+                : "bg-zinc-900/80 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/80 border border-zinc-800"
+            }`}
+          >
+            <Compass className="w-4 h-4 text-emerald-300" />
+            <span>Why Aegis? (Mission & Utility)</span>
+          </button>
+
           <button
             id="nav-tab-playground"
             ref={(el) => { tabRefs.current["playground"] = el; }}
@@ -333,7 +359,7 @@ export default function HomePage() {
                 : "bg-zinc-900/80 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/80 border border-zinc-800"
             }`}
           >
-            <Sparkles className="w-4 h-4" />
+            <Workflow className="w-4 h-4" />
             <span>How It Works (Visual Guide)</span>
           </button>
 
@@ -490,6 +516,8 @@ export default function HomePage() {
             </div>
           )}
 
+          {activeView === "mission" && <WhyAegisMission />}
+
           {activeView === "explainer" && <VisualFlowExplainer />}
 
           {activeView === "rust_ecosystem" && <RustZKPEcosystem />}
@@ -624,6 +652,14 @@ npm run dev`}
 
             {/* Center: Interactive Floating Modal Links */}
             <div className="flex flex-wrap items-center justify-center gap-3 text-xs">
+              <button
+                id="footer-modal-btn-mission"
+                onClick={() => setActiveFooterModal("mission")}
+                className="hover:text-emerald-300 font-semibold transition cursor-pointer text-emerald-400 underline-offset-2 hover:underline"
+              >
+                Why Aegis?
+              </button>
+              <span className="text-zinc-700">•</span>
               <button
                 id="footer-modal-btn-how-it-works"
                 onClick={() => setActiveFooterModal("how_it_works")}

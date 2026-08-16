@@ -14,7 +14,8 @@ import {
   Check,
   Copy,
   Layers,
-  Sparkles,
+  Workflow,
+  Compass,
   FileCode2,
   BookOpen,
   Calendar,
@@ -28,6 +29,7 @@ import { AegisLogo } from "./AegisLogo";
 
 export type FooterModalType =
   | "how_it_works"
+  | "mission"
   | "api_docs"
   | "security_lab"
   | "source_code"
@@ -118,6 +120,9 @@ export function FooterModal({ type, onClose, onNavigateTab }: FooterModalProps) 
             {type === "how_it_works" && (
               <AegisLogo size={32} animated id="modal-how-logo" />
             )}
+            {type === "mission" && (
+              <AegisLogo size={32} animated id="modal-mission-logo" />
+            )}
             {type === "api_docs" && (
               <div className="p-2 rounded-xl bg-indigo-500/10 border border-indigo-500/30 text-indigo-400">
                 <BookOpen className="w-5 h-5" />
@@ -150,6 +155,7 @@ export function FooterModal({ type, onClose, onNavigateTab }: FooterModalProps) 
             <div>
               <h2 className="text-base font-bold text-zinc-100 flex items-center gap-2">
                 {type === "how_it_works" && "How Aegis Works"}
+                {type === "mission" && "Why Aegis Was Built & Public Utility"}
                 {type === "api_docs" && "REST API & OpenAPI Specification"}
                 {type === "security_lab" && "Security & Cryptography Lab"}
                 {type === "source_code" && "Full-Stack Source Code & Downloads"}
@@ -159,6 +165,7 @@ export function FooterModal({ type, onClose, onNavigateTab }: FooterModalProps) 
               </h2>
               <p className="text-xs text-zinc-400">
                 {type === "how_it_works" && "3-Phase Privacy-Preserving verification workflow"}
+                {type === "mission" && "Solving the Internet's identity paradox for consumers, developers, businesses, and auditors"}
                 {type === "api_docs" && "Interactive endpoints and live cURL snippets"}
                 {type === "security_lab" && "SIMD Blake3, Zeroize, and Canary Dead-Man switch"}
                 {type === "source_code" && "Next.js App Router + Native Rust Axum engine"}
@@ -218,8 +225,69 @@ export function FooterModal({ type, onClose, onNavigateTab }: FooterModalProps) 
                   }}
                   className="px-4 py-2 rounded-lg bg-teal-600 hover:bg-teal-500 text-white text-xs font-semibold flex items-center gap-2 transition"
                 >
-                  <Sparkles className="w-4 h-4" />
+                  <Workflow className="w-4 h-4" />
                   <span>Open Full Interactive Explainer Tab</span>
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* MISSION & RELEVANCE MODAL */}
+          {type === "mission" && (
+            <div className="space-y-4">
+              <div className="p-4 bg-emerald-950/30 border border-emerald-800/40 rounded-xl space-y-2">
+                <span className="font-bold text-emerald-400 text-xs flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4" /> The Problem Aegis Solves
+                </span>
+                <p className="text-xs text-zinc-300 leading-relaxed">
+                  Traditional identity verification forces individuals to upload unredacted passports, driver&apos;s licenses, and birthdates to random websites. This creates toxic honeypots of personal data that inevitably get breached, exposing people to identity theft and companies to catastrophic GDPR/CCPA fines.
+                </p>
+              </div>
+
+              <div className="space-y-2.5 text-xs">
+                <span className="font-mono text-[11px] uppercase tracking-wider text-zinc-400 font-semibold block">
+                  Why Aegis Is Relevant For Every Audience
+                </span>
+                
+                <div className="p-3 bg-zinc-950 border border-zinc-800 rounded-xl space-y-1">
+                  <span className="font-bold text-emerald-400">1. For Everyday Users & Citizens</span>
+                  <p className="text-zinc-400 text-[11px]">
+                    Prove you are 18+, 21+, or hold an authorized credential without revealing your name, birthdate, or uploading raw document photos.
+                  </p>
+                </div>
+
+                <div className="p-3 bg-zinc-950 border border-zinc-800 rounded-xl space-y-1">
+                  <span className="font-bold text-blue-400">2. For Developers & Startups</span>
+                  <p className="text-zinc-400 text-[11px]">
+                    Integrate zero-knowledge privacy-preserving checks in minutes with self-sovereign API keys, OpenAPI 3.1 specs, and sub-millisecond Rust performance.
+                  </p>
+                </div>
+
+                <div className="p-3 bg-zinc-950 border border-zinc-800 rounded-xl space-y-1">
+                  <span className="font-bold text-purple-400">3. For Enterprises & Platforms</span>
+                  <p className="text-zinc-400 text-[11px]">
+                    Eliminate toxic PII liability under GDPR/CCPA, cut KYC cold-storage costs, and boost user signup conversion rates.
+                  </p>
+                </div>
+
+                <div className="p-3 bg-zinc-950 border border-zinc-800 rounded-xl space-y-1">
+                  <span className="font-bold text-amber-400">4. For Auditors & Regulators</span>
+                  <p className="text-zinc-400 text-[11px]">
+                    Rely on formal mathematical proofs, hardware memory zeroization, and append-only Merkle ledger receipts instead of blind trust.
+                  </p>
+                </div>
+              </div>
+
+              <div className="pt-2 flex justify-end gap-2">
+                <button
+                  onClick={() => {
+                    handleClose();
+                    onNavigateTab?.("mission");
+                  }}
+                  className="px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold flex items-center gap-2 transition"
+                >
+                  <Compass className="w-4 h-4" />
+                  <span>Open Full Mission & Relevance Tab</span>
                 </button>
               </div>
             </div>
