@@ -36,6 +36,11 @@ export const RustZKPEcosystem: React.FC = () => {
     | "constant_time"
     | "zeroize_memory"
     | "guarded_memory"
+    | "enclave_attestation"
+    | "post_quantum"
+    | "formal_verification"
+    | "differential_privacy"
+    | "hsm_isolation"
     | "seccomp_sandbox"
     | "timing_shield"
     | "replay_guard"
@@ -610,6 +615,131 @@ export const RustZKPEcosystem: React.FC = () => {
           </button>
 
           <button
+            onClick={() => handleRunSecurityTest("enclave_attestation")}
+            disabled={isRunningTest}
+            className={`p-3.5 rounded-xl border text-left transition flex flex-col justify-between gap-2 cursor-pointer ${
+              activeTest === "enclave_attestation"
+                ? "bg-blue-950/40 border-blue-500 ring-1 ring-blue-500/40"
+                : "bg-zinc-950 border-zinc-800 hover:border-zinc-700 hover:bg-zinc-900/80"
+            }`}
+          >
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-xs font-bold text-blue-400 flex items-center gap-1.5">
+                <Shield className="w-3.5 h-3.5" /> Hardware Enclave (TEE)
+              </span>
+              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-blue-950 text-blue-300 border border-blue-800">
+                SGX DCAP &amp; SEV-SNP
+              </span>
+            </div>
+            <p className="text-zinc-400 text-[11px]">
+              Verifies hardware quote signatures, MRENCLAVE identity, and TCB security level.
+            </p>
+            <span className="text-xs text-blue-300 font-mono flex items-center gap-1">
+              <Play className="w-3 h-3" /> Run Invariant Test
+            </span>
+          </button>
+
+          <button
+            onClick={() => handleRunSecurityTest("post_quantum")}
+            disabled={isRunningTest}
+            className={`p-3.5 rounded-xl border text-left transition flex flex-col justify-between gap-2 cursor-pointer ${
+              activeTest === "post_quantum"
+                ? "bg-purple-950/40 border-purple-500 ring-1 ring-purple-500/40"
+                : "bg-zinc-950 border-zinc-800 hover:border-zinc-700 hover:bg-zinc-900/80"
+            }`}
+          >
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-xs font-bold text-purple-400 flex items-center gap-1.5">
+                <Binary className="w-3.5 h-3.5" /> Post-Quantum ML-KEM
+              </span>
+              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800">
+                FIPS 203 &amp; 204
+              </span>
+            </div>
+            <p className="text-zinc-400 text-[11px]">
+              Dual-hybrid X25519 + ML-KEM-768 lattice encapsulation with quantum forward secrecy.
+            </p>
+            <span className="text-xs text-purple-300 font-mono flex items-center gap-1">
+              <Play className="w-3 h-3" /> Run Invariant Test
+            </span>
+          </button>
+
+          <button
+            onClick={() => handleRunSecurityTest("formal_verification")}
+            disabled={isRunningTest}
+            className={`p-3.5 rounded-xl border text-left transition flex flex-col justify-between gap-2 cursor-pointer ${
+              activeTest === "formal_verification"
+                ? "bg-cyan-950/40 border-cyan-500 ring-1 ring-cyan-500/40"
+                : "bg-zinc-950 border-zinc-800 hover:border-zinc-700 hover:bg-zinc-900/80"
+            }`}
+          >
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-xs font-bold text-cyan-400 flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5" /> Formal SMT Invariants
+              </span>
+              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800">
+                Kani &amp; Z3 Solver
+              </span>
+            </div>
+            <p className="text-zinc-400 text-[11px]">
+              Mathematically proves zero overflow, unforgeable soundness, and branchless timing.
+            </p>
+            <span className="text-xs text-cyan-300 font-mono flex items-center gap-1">
+              <Play className="w-3 h-3" /> Run Invariant Test
+            </span>
+          </button>
+
+          <button
+            onClick={() => handleRunSecurityTest("differential_privacy")}
+            disabled={isRunningTest}
+            className={`p-3.5 rounded-xl border text-left transition flex flex-col justify-between gap-2 cursor-pointer ${
+              activeTest === "differential_privacy"
+                ? "bg-amber-950/40 border-amber-500 ring-1 ring-amber-500/40"
+                : "bg-zinc-950 border-zinc-800 hover:border-zinc-700 hover:bg-zinc-900/80"
+            }`}
+          >
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-xs font-bold text-amber-400 flex items-center gap-1.5">
+                <Layers className="w-3.5 h-3.5" /> (ε, δ) Differential Privacy
+              </span>
+              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-800">
+                Laplace &amp; Gaussian
+              </span>
+            </div>
+            <p className="text-zinc-400 text-[11px]">
+              Tracks privacy budget depletion and injects calibrated noise to defeat linkage attacks.
+            </p>
+            <span className="text-xs text-amber-300 font-mono flex items-center gap-1">
+              <Play className="w-3 h-3" /> Run Invariant Test
+            </span>
+          </button>
+
+          <button
+            onClick={() => handleRunSecurityTest("hsm_isolation")}
+            disabled={isRunningTest}
+            className={`p-3.5 rounded-xl border text-left transition flex flex-col justify-between gap-2 cursor-pointer ${
+              activeTest === "hsm_isolation"
+                ? "bg-rose-950/40 border-rose-500 ring-1 ring-rose-500/40"
+                : "bg-zinc-950 border-zinc-800 hover:border-zinc-700 hover:bg-zinc-900/80"
+            }`}
+          >
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-xs font-bold text-rose-400 flex items-center gap-1.5">
+                <Lock className="w-3.5 h-3.5" /> HSM PKCS#11 Key Isolation
+              </span>
+              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-rose-950 text-rose-300 border border-rose-800">
+                FIPS 140-3 Level 4
+              </span>
+            </div>
+            <p className="text-zinc-400 text-[11px]">
+              Non-exportable silicon key slot handles, active tamper response, and PIN zeroization.
+            </p>
+            <span className="text-xs text-rose-300 font-mono flex items-center gap-1">
+              <Play className="w-3 h-3" /> Run Invariant Test
+            </span>
+          </button>
+
+          <button
             onClick={() => handleRunSecurityTest("compiler_hardening")}
             disabled={isRunningTest}
             className={`p-3.5 rounded-xl border text-left transition flex flex-col justify-between gap-2 cursor-pointer ${
@@ -972,6 +1102,56 @@ export const RustZKPEcosystem: React.FC = () => {
             3. Guarded Memory &amp; mlock
           </button>
           <button
+            onClick={() => setSelectedCodeTab("enclave_attestation")}
+            className={`px-3 py-1.5 text-xs font-mono rounded-lg transition cursor-pointer whitespace-nowrap ${
+              selectedCodeTab === "enclave_attestation"
+                ? "bg-blue-950 text-blue-300 border border-blue-700 font-semibold"
+                : "text-zinc-400 hover:text-zinc-200"
+            }`}
+          >
+            4. Enclave TEE Quote
+          </button>
+          <button
+            onClick={() => setSelectedCodeTab("post_quantum")}
+            className={`px-3 py-1.5 text-xs font-mono rounded-lg transition cursor-pointer whitespace-nowrap ${
+              selectedCodeTab === "post_quantum"
+                ? "bg-purple-950 text-purple-300 border border-purple-700 font-semibold"
+                : "text-zinc-400 hover:text-zinc-200"
+            }`}
+          >
+            5. Post-Quantum ML-KEM
+          </button>
+          <button
+            onClick={() => setSelectedCodeTab("formal_verification")}
+            className={`px-3 py-1.5 text-xs font-mono rounded-lg transition cursor-pointer whitespace-nowrap ${
+              selectedCodeTab === "formal_verification"
+                ? "bg-cyan-950 text-cyan-300 border border-cyan-700 font-semibold"
+                : "text-zinc-400 hover:text-zinc-200"
+            }`}
+          >
+            6. Formal SMT Proofs
+          </button>
+          <button
+            onClick={() => setSelectedCodeTab("differential_privacy")}
+            className={`px-3 py-1.5 text-xs font-mono rounded-lg transition cursor-pointer whitespace-nowrap ${
+              selectedCodeTab === "differential_privacy"
+                ? "bg-amber-950 text-amber-300 border border-amber-700 font-semibold"
+                : "text-zinc-400 hover:text-zinc-200"
+            }`}
+          >
+            7. Diff. Privacy (ε,δ)
+          </button>
+          <button
+            onClick={() => setSelectedCodeTab("hsm_isolation")}
+            className={`px-3 py-1.5 text-xs font-mono rounded-lg transition cursor-pointer whitespace-nowrap ${
+              selectedCodeTab === "hsm_isolation"
+                ? "bg-rose-950 text-rose-300 border border-rose-700 font-semibold"
+                : "text-zinc-400 hover:text-zinc-200"
+            }`}
+          >
+            8. HSM PKCS#11 FIPS 140-3
+          </button>
+          <button
             onClick={() => setSelectedCodeTab("seccomp_sandbox")}
             className={`px-3 py-1.5 text-xs font-mono rounded-lg transition cursor-pointer whitespace-nowrap ${
               selectedCodeTab === "seccomp_sandbox"
@@ -979,7 +1159,7 @@ export const RustZKPEcosystem: React.FC = () => {
                 : "text-zinc-400 hover:text-zinc-200"
             }`}
           >
-            4. Seccomp BPF Sandbox
+            9. Seccomp BPF Sandbox
           </button>
           <button
             onClick={() => setSelectedCodeTab("timing_shield")}
@@ -989,7 +1169,7 @@ export const RustZKPEcosystem: React.FC = () => {
                 : "text-zinc-400 hover:text-zinc-200"
             }`}
           >
-            5. Timing Shield &amp; Jitter
+            10. Timing Shield &amp; Jitter
           </button>
           <button
             onClick={() => setSelectedCodeTab("replay_guard")}
@@ -999,7 +1179,7 @@ export const RustZKPEcosystem: React.FC = () => {
                 : "text-zinc-400 hover:text-zinc-200"
             }`}
           >
-            6. Replay Guard &amp; Epoch
+            11. Replay Guard &amp; Epoch
           </button>
           <button
             onClick={() => setSelectedCodeTab("strict_headers")}
@@ -1009,7 +1189,7 @@ export const RustZKPEcosystem: React.FC = () => {
                 : "text-zinc-400 hover:text-zinc-200"
             }`}
           >
-            7. Strict HTTP Headers
+            12. Strict HTTP Headers
           </button>
           <button
             onClick={() => setSelectedCodeTab("arkworks_circuit")}

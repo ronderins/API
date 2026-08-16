@@ -15,9 +15,14 @@
 
 pub mod audit_logger;
 pub mod constant_time;
+pub mod differential_privacy;
+pub mod enclave_attestation;
 pub mod entropy;
+pub mod formal_verification;
 pub mod guarded_memory;
+pub mod hsm_isolation;
 pub mod key_management;
+pub mod post_quantum;
 pub mod rate_limiter;
 pub mod replay_guard;
 pub mod seccomp_sandbox;
@@ -27,9 +32,14 @@ pub mod timing_shield;
 
 pub use audit_logger::{CryptographicAuditLogger, SignedAuditEntry};
 pub use constant_time::ct_eq;
+pub use differential_privacy::{DifferentialPrivacyEngine, DpParameters, PrivacyBudgetState};
+pub use enclave_attestation::{EnclaveAttestationEvidence, EnclaveTcbStatus, HardwareEnclaveVerifier};
 pub use entropy::{EntropyEvaluator, EntropyHealthStatus};
+pub use formal_verification::{FormalVerificationReport, FormalVerifier, VerifiedTheorem};
 pub use guarded_memory::{GuardedBuffer, MemoryProtectionConfig};
+pub use hsm_isolation::{HardwareSecurityModule, HsmSlotStatus, HsmUserPin};
 pub use key_management::{KeyDerivation, KeyPair, SecretKey256};
+pub use post_quantum::{HybridCiphertext, HybridPublicKey, HybridSecretKey, PostQuantumHybridEngine};
 pub use rate_limiter::{RateLimitPolicy, RateLimiter};
 pub use replay_guard::{ReplayGuard, ReplayGuardConfig};
 pub use seccomp_sandbox::{SeccompPolicy, SeccompSandbox, SeccompStatusReport};

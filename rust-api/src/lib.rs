@@ -44,9 +44,14 @@ pub use privacy_engine::{BlindSignature, BlindSignatureEngine, BlindedMessage, D
 pub use sdk::{OfflineVerifier, ProofRequestBuilder, ZkAuthClient};
 pub use security::audit_logger::{CryptographicAuditLogger, SignedAuditEntry};
 pub use security::constant_time::ct_eq;
+pub use security::differential_privacy::{DifferentialPrivacyEngine as SecurityDpEngine, DpParameters, PrivacyBudgetState};
+pub use security::enclave_attestation::{EnclaveAttestationEvidence, EnclaveTcbStatus, HardwareEnclaveVerifier};
 pub use security::entropy::{EntropyEvaluator, EntropyHealthStatus};
+pub use security::formal_verification::{FormalVerificationReport, FormalVerifier, VerifiedTheorem};
 pub use security::guarded_memory::{GuardedBuffer, MemoryProtectionConfig};
+pub use security::hsm_isolation::{HardwareSecurityModule, HsmSlotStatus, HsmUserPin};
 pub use security::key_management::{KeyDerivation, KeyPair, SecretKey256};
+pub use security::post_quantum::{HybridCiphertext, HybridPublicKey, HybridSecretKey, PostQuantumHybridEngine};
 pub use security::rate_limiter::{RateLimitPolicy, RateLimiter};
 pub use security::replay_guard::{ReplayGuard, ReplayGuardConfig};
 pub use security::seccomp_sandbox::{SeccompPolicy, SeccompSandbox, SeccompStatusReport};
