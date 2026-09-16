@@ -1,0 +1,175 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 380" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="flowBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080a0f" />
+      <stop offset="50%" stop-color="#0f121a" />
+      <stop offset="100%" stop-color="#090c12" />
+    </linearGradient>
+
+    <!-- Card Gradients -->
+    <linearGradient id="cardGradClient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#064e3b" stop-opacity="0.5" />
+      <stop offset="100%" stop-color="#022c22" stop-opacity="0.2" />
+    </linearGradient>
+
+    <linearGradient id="cardGradApp" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b" stop-opacity="0.5" />
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.2" />
+    </linearGradient>
+
+    <linearGradient id="cardGradAegis" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0c4a6e" stop-opacity="0.5" />
+      <stop offset="100%" stop-color="#042f2e" stop-opacity="0.2" />
+    </linearGradient>
+
+    <!-- Arrow Markers -->
+    <marker id="flowArrowEmerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#10b981" />
+    </marker>
+    <marker id="flowArrowSky" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#38bdf8" />
+    </marker>
+  </defs>
+
+  <style>
+    @keyframes pulseStep {
+      0%, 100% { opacity: 0.5; filter: drop-shadow(0 0 2px #10b981); }
+      50% { opacity: 1; filter: drop-shadow(0 0 8px #34d399); }
+    }
+    @keyframes packetMove1 {
+      0% { transform: translateX(0); opacity: 0; }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { transform: translateX(85px); opacity: 0; }
+    }
+    @keyframes packetMove2 {
+      0% { transform: translateX(0); opacity: 0; }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { transform: translateX(85px); opacity: 0; }
+    }
+    @keyframes badgeGlow {
+      0%, 100% { stroke: #10b981; }
+      50% { stroke: #34d399; filter: drop-shadow(0 0 6px rgba(52, 211, 153, 0.6)); }
+    }
+    .step-beacon {
+      animation: pulseStep 2s ease-in-out infinite;
+    }
+    .packet-1 {
+      animation: packetMove1 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    .packet-2 {
+      animation: packetMove2 2s cubic-bezier(0.4, 0, 0.2, 1) infinite 0.7s;
+    }
+    .aegis-glow-card {
+      animation: badgeGlow 3s ease-in-out infinite;
+    }
+    text {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+    }
+  </style>
+
+  <!-- Background Base Container -->
+  <rect width="1080" height="380" fill="url(#flowBg)" rx="16" />
+  <rect x="1" y="1" width="1078" height="378" fill="none" stroke="#27272a" stroke-width="1.5" rx="15" />
+
+  <!-- Title Header -->
+  <g transform="translate(40, 38)">
+    <text x="0" y="0" font-size="24" font-weight="900" fill="#f4f4f5" letter-spacing="-0.5">
+      Developer Integration in 3 Simple Steps
+    </text>
+    <text x="520" y="-1" class="font-mono" font-size="14" font-weight="800" fill="#34d399">
+      // HOW TO CONSUME IN YOUR APP
+    </text>
+    <text x="0" y="24" font-size="14" font-weight="500" fill="#94a3b8">
+      Raw personal identity never leaves the user's browser or phone. You verify predicates in sub-milliseconds.
+    </text>
+  </g>
+
+  <!-- Flow Arrows Between Containers -->
+  <!-- Step 1 -> Step 2 -->
+  <g transform="translate(340, 195)">
+    <line x1="0" y1="0" x2="80" y2="0" stroke="#10b981" stroke-width="2.5" stroke-dasharray="5 4" marker-end="url(#flowArrowEmerald)" />
+    <!-- Animated Traveling Packet -->
+    <circle class="packet-1" cx="0" cy="0" r="5" fill="#34d399" filter="drop-shadow(0 0 6px #10b981)" />
+    <text x="40" y="-12" class="font-mono" font-size="11" font-weight="800" fill="#6ee7b7" text-anchor="middle">sha256 digest</text>
+  </g>
+
+  <!-- Step 2 -> Step 3 -->
+  <g transform="translate(685, 195)">
+    <line x1="0" y1="0" x2="80" y2="0" stroke="#38bdf8" stroke-width="2.5" stroke-dasharray="5 4" marker-end="url(#flowArrowSky)" />
+    <!-- Animated Traveling Packet -->
+    <circle class="packet-2" cx="0" cy="0" r="5" fill="#38bdf8" filter="drop-shadow(0 0 6px #38bdf8)" />
+    <text x="40" y="-12" class="font-mono" font-size="11" font-weight="800" fill="#7dd3fc" text-anchor="middle">POST /v1/verify</text>
+  </g>
+
+  <!-- ================= STEP 1: CLIENT EDGE ================= -->
+  <g transform="translate(40, 90)">
+    <rect width="295" height="245" rx="14" fill="url(#cardGradClient)" stroke="#059669" stroke-width="1.8" />
+    <rect x="0" y="0" width="295" height="42" rx="14" fill="#064e3b" fill-opacity="0.8" />
+    <circle class="step-beacon" cx="20" cy="21" r="5.5" fill="#34d399" />
+    <text x="36" y="26" class="font-mono" font-size="14" font-weight="900" fill="#a7f3d0">STEP 1: CLIENT HASH</text>
+
+    <g transform="translate(16, 56)">
+      <text x="0" y="16" font-size="16" font-weight="800" fill="#ffffff">Hash ID Locally</text>
+      <text x="0" y="36" font-size="13" font-weight="500" fill="#a7f3d0">Device computes irreversible digest.</text>
+      <text x="0" y="52" font-size="13" font-weight="500" fill="#a7f3d0">Raw passport/ID NEVER leaves memory.</text>
+
+      <rect x="0" y="66" width="263" height="66" rx="8" fill="#18181b" stroke="#27272a" stroke-width="1" />
+      <text x="12" y="88" class="font-mono" font-size="12" font-weight="700" fill="#94a3b8">// In Browser or Mobile App:</text>
+      <text x="12" y="106" class="font-mono" font-size="12" font-weight="800" fill="#38bdf8">const doc_hash = sha256(bytes);</text>
+      <text x="12" y="122" class="font-mono" font-size="12" font-weight="800" fill="#34d399">const user_digest = sha256(uid);</text>
+
+      <rect x="0" y="142" width="263" height="34" rx="6" fill="#064e3b" fill-opacity="0.6" stroke="#10b981" stroke-width="1" />
+      <text x="12" y="164" class="font-mono" font-size="12" font-weight="900" fill="#dcfce7">🛡️ ZERO RAW PII TRANSMITTED</text>
+    </g>
+  </g>
+
+  <!-- ================= STEP 2: YOUR APP BACKEND ================= -->
+  <g transform="translate(385, 90)">
+    <rect width="295" height="245" rx="14" fill="url(#cardGradApp)" stroke="#6366f1" stroke-width="1.8" />
+    <rect x="0" y="0" width="295" height="42" rx="14" fill="#1e1b4b" fill-opacity="0.8" />
+    <circle class="step-beacon" cx="20" cy="21" r="5.5" fill="#818cf8" />
+    <text x="36" y="26" class="font-mono" font-size="14" font-weight="900" fill="#c7d2fe">STEP 2: YOUR BACKEND</text>
+
+    <g transform="translate(16, 56)">
+      <text x="0" y="16" font-size="16" font-weight="800" fill="#ffffff">Call Aegis REST API</text>
+      <text x="0" y="36" font-size="13" font-weight="500" fill="#cbd5e1">Fetch nonce and submit threshold.</text>
+      <text x="0" y="52" font-size="13" font-weight="500" fill="#cbd5e1">Zero databases or PII storage required.</text>
+
+      <rect x="0" y="66" width="263" height="66" rx="8" fill="#18181b" stroke="#27272a" stroke-width="1" />
+      <text x="12" y="88" class="font-mono" font-size="12" font-weight="700" fill="#94a3b8">// Your Server / Next.js / Express:</text>
+      <text x="12" y="106" class="font-mono" font-size="12" font-weight="800" fill="#c4b5fd">fetch("/api/v1/verify", {</text>
+      <text x="24" y="122" class="font-mono" font-size="12" font-weight="800" fill="#ffffff">body: { doc_hash, threshold: 21 }</text>
+
+      <rect x="0" y="142" width="263" height="34" rx="6" fill="#1e1b4b" fill-opacity="0.6" stroke="#818cf8" stroke-width="1" />
+      <text x="12" y="164" class="font-mono" font-size="12" font-weight="900" fill="#e0e7ff">⚡ REPLAY-SAFE SESSION NONCE</text>
+    </g>
+  </g>
+
+  <!-- ================= STEP 3: AEGIS ZK ENGINE ================= -->
+  <g transform="translate(745, 90)">
+    <rect class="aegis-glow-card" width="295" height="245" rx="14" fill="url(#cardGradAegis)" stroke="#0284c7" stroke-width="1.8" />
+    <rect x="0" y="0" width="295" height="42" rx="14" fill="#0c4a6e" fill-opacity="0.85" />
+    <circle class="step-beacon" cx="20" cy="21" r="5.5" fill="#38bdf8" />
+    <text x="36" y="26" class="font-mono" font-size="14" font-weight="900" fill="#bae6fd">STEP 3: PROOF &amp; RECEIPT</text>
+
+    <g transform="translate(16, 56)">
+      <text x="0" y="16" font-size="16" font-weight="800" fill="#ffffff">Evaluate &amp; Zeroize</text>
+      <text x="0" y="36" font-size="13" font-weight="500" fill="#bae6fd">Runs circuit constraint in &lt;150 µs.</text>
+      <text x="0" y="52" font-size="13" font-weight="500" fill="#bae6fd">Purges memory to zeroes instantly.</text>
+
+      <rect x="0" y="66" width="263" height="66" rx="8" fill="#18181b" stroke="#27272a" stroke-width="1" />
+      <text x="12" y="88" class="font-mono" font-size="12" font-weight="800" fill="#34d399">✓ status: "verified"</text>
+      <text x="12" y="106" class="font-mono" font-size="12" font-weight="800" fill="#38bdf8">✓ proof_token: "eyJhbGciOi..."</text>
+      <text x="12" y="122" class="font-mono" font-size="12" font-weight="800" fill="#a78bfa">✓ merkle_root: "0x9e12...b2"</text>
+
+      <rect x="0" y="142" width="263" height="34" rx="6" fill="#064e3b" fill-opacity="0.8" stroke="#10b981" stroke-width="1" />
+      <text x="12" y="164" class="font-mono" font-size="12" font-weight="900" fill="#dcfce7">🔒 SIGNED JWT + BLAKE3 RECEIPT</text>
+    </g>
+  </g>
+</svg>

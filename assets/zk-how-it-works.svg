@@ -22,17 +22,31 @@
   <style>
     @keyframes alertPulse {
       0%, 100% { opacity: 0.4; }
-      50% { opacity: 1; filter: drop-shadow(0 0 8px #ef4444); }
+      50% { opacity: 1; filter: drop-shadow(0 0 10px #ef4444); }
     }
     @keyframes greenPulse {
       0%, 100% { opacity: 0.5; }
-      50% { opacity: 1; filter: drop-shadow(0 0 8px #34d399); }
+      50% { opacity: 1; filter: drop-shadow(0 0 10px #34d399); }
+    }
+    @keyframes aegisShieldGlow {
+      0%, 100% { stroke: #10b981; stroke-opacity: 0.6; }
+      50% { stroke: #34d399; stroke-opacity: 1; filter: drop-shadow(0 0 8px rgba(52, 211, 153, 0.6)); }
+    }
+    @keyframes breachPulse {
+      0%, 100% { stroke: #ef4444; stroke-opacity: 0.5; }
+      50% { stroke: #f87171; stroke-opacity: 1; filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.6)); }
     }
     .alert-led {
       animation: alertPulse 1.8s ease-in-out infinite;
     }
     .green-led {
       animation: greenPulse 1.8s ease-in-out infinite;
+    }
+    .honeypot-card {
+      animation: breachPulse 2.5s ease-in-out infinite;
+    }
+    .aegis-shield-card {
+      animation: aegisShieldGlow 2.5s ease-in-out infinite;
     }
     text {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -58,7 +72,7 @@
 
   <!-- ================= LEFT COLUMN: TRADITIONAL IDENTITY VENDOR (HONEYPOT) ================= -->
   <g transform="translate(40, 92)">
-    <rect width="480" height="350" rx="14" fill="url(#dangerGrad)" stroke="#ef4444" stroke-width="1.8" stroke-opacity="0.6" />
+    <rect class="honeypot-card" width="480" height="350" rx="14" fill="url(#dangerGrad)" stroke="#ef4444" stroke-width="1.8" />
     
     <!-- Header -->
     <rect x="0" y="0" width="480" height="50" rx="14" fill="#450a0a" fill-opacity="0.9" />
@@ -94,7 +108,7 @@
 
   <!-- ================= RIGHT COLUMN: AEGIS ZERO-KNOWLEDGE ENGINE ================= -->
   <g transform="translate(560, 92)">
-    <rect width="480" height="350" rx="14" fill="url(#successGrad)" stroke="#10b981" stroke-width="1.8" stroke-opacity="0.6" />
+    <rect class="aegis-shield-card" width="480" height="350" rx="14" fill="url(#successGrad)" stroke="#10b981" stroke-width="1.8" />
     
     <!-- Header -->
     <rect x="0" y="0" width="480" height="50" rx="14" fill="#064e3b" fill-opacity="0.9" />

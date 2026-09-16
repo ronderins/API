@@ -64,9 +64,42 @@
       0%, 100% { stroke: #22c55e; stroke-width: 1.5; }
       50% { stroke: #4ade80; stroke-width: 3; filter: drop-shadow(0 0 8px #22c55e); }
     }
-    .flow-line {
-      stroke-dasharray: 6 4;
+    @keyframes flowDash {
+      from { stroke-dashoffset: 20; }
+      to { stroke-dashoffset: 0; }
     }
+    @keyframes packetFlow1 {
+      0% { transform: translateX(0); opacity: 0; }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { transform: translateX(37px); opacity: 0; }
+    }
+    @keyframes packetFlow2 {
+      0% { transform: translateX(0); opacity: 0; }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { transform: translateX(37px); opacity: 0; }
+    }
+    @keyframes packetFlow3 {
+      0% { transform: translate(0, 0); opacity: 0; }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { transform: translate(32px, -18px); opacity: 0; }
+    }
+    @keyframes packetFlow4 {
+      0% { transform: translate(0, 0); opacity: 0; }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { transform: translate(32px, 42px); opacity: 0; }
+    }
+    .flow-line-active {
+      stroke-dasharray: 6 4;
+      animation: flowDash 1.2s linear infinite;
+    }
+    .packet-p1 { animation: packetFlow1 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+    .packet-p2 { animation: packetFlow2 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite 0.4s; }
+    .packet-p3 { animation: packetFlow3 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite 0.8s; }
+    .packet-p4 { animation: packetFlow4 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite 0.9s; }
     .beacon {
       animation: beaconBlink 2.5s ease-in-out infinite;
     }
@@ -98,11 +131,20 @@
     </text>
   </g>
 
-  <!-- Signal Flow Lines Connecting Tiers with Directional Arrowheads -->
-  <path d="M 260 300 L 297 300" fill="none" stroke="#10b981" stroke-width="3" marker-end="url(#arrowEmerald)" />
-  <path d="M 535 300 L 572 300" fill="none" stroke="#38bdf8" stroke-width="3" marker-end="url(#arrowSky)" />
-  <path d="M 815 240 L 847 222" fill="none" stroke="#34d399" stroke-width="3" marker-end="url(#arrowGreen)" />
-  <path d="M 815 370 L 847 412" fill="none" stroke="#a78bfa" stroke-width="3" marker-end="url(#arrowPurple)" />
+  <!-- Signal Flow Lines Connecting Tiers with Directional Arrowheads and Animated Pulses -->
+  <g>
+    <path d="M 260 300 L 297 300" fill="none" stroke="#10b981" stroke-width="3" class="flow-line-active" marker-end="url(#arrowEmerald)" />
+    <circle class="packet-p1" cx="260" cy="300" r="4.5" fill="#34d399" filter="drop-shadow(0 0 6px #10b981)" />
+
+    <path d="M 535 300 L 572 300" fill="none" stroke="#38bdf8" stroke-width="3" class="flow-line-active" marker-end="url(#arrowSky)" />
+    <circle class="packet-p2" cx="535" cy="300" r="4.5" fill="#38bdf8" filter="drop-shadow(0 0 6px #38bdf8)" />
+
+    <path d="M 815 240 L 847 222" fill="none" stroke="#34d399" stroke-width="3" class="flow-line-active" marker-end="url(#arrowGreen)" />
+    <circle class="packet-p3" cx="815" cy="240" r="4.5" fill="#34d399" filter="drop-shadow(0 0 6px #34d399)" />
+
+    <path d="M 815 370 L 847 412" fill="none" stroke="#a78bfa" stroke-width="3" class="flow-line-active" marker-end="url(#arrowPurple)" />
+    <circle class="packet-p4" cx="815" cy="370" r="4.5" fill="#c084fc" filter="drop-shadow(0 0 6px #a78bfa)" />
+  </g>
 
   <!-- ================= TIER 1: CLIENT EDGE ================= -->
   <g id="tier-1" transform="translate(35, 95)">
