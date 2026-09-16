@@ -24,9 +24,9 @@
   <a href="#-who-is-aegis-for"><img src="assets/icons/users.svg" width="26" height="26" align="absmiddle" /> Who Is It For</a> &nbsp;•&nbsp;
   <a href="#-system-architecture"><img src="assets/icons/architecture.svg" width="26" height="26" align="absmiddle" /> Architecture</a> &nbsp;•&nbsp;
   <a href="#-how-it-works"><img src="assets/icons/circuit.svg" width="26" height="26" align="absmiddle" /> How It Works</a> &nbsp;•&nbsp;
-  <a href="#-api-quickstart"><img src="assets/icons/zap.svg" width="26" height="26" align="absmiddle" /> Quickstart</a> &nbsp;•&nbsp;
+  <a href="#-how-to-consume-the-api"><img src="assets/icons/zap.svg" width="26" height="26" align="absmiddle" /> Consume The API</a> &nbsp;•&nbsp;
+  <a href="#-ui-design--animation-system"><img src="assets/icons/code.svg" width="26" height="26" align="absmiddle" /> UI & Animations</a> &nbsp;•&nbsp;
   <a href="#-api-reference"><img src="assets/icons/terminal.svg" width="26" height="26" align="absmiddle" /> API Reference</a> &nbsp;•&nbsp;
-  <a href="#-contributing"><img src="assets/icons/git-collab.svg" width="26" height="26" align="absmiddle" /> <strong>Contribute</strong></a> &nbsp;•&nbsp;
   <a href="#-deployment"><img src="assets/icons/rocket.svg" width="26" height="26" align="absmiddle" /> Deployment</a> &nbsp;•&nbsp;
   <a href="#-security-specifications"><img src="assets/icons/shield.svg" width="26" height="26" align="absmiddle" /> Security Spec</a>
 </p>
@@ -186,112 +186,237 @@ Auditors can verify that a specific attestation was legally issued by querying `
 
 ---
 
-## <img src="assets/icons/zap.svg" width="34" height="34" align="absmiddle" /> API Quickstart
+## <img src="assets/icons/zap.svg" width="34" height="34" align="absmiddle" /> How to Consume the API (Developer Integration Guide)
 
-Aegis is completely self-sovereign. No credit cards or account registrations are required.
+Aegis is engineered for instant, zero-friction developer adoption. It is 100% self-contained: no external SaaS signups, credit cards, or proprietary vendor credentials are required.
 
-### 1. Bash / cURL
+### How the API is Created & Operates
+* **Dual Execution Runtime**: Aegis includes both a full-stack **Next.js 15 App Router** engine (`/src/app/api/v1/*`) running on port `3000` and an optional native **Rust Axum** microservice (`/rust-api`) running on port `8080`. Both runtimes implement identical cryptographic API contracts.
+* **Authentication**: Optional pre-shared API key authorization via `X-API-Key: <key>` header or `Authorization: Bearer <key>`. Verification uses constant-time byte comparisons (`crypto.timingSafeEqual` in Node.js / `subtle::ConstantTimeEq` in Rust) to eliminate side-channel timing leaks.
+* **Zero PII Payload Guarantee**: The API strictly forbids raw identity bytes. The client hashes the identity document and user ID locally. Aegis receives only 64-character hexadecimal SHA-256/Blake3 digests and numerical predicate thresholds.
+* **Cryptographic Invariants**: Outputs tamper-evident HS256 JWT attestation tokens, domain-separated commitment hashes (`SHA-256("zk-identity-proof-v1\0" || user_digest || doc_hash || threshold || nonce)`), and appends an immutable leaf to an in-memory Blake3 Merkle tree.
+
+---
+
+### Step-by-Step Realistic Consumption Flow
+
+```
+[User Device]                           [Your App Backend]                          [Aegis API]
+     │                                          │                                        │
+     │ 1. Hash Document Locally (Blake3/SHA256) │                                        │
+     ├─────────────────────────────────────────>│                                        │
+     │                                          │ 2. Fetch Challenge Nonce               │
+     │                                          ├───────────────────────────────────────>│
+     │                                          │<───────────────────────────────────────┤ (200 OK: session_nonce)
+     │                                          │                                        │
+     │                                          │ 3. Submit Predicate Verification       │
+     │                                          ├───────────────────────────────────────>│ (POST /api/v1/verify)
+     │                                          │<───────────────────────────────────────┤ (200 OK: proof_token, merkle_root)
+     │                                          │                                        │
+     │ 4. Verified Access Granted               │ 5. (Optional) Audit Ledger Inclusion   │
+     │<─────────────────────────────────────────┤                                        ├───────────────────────────────────────>│ (POST /api/v1/verify-merkle)
+```
+
+---
+
+### Code Examples: Real-World Consumption
+
+#### 1. TypeScript & Node.js / Next.js
+```typescript
+import { createHash } from "crypto";
+
+interface AegisVerifyResponse {
+  status: "verified" | "rejected";
+  predicate: string;
+  verified: boolean;
+  proof_id: string;
+  proof_token: string;
+  commitment: string;
+  merkle_root: string;
+  latency_us: number;
+}
+
+async function verifyUserAge(
+  rawDocumentBytes: Buffer,
+  pseudonymousUserId: string,
+  userBirthYear: number,
+  requiredAge = 21
+): Promise<AegisVerifyResponse> {
+  const AEGIS_BASE_URL = process.env.AEGIS_API_URL || "http://localhost:3000";
+  const AEGIS_API_KEY = process.env.AEGIS_API_KEY;
+
+  // Step 1: Client/Edge hashes document locally (Raw document NEVER leaves device/memory)
+  const docHash = createHash("sha256").update(rawDocumentBytes).digest("hex");
+  const userDigest = createHash("sha256").update(pseudonymousUserId).digest("hex");
+
+  // Step 2: Fetch single-use session challenge nonce (prevents replay attacks)
+  const sessionRes = await fetch(`${AEGIS_BASE_URL}/api/v1/session`);
+  if (!sessionRes.ok) throw new Error("Failed to acquire challenge nonce");
+  const { session_nonce } = await sessionRes.json();
+
+  // Step 3: Dispatch verification request
+  const headers: Record<string, string> = { "Content-Type": "application/json" };
+  if (AEGIS_API_KEY) headers["X-API-Key"] = AEGIS_API_KEY;
+
+  const verifyRes = await fetch(`${AEGIS_BASE_URL}/api/v1/verify`, {
+    method: "POST",
+    headers,
+    body: JSON.stringify({
+      user_digest: userDigest,
+      doc_hash: docHash,
+      threshold: requiredAge,
+      current_year: new Date().getFullYear(),
+      birth_year: userBirthYear,
+      nonce: session_nonce,
+    }),
+  });
+
+  if (!verifyRes.ok) {
+    const errorData = await verifyRes.json();
+    throw new Error(`Aegis verification error: ${errorData.error || verifyRes.statusText}`);
+  }
+
+  const result: AegisVerifyResponse = await verifyRes.json();
+  
+  // Step 4: Validate token (or store in your user session)
+  console.log(`Verification status: ${result.status}`); // "verified"
+  console.log(`Proof Token (JWT): ${result.proof_token}`);
+  console.log(`Merkle Root: ${result.merkle_root}`);
+  console.log(`Latency: ${result.latency_us}µs`);
+
+  return result;
+}
+```
+
+#### 2. cURL / Bash
 ```bash
-# Step 1: Fetch a short-lived session challenge nonce (5-min TTL)
-SESSION=$(curl -s https://your-aegis-host/api/v1/session)
-NONCE=$(echo $SESSION | jq -r '.session_nonce')
+# 1. Acquire single-use ephemeral challenge nonce (300s TTL)
+NONCE=$(curl -s http://localhost:3000/api/v1/session | jq -r '.session_nonce')
 
-# Step 2: Generate a privacy-preserving age attestation (Age >= 21)
-curl -X POST https://your-aegis-host/api/v1/verify \
+# 2. Submit privacy-preserving age predicate check (Age >= 21)
+# Note: user_digest and doc_hash are client-generated 64-char SHA-256 hex strings
+curl -X POST http://localhost:3000/api/v1/verify \
   -H "Content-Type: application/json" \
+  -H "X-API-Key: test-api-key" \
   -d '{
     "user_digest": "4a7d3b8f1c2e5a9b0d6f8e7a1c3b5d7f9e2a4b6c8d0e1f3a5b7c9d1e3f5a7b9c",
     "doc_hash": "8f3c4e2b1a0d9e8f7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8b7c6d5e4f",
     "threshold": 21,
     "current_year": 2026,
-    "birth_year": 2001,
+    "birth_year": 2002,
     "nonce": "'"$NONCE"'"
   }'
 
-# Step 3: Verify the issued cryptographic JWT proof token
-curl -X POST https://your-aegis-host/api/v1/verify-token \
+# 3. Validate issued tamper-evident JWT proof token
+curl -X POST http://localhost:3000/api/v1/verify-token \
   -H "Content-Type: application/json" \
-  -d '{"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."}'
+  -d '{"token": "<TOKEN_FROM_STEP_2>"}'
+
+# 4. Lookup immutable audit ledger entry by proof ID
+curl -s http://localhost:3000/api/v1/proofs/<PROOF_ID> | jq .
 ```
 
-### 2. TypeScript / Node.js
-```typescript
-import { createHash } from "crypto";
-
-async function verifyAgeWithAegis(passportBytes: Buffer, birthYear: number) {
-  // 1. Client-Side Hash: Document never leaves the device
-  const docHash = createHash("sha256").update(passportBytes).digest("hex");
-  const userDigest = createHash("sha256").update("user_unique_salt").digest("hex");
-
-  // 2. Request ephemeral session challenge
-  const sessionRes = await fetch("https://your-aegis-host/api/v1/session");
-  const { session_nonce } = await sessionRes.json();
-
-  // 3. Submit cryptographic predicate verification
-  const verifyRes = await fetch("https://your-aegis-host/api/v1/verify", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      user_digest: userDigest,
-      doc_hash: docHash,
-      threshold: 21,
-      current_year: new Date().getFullYear(),
-      birth_year: birthYear,
-      nonce: session_nonce,
-    }),
-  });
-
-  const attestation = await verifyRes.json();
-  console.log("Proof Result:", attestation.status); // "verified"
-  console.log("Cryptographic Receipt:", attestation.proof_token);
-  return attestation;
-}
-```
-
-### 3. Python 3
+#### 3. Python 3 (requests)
 ```python
-import hashlib, requests
+import hashlib
+import requests
 
-# 1. Compute client-side document hash locally
-doc_bytes = b"sample_raw_passport_data_or_mrz"
+AEGIS_URL = "http://localhost:3000"
+HEADERS = {"X-API-Key": "your-api-key"}
+
+# 1. Compute client-side digests locally
+doc_bytes = b"sample_raw_passport_mrz_data"
 doc_hash = hashlib.sha256(doc_bytes).hexdigest()
-user_digest = hashlib.sha256(b"pseudonymous_user_id").hexdigest()
+user_digest = hashlib.sha256(b"user_unique_identifier").hexdigest()
 
-# 2. Acquire ephemeral challenge
-base_url = "https://your-aegis-host"
-session = requests.get(f"{base_url}/api/v1/session").json()
+# 2. Request single-use challenge nonce
+session_res = requests.get(f"{AEGIS_URL}/api/v1/session")
+nonce = session_res.json()["session_nonce"]
 
 # 3. Request zero-knowledge verification
-response = requests.post(f"{base_url}/api/v1/verify", json={
+verify_res = requests.post(f"{AEGIS_URL}/api/v1/verify", headers=HEADERS, json={
     "user_digest": user_digest,
     "doc_hash": doc_hash,
     "threshold": 21,
     "current_year": 2026,
-    "birth_year": 2002,
-    "nonce": session["session_nonce"]
+    "birth_year": 2003,
+    "nonce": nonce
 })
 
-result = response.json()
-print(f"Status: {result['status']}") # verified
-print(f"Merkle Block ID: {result['block_id']}")
+data = verify_res.json()
+print("Status:", data["status"])              # "verified"
+print("JWT Proof Token:", data["proof_token"]) # Cryptographic proof of age >= 21
+print("Execution Latency:", data["latency_us"], "microseconds")
 ```
+
+---
+
+### HTTP Status & Error Code Reference
+
+| Status Code | Meaning | Cause |
+| :---: | :--- | :--- |
+| `200 OK` | **Verification Successful** | Predicate constraint evaluated to `true`, JWT minted, and Merkle leaf recorded. |
+| `400 Bad Request` | **Missing or Invalid Parameters** | Missing `user_digest`, `doc_hash` not 64 hex chars, or invalid threshold range. |
+| `401 Unauthorized` | **Invalid API Key** | `X-API-Key` or `Bearer` token failed constant-time equality check against authorized keys. |
+| `404 Not Found` | **Proof ID Not Found** | Queried proof ID does not exist in the active SQLite ledger (`GET /api/v1/proofs/:id`). |
+| `422 Unprocessable` | **Predicate Criteria Unmet** | Arithmetic check failed (e.g., user is 19 for a threshold of 21). `criteria_met: false`. |
+| `500 Internal Error` | **Engine Fault** | SQLite database or cryptographic hashing anomaly. Zero PII is logged. |
+
+---
+
+## <img src="assets/icons/code.svg" width="34" height="34" align="absmiddle" /> UI Architecture: Card Spacing & Cryptographic Animations
+
+The Aegis workbench interface is purposefully engineered for developer and security auditor clarity. It eliminates visual clutter ("AI Slop") through mathematically sound spatial rhythm and cryptographic GSAP animations.
+
+### 1. Geometric Card Spacing Hierarchy (No Clunky Borders)
+To prevent clunky, cramped, or misaligned container layouts, Aegis adheres to a strict nested spacing system:
+
+* **Top-Level Container Cards (`aegis-card`)**:
+  * Outer Padding: `p-6 sm:p-7` (24px to 28px).
+  * Corner Radius: `rounded-2xl` (16px).
+  * Background & Border: `bg-zinc-900/70 border border-zinc-800 shadow-xl`.
+* **Child Cards & Invariant Blocks**:
+  * Inner Padding: `p-5` (20px).
+  * Corner Radius: `rounded-xl` (12px).
+  * Background & Border: `bg-zinc-950/90 border border-zinc-800/80 shadow-md`.
+* **Sub-Containers, Terminals & Code Blocks**:
+  * Deep Padding: `p-3.5` (14px).
+  * Corner Radius: `rounded-xl` (12px).
+  * Background & Border: `bg-zinc-900/90 border border-zinc-800/80 font-mono`.
+* **Mathematical Nested Radius Rule**:
+  $$\text{Radius}_{\text{inner}} = \text{Radius}_{\text{outer}} - \text{Padding}_{\text{gap}}$$
+  Situate `rounded-xl` cards inside `rounded-2xl` containers with balanced gap distributions, preventing overlapping or jagged corner curves.
+
+### 2. Purpose-Driven Cryptographic GSAP Animation Suite
+Animations in Aegis are not decorative SaaS gimmicks—they visually reflect **cryptographic isolation, circuit constraints, and tamper-evident guarantees**. All animations are centralized in `src/lib/gsap-animations.ts`:
+
+| Animation Function | Purpose / Domain Logic | Visual Effect & Easing |
+| :--- | :--- | :--- |
+| `animateCardsStagger(container, selector)` | Entrance reveal when switching tabs or viewing audit specs | Subtle vertical glide (`y: 16 -> 0`), opacity scaling (`0 -> 1`), and `power3.out` physics easing with 45ms stagger. |
+| `animateCardHover(el, isEnter)` | Tactile cursor feedback on interactive cards and inspectable modules | Subtle -2.5px elevation on hover with spring recovery (`back.out(2)`). |
+| `animateCircuitPulse(el)` | Visualizes cryptographic circuit evaluation during proof generation | Cyan/emerald scanning border wave across the active card with zero layout shift. |
+| `animateVerificationSuccess(container)` | Immediate feedback when a proof satisfies zero-knowledge constraints | Expanding emerald glow pulse (`rgba(16, 185, 129, 0.4)`) with elastic boundary settle. |
+| `animateCryptoStream(targetEl, text)` | Visualizes domain-separated commitment and hash crystallization | Rapid hexadecimal character scramble ticker before resolving into the final hash. |
+| `animateViewTransition(container)` | Seamless navigation across workbench tabs | Smooth cross-view opacity and translation reset with zero layout conflicts. |
 
 ---
 
 ## <img src="assets/icons/terminal.svg" width="34" height="34" align="absmiddle" /> API Reference
 
-| Method | Endpoint | Description | Request Body / Parameters |
-| :--- | :--- | :--- | :--- |
-| `GET` | `/healthz` | System health, service status, and memory liveness check | None |
-| `GET` | `/api/v1/session` | Generates a single-use challenge nonce (300s TTL) | None |
-| `POST` | `/api/v1/verify` | Evaluates predicate constraints and issues signed verification tokens | `{ user_digest, doc_hash, threshold, current_year, birth_year, nonce }` |
-| `POST` | `/api/v1/verify-token`| Validates signed cryptographic JWT tokens and checks expiration | `{ token }` |
-| `POST` | `/api/v1/verify-merkle`| Validates Merkle inclusion paths against the published ledger root | `{ proof_id, leaf_hash, merkle_root, sibling_path }` |
-| `GET` | `/api/v1/ledger` | Returns the append-only Blake3 Merkle block ledger receipts | `?limit=50&offset=0` |
-| `GET` | `/api/v1/proofs` | Lists historical proof commitments and timestamps | None |
-| `GET` | `/api/v1/proofs/{id}` | Retrieves a specific proof record and its verification receipt | Path parameter: `id` |
-| `GET` | `/api/v1/metrics` | Real-time microsecond execution latency and memory usage | None |
-| `GET` | `/api/v1/stats` | Aggregated engine metrics and active Merkle root digests | None |
+All endpoints return JSON and adhere to standard HTTP status codes.
+
+| Method | Endpoint | Description | Request Body / Query | Headers |
+| :--- | :--- | :--- | :--- | :--- |
+| `GET` | `/healthz` | System health check and engine liveness status | None | None |
+| `GET` | `/api/v1/session` | Generates a single-use challenge nonce (300s TTL) | None | None |
+| `POST` | `/api/v1/verify` | Evaluates predicate constraints and issues signed verification tokens | `{ user_digest, doc_hash, threshold, current_year, birth_year, nonce }` | `X-API-Key` (Optional) |
+| `POST` | `/api/v1/verify-token` | Validates signed cryptographic JWT tokens and checks expiration | `{ token: string }` | None |
+| `POST` | `/api/v1/verify-merkle` | Validates Merkle inclusion paths against the published ledger root | `{ proof_id, leaf_hash, merkle_root, sibling_path }` | None |
+| `GET` | `/api/v1/ledger` | Returns append-only Blake3 Merkle block ledger receipts | `?limit=50&offset=0` | None |
+| `GET` | `/api/v1/proofs` | Lists historical proof commitments and timestamps (Zero PII) | None | None |
+| `GET` | `/api/v1/proofs/{id}` | Retrieves a specific proof record and its verification receipt | Path param: `id` | None |
+| `GET` | `/api/v1/metrics` | Real-time microsecond execution latency and memory usage | None | None |
+| `GET` | `/api/v1/stats` | Aggregated ledger metrics and active Merkle root digests | None | None |
 
 ---
 
