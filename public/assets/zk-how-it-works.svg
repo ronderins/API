@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="zkBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#09090b" />
+      <stop offset="50%" stop-color="#0b0f17" />
+      <stop offset="100%" stop-color="#090d16" />
+    </linearGradient>
+
+    <!-- Traditional Danger Gradient -->
+    <linearGradient id="dangerGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#450a0a" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#1c0505" stop-opacity="0.1" />
+    </linearGradient>
+
+    <!-- Aegis Success Gradient -->
+    <linearGradient id="successGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#064e3b" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#022c22" stop-opacity="0.1" />
+    </linearGradient>
+
+    <filter id="badgeGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <style>
+    @keyframes alertPulse {
+      0%, 100% { opacity: 1; filter: drop-shadow(0 0 6px #ef4444); }
+      50% { opacity: 0.4; filter: none; }
+    }
+    @keyframes greenShieldPulse {
+      0%, 100% { opacity: 1; filter: drop-shadow(0 0 8px #10b981); }
+      50% { opacity: 0.5; filter: drop-shadow(0 0 3px #10b981); }
+    }
+    @keyframes wipeCycle {
+      0% { width: 0%; opacity: 0.2; }
+      50% { width: 100%; opacity: 0.9; }
+      100% { width: 100%; opacity: 0.2; }
+    }
+    @keyframes arrowFlow {
+      0% { stroke-dashoffset: 60; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes numberSpin {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    .alert-led { animation: alertPulse 2s ease-in-out infinite; }
+    .green-led { animation: greenShieldPulse 2.5s ease-in-out infinite; }
+    .flow-arrow {
+      stroke-dasharray: 6 4;
+      animation: arrowFlow 1.8s linear infinite;
+    }
+    .badge-pop {
+      transform-origin: center;
+      animation: numberSpin 3s ease-in-out infinite;
+    }
+
+    text {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+    }
+  </style>
+
+  <!-- Background Base -->
+  <rect width="960" height="440" fill="url(#zkBgGrad)" rx="16" />
+  <rect x="1" y="1" width="958" height="438" fill="none" stroke="#27272a" stroke-width="1.5" rx="15" />
+
+  <!-- Top Title & Subtitle -->
+  <g transform="translate(40, 36)">
+    <text x="0" y="0" font-size="20" font-weight="700" fill="#f4f4f5" letter-spacing="-0.5">
+      How Aegis Zero-Knowledge Verification Works Under The Hood
+    </text>
+    <text x="0" y="20" font-size="12" fill="#71717a">
+      Contrasting traditional centralized identity honeypots with Aegis mathematical predicate invariance.
+    </text>
+  </g>
+
+  <!-- ================= LEFT COLUMN: TRADITIONAL IDENTITY VENDOR (HONEYPOT) ================= -->
+  <g transform="translate(40, 80)">
+    <!-- Column Card Frame -->
+    <rect width="420" height="320" rx="12" fill="url(#dangerGrad)" stroke="#ef4444" stroke-width="1" stroke-opacity="0.35" />
+    
+    <!-- Header -->
+    <rect x="0" y="0" width="420" height="40" rx="12" fill="#450a0a" fill-opacity="0.6" />
+    <circle class="alert-led" cx="20" cy="20" r="4.5" fill="#ef4444" />
+    <text x="36" y="24" class="font-mono" font-size="11.5" font-weight="700" fill="#fca5a5">
+      TRADITIONAL IDENTITY VERIFICATION (HONEYPOT MODEL)
+    </text>
+
+    <!-- Sub-row 1: Data Submission -->
+    <g transform="translate(16, 56)">
+      <rect width="388" height="62" rx="6" fill="#18181b" stroke="#3f1414" stroke-width="1" />
+      <text x="12" y="18" font-size="10.5" font-weight="600" fill="#f87171">1. Full Raw Document Transmitted Over Network</text>
+      <text x="12" y="34" font-size="9" fill="#94a3b8">User uploads high-resolution photo of Passport or Driver's License.</text>
+      <text x="12" y="48" class="font-mono" font-size="8.5" fill="#ef4444">Contains: Full Legal Name, SSN, Home Address, Exact Date of Birth</text>
+    </g>
+
+    <!-- Sub-row 2: Centralized Storage -->
+    <g transform="translate(16, 128)">
+      <rect width="388" height="74" rx="6" fill="#18181b" stroke="#3f1414" stroke-width="1" />
+      <text x="12" y="18" font-size="10.5" font-weight="600" fill="#f87171">2. Centralized PII Retention in Cloud Database</text>
+      <text x="12" y="34" font-size="9" fill="#94a3b8">Vendor persists documents in S3 buckets &amp; PostgreSQL tables for "audit".</text>
+      <rect x="12" y="44" width="364" height="20" rx="4" fill="#7f1d1d" fill-opacity="0.5" stroke="#ef4444" stroke-width="0.8" />
+      <text x="20" y="58" class="font-mono" font-size="8.5" font-weight="700" fill="#fecaca">⚠️ HIGH VALUE TARGET FOR RANSOMWARE &amp; LEAKS</text>
+    </g>
+
+    <!-- Sub-row 3: Repercussions -->
+    <g transform="translate(16, 212)">
+      <rect width="388" height="88" rx="6" fill="#260b0b" stroke="#7f1d1d" stroke-width="1" />
+      <text x="12" y="18" class="font-mono" font-size="9" font-weight="700" fill="#f87171">BUSINESS &amp; CONSUMER LIABILITIES:</text>
+      <text x="12" y="36" font-size="9" fill="#fca5a5">❌ Regulatory Fines: Up to €20M / 4% global turnover under GDPR.</text>
+      <text x="12" y="52" font-size="9" fill="#fca5a5">❌ User Identity Theft: Compromised credentials sold on dark web.</text>
+      <text x="12" y="68" font-size="9" fill="#fca5a5">❌ High Cart Abandonment: 40%+ drop-off when asked for raw ID photos.</text>
+    </g>
+  </g>
+
+  <!-- ================= RIGHT COLUMN: AEGIS ZERO-KNOWLEDGE ENGINE ================= -->
+  <g transform="translate(500, 80)">
+    <!-- Column Card Frame -->
+    <rect width="420" height="320" rx="12" fill="url(#successGrad)" stroke="#10b981" stroke-width="1" stroke-opacity="0.35" />
+    
+    <!-- Header -->
+    <rect x="0" y="0" width="420" height="40" rx="12" fill="#064e3b" fill-opacity="0.6" />
+    <circle class="green-led" cx="20" cy="20" r="4.5" fill="#34d399" />
+    <text x="36" y="24" class="font-mono" font-size="11.5" font-weight="700" fill="#a7f3d0">
+      AEGIS ZERO-KNOWLEDGE ATTESTATION (PREDICATE INVARIANCE)
+    </text>
+
+    <!-- Sub-row 1: Client Hashing -->
+    <g transform="translate(16, 56)">
+      <rect width="388" height="62" rx="6" fill="#18181b" stroke="#065f46" stroke-width="1" />
+      <text x="12" y="18" font-size="10.5" font-weight="600" fill="#34d399">1. Client-Side Hash + Salt (Raw ID Never Leaves Device)</text>
+      <text x="12" y="33" class="font-mono" font-size="8.5" fill="#6ee7b7">doc_hash = Blake3(ID_bytes || salt_r) // 64-character digest</text>
+      <text x="12" y="47" font-size="9" fill="#94a3b8">Raw document photo is immediately discarded from device memory.</text>
+    </g>
+
+    <!-- Sub-row 2: Cryptographic Predicate -->
+    <g transform="translate(16, 128)">
+      <rect width="388" height="74" rx="6" fill="#18181b" stroke="#065f46" stroke-width="1" />
+      <text x="12" y="18" font-size="10.5" font-weight="600" fill="#38bdf8">2. Arithmetic Circuit Evaluation &amp; RAM Zeroization</text>
+      <text x="12" y="33" class="font-mono" font-size="8.5" fill="#93c5fd">ZK Constraint: (age ≥ 21) = 1 • Groth16 / BN254</text>
+      <rect x="12" y="44" width="364" height="20" rx="4" fill="#064e3b" fill-opacity="0.6" stroke="#10b981" stroke-width="0.8" />
+      <text x="20" y="58" class="font-mono" font-size="8.5" font-weight="700" fill="#a7f3d0">⚡ RAM SCRUBBED: zeroize::Zeroize::zeroize(&amp;mut witness)</text>
+    </g>
+
+    <!-- Sub-row 3: Verifiable Receipt -->
+    <g transform="translate(16, 212)">
+      <rect width="388" height="88" rx="6" fill="#062e24" stroke="#059669" stroke-width="1" />
+      <text x="12" y="18" class="font-mono" font-size="9" font-weight="700" fill="#34d399">AEGIS GUARANTEES &amp; BUSINESS IMPACT:</text>
+      <text x="12" y="36" font-size="9" fill="#a7f3d0">🛡️ 0 Bytes PII Stored: Nothing exists to breach, subpoena, or ransom.</text>
+      <text x="12" y="52" font-size="9" fill="#a7f3d0">🛡️ Full Legal Non-Repudiation: Signed JWT token &amp; Blake3 Merkle block.</text>
+      <text x="12" y="68" font-size="9" fill="#a7f3d0">🛡️ 150µs Latency: Sub-millisecond attestation for instant user conversions.</text>
+    </g>
+  </g>
+
+  <!-- Bottom Divider Line -->
+  <g transform="translate(40, 416)">
+    <line x1="0" y1="0" x2="880" y2="0" stroke="#27272a" stroke-width="1" />
+    <text x="0" y="14" class="font-mono" font-size="9.5" fill="#71717a">
+      MATHEMATICAL ASSURANCE: <tspan fill="#38bdf8">ZK-SNARKs (Groth16/BN254)</tspan> • <tspan fill="#34d399">Blake3 SIMD Receipts</tspan> • <tspan fill="#a78bfa">Post-Quantum Lattice FIPS-204</tspan> • <tspan fill="#e4e4e7">Memory Scrubbing (Zeroize)</tspan>
+    </text>
+  </g>
+</svg>
