@@ -453,62 +453,62 @@ export default function HomePage() {
               </div>
               <div className="space-y-6">
                 {/* Live System Stats */}
-                <div className="p-5 bg-zinc-900/70 border border-zinc-800 rounded-xl space-y-4">
-                  <h3 className="text-sm font-semibold text-zinc-200 flex items-center gap-2">
+                <div className="aegis-card p-6 bg-zinc-900/70 border border-zinc-800 rounded-2xl space-y-4 shadow-xl">
+                  <h3 className="text-sm font-semibold text-zinc-200 flex items-center gap-2 pb-1 border-b border-zinc-800/60">
                     <Activity className="w-4 h-4 text-emerald-400" />
                     Live Ledger & Engine Metrics
                   </h3>
                   <div className="grid grid-cols-2 gap-3 text-xs">
-                    <div className="p-3 bg-zinc-950 rounded-lg border border-zinc-800">
-                      <span className="text-zinc-500 font-mono text-[11px] block">Proofs Minted</span>
-                      <span className="text-emerald-400 font-bold font-mono text-base">
+                    <div className="p-3.5 bg-zinc-950/90 rounded-xl border border-zinc-800/80">
+                      <span className="text-zinc-500 font-mono text-[11px] block mb-1">Proofs Minted</span>
+                      <span className="text-emerald-400 font-bold font-mono text-lg">
                         {stats?.totalProofs ?? 1}
                       </span>
                     </div>
-                    <div className="p-3 bg-zinc-950 rounded-lg border border-zinc-800">
-                      <span className="text-zinc-500 font-mono text-[11px] block">Audit Log Entries</span>
-                      <span className="text-blue-400 font-bold font-mono text-base">
+                    <div className="p-3.5 bg-zinc-950/90 rounded-xl border border-zinc-800/80">
+                      <span className="text-zinc-500 font-mono text-[11px] block mb-1">Audit Log Entries</span>
+                      <span className="text-blue-400 font-bold font-mono text-lg">
                         {stats?.totalAuditEvents ?? 1}
                       </span>
                     </div>
                   </div>
-                  <p className="text-[11px] text-zinc-400 leading-relaxed">
+                  <p className="text-[12px] text-zinc-400 leading-relaxed">
                     All verifications generate a domain-separated cryptographic commitment and are logged to an in-memory SQLx SQLite ledger.
                   </p>
                 </div>
 
                 {/* Quick Architecture Guide for Devs */}
-                <div className="p-5 bg-zinc-900/70 border border-zinc-800 rounded-xl space-y-3">
-                  <h3 className="text-sm font-semibold text-zinc-200 flex items-center gap-2">
+                <div className="aegis-card p-6 bg-zinc-900/70 border border-zinc-800 rounded-2xl space-y-3.5 shadow-xl">
+                  <h3 className="text-sm font-semibold text-zinc-200 flex items-center gap-2 pb-1 border-b border-zinc-800/60">
                     <Server className="w-4 h-4 text-blue-400" />
                     Available REST Endpoints
                   </h3>
-                  <div className="space-y-2 text-xs font-mono">
-                    <div className="p-2.5 rounded bg-zinc-950 border border-zinc-800 flex items-center justify-between">
-                      <span className="text-emerald-400">POST /api/v1/verify</span>
+                  <div className="space-y-2.5 text-xs font-mono">
+                    <div className="p-3 rounded-xl bg-zinc-950/90 border border-zinc-800/80 flex items-center justify-between">
+                      <span className="text-emerald-400 font-medium">POST /api/v1/verify</span>
                       <span className="text-zinc-500 text-[10px]">Create Proof</span>
                     </div>
-                    <div className="p-2.5 rounded bg-zinc-950 border border-zinc-800 flex items-center justify-between">
-                      <span className="text-blue-400">GET /api/v1/proofs/:id</span>
+                    <div className="p-3 rounded-xl bg-zinc-950/90 border border-zinc-800/80 flex items-center justify-between">
+                      <span className="text-blue-400 font-medium">GET /api/v1/proofs/:id</span>
                       <span className="text-zinc-500 text-[10px]">Audit Ledger</span>
                     </div>
-                    <div className="p-2.5 rounded bg-zinc-950 border border-zinc-800 flex items-center justify-between">
-                      <span className="text-purple-400">GET /api/v1/stats</span>
+                    <div className="p-3 rounded-xl bg-zinc-950/90 border border-zinc-800/80 flex items-center justify-between">
+                      <span className="text-purple-400 font-medium">GET /api/v1/stats</span>
                       <span className="text-zinc-500 text-[10px]">Ledger Stats</span>
                     </div>
-                    <div className="p-2.5 rounded bg-zinc-950 border border-zinc-800 flex items-center justify-between">
-                      <span className="text-teal-400">GET /healthz</span>
+                    <div className="p-3 rounded-xl bg-zinc-950/90 border border-zinc-800/80 flex items-center justify-between">
+                      <span className="text-teal-400 font-medium">GET /healthz</span>
                       <span className="text-zinc-500 text-[10px]">Health Check</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Privacy Badge */}
-                <div className="p-4 bg-emerald-950/20 border border-emerald-900/40 rounded-xl space-y-2">
-                  <span className="text-xs font-semibold text-emerald-400 flex items-center gap-1.5">
-                    <Lock className="w-3.5 h-3.5" /> 100% Zero PII Guarantee
+                <div className="p-5 bg-emerald-950/30 border border-emerald-900/50 rounded-2xl space-y-2.5 shadow-md">
+                  <span className="text-xs font-semibold text-emerald-400 flex items-center gap-2">
+                    <Lock className="w-4 h-4" /> 100% Zero PII Guarantee
                   </span>
-                  <p className="text-[11px] text-zinc-300 leading-normal">
+                  <p className="text-[12px] text-zinc-300 leading-relaxed">
                     This system complies strictly with privacy mandates. The database never stores user names, raw identifiers, birthdates, or document scans.
                   </p>
                 </div>
@@ -531,7 +531,7 @@ export default function HomePage() {
           {activeView === "docs" && <ApiDocsViewer />}
 
           {activeView === "download" && (
-            <div id="download-panel" className="bg-zinc-900/70 border border-zinc-800 rounded-xl p-6 shadow-xl space-y-6">
+            <div id="download-panel" className="aegis-card bg-zinc-900/70 border border-zinc-800 rounded-2xl p-6 sm:p-7 shadow-xl space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800/80">
                 <div className="flex items-center gap-3">
                   <Download className="w-8 h-8 text-amber-400 shrink-0 filter drop-shadow-[0_0_10px_rgba(251,191,36,0.85)]" />
@@ -545,7 +545,7 @@ export default function HomePage() {
                   id="main-download-button"
                   href="/zk-identity-fullstack.zip"
                   download="zk-identity-fullstack.zip"
-                  className="px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-sm rounded-lg shadow-lg shadow-amber-950/50 flex items-center justify-center gap-2 transition cursor-pointer whitespace-nowrap"
+                  className="px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-sm rounded-xl shadow-lg shadow-amber-950/50 flex items-center justify-center gap-2 transition cursor-pointer whitespace-nowrap active:scale-95"
                 >
                   <Download className="w-4 h-4" />
                   Download zk-identity-fullstack.zip
@@ -554,16 +554,16 @@ export default function HomePage() {
 
               {/* What's Included */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                <div className="p-4 bg-zinc-950 border border-zinc-800 rounded-xl space-y-3">
-                  <h3 className="font-semibold text-zinc-200 flex items-center gap-2">
+                <div className="p-5 bg-zinc-950/90 border border-zinc-800/90 rounded-2xl space-y-3.5 shadow-md">
+                  <h3 className="font-semibold text-zinc-200 flex items-center gap-2 text-sm">
                     <Terminal className="w-4 h-4 text-emerald-400" />
                     Option 1: Run Next.js Full-Stack (Default)
                   </h3>
-                  <p className="text-zinc-400">
+                  <p className="text-zinc-400 leading-relaxed text-[12px]">
                     Runs the full Next.js App Router application with embedded cryptographic engine and API routes on port 3000.
                   </p>
                   <div className="relative">
-                    <pre className="p-3 bg-zinc-900 rounded-lg text-emerald-300 font-mono text-xs border border-zinc-800 overflow-x-auto">
+                    <pre className="p-3.5 bg-zinc-900/90 rounded-xl text-emerald-300 font-mono text-xs border border-zinc-800/80 overflow-x-auto">
 {`# 1. Extract ZIP (extracts directly to root folder)
 # 2. Install dependencies & run
 npm install
@@ -579,16 +579,16 @@ npm run dev`}
                   </div>
                 </div>
 
-                <div className="p-4 bg-zinc-950 border border-zinc-800 rounded-xl space-y-3">
-                  <h3 className="font-semibold text-zinc-200 flex items-center gap-2">
+                <div className="p-5 bg-zinc-950/90 border border-zinc-800/90 rounded-2xl space-y-3.5 shadow-md">
+                  <h3 className="font-semibold text-zinc-200 flex items-center gap-2 text-sm">
                     <Cpu className="w-4 h-4 text-amber-400" />
                     Option 2: Run Rust Backend + Next.js Frontend
                   </h3>
-                  <p className="text-zinc-400">
+                  <p className="text-zinc-400 leading-relaxed text-[12px]">
                     Runs the native high-performance Rust Axum API on port 8080 while Next.js proxies seamlessly to it.
                   </p>
                   <div className="relative">
-                    <pre className="p-3 bg-zinc-900 rounded-lg text-amber-300 font-mono text-xs border border-zinc-800 overflow-x-auto">
+                    <pre className="p-3.5 bg-zinc-900/90 rounded-xl text-amber-300 font-mono text-xs border border-zinc-800/80 overflow-x-auto">
 {`# Terminal 1: Run Rust API
 cd rust-api
 cargo run --release
@@ -608,12 +608,12 @@ npm run dev`}
               </div>
 
               {/* Extraction Specs */}
-              <div className="p-4 bg-zinc-950/80 border border-zinc-800/80 rounded-xl text-xs space-y-2">
-                <div className="flex items-center gap-2 text-zinc-300 font-semibold">
+              <div className="p-5 bg-zinc-950/80 border border-zinc-800/80 rounded-2xl text-xs space-y-2.5 shadow-sm">
+                <div className="flex items-center gap-2 text-zinc-300 font-semibold text-sm">
                   <Check className="w-4 h-4 text-emerald-400" />
                   <span>Zip Package Architecture Details</span>
                 </div>
-                <ul className="text-zinc-400 space-y-1 list-disc list-inside">
+                <ul className="text-zinc-400 space-y-1.5 list-disc list-inside text-[12px] leading-relaxed">
                   <li><strong className="text-zinc-200">Zero Nested Root Wrapper:</strong> Extracts directly into the project workspace root.</li>
                   <li><strong className="text-zinc-200">Rust API Folder Included:</strong> Contains Dockerfile, Cargo.toml, error algebraic enums, and comprehensive test suite.</li>
                   <li><strong className="text-zinc-200">Production Ready:</strong> Fully typed TypeScript components and complete OpenAPI documentation.</li>

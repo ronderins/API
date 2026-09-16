@@ -1,6 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import gsap from "gsap";
+import { animateCardsStagger } from "@/lib/gsap-animations";
 import {
   Lock,
   EyeOff,
@@ -19,6 +21,7 @@ import {
 } from "lucide-react";
 
 export const SecurityInspector: React.FC = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
   // Interactive Commitment Lab state
   const [labDomain, setLabDomain] = useState("zk-identity-proof-v1");
   const [labUserId, setLabUserId] = useState("user-alice-9842");
@@ -97,8 +100,16 @@ export const SecurityInspector: React.FC = () => {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     handleDecodeJwt();
+    if (containerRef.current) {
+      gsap.fromTo(
+        containerRef.current,
+        { opacity: 0, y: 15 },
+        { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }
+      );
+      animateCardsStagger(containerRef.current, ".aegis-card");
+    }
   }, []);
 
   // Attack Test Runner
@@ -154,9 +165,9 @@ export const SecurityInspector: React.FC = () => {
   };
 
   return (
-    <div id="security-inspector-root" className="space-y-6">
+    <div ref={containerRef} id="security-inspector-root" className="space-y-8 will-change-transform">
       {/* Top Banner */}
-      <div className="bg-zinc-900/70 border border-zinc-800 rounded-xl p-6 shadow-xl space-y-4">
+      <div className="aegis-card bg-zinc-900/70 border border-zinc-800 rounded-2xl p-6 sm:p-7 shadow-xl space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800/80">
           <div className="flex items-center gap-3">
             <Layers className="w-8 h-8 text-teal-400 shrink-0 filter drop-shadow-[0_0_10px_rgba(45,212,191,0.85)]" />
@@ -175,8 +186,8 @@ export const SecurityInspector: React.FC = () => {
         </div>
 
         {/* Security Controls Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
-          <div className="p-3.5 bg-zinc-950 border border-zinc-850 rounded-xl space-y-1">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-3.5 text-xs">
+          <div className="p-4 bg-zinc-950/80 border border-zinc-800/80 rounded-xl space-y-1.5 transition-all duration-200 hover:border-zinc-700">
             <span className="text-emerald-400 font-semibold flex items-center gap-1.5 font-mono">
               <EyeOff className="w-3.5 h-3.5" /> 0% Raw Identity
             </span>
@@ -185,7 +196,7 @@ export const SecurityInspector: React.FC = () => {
             </p>
           </div>
 
-          <div className="p-3.5 bg-zinc-950 border border-zinc-850 rounded-xl space-y-1">
+          <div className="p-4 bg-zinc-950/80 border border-zinc-800/80 rounded-xl space-y-1.5 transition-all duration-200 hover:border-zinc-700">
             <span className="text-blue-400 font-semibold flex items-center gap-1.5 font-mono">
               <ShieldCheck className="w-3.5 h-3.5" /> No Document Ingestion
             </span>
@@ -194,7 +205,7 @@ export const SecurityInspector: React.FC = () => {
             </p>
           </div>
 
-          <div className="p-3.5 bg-zinc-950 border border-zinc-850 rounded-xl space-y-1">
+          <div className="p-4 bg-zinc-950/80 border border-zinc-800/80 rounded-xl space-y-1.5 transition-all duration-200 hover:border-zinc-700">
             <span className="text-purple-400 font-semibold flex items-center gap-1.5 font-mono">
               <KeyRound className="w-3.5 h-3.5" /> Constant-Time Auth
             </span>
@@ -203,7 +214,7 @@ export const SecurityInspector: React.FC = () => {
             </p>
           </div>
 
-          <div className="p-3.5 bg-zinc-950 border border-zinc-850 rounded-xl space-y-1">
+          <div className="p-4 bg-zinc-950/80 border border-zinc-800/80 rounded-xl space-y-1.5 transition-all duration-200 hover:border-zinc-700">
             <span className="text-amber-400 font-semibold flex items-center gap-1.5 font-mono">
               <Lock className="w-3.5 h-3.5" /> Domain Separation
             </span>
@@ -215,7 +226,7 @@ export const SecurityInspector: React.FC = () => {
       </div>
 
       {/* Zero-PII Storage Diff Matrix (What You Send vs What SQLite Stores) */}
-      <div className="bg-zinc-900/70 border border-zinc-800 rounded-xl p-6 shadow-xl space-y-4">
+      <div className="aegis-card bg-zinc-900/70 border border-zinc-800 rounded-2xl p-6 sm:p-7 shadow-xl space-y-5">
         <div className="flex items-center gap-2 pb-3 border-b border-zinc-800/80">
           <Fingerprint className="w-4 h-4 text-emerald-400" />
           <h3 className="text-sm font-semibold text-zinc-100 uppercase tracking-wider font-mono">
@@ -224,7 +235,7 @@ export const SecurityInspector: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-          <div className="p-4 bg-zinc-950 border border-zinc-800 rounded-xl space-y-3">
+          <div className="p-5 bg-zinc-950/90 border border-zinc-800/90 rounded-2xl space-y-3.5">
             <div className="flex items-center justify-between">
               <span className="font-semibold text-zinc-200">1. Client Request Payload (Transient in RAM)</span>
               <span className="px-2 py-0.5 rounded bg-zinc-800 text-zinc-400 font-mono text-[10px]">JSON Payload</span>
@@ -248,7 +259,7 @@ export const SecurityInspector: React.FC = () => {
             </p>
           </div>
 
-          <div className="p-4 bg-emerald-950/15 border border-emerald-800/40 rounded-xl space-y-3">
+          <div className="p-5 bg-emerald-950/15 border border-emerald-800/40 rounded-2xl space-y-3.5">
             <div className="flex items-center justify-between">
               <span className="font-semibold text-emerald-400 flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4" /> 2. What SQLite Actually Stores (0% PII)
@@ -278,7 +289,7 @@ export const SecurityInspector: React.FC = () => {
       </div>
 
       {/* 5 ADVANCED RUST FEATURES INTERACTIVE DEMO */}
-      <div className="bg-zinc-900/70 border border-emerald-900/50 rounded-xl p-6 shadow-xl space-y-5">
+      <div className="aegis-card bg-zinc-900/70 border border-emerald-900/50 rounded-2xl p-6 sm:p-7 shadow-xl space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-zinc-800/80">
           <div className="flex items-center gap-2.5">
             <div className="text-emerald-400">
@@ -300,7 +311,7 @@ export const SecurityInspector: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
           {/* Feature 1: Ephemeral Memory Lockdown */}
-          <div className="p-4 bg-zinc-950 border border-zinc-800 rounded-xl space-y-2 flex flex-col justify-between">
+          <div className="p-5 bg-zinc-950/90 border border-zinc-800/80 rounded-2xl space-y-3 flex flex-col justify-between transition-all duration-200 hover:border-zinc-700">
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
                 <span className="font-bold text-emerald-400 flex items-center gap-1.5 font-mono">
@@ -321,7 +332,7 @@ export const SecurityInspector: React.FC = () => {
           </div>
 
           {/* Feature 2: One-Time-Blind QR Sessions */}
-          <div className="p-4 bg-zinc-950 border border-zinc-800 rounded-xl space-y-2 flex flex-col justify-between">
+          <div className="p-5 bg-zinc-950/90 border border-zinc-800/80 rounded-2xl space-y-3 flex flex-col justify-between transition-all duration-200 hover:border-zinc-700">
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
                 <span className="font-bold text-teal-400 flex items-center gap-1.5 font-mono">
@@ -342,7 +353,7 @@ export const SecurityInspector: React.FC = () => {
           </div>
 
           {/* Feature 3: Cryptographic Receipt Ledger */}
-          <div className="p-4 bg-zinc-950 border border-zinc-800 rounded-xl space-y-2 flex flex-col justify-between">
+          <div className="p-5 bg-zinc-950/90 border border-zinc-800/80 rounded-2xl space-y-3 flex flex-col justify-between transition-all duration-200 hover:border-zinc-700">
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
                 <span className="font-bold text-purple-400 flex items-center gap-1.5 font-mono">
@@ -363,7 +374,7 @@ export const SecurityInspector: React.FC = () => {
           </div>
 
           {/* Feature 4: Performance Dashboard */}
-          <div className="p-4 bg-zinc-950 border border-zinc-800 rounded-xl space-y-2 flex flex-col justify-between">
+          <div className="p-5 bg-zinc-950/90 border border-zinc-800/80 rounded-2xl space-y-3 flex flex-col justify-between transition-all duration-200 hover:border-zinc-700">
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
                 <span className="font-bold text-blue-400 flex items-center gap-1.5 font-mono">
@@ -384,7 +395,7 @@ export const SecurityInspector: React.FC = () => {
           </div>
 
           {/* Feature 5: Canary Dead-Man Switch */}
-          <div className="p-4 bg-zinc-950 border border-zinc-800 rounded-xl space-y-2 flex flex-col justify-between md:col-span-2 lg:col-span-2">
+          <div className="p-5 bg-zinc-950/90 border border-zinc-800/80 rounded-2xl space-y-3 flex flex-col justify-between transition-all duration-200 hover:border-zinc-700 md:col-span-2 lg:col-span-2">
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
                 <span className="font-bold text-amber-400 flex items-center gap-1.5 font-mono">
@@ -407,7 +418,7 @@ export const SecurityInspector: React.FC = () => {
       </div>
 
       {/* Interactive Cryptographic Commitment Workbench */}
-      <div className="bg-zinc-900/70 border border-zinc-800 rounded-xl p-6 shadow-xl space-y-5">
+      <div className="aegis-card bg-zinc-900/70 border border-zinc-800 rounded-2xl p-6 sm:p-7 shadow-xl space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-zinc-800/80">
           <div className="flex items-center gap-2">
             <Binary className="w-4 h-4 text-purple-400" />
@@ -475,7 +486,7 @@ export const SecurityInspector: React.FC = () => {
         </div>
 
         {/* Real-Time Hash Outputs */}
-        <div className="p-4 bg-zinc-950 rounded-xl border border-zinc-800 space-y-2.5">
+        <div className="p-5 bg-zinc-950/90 rounded-2xl border border-zinc-800 space-y-3">
           <div className="flex items-center justify-between">
             <span className="text-xs font-mono text-zinc-400 font-medium">Computed Non-Reversible User ID Digest:</span>
             <button
@@ -507,7 +518,7 @@ export const SecurityInspector: React.FC = () => {
       </div>
 
       {/* JWT Proof Signature Inspector */}
-      <div className="bg-zinc-900/70 border border-zinc-800 rounded-xl p-6 shadow-xl space-y-4">
+      <div className="aegis-card bg-zinc-900/70 border border-zinc-800 rounded-2xl p-6 sm:p-7 shadow-xl space-y-5">
         <div className="flex items-center gap-2 pb-3 border-b border-zinc-800/80">
           <ShieldCheck className="w-4 h-4 text-blue-400" />
           <h3 className="text-sm font-semibold text-zinc-100 uppercase tracking-wider font-mono">
@@ -539,7 +550,7 @@ export const SecurityInspector: React.FC = () => {
 
         {decodedPayload && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-            <div className="p-4 bg-zinc-950 rounded-xl border border-zinc-800 space-y-2">
+            <div className="p-5 bg-zinc-950 rounded-2xl border border-zinc-800 space-y-2.5">
               <span className="text-blue-400 font-mono font-semibold block text-[11px] uppercase">
                 Header (HS256 HMAC-SHA256)
               </span>
@@ -548,7 +559,7 @@ export const SecurityInspector: React.FC = () => {
               </pre>
             </div>
 
-            <div className="p-4 bg-zinc-950 rounded-xl border border-zinc-800 space-y-2">
+            <div className="p-5 bg-zinc-950 rounded-2xl border border-zinc-800 space-y-2.5">
               <span className="text-emerald-400 font-mono font-semibold block text-[11px] uppercase">
                 Decoded Privacy-Preserving Claims Payload
               </span>
@@ -561,7 +572,7 @@ export const SecurityInspector: React.FC = () => {
       </div>
 
       {/* Security Attack Simulation & Resilience Suite */}
-      <div className="bg-zinc-900/70 border border-zinc-800 rounded-xl p-6 shadow-xl space-y-4">
+      <div className="aegis-card bg-zinc-900/70 border border-zinc-800 rounded-2xl p-6 sm:p-7 shadow-xl space-y-5">
         <div className="flex items-center gap-2 pb-3 border-b border-zinc-800/80">
           <AlertTriangle className="w-4 h-4 text-amber-400" />
           <h3 className="text-sm font-semibold text-zinc-100 uppercase tracking-wider font-mono">
@@ -573,9 +584,9 @@ export const SecurityInspector: React.FC = () => {
           Simulate malicious requests against the Rust Axum API to verify strict algebraic error enforcement (`ApiError`), HTTP status codes, and input bounds checking:
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
           {/* Test 1: Tampered Hash */}
-          <div className="p-4 bg-zinc-950 border border-zinc-800 rounded-xl space-y-2 flex flex-col justify-between">
+          <div className="p-5 bg-zinc-950/90 border border-zinc-800/90 rounded-2xl space-y-3 flex flex-col justify-between transition-all duration-200 hover:border-zinc-700">
             <div>
               <div className="flex items-center justify-between mb-1">
                 <span className="font-semibold text-zinc-200">1. Malformed doc_hash String</span>
@@ -592,7 +603,7 @@ export const SecurityInspector: React.FC = () => {
             <button
               onClick={() => runAttackTest("tampered_hash")}
               disabled={attackRunning === "tampered_hash"}
-              className="mt-2 w-full py-1.5 bg-zinc-900 hover:bg-zinc-850 border border-zinc-700 text-zinc-300 rounded font-mono text-xs flex items-center justify-center gap-1.5 transition cursor-pointer"
+              className="mt-2 w-full py-2 bg-zinc-900 hover:bg-zinc-850 border border-zinc-700 text-zinc-300 rounded-lg font-mono text-xs flex items-center justify-center gap-1.5 transition cursor-pointer"
             >
               {attackRunning === "tampered_hash" ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Play className="w-3 h-3 text-amber-400" />}
               <span>Execute Test</span>
@@ -600,7 +611,7 @@ export const SecurityInspector: React.FC = () => {
           </div>
 
           {/* Test 2: Age Threshold Overflow */}
-          <div className="p-4 bg-zinc-950 border border-zinc-800 rounded-xl space-y-2 flex flex-col justify-between">
+          <div className="p-5 bg-zinc-950/90 border border-zinc-800/90 rounded-2xl space-y-3 flex flex-col justify-between transition-all duration-200 hover:border-zinc-700">
             <div>
               <div className="flex items-center justify-between mb-1">
                 <span className="font-semibold text-zinc-200">2. Out-of-Bounds Threshold (&gt;130)</span>
@@ -617,7 +628,7 @@ export const SecurityInspector: React.FC = () => {
             <button
               onClick={() => runAttackTest("overflow_threshold")}
               disabled={attackRunning === "overflow_threshold"}
-              className="mt-2 w-full py-1.5 bg-zinc-900 hover:bg-zinc-850 border border-zinc-700 text-zinc-300 rounded font-mono text-xs flex items-center justify-center gap-1.5 transition cursor-pointer"
+              className="mt-2 w-full py-2 bg-zinc-900 hover:bg-zinc-850 border border-zinc-700 text-zinc-300 rounded-lg font-mono text-xs flex items-center justify-center gap-1.5 transition cursor-pointer"
             >
               {attackRunning === "overflow_threshold" ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Play className="w-3 h-3 text-amber-400" />}
               <span>Execute Test</span>
@@ -625,7 +636,7 @@ export const SecurityInspector: React.FC = () => {
           </div>
 
           {/* Test 3: Blank User Identifier */}
-          <div className="p-4 bg-zinc-950 border border-zinc-800 rounded-xl space-y-2 flex flex-col justify-between">
+          <div className="p-5 bg-zinc-950/90 border border-zinc-800/90 rounded-2xl space-y-3 flex flex-col justify-between transition-all duration-200 hover:border-zinc-700">
             <div>
               <div className="flex items-center justify-between mb-1">
                 <span className="font-semibold text-zinc-200">3. Blank / Whitespace user_id</span>
@@ -642,7 +653,7 @@ export const SecurityInspector: React.FC = () => {
             <button
               onClick={() => runAttackTest("empty_user_id")}
               disabled={attackRunning === "empty_user_id"}
-              className="mt-2 w-full py-1.5 bg-zinc-900 hover:bg-zinc-850 border border-zinc-700 text-zinc-300 rounded font-mono text-xs flex items-center justify-center gap-1.5 transition cursor-pointer"
+              className="mt-2 w-full py-2 bg-zinc-900 hover:bg-zinc-850 border border-zinc-700 text-zinc-300 rounded-lg font-mono text-xs flex items-center justify-center gap-1.5 transition cursor-pointer"
             >
               {attackRunning === "empty_user_id" ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Play className="w-3 h-3 text-amber-400" />}
               <span>Execute Test</span>
@@ -650,7 +661,7 @@ export const SecurityInspector: React.FC = () => {
           </div>
 
           {/* Test 4: Fake Proof ID Lookup */}
-          <div className="p-4 bg-zinc-950 border border-zinc-800 rounded-xl space-y-2 flex flex-col justify-between">
+          <div className="p-5 bg-zinc-950/90 border border-zinc-800/90 rounded-2xl space-y-3 flex flex-col justify-between transition-all duration-200 hover:border-zinc-700">
             <div>
               <div className="flex items-center justify-between mb-1">
                 <span className="font-semibold text-zinc-200">4. Non-Existent Proof Query</span>
@@ -667,7 +678,7 @@ export const SecurityInspector: React.FC = () => {
             <button
               onClick={() => runAttackTest("proof_not_found")}
               disabled={attackRunning === "proof_not_found"}
-              className="mt-2 w-full py-1.5 bg-zinc-900 hover:bg-zinc-850 border border-zinc-700 text-zinc-300 rounded font-mono text-xs flex items-center justify-center gap-1.5 transition cursor-pointer"
+              className="mt-2 w-full py-2 bg-zinc-900 hover:bg-zinc-850 border border-zinc-700 text-zinc-300 rounded-lg font-mono text-xs flex items-center justify-center gap-1.5 transition cursor-pointer"
             >
               {attackRunning === "proof_not_found" ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Play className="w-3 h-3 text-amber-400" />}
               <span>Execute Test</span>

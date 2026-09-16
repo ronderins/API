@@ -265,81 +265,84 @@ bytes memory calldata = abi.encodeWithSelector(
   };
 
   return (
-    <div id="proof-generator-container" className="bg-zinc-900/70 border border-zinc-800 rounded-xl p-6 shadow-xl space-y-6">
+    <div id="proof-generator-container" className="aegis-card bg-zinc-900/70 border border-zinc-800 rounded-2xl p-6 sm:p-7 shadow-xl space-y-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800/80">
-        <div className="flex items-center gap-3">
-          <Zap className="w-8 h-8 text-emerald-400 shrink-0 filter drop-shadow-[0_0_10px_rgba(52,211,153,0.85)]" />
+        <div className="flex items-center gap-3.5">
+          <div className="p-2.5 rounded-xl bg-emerald-950/50 border border-emerald-800/40">
+            <Zap className="w-6 h-6 text-emerald-400 shrink-0 filter drop-shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+          </div>
           <div>
-            <h2 className="text-lg font-semibold text-zinc-100">Privacy-Preserving Verification Playground</h2>
-            <p className="text-xs text-zinc-400">
+            <h2 className="text-lg font-semibold text-zinc-100 tracking-tight">Privacy-Preserving Verification Playground</h2>
+            <p className="text-xs text-zinc-400 mt-0.5">
               Interactive request composer with instant cryptographic commitment & token issuance
             </p>
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <span className="px-2.5 py-1 text-xs font-mono font-medium rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-800/60">
+          <span className="px-3 py-1 text-xs font-mono font-medium rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-800/60 shadow-sm">
             POST /api/v1/verify
           </span>
         </div>
       </div>
 
       {/* Quick Scenarios & Presets */}
-      <div className="p-3.5 bg-zinc-950/80 border border-zinc-800 rounded-xl space-y-2">
+      <div className="p-4 sm:p-4.5 bg-zinc-950/70 border border-zinc-800/80 rounded-xl space-y-3">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-semibold text-zinc-300 uppercase tracking-wider font-mono">
+          <span className="text-xs font-semibold text-zinc-300 uppercase tracking-wider font-mono flex items-center gap-1.5">
+            <Layers className="w-3.5 h-3.5 text-emerald-400" />
             Interactive Test Presets
           </span>
-          <span className="text-[11px] text-zinc-500">Autofill standard compliance scenarios</span>
+          <span className="text-[11px] text-zinc-500 font-mono">Autofill standard compliance scenarios</span>
         </div>
-        <div className="flex flex-wrap gap-2 pt-1">
+        <div className="flex flex-wrap gap-2.5 pt-0.5">
           <button
             type="button"
             onClick={() => handlePreset("eidas_18")}
-            className="px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-750 text-zinc-300 hover:text-white text-xs font-medium transition cursor-pointer flex items-center gap-1.5"
+            className="px-3.5 py-2 rounded-lg bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 text-zinc-300 hover:text-white text-xs font-medium transition duration-150 cursor-pointer flex items-center gap-2 active:scale-95"
           >
-            <Globe className="w-3.5 h-3.5 text-cyan-400" />
+            <Globe className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
             <span>eIDAS 2.0 EU Age (18+)</span>
           </button>
           <button
             type="button"
             onClick={() => handlePreset("us_regulated_21")}
-            className="px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-750 text-zinc-300 hover:text-white text-xs font-medium transition cursor-pointer flex items-center gap-1.5"
+            className="px-3.5 py-2 rounded-lg bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 text-zinc-300 hover:text-white text-xs font-medium transition duration-150 cursor-pointer flex items-center gap-2 active:scale-95"
           >
-            <Flag className="w-3.5 h-3.5 text-blue-400" />
+            <Flag className="w-3.5 h-3.5 text-blue-400 shrink-0" />
             <span>US Legal Age (21+)</span>
           </button>
           <button
             type="button"
             onClick={() => handlePreset("sanctions_check")}
-            className="px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-750 text-zinc-300 hover:text-white text-xs font-medium transition cursor-pointer flex items-center gap-1.5"
+            className="px-3.5 py-2 rounded-lg bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 text-zinc-300 hover:text-white text-xs font-medium transition duration-150 cursor-pointer flex items-center gap-2 active:scale-95"
           >
-            <Shield className="w-3.5 h-3.5 text-emerald-400" />
+            <Shield className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
             <span>OFAC Sanctions Non-Membership</span>
           </button>
           <button
             type="button"
             onClick={() => handlePreset("senior_65")}
-            className="px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-750 text-zinc-300 hover:text-white text-xs font-medium transition cursor-pointer flex items-center gap-1.5"
+            className="px-3.5 py-2 rounded-lg bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 text-zinc-300 hover:text-white text-xs font-medium transition duration-150 cursor-pointer flex items-center gap-2 active:scale-95"
           >
-            <UserCheck className="w-3.5 h-3.5 text-amber-400" />
+            <UserCheck className="w-3.5 h-3.5 text-amber-400 shrink-0" />
             <span>Senior Tier (65+)</span>
           </button>
           <button
             type="button"
             onClick={() => handlePreset("invalid_hash")}
-            className="px-3 py-1.5 rounded-lg bg-red-950/40 hover:bg-red-900/50 border border-red-900/60 text-red-300 text-xs font-medium transition cursor-pointer flex items-center gap-1.5"
+            className="px-3.5 py-2 rounded-lg bg-red-950/40 hover:bg-red-900/50 border border-red-900/60 text-red-300 text-xs font-medium transition duration-150 cursor-pointer flex items-center gap-2 active:scale-95"
           >
-            <AlertTriangle className="w-3.5 h-3.5 text-rose-400" />
+            <AlertTriangle className="w-3.5 h-3.5 text-rose-400 shrink-0" />
             <span>Malformed Hash (422)</span>
           </button>
         </div>
       </div>
 
       {/* Main Form */}
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block text-xs font-medium text-zinc-300 mb-1.5 font-mono">
+      <form onSubmit={handleSubmit} className="space-y-5">
+        <div className="space-y-1.5">
+          <label className="block text-xs font-medium text-zinc-300 font-mono">
             User Identifier (`user_id`)
           </label>
           <input
@@ -349,16 +352,16 @@ bytes memory calldata = abi.encodeWithSelector(
             onChange={(e) => setUserId(e.target.value)}
             placeholder="e.g. user-alice-123"
             required
-            className="w-full bg-zinc-950 border border-zinc-700/80 rounded-lg px-3.5 py-2.5 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-emerald-500 font-mono transition"
+            className="w-full bg-zinc-950 border border-zinc-700/80 rounded-lg px-4 py-2.5 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-emerald-500 font-mono transition"
           />
-          <p className="text-[11px] text-zinc-500 mt-1 flex items-center gap-1">
+          <p className="text-[11px] text-zinc-500 pt-0.5 flex items-center gap-1.5">
             <Lock className="w-3 h-3 text-emerald-400 inline shrink-0" />
             <span>Privacy Guarantee: Raw <code className="text-zinc-400 font-mono">user_id</code> is NEVER stored in database. Only its non-reversible SHA-256 digest is retained.</span>
           </p>
         </div>
 
-        <div>
-          <div className="flex items-center justify-between mb-1.5">
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
             <label className="text-xs font-medium text-zinc-300 font-mono">
               Document Digest (`doc_hash` SHA-256 Hex)
             </label>
@@ -366,7 +369,7 @@ bytes memory calldata = abi.encodeWithSelector(
               id="btn-random-hash"
               type="button"
               onClick={handleGenerateRandomHex}
-              className="text-[11px] text-emerald-400 hover:text-emerald-300 flex items-center gap-1 font-mono"
+              className="text-[11px] text-emerald-400 hover:text-emerald-300 flex items-center gap-1.5 font-mono cursor-pointer transition hover:underline"
             >
               <Shuffle className="w-3 h-3" /> Random SHA-256
             </button>
@@ -378,41 +381,42 @@ bytes memory calldata = abi.encodeWithSelector(
             onChange={(e) => setDocHash(e.target.value)}
             placeholder="64-character hex digest"
             required
-            className="w-full bg-zinc-950 border border-zinc-700/80 rounded-lg px-3.5 py-2.5 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-emerald-500 font-mono transition"
+            className="w-full bg-zinc-950 border border-zinc-700/80 rounded-lg px-4 py-2.5 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-emerald-500 font-mono transition"
           />
-        </div>
 
-        {/* Client-side document hasher utility */}
-        <div className="p-3 bg-zinc-950/60 border border-zinc-800 rounded-lg">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-medium text-zinc-400 flex items-center gap-1.5">
-              <Hash className="w-3.5 h-3.5 text-zinc-400" /> Client-Side ID Hasher Tool (Simulate local photo/passport hash)
-            </span>
-          </div>
-          <div className="flex gap-2">
-            <input
-              id="input-sample-doc"
-              type="text"
-              value={sampleDocumentText}
-              onChange={(e) => setSampleDocumentText(e.target.value)}
-              placeholder="Type dummy passport/license string (e.g. PASSPORT_US_DOE_JOHN_1995)..."
-              className="flex-1 bg-zinc-900 border border-zinc-800 rounded px-2.5 py-1.5 text-xs text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-zinc-600"
-            />
-            <button
-              id="btn-hash-doc"
-              type="button"
-              onClick={handleComputeHashFromDoc}
-              disabled={!sampleDocumentText}
-              className="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 disabled:opacity-50 text-xs font-medium rounded text-zinc-200 transition cursor-pointer"
-            >
-              Hash & Set
-            </button>
+          {/* Client-side document hasher utility */}
+          <div className="p-3.5 sm:p-4 bg-zinc-950/70 border border-zinc-850 rounded-xl space-y-2.5 mt-2.5">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-medium text-zinc-400 flex items-center gap-2">
+                <Hash className="w-3.5 h-3.5 text-emerald-400" /> Client-Side ID Hasher Tool (Simulate local passport/ID hash)
+              </span>
+              <span className="text-[10px] font-mono text-zinc-500">SubtleCrypto SHA-256</span>
+            </div>
+            <div className="flex gap-2.5">
+              <input
+                id="input-sample-doc"
+                type="text"
+                value={sampleDocumentText}
+                onChange={(e) => setSampleDocumentText(e.target.value)}
+                placeholder="Type dummy passport/license string (e.g. PASSPORT_US_DOE_JOHN_1995)..."
+                className="flex-1 bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-xs text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-emerald-500 font-mono"
+              />
+              <button
+                id="btn-hash-doc"
+                type="button"
+                onClick={handleComputeHashFromDoc}
+                disabled={!sampleDocumentText}
+                className="px-4 py-2 bg-zinc-800 hover:bg-zinc-750 disabled:opacity-40 text-xs font-medium rounded-lg text-zinc-200 transition cursor-pointer whitespace-nowrap active:scale-95"
+              >
+                Hash &amp; Set
+              </button>
+            </div>
           </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div>
-            <label className="block text-xs font-medium text-zinc-300 mb-1.5 font-mono">
+          <div className="space-y-1.5">
+            <label className="block text-xs font-medium text-zinc-300 font-mono">
               Age Threshold (`age_threshold`)
             </label>
             <input
@@ -423,12 +427,12 @@ bytes memory calldata = abi.encodeWithSelector(
               value={ageThreshold}
               onChange={(e) => setAgeThreshold(Number(e.target.value))}
               required
-              className="w-full bg-zinc-950 border border-zinc-700/80 rounded-lg px-3.5 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-emerald-500 font-mono transition"
+              className="w-full bg-zinc-950 border border-zinc-700/80 rounded-lg px-4 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-emerald-500 font-mono transition"
             />
           </div>
 
-          <div>
-            <label className="block text-xs font-medium text-zinc-300 mb-1.5 font-mono">
+          <div className="space-y-1.5">
+            <label className="block text-xs font-medium text-zinc-300 font-mono">
               API Key (`x-api-key`)
             </label>
             <input
@@ -437,12 +441,12 @@ bytes memory calldata = abi.encodeWithSelector(
               value={apiKey}
               onChange={(e) => setApiKey(e.target.value)}
               placeholder="Optional API key"
-              className="w-full bg-zinc-950 border border-zinc-700/80 rounded-lg px-3.5 py-2 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-emerald-500 font-mono transition"
+              className="w-full bg-zinc-950 border border-zinc-700/80 rounded-lg px-4 py-2 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-emerald-500 font-mono transition"
             />
           </div>
 
-          <div>
-            <label className="block text-xs font-medium text-zinc-300 mb-1.5 font-mono">
+          <div className="space-y-1.5">
+            <label className="block text-xs font-medium text-zinc-300 font-mono">
               Custom Request ID (`x-request-id`)
             </label>
             <input
@@ -451,7 +455,7 @@ bytes memory calldata = abi.encodeWithSelector(
               value={customRequestId}
               onChange={(e) => setCustomRequestId(e.target.value)}
               placeholder="Auto-generated if blank"
-              className="w-full bg-zinc-950 border border-zinc-700/80 rounded-lg px-3.5 py-2 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-emerald-500 font-mono transition"
+              className="w-full bg-zinc-950 border border-zinc-700/80 rounded-lg px-4 py-2 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-emerald-500 font-mono transition"
             />
           </div>
         </div>
@@ -460,10 +464,10 @@ bytes memory calldata = abi.encodeWithSelector(
           id="btn-submit-verify"
           type="submit"
           disabled={loading}
-          className="w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-500 disabled:bg-emerald-800/50 text-white font-semibold text-sm rounded-lg flex items-center justify-center gap-2 shadow-lg shadow-emerald-950/50 transition cursor-pointer"
+          className="w-full py-3.5 px-5 bg-emerald-600 hover:bg-emerald-500 disabled:bg-emerald-800/50 text-white font-semibold text-sm rounded-xl flex items-center justify-center gap-2.5 shadow-lg shadow-emerald-950/50 transition duration-150 cursor-pointer active:scale-[0.99]"
         >
           {loading ? (
-            <span className="inline-block animate-spin mr-1">⟳</span>
+            <span className="inline-block animate-spin mr-1 text-base">⟳</span>
           ) : (
             <Play className="w-4 h-4 text-emerald-200 fill-current" />
           )}
@@ -473,14 +477,14 @@ bytes memory calldata = abi.encodeWithSelector(
 
       {/* Response Box with GSAP Scramble & Ticker */}
       {response && (
-        <div ref={responseBoxRef} id="verify-response-box" className="mt-6 p-5 rounded-xl bg-zinc-950 border border-emerald-500/40 space-y-4 shadow-xl will-change-transform">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-zinc-800">
-            <div className="flex items-center gap-2">
-              <span className="px-2.5 py-1 rounded bg-emerald-950 border border-emerald-800 text-emerald-400 font-mono text-xs font-semibold flex items-center gap-1.5">
+        <div ref={responseBoxRef} id="verify-response-box" className="mt-6 p-5 sm:p-6 rounded-xl bg-zinc-950/90 border border-emerald-500/40 space-y-4.5 shadow-xl will-change-transform">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3.5 border-b border-zinc-800">
+            <div className="flex items-center gap-2.5">
+              <span className="px-3 py-1 rounded-md bg-emerald-950 border border-emerald-800 text-emerald-400 font-mono text-xs font-semibold flex items-center gap-1.5 shadow-sm">
                 <Check className="w-3.5 h-3.5" /> HTTP {responseStatus || 201} Created
               </span>
               {latencyMs !== null && (
-                <span className="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800 text-zinc-400 font-mono text-[11px] flex items-center gap-1">
+                <span className="px-2.5 py-1 rounded-md bg-zinc-900 border border-zinc-800 text-zinc-400 font-mono text-[11px] flex items-center gap-1.5">
                   <Clock className="w-3 h-3 text-emerald-400" /> {latencyMs} ms
                 </span>
               )}
@@ -491,7 +495,7 @@ bytes memory calldata = abi.encodeWithSelector(
                 <button
                   id="btn-copy-proof-id"
                   onClick={() => handleCopy(response.proof_id || "", "proof_id")}
-                  className="text-xs text-zinc-400 hover:text-zinc-200 flex items-center gap-1 font-mono px-2 py-1 rounded bg-zinc-900 border border-zinc-800 cursor-pointer"
+                  className="text-xs text-zinc-400 hover:text-zinc-200 flex items-center gap-1.5 font-mono px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-zinc-700 cursor-pointer transition active:scale-95"
                 >
                   {copiedField === "proof_id" ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
                   <span>{copiedField === "proof_id" ? "Copied ID" : "Copy Proof ID"}</span>
@@ -500,16 +504,16 @@ bytes memory calldata = abi.encodeWithSelector(
             </div>
           </div>
 
-          <div className="p-3 bg-emerald-950/20 border border-emerald-800/40 rounded-lg flex items-center justify-between text-xs">
-            <span className="text-emerald-300 font-medium flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-              Compliance Status: <strong className="text-emerald-200 font-mono">{response.criteria_met}</strong> (Zero PII Stored)
+          <div className="p-3.5 bg-emerald-950/20 border border-emerald-800/40 rounded-lg flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+            <span className="text-emerald-300 font-medium flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+              <span>Compliance Status: <strong className="text-emerald-200 font-mono">{response.criteria_met}</strong> (Zero PII Stored)</span>
             </span>
-            <div className="flex items-center gap-1.5">
-              <span className="px-2 py-0.5 bg-purple-900/60 text-purple-300 font-mono text-[10px] rounded border border-purple-700/50">
+            <div className="flex items-center gap-2">
+              <span className="px-2.5 py-0.5 bg-purple-900/60 text-purple-300 font-mono text-[10px] rounded border border-purple-700/50">
                 Rust SQLx SQLite
               </span>
-              <span className="px-2 py-0.5 bg-emerald-900/60 text-emerald-300 font-mono text-[10px] rounded border border-emerald-700/50">
+              <span className="px-2.5 py-0.5 bg-emerald-900/60 text-emerald-300 font-mono text-[10px] rounded border border-emerald-700/50">
                 jwt-simple
               </span>
             </div>
@@ -517,20 +521,20 @@ bytes memory calldata = abi.encodeWithSelector(
 
           {/* Cryptographic Commitment Animated Display */}
           {response.commitment && (
-            <div className="p-3 bg-zinc-900 rounded-lg border border-zinc-800 space-y-1.5">
+            <div className="p-3.5 sm:p-4 bg-zinc-900/80 rounded-lg border border-zinc-800 space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-mono text-zinc-400 font-medium">Domain-Separated Commitment (`commitment`)</span>
+                <span className="text-xs font-mono text-zinc-300 font-medium">Domain-Separated Commitment (`commitment`)</span>
                 <button
                   onClick={() => handleCopy(response.commitment || "", "commitment")}
-                  className="text-[11px] text-zinc-400 hover:text-emerald-400 flex items-center gap-1 font-mono cursor-pointer"
+                  className="text-xs text-zinc-400 hover:text-emerald-400 flex items-center gap-1.5 font-mono cursor-pointer transition"
                 >
                   {copiedField === "commitment" ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
-                  {copiedField === "commitment" ? "Copied" : "Copy Commitment"}
+                  <span>{copiedField === "commitment" ? "Copied" : "Copy Commitment"}</span>
                 </button>
               </div>
               <div
                 ref={commitmentTextRef}
-                className="text-[11px] text-emerald-400 font-mono bg-zinc-950 p-2.5 rounded border border-zinc-800 break-all select-all font-semibold"
+                className="text-xs text-emerald-400 font-mono bg-zinc-950 p-3 rounded-md border border-zinc-800 break-all select-all font-semibold tracking-wide"
               >
                 {response.commitment}
               </div>
@@ -538,27 +542,27 @@ bytes memory calldata = abi.encodeWithSelector(
           )}
 
           {(response.proof_signature || response.signed_token) && (
-            <div className="p-3 bg-zinc-900 rounded-lg border border-zinc-800 space-y-1.5">
+            <div className="p-3.5 sm:p-4 bg-zinc-900/80 rounded-lg border border-zinc-800 space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-mono text-zinc-400 font-medium">proof_signature (Cryptographic HMAC-SHA256 Token)</span>
+                <span className="text-xs font-mono text-zinc-300 font-medium">proof_signature (Cryptographic HMAC-SHA256 Token)</span>
                 <button
                   id="btn-copy-token"
                   onClick={() => handleCopy(response.proof_signature || response.signed_token || "", "signed_token")}
-                  className="text-[11px] text-zinc-400 hover:text-emerald-400 flex items-center gap-1 font-mono cursor-pointer"
+                  className="text-xs text-zinc-400 hover:text-emerald-400 flex items-center gap-1.5 font-mono cursor-pointer transition"
                 >
                   {copiedField === "signed_token" ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
-                  {copiedField === "signed_token" ? "Copied Token" : "Copy Token"}
+                  <span>{copiedField === "signed_token" ? "Copied Token" : "Copy Token"}</span>
                 </button>
               </div>
-              <div className="text-[11px] text-emerald-400 font-mono bg-zinc-950 p-2.5 rounded border border-zinc-800 break-all select-all max-h-24 overflow-y-auto">
+              <div className="text-xs text-emerald-400 font-mono bg-zinc-950 p-3 rounded-md border border-zinc-800 break-all select-all max-h-28 overflow-y-auto">
                 {response.proof_signature || response.signed_token}
               </div>
             </div>
           )}
 
-          <div className="space-y-1.5">
-            <span className="text-[11px] font-mono text-zinc-400">Response JSON Body:</span>
-            <pre className="text-xs text-emerald-300 font-mono bg-zinc-900/90 p-3 rounded-lg overflow-x-auto border border-zinc-800">
+          <div className="space-y-2">
+            <span className="text-xs font-mono text-zinc-400">Response JSON Body:</span>
+            <pre className="text-xs text-emerald-300 font-mono bg-zinc-900/90 p-4 rounded-lg overflow-x-auto border border-zinc-800">
               {JSON.stringify(response, null, 2)}
             </pre>
           </div>
@@ -567,31 +571,31 @@ bytes memory calldata = abi.encodeWithSelector(
 
       {/* Error Box */}
       {error && (
-        <div ref={errorBoxRef} id="verify-error-box" className="mt-6 p-4 rounded-xl bg-red-950/30 border border-red-800/50 space-y-3 will-change-transform">
+        <div ref={errorBoxRef} id="verify-error-box" className="mt-6 p-4 sm:p-5 rounded-xl bg-red-950/30 border border-red-800/50 space-y-3 will-change-transform">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 text-red-400 text-xs font-semibold">
               <AlertCircle className="w-4 h-4" />
               <span>Request Rejected — Error Handled by Algebraic `ApiError`</span>
             </div>
             {responseStatus && (
-              <span className="px-2 py-0.5 rounded bg-red-950 border border-red-800 text-red-300 font-mono text-xs">
+              <span className="px-2.5 py-0.5 rounded bg-red-950 border border-red-800 text-red-300 font-mono text-xs font-medium">
                 HTTP {responseStatus}
               </span>
             )}
           </div>
-          <pre className="text-xs text-red-300 font-mono bg-zinc-900 p-3 rounded-lg overflow-x-auto border border-red-900/50">
+          <pre className="text-xs text-red-300 font-mono bg-zinc-900 p-3.5 rounded-lg overflow-x-auto border border-red-900/50">
             {typeof error === "string" ? error : JSON.stringify(error, null, 2)}
           </pre>
         </div>
       )}
 
       {/* Multi-Language Code Snippets */}
-      <div className="mt-6 pt-5 border-t border-zinc-800/80 space-y-3">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+      <div className="mt-6 pt-6 border-t border-zinc-800/80 space-y-3.5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <Code2 className="w-4 h-4 text-emerald-400" />
             <span className="text-xs font-semibold text-zinc-200 uppercase tracking-wider font-mono">
-              Live SDK & API Request Code Generator
+              Live SDK &amp; API Request Code Generator
             </span>
           </div>
 
@@ -601,9 +605,9 @@ bytes memory calldata = abi.encodeWithSelector(
                 key={lang}
                 type="button"
                 onClick={() => setCodeLang(lang)}
-                className={`px-2.5 py-1 rounded text-[11px] font-mono transition cursor-pointer ${
+                className={`px-3 py-1 rounded text-xs font-mono transition cursor-pointer ${
                   codeLang === lang
-                    ? "bg-zinc-800 text-emerald-400 font-semibold"
+                    ? "bg-zinc-800 text-emerald-400 font-semibold shadow-sm"
                     : "text-zinc-400 hover:text-zinc-200"
                 }`}
               >
@@ -614,15 +618,15 @@ bytes memory calldata = abi.encodeWithSelector(
         </div>
 
         <div className="relative">
-          <pre className="text-xs text-zinc-300 font-mono bg-zinc-950 p-4 rounded-xl overflow-x-auto border border-zinc-800">
+          <pre className="text-xs text-zinc-300 font-mono bg-zinc-950 p-4 sm:p-5 rounded-xl overflow-x-auto border border-zinc-800/90 leading-relaxed">
             {getCodeSnippet()}
           </pre>
           <button
             id="btn-copy-code-snippet"
             onClick={() => handleCopy(getCodeSnippet(), "snippet")}
-            className="absolute top-3 right-3 px-2.5 py-1 rounded bg-zinc-850 hover:bg-zinc-750 text-zinc-300 text-xs flex items-center gap-1.5 font-mono border border-zinc-750 transition cursor-pointer"
+            className="absolute top-3 right-3 px-3 py-1.5 rounded-lg bg-zinc-850 hover:bg-zinc-750 text-zinc-300 text-xs flex items-center gap-1.5 font-mono border border-zinc-750 transition cursor-pointer active:scale-95"
           >
-            {copiedField === "snippet" ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+            {copiedField === "snippet" ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
             <span>{copiedField === "snippet" ? "Copied" : "Copy Code"}</span>
           </button>
         </div>

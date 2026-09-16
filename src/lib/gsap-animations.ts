@@ -189,3 +189,95 @@ export const animateVerificationSuccess = (container: HTMLElement | null) => {
     { scale: 1, borderColor: "rgba(16, 185, 129, 0.4)", boxShadow: "0 0 0px rgba(16, 185, 129, 0)", duration: 0.6, ease: "back.out(1.5)" }
   );
 };
+
+/**
+ * High-precision cryptographic card hover interaction
+ */
+export const animateCardHover = (el: HTMLElement | null, isEnter: boolean) => {
+  if (!el) return;
+  gsap.to(el, {
+    y: isEnter ? -2.5 : 0,
+    duration: 0.24,
+    ease: isEnter ? "power2.out" : "power2.inOut",
+  });
+};
+
+export interface StaggerOptions {
+  yOffset?: number;
+  staggerDelay?: number;
+  duration?: number;
+}
+
+/**
+ * Staggered entrance for cryptographic cards within a container or direct list
+ */
+export const animateCardsStagger = (
+  target: HTMLElement | HTMLElement[] | NodeListOf<Element> | null,
+  selectorOrOptions: string | number | StaggerOptions = ".aegis-card",
+  options?: StaggerOptions
+) => {
+  if (!target) return;
+
+  let elements: HTMLElement[] = [];
+  let opts: StaggerOptions = {};
+
+  if (typeof selectorOrOptions === "number") {
+    opts.staggerDelay = selectorOrOptions;
+    if (Array.isArray(target)) {
+      elements = target;
+    } else if (target instanceof HTMLElement && "querySelectorAll" in target) {
+      elements = Array.from(target.querySelectorAll(".aegis-card")) as HTMLElement[];
+    }
+  } else if (typeof selectorOrOptions === "string") {
+    if (target instanceof HTMLElement && "querySelectorAll" in target) {
+      elements = Array.from(target.querySelectorAll(selectorOrOptions)) as HTMLElement[];
+    } else if (Array.isArray(target)) {
+      elements = target;
+    }
+    if (options) opts = options;
+  } else if (typeof selectorOrOptions === "object") {
+    opts = selectorOrOptions;
+    if (Array.isArray(target)) {
+      elements = target;
+    } else if (target instanceof HTMLElement && "querySelectorAll" in target) {
+      elements = Array.from(target.querySelectorAll(".aegis-card")) as HTMLElement[];
+    }
+  }
+
+  if (Array.isArray(target) && elements.length === 0) {
+    elements = target;
+  }
+
+  if (elements.length === 0) return;
+
+  const yOffset = opts.yOffset ?? 16;
+  const staggerDelay = opts.staggerDelay ?? 0.045;
+  const duration = opts.duration ?? 0.38;
+
+  gsap.fromTo(
+    elements,
+    { opacity: 0, y: yOffset, scale: 0.99 },
+    {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      stagger: staggerDelay,
+      duration: duration,
+      ease: "power3.out",
+      clearProps: "transform",
+    }
+  );
+};
+
+/**
+ * Subtle cryptographic circuit scanning pulse on cards
+ */
+export const animateCircuitPulse = (el: HTMLElement | null) => {
+  if (!el) return;
+  gsap.fromTo(
+    el,
+    { borderColor: "rgba(52, 211, 153, 0.8)", boxShadow: "0 0 20px rgba(52, 211, 153, 0.25)" },
+    { borderColor: "rgba(39, 39, 42, 0.8)", boxShadow: "0 0 0px rgba(0, 0, 0, 0)", duration: 1.2, ease: "power2.out" }
+  );
+};
+

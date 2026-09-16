@@ -29,6 +29,7 @@ import {
   Compass,
   Workflow
 } from "lucide-react";
+import { animateCardsStagger } from "@/lib/gsap-animations";
 
 export const RustZKPEcosystem: React.FC = () => {
   const [selectedEcosystem, setSelectedEcosystem] = useState<"arkworks" | "zksync" | "aleo" | "halo2">("arkworks");
@@ -99,6 +100,7 @@ export const RustZKPEcosystem: React.FC = () => {
         { opacity: 0, y: 15 },
         { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }
       );
+      animateCardsStagger(panelRef.current, ".aegis-card");
     }
   }, []);
 
@@ -203,7 +205,7 @@ export const RustZKPEcosystem: React.FC = () => {
   return (
     <div ref={panelRef} id="rust-zkp-ecosystem-root" className="space-y-8 will-change-transform">
       {/* Hero: The Cryptographic Reality */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-zinc-900 via-zinc-900/90 to-amber-950/30 border border-amber-500/30 rounded-2xl p-6 sm:p-8 shadow-2xl space-y-6">
+      <div className="aegis-card relative overflow-hidden bg-gradient-to-br from-zinc-900 via-zinc-900/90 to-amber-950/30 border border-amber-500/30 rounded-2xl p-6 sm:p-8 shadow-2xl space-y-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-zinc-800">
           <div className="flex items-start sm:items-center gap-3.5">
             <Cpu className="w-10 h-10 text-amber-400 shrink-0 filter drop-shadow-[0_0_12px_rgba(251,191,36,0.9)]" />
@@ -230,7 +232,7 @@ export const RustZKPEcosystem: React.FC = () => {
         </div>
 
         {/* Fundamental Thesis Box */}
-        <div className="p-4 sm:p-5 bg-zinc-950/90 border border-amber-600/30 rounded-xl space-y-3">
+        <div className="p-5 sm:p-6 bg-zinc-950/90 border border-amber-600/30 rounded-xl space-y-3">
           <p className="text-zinc-200 text-sm sm:text-base leading-relaxed font-sans">
             <strong className="text-amber-300 font-semibold">The broader cryptography and privacy-preserving developer ecosystems have already chosen Rust as their foundational language.</strong>
           </p>
@@ -243,7 +245,7 @@ export const RustZKPEcosystem: React.FC = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div
             onClick={() => setSelectedEcosystem("arkworks")}
-            className={`p-4 rounded-xl border transition-all cursor-pointer ${
+            className={`p-4.5 rounded-xl border transition-all duration-200 cursor-pointer hover:shadow-lg active:scale-95 ${
               selectedEcosystem === "arkworks"
                 ? "bg-emerald-950/40 border-emerald-500 shadow-lg shadow-emerald-950/40 ring-1 ring-emerald-500/50"
                 : "bg-zinc-950/60 border-zinc-800 hover:border-zinc-700 hover:bg-zinc-900/60"
@@ -267,7 +269,7 @@ export const RustZKPEcosystem: React.FC = () => {
 
           <div
             onClick={() => setSelectedEcosystem("zksync")}
-            className={`p-4 rounded-xl border transition-all cursor-pointer ${
+            className={`p-4.5 rounded-xl border transition-all duration-200 cursor-pointer hover:shadow-lg active:scale-95 ${
               selectedEcosystem === "zksync"
                 ? "bg-blue-950/40 border-blue-500 shadow-lg shadow-blue-950/40 ring-1 ring-blue-500/50"
                 : "bg-zinc-950/60 border-zinc-800 hover:border-zinc-700 hover:bg-zinc-900/60"
@@ -291,7 +293,7 @@ export const RustZKPEcosystem: React.FC = () => {
 
           <div
             onClick={() => setSelectedEcosystem("aleo")}
-            className={`p-4 rounded-xl border transition-all cursor-pointer ${
+            className={`p-4.5 rounded-xl border transition-all duration-200 cursor-pointer hover:shadow-lg active:scale-95 ${
               selectedEcosystem === "aleo"
                 ? "bg-purple-950/40 border-purple-500 shadow-lg shadow-purple-950/40 ring-1 ring-purple-500/50"
                 : "bg-zinc-950/60 border-zinc-800 hover:border-zinc-700 hover:bg-zinc-900/60"
@@ -315,7 +317,7 @@ export const RustZKPEcosystem: React.FC = () => {
 
           <div
             onClick={() => setSelectedEcosystem("halo2")}
-            className={`p-4 rounded-xl border transition-all cursor-pointer ${
+            className={`p-4.5 rounded-xl border transition-all duration-200 cursor-pointer hover:shadow-lg active:scale-95 ${
               selectedEcosystem === "halo2"
                 ? "bg-amber-950/40 border-amber-500 shadow-lg shadow-amber-950/40 ring-1 ring-amber-500/50"
                 : "bg-zinc-950/60 border-zinc-800 hover:border-zinc-700 hover:bg-zinc-900/60"
@@ -340,7 +342,7 @@ export const RustZKPEcosystem: React.FC = () => {
       </div>
 
       {/* NEW: Interactive Rust Security Test Runner & Invariant Auditor */}
-      <div className="bg-zinc-900/70 border border-zinc-800 rounded-xl p-6 shadow-xl space-y-6">
+      <div className="aegis-card bg-zinc-900/70 border border-zinc-800 rounded-2xl p-6 sm:p-7 shadow-xl space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800/80">
           <div className="flex items-center gap-3">
             <div className="text-indigo-400">
@@ -821,7 +823,7 @@ export const RustZKPEcosystem: React.FC = () => {
       </div>
 
       {/* Interactive Matrix: Native Rust vs Wrapper/FFI Architecture */}
-      <div className="bg-zinc-900/70 border border-zinc-800 rounded-xl p-6 shadow-xl space-y-6">
+      <div className="aegis-card bg-zinc-900/70 border border-zinc-800 rounded-2xl p-6 sm:p-7 shadow-xl space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800/80">
           <div className="flex items-center gap-3">
             <div className="text-emerald-400">
@@ -985,7 +987,7 @@ export const RustZKPEcosystem: React.FC = () => {
       </div>
 
       {/* Interactive Zeroize & Memory Security Sandbox */}
-      <div className="bg-zinc-900/70 border border-zinc-800 rounded-xl p-6 shadow-xl space-y-5">
+      <div className="aegis-card bg-zinc-900/70 border border-zinc-800 rounded-2xl p-6 sm:p-7 shadow-xl space-y-5">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-zinc-800/80">
           <div className="flex items-center gap-3">
             <div className="text-purple-400">
@@ -1011,7 +1013,7 @@ export const RustZKPEcosystem: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
-          <div className="p-4 bg-zinc-950 border border-zinc-800 rounded-xl space-y-2">
+          <div className="p-5 bg-zinc-950/90 border border-zinc-800/90 rounded-2xl space-y-3">
             <span className="text-zinc-400 font-semibold block text-[11px]">
               Active Witness State: <span className="text-purple-400 uppercase">{zeroizeStep}</span>
             </span>
@@ -1032,7 +1034,7 @@ export const RustZKPEcosystem: React.FC = () => {
             </div>
           </div>
 
-          <div className="p-4 bg-zinc-950 border border-zinc-800 rounded-xl space-y-3">
+          <div className="p-5 bg-zinc-950/90 border border-zinc-800/90 rounded-2xl space-y-3.5">
             <span className="text-zinc-300 font-semibold block text-[11px] font-sans">
               Why this cannot be done in JavaScript / Python / Go:
             </span>
@@ -1047,7 +1049,7 @@ export const RustZKPEcosystem: React.FC = () => {
       </div>
 
       {/* Production-Grade Rust Cryptographic Security Code Modules */}
-      <div className="bg-zinc-900/70 border border-zinc-800 rounded-xl p-6 shadow-xl space-y-5">
+      <div className="aegis-card bg-zinc-900/70 border border-zinc-800 rounded-2xl p-6 sm:p-7 shadow-xl space-y-5">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800/80">
           <div className="flex items-center gap-3">
             <div className="text-blue-400">

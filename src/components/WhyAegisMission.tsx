@@ -30,6 +30,7 @@ import {
   KeyRound
 } from "lucide-react";
 import { AegisLogo } from "./AegisLogo";
+import { animateCardsStagger } from "@/lib/gsap-animations";
 
 type AudienceKey = "all" | "consumers" | "developers" | "enterprises" | "auditors";
 type UseCaseKey = "age_gating" | "fintech" | "gaming_social" | "healthcare" | "workplace";
@@ -47,12 +48,18 @@ export const WhyAegisMission: React.FC = () => {
   const useCaseRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (containerRef.current) {
+      const cards = containerRef.current.querySelectorAll(".aegis-card");
+      animateCardsStagger(Array.from(cards) as HTMLElement[], 0.07);
+    }
+  }, []);
+
+  useEffect(() => {
     if (cardRef.current) {
-      gsap.fromTo(
-        cardRef.current,
-        { opacity: 0, y: 12, scale: 0.99 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.3, ease: "power3.out" }
-      );
+      const cards = cardRef.current.querySelectorAll(".aegis-card");
+      if (cards.length > 0) {
+        animateCardsStagger(Array.from(cards) as HTMLElement[], 0.06);
+      }
     }
   }, [activeAudience]);
 
@@ -269,55 +276,57 @@ export const WhyAegisMission: React.FC = () => {
             return (
               <div
                 key={key}
-                className="p-6 bg-zinc-900/70 border border-zinc-800 rounded-2xl flex flex-col justify-between space-y-5 hover:border-zinc-750 transition shadow-lg"
+                className="aegis-card p-6 sm:p-7 bg-zinc-900/60 border border-zinc-800 rounded-2xl flex flex-col justify-between space-y-6 hover:border-zinc-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-zinc-950/40"
               >
-                <div className="space-y-4">
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex items-center gap-3">
-                      <Icon className="w-8 h-8 text-emerald-400 shrink-0 filter drop-shadow-[0_0_10px_rgba(52,211,153,0.85)]" />
+                <div className="space-y-4.5">
+                  <div className="flex items-start justify-between gap-3 pb-2 border-b border-zinc-800/60">
+                    <div className="flex items-center gap-3.5">
+                      <div className="p-2.5 rounded-xl bg-emerald-950/40 border border-emerald-800/40">
+                        <Icon className="w-7 h-7 text-emerald-400 shrink-0 filter drop-shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+                      </div>
                       <div>
                         <h4 className="text-base font-bold text-zinc-100">{data.title}</h4>
-                        <span className="text-[11px] font-mono text-emerald-400 block">{data.badge}</span>
+                        <span className="text-xs font-mono text-emerald-400 block mt-0.5">{data.badge}</span>
                       </div>
                     </div>
                   </div>
 
-                  <p className="text-xs font-medium text-emerald-300 bg-emerald-950/40 border border-emerald-900/50 p-2.5 rounded-lg">
+                  <p className="text-xs font-medium text-emerald-300 bg-emerald-950/30 border border-emerald-900/50 p-3.5 rounded-xl leading-relaxed">
                     {data.tagline}
                   </p>
 
-                  <div className="space-y-2 text-xs">
-                    <div className="p-3 bg-red-950/20 border border-red-900/30 rounded-xl space-y-1">
-                      <span className="text-red-400 font-semibold flex items-center gap-1.5">
-                        <AlertTriangle className="w-3.5 h-3.5" /> The Broken Status Quo
+                  <div className="space-y-3 text-xs">
+                    <div className="p-4 bg-red-950/15 border border-red-900/30 rounded-xl space-y-1.5">
+                      <span className="text-red-400 font-semibold flex items-center gap-2">
+                        <AlertTriangle className="w-3.5 h-3.5 shrink-0" /> The Broken Status Quo
                       </span>
-                      <p className="text-zinc-300 text-[11px] leading-relaxed">{data.coreProblem}</p>
+                      <p className="text-zinc-300 text-xs leading-relaxed">{data.coreProblem}</p>
                     </div>
 
-                    <div className="p-3 bg-zinc-950 border border-zinc-800/90 rounded-xl space-y-1">
-                      <span className="text-emerald-400 font-semibold flex items-center gap-1.5">
-                        <ShieldCheck className="w-3.5 h-3.5" /> How Aegis Transforms This
+                    <div className="p-4 bg-zinc-950 border border-zinc-800/90 rounded-xl space-y-1.5">
+                      <span className="text-emerald-400 font-semibold flex items-center gap-2">
+                        <ShieldCheck className="w-3.5 h-3.5 shrink-0" /> How Aegis Transforms This
                       </span>
-                      <p className="text-zinc-300 text-[11px] leading-relaxed">{data.aegisSolution}</p>
+                      <p className="text-zinc-300 text-xs leading-relaxed">{data.aegisSolution}</p>
                     </div>
                   </div>
 
-                  <div className="space-y-2 pt-2">
-                    <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-400 font-semibold">
+                  <div className="space-y-2.5 pt-1">
+                    <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-semibold block">
                       Key Practical Benefits
                     </span>
-                    <ul className="space-y-1.5 text-xs text-zinc-300">
+                    <ul className="space-y-2 text-xs text-zinc-300">
                       {data.benefits.map((benefit, i) => (
-                        <li key={i} className="flex items-start gap-2">
+                        <li key={i} className="flex items-start gap-2.5 leading-relaxed">
                           <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 mt-0.5 shrink-0" />
-                          <span className="leading-snug">{benefit}</span>
+                          <span>{benefit}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
                 </div>
 
-                <div className="p-3 bg-zinc-950/80 border-t border-zinc-800/80 rounded-xl text-[11px] text-zinc-400 italic">
+                <div className="p-4 bg-zinc-950/70 border border-zinc-850 rounded-xl text-xs text-zinc-400 italic leading-relaxed">
                   &ldquo;{data.quote}&rdquo;
                 </div>
               </div>
@@ -327,14 +336,14 @@ export const WhyAegisMission: React.FC = () => {
       </div>
 
       {/* Real-World Use Cases Deep-Dive */}
-      <div className="bg-zinc-900/70 border border-zinc-800 rounded-2xl p-6 space-y-6">
+      <div className="aegis-card bg-zinc-900/70 border border-zinc-800 rounded-2xl p-6 sm:p-7 space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800/80">
           <div>
             <h3 className="text-lg font-semibold text-zinc-100 flex items-center gap-2">
               <Layers className="w-5 h-5 text-teal-400" />
-              Real-World Applicability & Industry Scenarios
+              Real-World Applicability &amp; Industry Scenarios
             </h3>
-            <p className="text-xs text-zinc-400">
+            <p className="text-xs text-zinc-400 mt-0.5">
               See where Aegis is deployed to replace invasive ID verification across industries:
             </p>
           </div>
@@ -346,10 +355,10 @@ export const WhyAegisMission: React.FC = () => {
                 <button
                   key={k}
                   onClick={() => setActiveUseCase(k as UseCaseKey)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition duration-200 cursor-pointer whitespace-nowrap ${
+                  className={`px-3.5 py-2 rounded-lg text-xs font-medium transition duration-200 cursor-pointer whitespace-nowrap active:scale-95 ${
                     isSelected
                       ? "bg-teal-600 text-white font-semibold shadow-md shadow-teal-950/50"
-                      : "bg-zinc-950 text-zinc-400 hover:text-zinc-200 border border-zinc-800"
+                      : "bg-zinc-950 text-zinc-400 hover:text-zinc-200 border border-zinc-800 hover:border-zinc-700"
                   }`}
                 >
                   {item.title.split(" & ")[0]}
@@ -366,48 +375,50 @@ export const WhyAegisMission: React.FC = () => {
           return (
             <div ref={useCaseRef} className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
               <div className="lg:col-span-2 space-y-4">
-                <div className="flex items-center gap-3">
-                  <Icon className="w-8 h-8 text-teal-400 shrink-0 filter drop-shadow-[0_0_10px_rgba(45,212,191,0.85)]" />
+                <div className="flex items-center gap-3.5 pb-2">
+                  <div className="p-2.5 rounded-xl bg-teal-950/40 border border-teal-800/40">
+                    <Icon className="w-7 h-7 text-teal-400 shrink-0 filter drop-shadow-[0_0_8px_rgba(45,212,191,0.8)]" />
+                  </div>
                   <div>
                     <h4 className="text-base font-bold text-zinc-100">{item.title}</h4>
                     <span className="text-xs text-zinc-400 font-mono">Primary Stakeholders: {item.stakeholders}</span>
                   </div>
                 </div>
 
-                <div className="space-y-3 text-xs">
-                  <div className="p-4 bg-zinc-950 rounded-xl border border-zinc-800 space-y-1.5">
-                    <span className="text-zinc-400 font-semibold uppercase tracking-wider text-[10px] block">
+                <div className="space-y-3.5 text-xs">
+                  <div className="p-4 sm:p-4.5 bg-zinc-950/80 rounded-xl border border-zinc-800/80 space-y-2">
+                    <span className="text-zinc-400 font-semibold uppercase tracking-wider text-[11px] block font-mono">
                       Industry Challenge
                     </span>
-                    <p className="text-zinc-300 leading-relaxed">{item.scenario}</p>
+                    <p className="text-zinc-300 leading-relaxed text-xs">{item.scenario}</p>
                   </div>
 
-                  <div className="p-4 bg-teal-950/20 rounded-xl border border-teal-900/40 space-y-1.5">
-                    <span className="text-teal-400 font-semibold uppercase tracking-wider text-[10px] block">
+                  <div className="p-4 sm:p-4.5 bg-teal-950/20 rounded-xl border border-teal-900/40 space-y-2">
+                    <span className="text-teal-400 font-semibold uppercase tracking-wider text-[11px] block font-mono">
                       Aegis Cryptographic Resolution
                     </span>
-                    <p className="text-zinc-200 leading-relaxed">{item.howAegisSolves}</p>
+                    <p className="text-zinc-200 leading-relaxed text-xs">{item.howAegisSolves}</p>
                   </div>
                 </div>
               </div>
 
-              <div className="p-5 bg-zinc-950 rounded-2xl border border-zinc-800 space-y-4">
+              <div className="p-5 sm:p-6 bg-zinc-950/90 rounded-2xl border border-zinc-800 space-y-4.5">
                 <span className="text-xs font-mono font-semibold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
                   <TrendingUp className="w-4 h-4" /> Measurable Outcome
                 </span>
-                <p className="text-sm font-medium text-zinc-100 leading-normal">
+                <p className="text-sm font-medium text-zinc-100 leading-relaxed">
                   {item.impact}
                 </p>
-                <div className="pt-3 border-t border-zinc-850 space-y-2 text-xs text-zinc-400">
-                  <div className="flex items-center justify-between">
+                <div className="pt-3 border-t border-zinc-850 space-y-2.5 text-xs text-zinc-400">
+                  <div className="flex items-center justify-between p-2 rounded-lg bg-zinc-900/50 border border-zinc-850/60">
                     <span>Raw PII Transferred:</span>
                     <span className="font-mono font-bold text-emerald-400">0 Bytes</span>
                   </div>
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between p-2 rounded-lg bg-zinc-900/50 border border-zinc-855/60">
                     <span>Verification Time:</span>
                     <span className="font-mono font-bold text-blue-400">&lt; 150 µs</span>
                   </div>
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between p-2 rounded-lg bg-zinc-900/50 border border-zinc-850/60">
                     <span>Audit Trail:</span>
                     <span className="font-mono font-bold text-purple-400">Merkle Chain</span>
                   </div>
@@ -419,29 +430,29 @@ export const WhyAegisMission: React.FC = () => {
       </div>
 
       {/* Interactive Risk & Liability Simulator for Enterprise & Devs */}
-      <div className="bg-zinc-900/70 border border-zinc-800 rounded-2xl p-6 space-y-6">
+      <div className="aegis-card bg-zinc-900/70 border border-zinc-800 rounded-2xl p-6 sm:p-7 space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800/80">
           <div>
             <h3 className="text-lg font-semibold text-zinc-100 flex items-center gap-2">
               <DollarSign className="w-5 h-5 text-emerald-400" />
-              Interactive Compliance & Breach Liability Simulator
+              Interactive Compliance &amp; Breach Liability Simulator
             </h3>
-            <p className="text-xs text-zinc-400">
+            <p className="text-xs text-zinc-400 mt-0.5">
               Simulate the financial and risk impact of traditional PII collection vs Aegis Zero-PII architecture:
             </p>
           </div>
-          <div className="px-3 py-1 rounded-full bg-emerald-950 border border-emerald-800/60 text-emerald-400 font-mono text-xs flex items-center gap-1.5">
-            <Lock className="w-3 h-3" />
+          <div className="px-3.5 py-1.5 rounded-full bg-emerald-950 border border-emerald-800/60 text-emerald-400 font-mono text-xs flex items-center gap-2">
+            <Lock className="w-3.5 h-3.5" />
             <span>Mathematical Risk Elimination</span>
           </div>
         </div>
 
         {/* Sliders */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="p-4 bg-zinc-950 border border-zinc-800 rounded-xl space-y-3">
+          <div className="p-5 bg-zinc-950/80 border border-zinc-800/90 rounded-xl space-y-3.5">
             <div className="flex items-center justify-between text-xs">
               <span className="text-zinc-300 font-medium">Monthly Active Verifications</span>
-              <span className="font-mono font-bold text-emerald-400">{userVolume.toLocaleString()} users</span>
+              <span className="font-mono font-bold text-emerald-400 text-sm">{userVolume.toLocaleString()} users</span>
             </div>
             <input
               type="range"
@@ -450,9 +461,9 @@ export const WhyAegisMission: React.FC = () => {
               step="5000"
               value={userVolume}
               onChange={(e) => setUserVolume(Number(e.target.value))}
-              className="w-full h-1.5 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-emerald-500"
+              className="w-full h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-emerald-500"
             />
-            <div className="flex justify-between text-[10px] text-zinc-500 font-mono">
+            <div className="flex justify-between text-[11px] text-zinc-500 font-mono">
               <span>1k</span>
               <span>100k</span>
               <span>250k</span>
@@ -460,10 +471,10 @@ export const WhyAegisMission: React.FC = () => {
             </div>
           </div>
 
-          <div className="p-4 bg-zinc-950 border border-zinc-800 rounded-xl space-y-3">
+          <div className="p-5 bg-zinc-950/80 border border-zinc-800/90 rounded-xl space-y-3.5">
             <div className="flex items-center justify-between text-xs">
               <span className="text-zinc-300 font-medium">Estimated Industry Breach Exposure Risk</span>
-              <span className="font-mono font-bold text-amber-400">{breachRiskPercentage}% / year</span>
+              <span className="font-mono font-bold text-amber-400 text-sm">{breachRiskPercentage}% / year</span>
             </div>
             <input
               type="range"
@@ -472,9 +483,9 @@ export const WhyAegisMission: React.FC = () => {
               step="0.2"
               value={breachRiskPercentage}
               onChange={(e) => setBreachRiskPercentage(Number(e.target.value))}
-              className="w-full h-1.5 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-amber-500"
+              className="w-full h-2 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-amber-500"
             />
-            <div className="flex justify-between text-[10px] text-zinc-500 font-mono">
+            <div className="flex justify-between text-[11px] text-zinc-500 font-mono">
               <span>1% (Low)</span>
               <span>4.2% (Average)</span>
               <span>15% (High Threat)</span>
@@ -483,53 +494,53 @@ export const WhyAegisMission: React.FC = () => {
         </div>
 
         {/* Comparison Metrics */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-1">
           {/* Traditional KYC Box */}
-          <div className="p-5 bg-red-950/20 border border-red-900/40 rounded-xl space-y-4">
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-bold text-red-400 flex items-center gap-1.5">
+          <div className="p-5 sm:p-6 bg-red-950/20 border border-red-900/40 rounded-2xl space-y-4">
+            <div className="flex items-center justify-between pb-2 border-b border-red-950/80">
+              <span className="text-sm font-bold text-red-400 flex items-center gap-2">
                 <AlertTriangle className="w-4 h-4" /> Traditional KYC (Raw Document Retention)
               </span>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-red-950 border border-red-800 text-red-300">
+              <span className="text-[10px] font-mono px-2.5 py-0.5 rounded bg-red-950 border border-red-800 text-red-300 font-semibold">
                 Extreme Liability
               </span>
             </div>
-            <div className="space-y-3 text-xs">
-              <div className="flex justify-between pb-2 border-b border-red-950">
-                <span className="text-zinc-400">Stored Raw ID Scans & Birthdates:</span>
+            <div className="space-y-3.5 text-xs">
+              <div className="flex justify-between items-center pb-2.5 border-b border-red-950/60">
+                <span className="text-zinc-400">Stored Raw ID Scans &amp; Birthdates:</span>
                 <span className="font-mono font-bold text-red-400">{traditionalPiiRecords.toLocaleString()} documents</span>
               </div>
-              <div className="flex justify-between pb-2 border-b border-red-950">
-                <span className="text-zinc-400">Potential Breach Liability (IBM Ponemon Metric):</span>
+              <div className="flex justify-between items-center pb-2.5 border-b border-red-950/60">
+                <span className="text-zinc-400">Potential Breach Liability (IBM Ponemon):</span>
                 <span className="font-mono font-bold text-red-400">${traditionalBreachCostUSD.toLocaleString()}</span>
               </div>
-              <div className="flex justify-between pb-2 border-b border-red-950">
-                <span className="text-zinc-400">GDPR / CCPA Audit Risk:</span>
+              <div className="flex justify-between items-center">
+                <span className="text-zinc-400">GDPR / CCPA Regulatory Risk:</span>
                 <span className="font-mono font-bold text-red-400">High (Up to 4% Global Turnover)</span>
               </div>
             </div>
           </div>
 
           {/* Aegis Box */}
-          <div className="p-5 bg-emerald-950/25 border border-emerald-900/50 rounded-xl space-y-4">
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-bold text-emerald-400 flex items-center gap-1.5">
+          <div className="p-5 sm:p-6 bg-emerald-950/25 border border-emerald-900/50 rounded-2xl space-y-4">
+            <div className="flex items-center justify-between pb-2 border-b border-emerald-950/80">
+              <span className="text-sm font-bold text-emerald-400 flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4" /> Aegis Architecture (Zero PII Guarantee)
               </span>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950 border border-emerald-800 text-emerald-300">
+              <span className="text-[10px] font-mono px-2.5 py-0.5 rounded bg-emerald-950 border border-emerald-800 text-emerald-300 font-semibold">
                 Zero Liability
               </span>
             </div>
-            <div className="space-y-3 text-xs">
-              <div className="flex justify-between pb-2 border-b border-emerald-950">
-                <span className="text-zinc-400">Stored Raw ID Scans & Birthdates:</span>
+            <div className="space-y-3.5 text-xs">
+              <div className="flex justify-between items-center pb-2.5 border-b border-emerald-950/60">
+                <span className="text-zinc-400">Stored Raw ID Scans &amp; Birthdates:</span>
                 <span className="font-mono font-bold text-emerald-400">{aegisPiiStored} documents</span>
               </div>
-              <div className="flex justify-between pb-2 border-b border-emerald-950">
+              <div className="flex justify-between items-center pb-2.5 border-b border-emerald-950/60">
                 <span className="text-zinc-400">Potential Breach Liability:</span>
                 <span className="font-mono font-bold text-emerald-400">${aegisBreachLiabilityUSD} (Zero Usable Data)</span>
               </div>
-              <div className="flex justify-between pb-2 border-b border-emerald-950">
+              <div className="flex justify-between items-center">
                 <span className="text-zinc-400">Estimated Compliance Cost Savings:</span>
                 <span className="font-mono font-bold text-emerald-400">${estimatedComplianceSavingsUSD.toLocaleString()} / year</span>
               </div>
@@ -539,26 +550,26 @@ export const WhyAegisMission: React.FC = () => {
       </div>
 
       {/* The Core Principles / Architectural Manifesto */}
-      <div className="p-6 bg-zinc-950 border border-zinc-800 rounded-2xl space-y-4">
-        <h4 className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-semibold flex items-center gap-1.5">
+      <div className="aegis-card p-6 sm:p-7 bg-zinc-950 border border-zinc-800 rounded-2xl space-y-5">
+        <h4 className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-semibold flex items-center gap-2">
           <Scale className="w-4 h-4" /> The Aegis Architectural Invariants
         </h4>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
-          <div className="p-3.5 bg-zinc-900/80 border border-zinc-800/80 rounded-xl space-y-1">
-            <span className="font-bold text-zinc-100 block">1. Predicates over Raw Data</span>
-            <p className="text-zinc-400 text-[11px] leading-relaxed">
+          <div className="p-4 bg-zinc-900/80 border border-zinc-800/80 rounded-xl space-y-2">
+            <span className="font-bold text-zinc-100 text-sm block">1. Predicates over Raw Data</span>
+            <p className="text-zinc-400 text-xs leading-relaxed">
               Applications only ever need answers to questions (&ldquo;Is this person over 18?&rdquo;), never the raw underlying personal secrets (&ldquo;What is their birthday?&rdquo;).
             </p>
           </div>
-          <div className="p-3.5 bg-zinc-900/80 border border-zinc-800/80 rounded-xl space-y-1">
-            <span className="font-bold text-zinc-100 block">2. Self-Sovereignty</span>
-            <p className="text-zinc-400 text-[11px] leading-relaxed">
+          <div className="p-4 bg-zinc-900/80 border border-zinc-800/80 rounded-xl space-y-2">
+            <span className="font-bold text-zinc-100 text-sm block">2. Self-Sovereignty</span>
+            <p className="text-zinc-400 text-xs leading-relaxed">
               No central identity provider should hold a master ledger of who you are, what websites you visit, or when you verify.
             </p>
           </div>
-          <div className="p-3.5 bg-zinc-900/80 border border-zinc-800/80 rounded-xl space-y-1">
-            <span className="font-bold text-zinc-100 block">3. Verifiable Open Science</span>
-            <p className="text-zinc-400 text-[11px] leading-relaxed">
+          <div className="p-4 bg-zinc-900/80 border border-zinc-800/80 rounded-xl space-y-2">
+            <span className="font-bold text-zinc-100 text-sm block">3. Verifiable Open Science</span>
+            <p className="text-zinc-400 text-xs leading-relaxed">
               All cryptographic algorithms, RAM zeroization patterns, and Rust engines are fully open-source and auditable by the global security community.
             </p>
           </div>
