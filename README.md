@@ -22,7 +22,7 @@
 <p align="center">
   <a href="#-what-is-aegis-api-goal--problem-statement"><img src="assets/icons/target.svg" width="26" height="26" align="absmiddle" /> API Goal</a> &nbsp;•&nbsp;
   <a href="#-who-is-aegis-for--how-is-it-useful"><img src="assets/icons/users.svg" width="26" height="26" align="absmiddle" /> Who Is It For?</a> &nbsp;•&nbsp;
-  <a href="#-system-design--architecture-animation"><img src="assets/icons/architecture.svg" width="26" height="26" align="absmiddle" /> System Design</a> &nbsp;•&nbsp;
+  <a href="#-system-design--architecture"><img src="assets/icons/architecture.svg" width="26" height="26" align="absmiddle" /> System Design</a> &nbsp;•&nbsp;
   <a href="#-how-it-works-under-the-hood"><img src="assets/icons/circuit.svg" width="26" height="26" align="absmiddle" /> How It Works</a> &nbsp;•&nbsp;
   <a href="#-api-quickstart--code-examples"><img src="assets/icons/zap.svg" width="26" height="26" align="absmiddle" /> API Quickstart</a> &nbsp;•&nbsp;
   <a href="#-contributing--open-source-collaboration"><img src="assets/icons/git-collab.svg" width="26" height="26" align="absmiddle" /> <strong>Contribute</strong></a> &nbsp;•&nbsp;
@@ -36,42 +36,61 @@
 
 ## <img src="assets/icons/target.svg" width="34" height="34" align="absmiddle" /> What Is Aegis? (API Goal & Problem Statement)
 
-### The Fundamental Digital Identity Dilemma
-Every day, digital businesses and online platforms face a critical compliance paradox:
-1. **Regulations mandate strict verification**: Global laws (including the UK Online Safety Act, EU Digital Services Act, US State Age Gating laws, and FINRA/CFTC financial regulations) require platforms to verify user eligibility—such as confirming an individual is 18+ or 21+, not located in an OFAC-sanctioned jurisdiction, or holding a valid credential.
-2. **Traditional verification creates catastrophic legal liabilities**: Conventional Identity/KYC vendors force users to upload high-resolution photos of passports, driver's licenses, and national identity cards. Platforms store these unencrypted or loosely guarded files in cloud buckets—creating massive **"honeypots"** that are repeatedly hacked, leaked, or held for ransom.
+### What Does This API Do?
+**Aegis is an HTTP REST API for verifying user identity attributes (such as "Age ≥ 21", "Unexpired Passport", or "Sanctions-Free Entity") without ever collecting, inspecting, or storing the user's personal data (PII).**
 
-> Under GDPR Article 83, storing user identity data exposes companies to penalties up to **€20,000,000 or 4% of global annual turnover**, while 40%+ of potential customers abandon registration forms when prompted to upload physical government documents.
+Instead of forcing users to upload passport photos or driver's licenses to your cloud servers:
+1. **The client hashes the document locally**: Your frontend or mobile app hashes the ID using Blake3 or SHA-256 with a client salt. Raw document bytes never leave the user's device.
+2. **Your backend sends the hash and predicate rule to Aegis** (`POST /api/v1/verify`).
+3. **Aegis evaluates the zero-knowledge circuit in Rust memory (<150µs)**, deterministically wipes all witness data from RAM (`zeroize`), and writes an audit leaf to an append-only Blake3 Merkle tree.
+4. **Aegis returns a signed verification token** (`{ verified: true }`) that your application can independently verify with standard public key cryptography.
 
-### The Aegis Solution
-**Aegis is a high-assurance, privacy-preserving cryptographic attestation engine.** 
+```json
+// 1. Request: What your app sends to POST /api/v1/verify
+{
+  "user_digest": "4a7d3b8f1c2e5a9b0d6f8e7a1c3b5d7f9e2a4b6c8d0e1f3a5b7c9d1e3f5a7b9c",
+  "doc_hash": "8f3c4e2b1a0d9e8f7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8b7c6d5e4f",
+  "threshold": 21,
+  "current_year": 2026,
+  "birth_year": 2001,
+  "nonce": "e9b4072f8a1c4d92"
+}
 
-The goal of the Aegis API is to enable applications to verify identity predicates—such as **"Is this user over 21?"**, **"Is this credential genuine and unexpired?"**, or **"Is this entity absent from an OFAC sanctions list?"**—**WITHOUT EVER collecting, transmitting, indexing, or storing the user's raw Personally Identifiable Information (PII).**
+// 2. Response: What Aegis returns in <150 microseconds
+{
+  "status": "verified",
+  "predicate": "age_over_21",
+  "verified": true,
+  "proof_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "merkle_root": "0x9e12bf4a...7e",
+  "leaf_hash": "0x4a11c8d0...b2",
+  "latency_us": 142
+}
+```
 
+### Core Developer Guarantees
 * <img src="assets/icons/shield-check.svg" width="26" height="26" align="absmiddle" /> **0 Bytes PII Stored**: Neither raw photos, names, social security numbers, nor dates of birth ever touch server disks or databases.
-* <img src="assets/icons/shield-check.svg" width="26" height="26" align="absmiddle" /> **Mathematical Invariance**: Proofs are constructed using client-side cryptographic hashing, blinding nonces, and arithmetic predicate evaluation.
-* <img src="assets/icons/shield-check.svg" width="26" height="26" align="absmiddle" /> **Append-Only Merkle Block Ledger**: Every verification receipt is chained in an immutable Blake3 Merkle tree with $O(\log N)$ tamper-evident inclusion proof verification.
+* <img src="assets/icons/shield-check.svg" width="26" height="26" align="absmiddle" /> **Sub-Millisecond Rust Engine**: Verification runs in <150µs using an Axum + SIMD Blake3 native microservice.
 * <img src="assets/icons/shield-check.svg" width="26" height="26" align="absmiddle" /> **Deterministic RAM Scrubbing (`zeroize`)**: Heap and stack witnesses are purged to zeroes immediately upon constraint evaluation.
+* <img src="assets/icons/shield-check.svg" width="26" height="26" align="absmiddle" /> **Append-Only Merkle Block Ledger**: Every verification receipt is chained in an immutable Blake3 Merkle tree with $O(\log N)$ tamper-evident inclusion proof verification.
 
 ---
 
 ## <img src="assets/icons/users.svg" width="34" height="34" align="absmiddle" /> Who Is Aegis For & How Is It Useful?
 
-Aegis was specifically architected to serve five distinct stakeholder groups, solving concrete operational, legal, and engineering bottlenecks:
-
-| Stakeholder / Persona | Their Core Pain Point | How Aegis Solves It | Tangible Business & Security Value |
+| Use Case / Domain | Typical Industry Problem | What You Implement With Aegis | Result & Developer Value |
 | :--- | :--- | :--- | :--- |
-| <img src="assets/icons/cart.svg" width="28" height="28" align="absmiddle" /> **Online Platforms & E-Commerce** | Mandated age verification (alcohol, adult content, regulated gaming) triggers 40%+ cart abandonment and massive data breach exposure. | Evaluates `Age >= Threshold` client-side. The platform receives a signed cryptographic token stating `verified: true`. | **100% regulatory compliance** with zero customer drop-off and zero minor data liability. |
-| <img src="assets/icons/bank.svg" width="28" height="28" align="absmiddle" /> **FinTech, DeFi & Web3 Protocols** | Need to verify KYC/AML compliance and sanctions non-membership without de-anonymizing wallet addresses or hosting toxic PII vaults. | Binds cryptographic commitments directly to user public keys or EVM calldata without public disclosure of private net worth or legal names. | **Auditable compliance** while preserving user pseudonymity and decentralized trust guarantees. |
-| <img src="assets/icons/code.svg" width="28" height="28" align="absmiddle" /> **Software Engineers & Dev Teams** | Building zero-knowledge circuits from scratch requires rare cryptographic expertise, complex math, and costly vendor lock-in. | Single-line HTTP REST API (`POST /api/v1/verify`), OpenAPI 3.1 specification, and sub-millisecond response latency (<150µs). | **5-minute integration** using standard JSON payloads, self-sovereign API keys, and zero vendor lock-in. |
-| <img src="assets/icons/audit.svg" width="28" height="28" align="absmiddle" /> **Compliance Officers, CISOs & Auditors** | Traditional vendors offer opaque marketing claims ("military-grade encryption") while secretly storing raw customer logs. | Tamper-evident Blake3 Merkle ledger, open-source Rust engine, and mathematical non-repudiation receipts (`POST /api/v1/verify-merkle`). | **Zero GDPR/CCPA data breach liability**; independent mathematical verification replaces blind trust. |
-| <img src="assets/icons/person.svg" width="28" height="28" align="absmiddle" /> **Everyday Citizens & Consumers** | Users must upload sensitive documents to unvetted websites, exposing them to identity theft, stalking, and credit fraud. | The physical document never leaves the device. WebCrypto calculates a one-way hash and blinding salt before any bytes touch the wire. | **Absolute digital sovereignty**: users prove their eligibility without surrendering their private lives. |
+| <img src="assets/icons/cart.svg" width="28" height="28" align="absmiddle" /> **Age-Restricted Platforms & E-Commerce** | Mandated age checks (gaming, alcohol delivery, adult content) cause 40%+ drop-off and severe minor data liabilities. | Call `POST /api/v1/verify` with `threshold: 18` or `21`. Client hashes the ID; you receive a signed verification token. | **Full regulatory compliance** with zero customer drop-off and zero stored user PII. |
+| <img src="assets/icons/bank.svg" width="28" height="28" align="absmiddle" /> **FinTech, Web3 & Crypto Protocols** | AML/sanctions compliance requires screening users without de-anonymizing wallet addresses or hosting toxic PII vaults. | Evaluate sanctions non-membership or accredited investor rules over cryptographic commitments. | **Auditable compliance** while preserving user privacy and decentralized trust. |
+| <img src="assets/icons/code.svg" width="28" height="28" align="absmiddle" /> **Software Engineers & Backend Devs** | Custom ZK circuits require specialized math, circuit compilers, and costly vendor contracts. | Single HTTP REST API (`POST /api/v1/verify`), OpenAPI 3.1 specification, and sub-millisecond execution. | **5-minute integration** using standard JSON payloads, self-sovereign keys, and zero vendor lock-in. |
+| <img src="assets/icons/audit.svg" width="28" height="28" align="absmiddle" /> **Compliance Officers & Security Auditors** | Auditing traditional KYC vendors requires trusting proprietary logs and opaque promises. | Query `POST /api/v1/verify-merkle` to mathematically verify inclusion in the Blake3 Merkle ledger. | **Zero data breach liability**; mathematical non-repudiation replaces blind trust. |
+| <img src="assets/icons/person.svg" width="28" height="28" align="absmiddle" /> **End Users & Privacy Advocates** | Users must upload sensitive government documents to unvetted websites, risking identity theft. | Documents are hashed on the user's device. No raw identity bytes ever cross the network. | **Digital sovereignty**: users prove their eligibility without surrendering their private identity. |
 
 ---
 
-## <img src="assets/icons/architecture.svg" width="34" height="34" align="absmiddle" /> System Design & Architecture (Animation)
+## <img src="assets/icons/architecture.svg" width="34" height="34" align="absmiddle" /> System Design & Architecture
 
-Aegis is structured into four secure execution tiers. Watch the animated architectural pipeline below to understand how an attestation flows from the user's browser down to the immutable cryptographic ledger:
+Aegis is structured into four secure execution tiers. The architectural pipeline below illustrates how an attestation flows from the user's browser down to the immutable cryptographic ledger:
 
 <div align="center">
   <img src="assets/system-architecture.svg" alt="Aegis Architectural System Design" width="100%" />

@@ -39,49 +39,39 @@
     <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="120%">
       <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.6" />
     </filter>
+
+    <!-- Arrow Markers for Architecture Data Flow -->
+    <marker id="arrowEmerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#10b981" />
+    </marker>
+    <marker id="arrowSky" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#38bdf8" />
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#34d399" />
+    </marker>
+    <marker id="arrowPurple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#a78bfa" />
+    </marker>
   </defs>
 
   <style>
-    @keyframes pulseFlow {
-      0% { stroke-dashoffset: 28; }
-      100% { stroke-dashoffset: 0; }
-    }
-    @keyframes movePacket1 {
-      0% { cx: 260; opacity: 0; }
-      20% { opacity: 1; }
-      80% { opacity: 1; }
-      100% { cx: 305; opacity: 0; }
-    }
-    @keyframes movePacket2 {
-      0% { cx: 535; opacity: 0; }
-      20% { opacity: 1; }
-      80% { opacity: 1; }
-      100% { cx: 580; opacity: 0; }
-    }
-    @keyframes movePacketLedger {
-      0% { cx: 815; cy: 370; opacity: 0; }
-      20% { opacity: 1; }
-      80% { opacity: 1; }
-      100% { cx: 855; cy: 420; opacity: 0; }
-    }
     @keyframes beaconBlink {
-      0%, 100% { opacity: 0.4; transform: scale(0.9); }
-      50% { opacity: 1; transform: scale(1.15); filter: drop-shadow(0 0 8px #34d399); }
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; filter: drop-shadow(0 0 6px #34d399); }
     }
     @keyframes zeroizeFlash {
       0%, 100% { stroke: #22c55e; stroke-width: 1.5; }
-      50% { stroke: #4ade80; stroke-width: 3.5; filter: drop-shadow(0 0 10px #22c55e); }
+      50% { stroke: #4ade80; stroke-width: 3; filter: drop-shadow(0 0 8px #22c55e); }
     }
     .flow-line {
       stroke-dasharray: 6 4;
-      animation: pulseFlow 1.2s linear infinite;
     }
     .beacon {
-      animation: beaconBlink 2s ease-in-out infinite;
-      transform-origin: center;
+      animation: beaconBlink 2.5s ease-in-out infinite;
     }
     .zeroize-badge {
-      animation: zeroizeFlash 2.5s ease-in-out infinite;
+      animation: zeroizeFlash 3s ease-in-out infinite;
     }
     text {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -108,16 +98,11 @@
     </text>
   </g>
 
-  <!-- Animated Signal Flow Lines Connecting Tiers -->
-  <path d="M 260 300 L 305 300" fill="none" stroke="#10b981" stroke-width="3.5" class="flow-line" />
-  <path d="M 535 300 L 580 300" fill="none" stroke="#38bdf8" stroke-width="3.5" class="flow-line" />
-  <path d="M 815 240 L 855 220" fill="none" stroke="#34d399" stroke-width="3.5" class="flow-line" />
-  <path d="M 815 370 L 855 420" fill="none" stroke="#a78bfa" stroke-width="3.5" class="flow-line" />
-
-  <!-- Moving Data Packets -->
-  <circle cx="260" cy="300" r="7" fill="#34d399" filter="url(#packetGlow)" style="animation: movePacket1 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;" />
-  <circle cx="535" cy="300" r="7" fill="#38bdf8" filter="url(#packetGlow)" style="animation: movePacket2 3s cubic-bezier(0.4, 0, 0.2, 1) infinite 1.2s;" />
-  <circle cx="815" cy="370" r="7" fill="#c084fc" filter="url(#packetGlow)" style="animation: movePacketLedger 3s cubic-bezier(0.4, 0, 0.2, 1) infinite 2.1s;" />
+  <!-- Signal Flow Lines Connecting Tiers with Directional Arrowheads -->
+  <path d="M 260 300 L 297 300" fill="none" stroke="#10b981" stroke-width="3" marker-end="url(#arrowEmerald)" />
+  <path d="M 535 300 L 572 300" fill="none" stroke="#38bdf8" stroke-width="3" marker-end="url(#arrowSky)" />
+  <path d="M 815 240 L 847 222" fill="none" stroke="#34d399" stroke-width="3" marker-end="url(#arrowGreen)" />
+  <path d="M 815 370 L 847 412" fill="none" stroke="#a78bfa" stroke-width="3" marker-end="url(#arrowPurple)" />
 
   <!-- ================= TIER 1: CLIENT EDGE ================= -->
   <g id="tier-1" transform="translate(35, 95)">
