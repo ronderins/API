@@ -2,90 +2,87 @@
   <defs>
     <!-- Gradients -->
     <linearGradient id="sysBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#09090b" />
-      <stop offset="50%" stop-color="#0c1017" />
-      <stop offset="100%" stop-color="#090d16" />
+      <stop offset="0%" stop-color="#090a0f" />
+      <stop offset="50%" stop-color="#0f1219" />
+      <stop offset="100%" stop-color="#08090d" />
     </linearGradient>
 
     <linearGradient id="clientGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#064e3b" stop-opacity="0.35" />
-      <stop offset="100%" stop-color="#022c22" stop-opacity="0.1" />
+      <stop offset="0%" stop-color="#064e3b" stop-opacity="0.55" />
+      <stop offset="100%" stop-color="#022c22" stop-opacity="0.25" />
     </linearGradient>
 
     <linearGradient id="gatewayGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#1e1b4b" stop-opacity="0.35" />
-      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.1" />
+      <stop offset="0%" stop-color="#1e1b4b" stop-opacity="0.55" />
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.25" />
     </linearGradient>
 
     <linearGradient id="engineGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#1e3a5f" stop-opacity="0.4" />
-      <stop offset="100%" stop-color="#0b1e36" stop-opacity="0.15" />
+      <stop offset="0%" stop-color="#0c4a6e" stop-opacity="0.55" />
+      <stop offset="100%" stop-color="#022c22" stop-opacity="0.25" />
     </linearGradient>
 
     <linearGradient id="ledgerGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#3b0764" stop-opacity="0.35" />
-      <stop offset="100%" stop-color="#18022e" stop-opacity="0.1" />
+      <stop offset="0%" stop-color="#581c87" stop-opacity="0.55" />
+      <stop offset="100%" stop-color="#2e1065" stop-opacity="0.25" />
     </linearGradient>
 
     <!-- Filters -->
-    <filter id="packetGlow" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="4" result="blur" />
-      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    <filter id="packetGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
     </filter>
 
     <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000" flood-opacity="0.6" />
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.6" />
     </filter>
   </defs>
 
   <style>
     @keyframes pulseFlow {
-      0% { stroke-dashoffset: 240; }
+      0% { stroke-dashoffset: 28; }
       100% { stroke-dashoffset: 0; }
     }
     @keyframes movePacket1 {
-      0% { cx: 240; cy: 290; opacity: 0; }
-      10% { opacity: 1; }
-      40% { cx: 300; cy: 290; }
-      50% { cx: 330; cy: 290; }
-      90% { opacity: 1; }
-      100% { cx: 520; cy: 290; opacity: 0; }
+      0% { cx: 260; opacity: 0; }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { cx: 305; opacity: 0; }
     }
     @keyframes movePacket2 {
-      0% { cx: 520; cy: 290; opacity: 0; }
-      15% { opacity: 1; }
-      50% { cx: 700; cy: 290; }
-      85% { opacity: 1; }
-      100% { cx: 830; cy: 230; opacity: 0; }
+      0% { cx: 535; opacity: 0; }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { cx: 580; opacity: 0; }
     }
     @keyframes movePacketLedger {
-      0% { cx: 700; cy: 330; opacity: 0; }
-      15% { opacity: 1; }
-      60% { cx: 780; cy: 450; }
-      85% { opacity: 1; }
-      100% { cx: 840; cy: 460; opacity: 0; }
-    }
-    @keyframes zeroizePulse {
-      0%, 100% { fill-opacity: 0.2; stroke-opacity: 0.6; }
-      50% { fill-opacity: 0.45; stroke-opacity: 1; }
+      0% { cx: 815; cy: 370; opacity: 0; }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { cx: 855; cy: 420; opacity: 0; }
     }
     @keyframes beaconBlink {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.35; transform: scale(0.85); }
+      0%, 100% { opacity: 0.4; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.15); filter: drop-shadow(0 0 8px #34d399); }
     }
-
+    @keyframes zeroizeFlash {
+      0%, 100% { stroke: #22c55e; stroke-width: 1.5; }
+      50% { stroke: #4ade80; stroke-width: 3.5; filter: drop-shadow(0 0 10px #22c55e); }
+    }
     .flow-line {
-      stroke-dasharray: 8 6;
-      animation: pulseFlow 2.8s linear infinite;
-    }
-    .zeroize-badge {
-      animation: zeroizePulse 3s ease-in-out infinite;
+      stroke-dasharray: 6 4;
+      animation: pulseFlow 1.2s linear infinite;
     }
     .beacon {
-      transform-origin: center;
       animation: beaconBlink 2s ease-in-out infinite;
+      transform-origin: center;
     }
-
+    .zeroize-badge {
+      animation: zeroizeFlash 2.5s ease-in-out infinite;
+    }
     text {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     }
@@ -99,219 +96,206 @@
   <rect x="1" y="1" width="1078" height="618" fill="none" stroke="#27272a" stroke-width="1.5" rx="15" />
 
   <!-- Top Title Banner -->
-  <g transform="translate(40, 42)">
-    <text x="0" y="0" font-size="24" font-weight="800" fill="#f4f4f5" letter-spacing="-0.5">
+  <g transform="translate(40, 46)">
+    <text x="0" y="0" font-size="32" font-weight="900" fill="#f4f4f5" letter-spacing="-0.5">
       Aegis Architectural System Design
     </text>
-    <text x="420" y="-1" class="font-mono" font-size="13" font-weight="600" fill="#10b981">
-      // END-TO-END ZERO-PII CRYPTOGRAPHIC PIPELINE
+    <text x="560" y="-1" class="font-mono" font-size="17" font-weight="800" fill="#34d399">
+      // ZERO-PII CRYPTO PIPELINE
     </text>
-    <text x="0" y="24" font-size="14" fill="#94a3b8">
-      How cryptographic commitments, ephemeral witness evaluation, and Merkle ledgers prevent PII retention.
+    <text x="0" y="28" font-size="17" font-weight="600" fill="#94a3b8">
+      Sub-millisecond Rust attestation, memory zeroization, and append-only Merkle ledger.
     </text>
   </g>
 
   <!-- Animated Signal Flow Lines Connecting Tiers -->
-  <path d="M 260 300 L 305 300" fill="none" stroke="#10b981" stroke-width="3" class="flow-line" />
-  <path d="M 525 300 L 570 300" fill="none" stroke="#38bdf8" stroke-width="3" class="flow-line" />
-  <path d="M 800 240 L 845 220" fill="none" stroke="#34d399" stroke-width="3" class="flow-line" />
-  <path d="M 800 360 L 845 420" fill="none" stroke="#a78bfa" stroke-width="3" class="flow-line" />
+  <path d="M 260 300 L 305 300" fill="none" stroke="#10b981" stroke-width="3.5" class="flow-line" />
+  <path d="M 535 300 L 580 300" fill="none" stroke="#38bdf8" stroke-width="3.5" class="flow-line" />
+  <path d="M 815 240 L 855 220" fill="none" stroke="#34d399" stroke-width="3.5" class="flow-line" />
+  <path d="M 815 370 L 855 420" fill="none" stroke="#a78bfa" stroke-width="3.5" class="flow-line" />
 
   <!-- Moving Data Packets -->
-  <circle cx="260" cy="300" r="5" fill="#34d399" filter="url(#packetGlow)" style="animation: movePacket1 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;" />
-  <circle cx="525" cy="300" r="5" fill="#38bdf8" filter="url(#packetGlow)" style="animation: movePacket2 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite 1.2s;" />
-  <circle cx="800" cy="360" r="5" fill="#c084fc" filter="url(#packetGlow)" style="animation: movePacketLedger 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite 2.1s;" />
+  <circle cx="260" cy="300" r="7" fill="#34d399" filter="url(#packetGlow)" style="animation: movePacket1 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;" />
+  <circle cx="535" cy="300" r="7" fill="#38bdf8" filter="url(#packetGlow)" style="animation: movePacket2 3s cubic-bezier(0.4, 0, 0.2, 1) infinite 1.2s;" />
+  <circle cx="815" cy="370" r="7" fill="#c084fc" filter="url(#packetGlow)" style="animation: movePacketLedger 3s cubic-bezier(0.4, 0, 0.2, 1) infinite 2.1s;" />
 
-  <!-- ================= TIER 1: CLIENT / SUBJECT EDGE ================= -->
+  <!-- ================= TIER 1: CLIENT EDGE ================= -->
   <g id="tier-1" transform="translate(35, 95)">
-    <!-- Column Card Frame -->
-    <rect width="225" height="470" rx="14" fill="url(#clientGrad)" stroke="#059669" stroke-width="1.5" stroke-opacity="0.5" filter="url(#cardShadow)" />
+    <rect width="225" height="470" rx="14" fill="url(#clientGrad)" stroke="#059669" stroke-width="1.8" filter="url(#cardShadow)" />
     
     <!-- Header -->
-    <rect x="0" y="0" width="225" height="48" rx="14" fill="#064e3b" fill-opacity="0.5" />
-    <path d="M 0 36 L 225 36" stroke="#059669" stroke-width="1" stroke-opacity="0.4" />
-    <circle class="beacon" cx="22" cy="24" r="5" fill="#34d399" />
-    <text x="38" y="28" class="font-mono" font-size="13" font-weight="700" fill="#a7f3d0">1. CLIENT EDGE</text>
-
-    <!-- Subtitle -->
-    <text x="16" y="66" font-size="12" font-weight="700" fill="#6ee7b7">Device-Side Execution</text>
-    <text x="16" y="82" font-size="11" fill="#cbd5e1">Browser / Mobile App / SDK</text>
+    <rect x="0" y="0" width="225" height="52" rx="14" fill="#064e3b" fill-opacity="0.8" />
+    <circle class="beacon" cx="22" cy="26" r="6" fill="#34d399" />
+    <text x="38" y="33" class="font-mono" font-size="18" font-weight="900" fill="#a7f3d0">1. CLIENT EDGE</text>
 
     <!-- Step 1A: Raw Document Input -->
-    <g transform="translate(14, 96)">
-      <rect width="197" height="88" rx="8" fill="#18181b" stroke="#27272a" stroke-width="1" />
-      <text x="12" y="22" font-size="13" font-weight="700" fill="#f4f4f5">ID Card / Passport</text>
-      <text x="12" y="40" class="font-mono" font-size="11.5" fill="#94a3b8">Birth: 2001-08-14 (MRZ)</text>
-      <!-- Red PII Drop Box -->
-      <rect x="10" y="50" width="177" height="28" rx="5" fill="#450a0a" fill-opacity="0.7" stroke="#dc2626" stroke-width="1" />
-      <text x="16" y="69" class="font-mono" font-size="10.5" font-weight="700" fill="#fecaca">PII NEVER LEAVES DEVICE</text>
+    <g transform="translate(14, 68)">
+      <rect width="197" height="92" rx="8" fill="#18181b" stroke="#27272a" stroke-width="1.2" />
+      <text x="14" y="30" font-size="19" font-weight="900" fill="#f4f4f5">ID / Passport</text>
+      <rect x="10" y="44" width="177" height="38" rx="6" fill="#450a0a" fill-opacity="0.9" stroke="#ef4444" stroke-width="1.4" />
+      <text x="16" y="70" class="font-mono" font-size="16" font-weight="900" fill="#fca5a5">🔒 0 PII LEAKS</text>
     </g>
 
-    <!-- Step 1B: WebCrypto Hashing -->
-    <g transform="translate(14, 196)">
-      <rect width="197" height="110" rx="8" fill="#18181b" stroke="#27272a" stroke-width="1" />
-      <text x="12" y="22" font-size="13" font-weight="700" fill="#34d399">One-Way Blake3 Hash</text>
-      <text x="12" y="40" class="font-mono" font-size="11" fill="#a1a1aa">H(doc) = 0x8f3c4e...</text>
-      
-      <!-- Salt / Nonce -->
-      <rect x="10" y="52" width="177" height="46" rx="5" fill="#0f172a" stroke="#1e293b" stroke-width="1" />
-      <text x="14" y="70" class="font-mono" font-size="11" font-weight="600" fill="#38bdf8">+ Blinding Nonce (r)</text>
-      <text x="14" y="86" class="font-mono" font-size="10" fill="#94a3b8">Prevents tracking across sites</text>
+    <!-- Step 1B: Blake3 Hashing -->
+    <g transform="translate(14, 172)">
+      <rect width="197" height="114" rx="8" fill="#18181b" stroke="#27272a" stroke-width="1.2" />
+      <text x="14" y="30" font-size="18" font-weight="900" fill="#34d399">Blake3 Hash</text>
+      <rect x="10" y="44" width="177" height="58" rx="6" fill="#0f172a" stroke="#1e293b" stroke-width="1.2" />
+      <text x="16" y="68" class="font-mono" font-size="16" font-weight="800" fill="#38bdf8">doc_hash</text>
+      <text x="16" y="90" class="font-mono" font-size="15" font-weight="800" fill="#a78bfa">+ Blinding Salt</text>
     </g>
 
-    <!-- Transmit Payload -->
-    <g transform="translate(14, 318)">
-      <rect width="197" height="136" rx="8" fill="#064e3b" fill-opacity="0.3" stroke="#10b981" stroke-width="1.2" />
-      <text x="12" y="22" class="font-mono" font-size="11.5" font-weight="700" fill="#34d399">EMITTED PAYLOAD:</text>
-      <text x="12" y="44" class="font-mono" font-size="11" fill="#e2e8f0">• doc_hash (64 hex)</text>
-      <text x="12" y="64" class="font-mono" font-size="11" fill="#e2e8f0">• user_digest (hash)</text>
-      <text x="12" y="84" class="font-mono" font-size="11" fill="#e2e8f0">• threshold: 21</text>
-      <text x="12" y="104" class="font-mono" font-size="11" fill="#e2e8f0">• session_nonce</text>
-      <rect x="10" y="116" width="177" height="10" rx="3" fill="#10b981" fill-opacity="0.4" />
+    <!-- Step 1C: Emitted Payload -->
+    <g transform="translate(14, 298)">
+      <rect width="197" height="156" rx="8" fill="#064e3b" fill-opacity="0.4" stroke="#10b981" stroke-width="1.6" />
+      <text x="14" y="30" class="font-mono" font-size="17" font-weight="900" fill="#34d399">PAYLOAD OUT:</text>
+      <text x="14" y="64" class="font-mono" font-size="16" font-weight="800" fill="#ffffff">• doc_hash</text>
+      <text x="14" y="94" class="font-mono" font-size="16" font-weight="800" fill="#ffffff">• threshold: 21</text>
+      <text x="14" y="124" class="font-mono" font-size="16" font-weight="800" fill="#ffffff">• session_nonce</text>
     </g>
   </g>
 
-  <!-- ================= TIER 2: API GATEWAY & SESSION GUARD ================= -->
-  <g id="tier-2" transform="translate(295, 95)">
-    <!-- Column Card Frame -->
-    <rect width="230" height="470" rx="14" fill="url(#gatewayGrad)" stroke="#4338ca" stroke-width="1.5" stroke-opacity="0.5" filter="url(#cardShadow)" />
-
+  <!-- ================= TIER 2: API GATEWAY ================= -->
+  <g id="tier-2" transform="translate(305, 95)">
+    <rect width="230" height="470" rx="14" fill="url(#gatewayGrad)" stroke="#4338ca" stroke-width="1.8" filter="url(#cardShadow)" />
+    
     <!-- Header -->
-    <rect x="0" y="0" width="230" height="48" rx="14" fill="#1e1b4b" fill-opacity="0.6" />
-    <path d="M 0 36 L 230 36" stroke="#4338ca" stroke-width="1" stroke-opacity="0.4" />
-    <circle class="beacon" cx="22" cy="24" r="5" fill="#818cf8" />
-    <text x="38" y="28" class="font-mono" font-size="13" font-weight="700" fill="#e0e7ff">2. API GATEWAY</text>
+    <rect x="0" y="0" width="230" height="52" rx="14" fill="#1e1b4b" fill-opacity="0.85" />
+    <circle class="beacon" cx="22" cy="26" r="6" fill="#818cf8" />
+    <text x="38" y="33" class="font-mono" font-size="18" font-weight="900" fill="#c7d2fe">2. API GATEWAY</text>
 
-    <!-- Subtitle -->
-    <text x="16" y="66" font-size="12" font-weight="700" fill="#a5b4fc">Transport &amp; Guard</text>
-    <text x="16" y="82" font-size="11" fill="#cbd5e1">Axum Route Handlers</text>
-
-    <!-- Single Use Challenge Nonce -->
-    <g transform="translate(14, 96)">
-      <rect width="202" height="96" rx="8" fill="#18181b" stroke="#27272a" stroke-width="1" />
-      <text x="12" y="24" font-size="13" font-weight="700" fill="#818cf8">GET /api/v1/session</text>
-      <text x="12" y="44" font-size="11" fill="#cbd5e1">Cryptographic Challenge Nonce</text>
-      <text x="12" y="64" class="font-mono" font-size="11" font-weight="600" fill="#a5b4fc">TTL: 300s (5 minutes)</text>
-      <text x="12" y="82" class="font-mono" font-size="10.5" fill="#94a3b8">Defeats replay attacks</text>
+    <!-- Gateway 2A: Session Nonce -->
+    <g transform="translate(14, 68)">
+      <rect width="202" height="92" rx="8" fill="#18181b" stroke="#27272a" stroke-width="1.2" />
+      <text x="14" y="30" class="font-mono" font-size="17" font-weight="900" fill="#818cf8">GET /v1/session</text>
+      <text x="14" y="56" class="font-mono" font-size="16" font-weight="800" fill="#ffffff">Anti-Replay Nonce</text>
+      <text x="14" y="78" class="font-mono" font-size="15" font-weight="800" fill="#34d399">TTL: 300 Seconds</text>
     </g>
 
-    <!-- Replay Guard & Timing Shield -->
-    <g transform="translate(14, 204)">
-      <rect width="202" height="110" rx="8" fill="#18181b" stroke="#27272a" stroke-width="1" />
-      <text x="12" y="24" font-size="13" font-weight="700" fill="#c084fc">Timing Shield &amp; Sandbox</text>
-      <text x="12" y="44" class="font-mono" font-size="11" fill="#e9d5ff">constant_time::verify()</text>
-      <text x="12" y="62" font-size="11" fill="#94a3b8">Prevents side-channel leaks</text>
-      <text x="12" y="82" class="font-mono" font-size="11" fill="#a855f7">seccomp_sandbox::apply()</text>
-      <text x="12" y="98" font-size="10.5" fill="#94a3b8">Linux syscall filter locked</text>
+    <!-- Gateway 2B: Constant Time -->
+    <g transform="translate(14, 172)">
+      <rect width="202" height="114" rx="8" fill="#18181b" stroke="#27272a" stroke-width="1.2" />
+      <text x="14" y="30" font-size="18" font-weight="900" fill="#c084fc">Timing Shield</text>
+      <text x="14" y="58" class="font-mono" font-size="16" font-weight="800" fill="#e9d5ff">constant_time</text>
+      <text x="14" y="82" class="font-mono" font-size="16" font-weight="800" fill="#38bdf8">Linux Sandbox</text>
+      <text x="14" y="102" font-size="14" font-weight="700" fill="#94a3b8">0 Side-Channel Leak</text>
     </g>
 
-    <!-- Dispatch to Rust Core -->
-    <g transform="translate(14, 326)">
-      <rect width="202" height="128" rx="8" fill="#1e1b4b" fill-opacity="0.35" stroke="#6366f1" stroke-width="1.2" />
-      <text x="12" y="24" class="font-mono" font-size="11.5" font-weight="700" fill="#a5b4fc">SECURITY ENFORCEMENT:</text>
-      <text x="12" y="48" class="font-mono" font-size="11" fill="#e0e7ff">✓ Rate Limit (Token Bucket)</text>
-      <text x="12" y="68" class="font-mono" font-size="11" fill="#e0e7ff">✓ Pre-shared X-API-Key</text>
-      <text x="12" y="88" class="font-mono" font-size="11" fill="#e0e7ff">✓ Strict CSP Security Headers</text>
-      <text x="12" y="110" class="font-mono" font-size="11" font-weight="700" fill="#a7f3d0">→ Dispatched to ZK Engine</text>
+    <!-- Gateway 2C: Security Guard -->
+    <g transform="translate(14, 298)">
+      <rect width="202" height="156" rx="8" fill="#1e1b4b" fill-opacity="0.45" stroke="#6366f1" stroke-width="1.6" />
+      <text x="14" y="30" class="font-mono" font-size="17" font-weight="900" fill="#a5b4fc">SECURITY SHIELD:</text>
+      <text x="14" y="64" class="font-mono" font-size="16" font-weight="800" fill="#ffffff">✓ Token Bucket</text>
+      <text x="14" y="94" class="font-mono" font-size="16" font-weight="800" fill="#ffffff">✓ API Key Guard</text>
+      <text x="14" y="124" class="font-mono" font-size="16" font-weight="800" fill="#ffffff">✓ Strict CSP Head</text>
+      <text x="14" y="146" class="font-mono" font-size="15" font-weight="900" fill="#34d399">→ Fast Dispatch</text>
     </g>
   </g>
 
-  <!-- ================= TIER 3: AEGIS CORE ENGINE ================= -->
-  <g id="tier-3" transform="translate(560, 95)">
-    <!-- Column Card Frame -->
-    <rect width="240" height="470" rx="14" fill="url(#engineGrad)" stroke="#0284c7" stroke-width="1.5" stroke-opacity="0.6" filter="url(#cardShadow)" />
-
+  <!-- ================= TIER 3: RUST CORE ================= -->
+  <g id="tier-3" transform="translate(580, 95)">
+    <rect width="235" height="470" rx="14" fill="url(#engineGrad)" stroke="#0284c7" stroke-width="1.8" filter="url(#cardShadow)" />
+    
     <!-- Header -->
-    <rect x="0" y="0" width="240" height="48" rx="14" fill="#0c4a6e" fill-opacity="0.5" />
-    <path d="M 0 36 L 240 36" stroke="#0284c7" stroke-width="1" stroke-opacity="0.4" />
-    <circle class="beacon" cx="22" cy="24" r="5" fill="#38bdf8" />
-    <text x="38" y="28" class="font-mono" font-size="13" font-weight="700" fill="#bae6fd">3. AEGIS RUST CORE</text>
+    <rect x="0" y="0" width="235" height="52" rx="14" fill="#0c4a6e" fill-opacity="0.8" />
+    <circle class="beacon" cx="22" cy="26" r="6" fill="#38bdf8" />
+    <text x="38" y="33" class="font-mono" font-size="18" font-weight="900" fill="#bae6fd">3. AEGIS RUST CORE</text>
 
-    <!-- Subtitle -->
-    <text x="16" y="66" font-size="12" font-weight="700" fill="#38bdf8">ZK Circuits &amp; Attestation</text>
-    <text x="16" y="82" font-size="11" fill="#cbd5e1">Native Rust • Sub-Millisecond</text>
-
-    <!-- Circuit Evaluation Box -->
-    <g transform="translate(14, 96)">
-      <rect width="212" height="124" rx="8" fill="#18181b" stroke="#27272a" stroke-width="1" />
-      <text x="12" y="24" font-size="13" font-weight="700" fill="#38bdf8">Predicate Circuit Evaluator</text>
-      <text x="12" y="44" class="font-mono" font-size="11" fill="#cbd5e1">• Groth16 (BN254 curve)</text>
-      <text x="12" y="62" class="font-mono" font-size="11" fill="#cbd5e1">• Bulletproofs Range Bounds</text>
-      <text x="12" y="80" class="font-mono" font-size="11" fill="#cbd5e1">• Sanctions Non-Membership</text>
-      
-      <rect x="10" y="90" width="192" height="26" rx="5" fill="#0369a1" fill-opacity="0.35" stroke="#0284c7" stroke-width="1" />
-      <text x="16" y="108" class="font-mono" font-size="11" font-weight="700" fill="#7dd3fc">Constraint: (Age ≥ 21) = 1</text>
+    <!-- Engine 3A: ZK Circuit Evaluator -->
+    <g transform="translate(14, 68)">
+      <rect width="207" height="92" rx="8" fill="#18181b" stroke="#27272a" stroke-width="1.2" />
+      <text x="14" y="30" font-size="18" font-weight="900" fill="#38bdf8">ZK Groth16</text>
+      <text x="14" y="56" class="font-mono" font-size="16" font-weight="800" fill="#cbd5e1">Range Check BN254</text>
+      <rect x="8" y="64" width="191" height="24" rx="4" fill="#0369a1" fill-opacity="0.4" stroke="#0284c7" stroke-width="1" />
+      <text x="14" y="81" class="font-mono" font-size="15" font-weight="900" fill="#7dd3fc">Rule: (Age ≥ 21)</text>
     </g>
 
-    <!-- CRITICAL: Zeroize Memory Scrubbing -->
-    <g transform="translate(14, 232)">
-      <rect class="zeroize-badge" width="212" height="102" rx="8" fill="#15803d" stroke="#22c55e" stroke-width="1.5" />
-      <text x="12" y="24" font-size="13" font-weight="800" fill="#dcfce7">⚡ ZEROIZE MEMORY SCRUB</text>
-      <text x="12" y="44" class="font-mono" font-size="11" fill="#bbf7d0">Heap &amp; stack witness erased</text>
-      <text x="12" y="64" class="font-mono" font-size="11" font-weight="600" fill="#86efac">zeroize::Zeroize::zeroize(&amp;mut w)</text>
-      <text x="12" y="86" font-size="11" fill="#f0fdf4">Zero trace left in RAM for forensics</text>
+    <!-- Engine 3B: Memory Scrubbing ZEROIZE -->
+    <g transform="translate(14, 172)">
+      <rect class="zeroize-badge" width="207" height="114" rx="8" fill="#14532d" stroke="#22c55e" stroke-width="1.6" />
+      <text x="14" y="32" font-size="18" font-weight="900" fill="#dcfce7">⚡ ZEROIZE MEMORY</text>
+      <text x="14" y="60" class="font-mono" font-size="16" font-weight="800" fill="#bbf7d0">zeroize(&amp;witness)</text>
+      <text x="14" y="86" font-size="16" font-weight="900" fill="#ffffff">RAM Reset: 0x00</text>
+      <text x="14" y="104" font-size="13" font-weight="700" fill="#86efac">0 Forensic Residue</text>
     </g>
 
-    <!-- Post-Quantum Hybrid Attestation -->
-    <g transform="translate(14, 346)">
-      <rect width="212" height="108" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1" />
-      <text x="12" y="24" font-size="13" font-weight="700" fill="#a78bfa">Post-Quantum Attestation</text>
-      <text x="12" y="44" class="font-mono" font-size="11" fill="#c4b5fd">ML-DSA (FIPS 204) + Ed25519</text>
-      <text x="12" y="64" class="font-mono" font-size="11" fill="#94a3b8">Dual cryptographic commitment</text>
-      <text x="12" y="88" class="font-mono" font-size="11.5" font-weight="800" fill="#34d399">EXECUTION TIME: &lt;150 µs</text>
+    <!-- Engine 3C: Post-Quantum Hybrid -->
+    <g transform="translate(14, 298)">
+      <rect width="207" height="156" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1.2" />
+      <text x="14" y="30" font-size="18" font-weight="900" fill="#a78bfa">Post-Quantum</text>
+      <text x="14" y="60" class="font-mono" font-size="16" font-weight="800" fill="#c4b5fd">FIPS 204 ML-DSA</text>
+      <text x="14" y="86" font-size="16" font-weight="700" fill="#ffffff">+ Ed25519 Hybrid</text>
+      <rect x="8" y="102" width="191" height="42" rx="6" fill="#064e3b" stroke="#10b981" stroke-width="1.4" />
+      <text x="14" y="129" class="font-mono" font-size="18" font-weight="900" fill="#34d399">SPEED: &lt;150 µs</text>
     </g>
   </g>
 
-  <!-- ================= TIER 4: OUTPUT & AUDIT LEDGER ================= -->
-  <g id="tier-4" transform="translate(835, 95)">
-    <!-- Top Card: Verifier Output -->
+  <!-- ================= TIER 4: OUTPUT RECEIPT TIERS ================= -->
+  <g id="tier-4" transform="translate(855, 95)">
+    <!-- 4A: Signed JWT Verifier Token -->
     <g transform="translate(0, 0)">
-      <rect width="210" height="225" rx="14" fill="url(#clientGrad)" stroke="#10b981" stroke-width="1.5" stroke-opacity="0.5" filter="url(#cardShadow)" />
-      
-      <rect x="0" y="0" width="210" height="44" rx="14" fill="#064e3b" fill-opacity="0.6" />
-      <circle class="beacon" cx="20" cy="22" r="5" fill="#34d399" />
-      <text x="36" y="26" class="font-mono" font-size="12" font-weight="700" fill="#a7f3d0">4A. VERIFIER TOKEN</text>
+      <rect width="190" height="225" rx="14" fill="url(#clientGrad)" stroke="#10b981" stroke-width="1.8" filter="url(#cardShadow)" />
+      <rect x="0" y="0" width="190" height="48" rx="14" fill="#064e3b" fill-opacity="0.8" />
+      <circle cx="18" cy="24" r="6" fill="#34d399" />
+      <text x="32" y="31" class="font-mono" font-size="17" font-weight="900" fill="#a7f3d0">4A. JWT TOKEN</text>
 
-      <g transform="translate(14, 56)">
-        <text x="0" y="14" font-size="12" font-weight="700" fill="#34d399">Signed JWT Token</text>
-        <rect x="0" y="24" width="182" height="74" rx="6" fill="#18181b" stroke="#27272a" stroke-width="1" />
-        <text x="10" y="44" class="font-mono" font-size="11" font-weight="600" fill="#e2e8f0">status: "verified"</text>
-        <text x="10" y="62" class="font-mono" font-size="11" fill="#e2e8f0">criteria: "age_over_21"</text>
-        <text x="10" y="80" class="font-mono" font-size="11" font-weight="700" fill="#10b981">pii_stored: 0</text>
+      <g transform="translate(12, 54)">
+        <text x="0" y="20" font-size="18" font-weight="900" fill="#34d399">Signed Token</text>
+        <rect x="0" y="28" width="166" height="82" rx="6" fill="#18181b" stroke="#27272a" stroke-width="1" />
+        <text x="10" y="52" class="font-mono" font-size="16" font-weight="800" fill="#ffffff">verified: true</text>
+        <text x="10" y="76" class="font-mono" font-size="16" font-weight="800" fill="#ffffff">age_over_21</text>
+        <text x="10" y="100" class="font-mono" font-size="16" font-weight="900" fill="#34d399">pii_stored: 0</text>
 
-        <rect x="0" y="106" width="182" height="52" rx="6" fill="#0f172a" stroke="#1e293b" stroke-width="1" />
-        <text x="10" y="126" class="font-mono" font-size="10.5" fill="#38bdf8">Third-party verifier checks</text>
-        <text x="10" y="144" class="font-mono" font-size="10.5" font-weight="600" fill="#94a3b8">via POST /api/v1/verify-token</text>
+        <rect x="0" y="118" width="166" height="44" rx="6" fill="#0f172a" stroke="#1e293b" stroke-width="1" />
+        <text x="10" y="145" class="font-mono" font-size="16" font-weight="800" fill="#38bdf8">POST /v1/verify</text>
       </g>
     </g>
 
-    <!-- Bottom Card: Merkle Block Ledger -->
+    <!-- 4B: Append-Only Merkle Block Ledger -->
     <g transform="translate(0, 240)">
-      <rect width="210" height="230" rx="14" fill="url(#ledgerGrad)" stroke="#9333ea" stroke-width="1.5" stroke-opacity="0.5" filter="url(#cardShadow)" />
-      
-      <rect x="0" y="0" width="210" height="44" rx="14" fill="#581c87" fill-opacity="0.6" />
-      <circle class="beacon" cx="20" cy="22" r="5" fill="#c084fc" />
-      <text x="36" y="26" class="font-mono" font-size="12" font-weight="700" fill="#f3e8ff">4B. MERKLE LEDGER</text>
+      <rect width="190" height="230" rx="14" fill="url(#ledgerGrad)" stroke="#9333ea" stroke-width="1.8" filter="url(#cardShadow)" />
+      <rect x="0" y="0" width="190" height="48" rx="14" fill="#581c87" fill-opacity="0.8" />
+      <circle cx="18" cy="24" r="6" fill="#c084fc" />
+      <text x="32" y="31" class="font-mono" font-size="17" font-weight="900" fill="#f3e8ff">4B. MERKLE</text>
 
-      <g transform="translate(14, 56)">
-        <text x="0" y="14" font-size="12" font-weight="700" fill="#c084fc">Blake3 Merkle Chain</text>
-        <rect x="0" y="24" width="182" height="74" rx="6" fill="#18181b" stroke="#27272a" stroke-width="1" />
-        <text x="10" y="44" class="font-mono" font-size="11" fill="#cbd5e1">Block Hash Receipt</text>
-        <text x="10" y="62" class="font-mono" font-size="10.5" fill="#a78bfa">Root: 0x9e12bf8a...</text>
-        <text x="10" y="80" class="font-mono" font-size="11" font-weight="700" fill="#34d399">Inclusion: O(log N) Proof</text>
+      <g transform="translate(12, 54)">
+        <text x="0" y="20" font-size="18" font-weight="900" fill="#c084fc">Blake3 Ledger</text>
+        <rect x="0" y="28" width="166" height="82" rx="6" fill="#18181b" stroke="#27272a" stroke-width="1" />
+        <text x="10" y="52" class="font-mono" font-size="16" font-weight="800" fill="#cbd5e1">Block Receipt</text>
+        <text x="10" y="76" class="font-mono" font-size="16" font-weight="800" fill="#a78bfa">Root: 0x9e12...b2</text>
+        <text x="10" y="100" class="font-mono" font-size="16" font-weight="900" fill="#34d399">Proof: O(log N)</text>
 
-        <rect x="0" y="106" width="182" height="56" rx="6" fill="#2e1065" fill-opacity="0.45" stroke="#6b21a8" stroke-width="1" />
-        <text x="10" y="126" class="font-mono" font-size="10.5" font-weight="700" fill="#d8b4fe">POST /api/v1/verify-merkle</text>
-        <text x="10" y="144" class="font-mono" font-size="10.5" fill="#cbd5e1">Auditable tamper evidence</text>
+        <rect x="0" y="118" width="166" height="46" rx="6" fill="#2e1065" fill-opacity="0.6" stroke="#6b21a8" stroke-width="1" />
+        <text x="10" y="146" class="font-mono" font-size="16" font-weight="900" fill="#d8b4fe">POST /v1/merkle</text>
       </g>
     </g>
   </g>
 
-  <!-- Bottom Global Trust Footer -->
+  <!-- Bottom Legend Footer -->
   <g transform="translate(40, 584)">
-    <line x1="0" y1="0" x2="1000" y2="0" stroke="#27272a" stroke-width="1.2" />
-    <text x="0" y="22" class="font-mono" font-size="12" fill="#94a3b8">
-      CRYPTOGRAPHIC INTEGRITY: <tspan fill="#34d399" font-weight="700">0 Bytes PII Stored</tspan> • <tspan fill="#38bdf8" font-weight="700">Blake3 SIMD Hash Chains</tspan> • <tspan fill="#a78bfa" font-weight="700">FIPS 204 Lattice ML-DSA</tspan> • <tspan fill="#f59e0b" font-weight="700">eIDAS 2.0 / ISO 18013-5 mDL Ready</tspan>
+    <circle cx="6" cy="6" r="5" fill="#10b981" />
+    <text x="18" y="12" class="font-mono" font-size="16" font-weight="700" fill="#e2e8f0">
+      CLIENT EDGE HASH
+    </text>
+
+    <circle cx="240" cy="6" r="5" fill="#6366f1" />
+    <text x="254" y="12" class="font-mono" font-size="16" font-weight="700" fill="#e2e8f0">
+      GATEWAY ISOLATION
+    </text>
+
+    <circle cx="480" cy="6" r="5" fill="#0284c7" />
+    <text x="494" y="12" class="font-mono" font-size="16" font-weight="700" fill="#e2e8f0">
+      RUST ZK CIRCUIT
+    </text>
+
+    <circle cx="700" cy="6" r="5" fill="#22c55e" />
+    <text x="714" y="12" class="font-mono" font-size="16" font-weight="900" fill="#34d399">
+      ZEROIZE SCRUB
+    </text>
+
+    <circle cx="910" cy="6" r="5" fill="#a855f7" />
+    <text x="924" y="12" class="font-mono" font-size="16" font-weight="700" fill="#e2e8f0">
+      MERKLE AUDIT
     </text>
   </g>
 </svg>

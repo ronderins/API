@@ -1,73 +1,70 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1020 340" width="100%" height="100%">
   <defs>
-    <!-- Gradients -->
+    <!-- Background Gradients -->
     <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#09090b" />
-      <stop offset="50%" stop-color="#0d1117" />
-      <stop offset="100%" stop-color="#090d16" />
+      <stop offset="0%" stop-color="#08090d" />
+      <stop offset="50%" stop-color="#0f1117" />
+      <stop offset="100%" stop-color="#090a0f" />
     </linearGradient>
 
-    <linearGradient id="emeraldGlow" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#34d399" />
-      <stop offset="50%" stop-color="#10b981" />
-      <stop offset="100%" stop-color="#059669" />
-    </linearGradient>
-
-    <linearGradient id="cyanGlow" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#38bdf8" />
-      <stop offset="100%" stop-color="#0284c7" />
+    <!-- Glowing Accent Gradients -->
+    <linearGradient id="emeraldGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="50%" stop-color="#34d399" />
+      <stop offset="100%" stop-color="#06b6d4" />
     </linearGradient>
 
     <linearGradient id="shieldFill" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#10b981" stop-opacity="0.15" />
-      <stop offset="100%" stop-color="#06b6d4" stop-opacity="0.05" />
+      <stop offset="0%" stop-color="#064e3b" stop-opacity="0.85" />
+      <stop offset="50%" stop-color="#022c22" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.95" />
     </linearGradient>
 
-    <!-- Filters -->
+    <!-- Glow Filters -->
     <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feGaussianBlur stdDeviation="8" result="blur" />
       <feComposite in="SourceGraphic" in2="blur" operator="over" />
     </filter>
+
     <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
       <feGaussianBlur stdDeviation="3" result="blur" />
       <feComposite in="SourceGraphic" in2="blur" operator="over" />
     </filter>
 
+    <!-- Grid Pattern -->
     <pattern id="cyberGrid" width="30" height="30" patternUnits="userSpaceOnUse">
-      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#27272a" stroke-width="0.75" stroke-opacity="0.4" />
-      <circle cx="0" cy="0" r="1" fill="#10b981" fill-opacity="0.3" />
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#27272a" stroke-width="0.75" stroke-opacity="0.3" />
     </pattern>
   </defs>
 
   <style>
-    @keyframes pulseOrbital {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    @keyframes spinOrbital {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
-    @keyframes pulseReverse {
-      0% { transform: rotate(360deg); }
-      100% { transform: rotate(0deg); }
+    @keyframes spinOrbitalRev {
+      from { transform: rotate(360deg); }
+      to { transform: rotate(0deg); }
     }
     @keyframes breatheShield {
       0%, 100% { transform: scale(1); filter: drop-shadow(0 0 12px rgba(16, 185, 129, 0.4)); }
-      50% { transform: scale(1.025); filter: drop-shadow(0 0 24px rgba(56, 189, 248, 0.65)); }
+      50% { transform: scale(1.025); filter: drop-shadow(0 0 24px rgba(52, 211, 153, 0.7)); }
     }
     @keyframes blinkLed {
-      0%, 100% { opacity: 1; filter: drop-shadow(0 0 6px #10b981); }
-      50% { opacity: 0.35; filter: none; }
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; filter: drop-shadow(0 0 6px #34d399); }
     }
     @keyframes floatParticle {
-      0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.3; }
-      50% { transform: translateY(-12px) translateX(6px); opacity: 0.85; }
+      0%, 100% { transform: translateY(0px); opacity: 0.6; }
+      50% { transform: translateY(-8px); opacity: 1; }
     }
-
     .orbital-ring {
       transform-origin: 160px 170px;
-      animation: pulseOrbital 24s linear infinite;
+      animation: spinOrbital 24s linear infinite;
     }
     .orbital-ring-rev {
       transform-origin: 160px 170px;
-      animation: pulseReverse 18s linear infinite;
+      animation: spinOrbitalRev 18s linear infinite;
     }
     .shield-center {
       transform-origin: 160px 170px;
@@ -144,15 +141,15 @@
     <!-- Floating Hex / Particle Elements -->
     <g class="particle-1">
       <circle cx="65" cy="95" r="2.5" fill="#34d399" />
-      <text x="45" y="85" class="font-mono" font-size="11" font-weight="600" fill="#10b981" fill-opacity="0.7">0x7f4a</text>
+      <text x="40" y="85" class="font-mono" font-size="15" font-weight="800" fill="#34d399">0x7f4a</text>
     </g>
     <g class="particle-2">
       <circle cx="260" cy="85" r="2.5" fill="#38bdf8" />
-      <text x="265" y="90" class="font-mono" font-size="11" font-weight="600" fill="#38bdf8" fill-opacity="0.8">π=ZK</text>
+      <text x="265" y="90" class="font-mono" font-size="15" font-weight="800" fill="#38bdf8">π=ZK</text>
     </g>
     <g class="particle-3">
       <circle cx="60" cy="245" r="2" fill="#a78bfa" />
-      <text x="48" y="260" class="font-mono" font-size="11" font-weight="600" fill="#a78bfa" fill-opacity="0.7">FIPS-204</text>
+      <text x="35" y="260" class="font-mono" font-size="15" font-weight="800" fill="#c084fc">FIPS-204</text>
     </g>
   </g>
 
@@ -163,31 +160,31 @@
   <!-- Right Side: Content & Typographic Information -->
   <g id="header-content" transform="translate(340, 0)">
     <!-- Top System State & Live Pill -->
-    <g transform="translate(0, 36)">
-      <rect x="0" y="0" width="160" height="28" rx="14" fill="#064e3b" fill-opacity="0.6" stroke="#059669" stroke-width="1.2" />
-      <circle class="status-led" cx="16" cy="14" r="4.5" fill="#34d399" />
-      <text x="30" y="19" class="font-mono" font-size="11.5" font-weight="700" fill="#a7f3d0" letter-spacing="0.5">ZERO-PII ACTIVE</text>
+    <g transform="translate(0, 30)">
+      <rect x="0" y="0" width="180" height="34" rx="17" fill="#064e3b" fill-opacity="0.8" stroke="#059669" stroke-width="1.4" />
+      <circle class="status-led" cx="18" cy="17" r="5.5" fill="#34d399" />
+      <text x="34" y="23" class="font-mono" font-size="15" font-weight="900" fill="#a7f3d0" letter-spacing="0.5">ZERO-PII ACTIVE</text>
       
-      <rect x="172" y="0" width="195" height="28" rx="14" fill="#1e1b4b" fill-opacity="0.5" stroke="#4338ca" stroke-width="1" />
-      <text x="186" y="19" class="font-mono" font-size="11.5" font-weight="600" fill="#c7d2fe">RUST AXUM • 150µs LATENCY</text>
+      <rect x="195" y="0" width="220" height="34" rx="17" fill="#1e1b4b" fill-opacity="0.75" stroke="#4338ca" stroke-width="1.4" />
+      <text x="210" y="23" class="font-mono" font-size="15" font-weight="800" fill="#c7d2fe">RUST • 150µs LATENCY</text>
 
-      <rect x="379" y="0" width="180" height="28" rx="14" fill="#172554" fill-opacity="0.5" stroke="#1d4ed8" stroke-width="1" />
-      <text x="393" y="19" class="font-mono" font-size="11.5" font-weight="600" fill="#bae6fd">POST-QUANTUM HYBRID</text>
+      <rect x="430" y="0" width="205" height="34" rx="17" fill="#172554" fill-opacity="0.75" stroke="#1d4ed8" stroke-width="1.4" />
+      <text x="445" y="23" class="font-mono" font-size="15" font-weight="800" fill="#bae6fd">POST-QUANTUM ML-DSA</text>
     </g>
 
     <!-- Main Title & Branding -->
     <g transform="translate(0, 108)">
-      <text x="0" y="0" font-size="42" font-weight="900" fill="#f4f4f5" letter-spacing="-1">
+      <text x="0" y="0" font-size="46" font-weight="900" fill="#f4f4f5" letter-spacing="-1">
         AEGIS
       </text>
-      <text x="150" y="-4" class="font-mono" font-size="15" font-weight="700" fill="#10b981">
-        // v0.2.0 • Cryptographic Engine
+      <text x="165" y="-4" class="font-mono" font-size="18" font-weight="900" fill="#34d399">
+        // v0.2.0 • Zero-Knowledge Engine
       </text>
-      <text x="0" y="28" font-size="17" font-weight="600" fill="#cbd5e1">
-        Privacy-Preserving Identity &amp; Predicate Verification Architecture
+      <text x="0" y="32" font-size="19" font-weight="800" fill="#ffffff">
+        Privacy-Preserving Identity &amp; Predicate Verification
       </text>
-      <text x="0" y="52" font-size="13.5" fill="#94a3b8">
-        Mathematical proof of age, sanctions, and credentials with zero PII retention or leakage.
+      <text x="0" y="56" font-size="16" font-weight="600" fill="#cbd5e1">
+        Mathematical proof of age, sanctions, and credentials with zero PII retention.
       </text>
     </g>
 
@@ -195,38 +192,37 @@
     <g transform="translate(0, 204)">
       <!-- Pill 1: Zero PII -->
       <g transform="translate(0, 0)">
-        <rect width="200" height="54" rx="10" fill="#18181b" stroke="#27272a" stroke-width="1.2" />
-        <rect width="4" height="54" rx="2" fill="#10b981" />
-        <text x="16" y="22" class="font-mono" font-size="11" font-weight="800" fill="#10b981">PII RETENTION</text>
-        <text x="16" y="42" font-size="15" font-weight="700" fill="#f4f4f5">0 Bytes Stored</text>
+        <rect width="200" height="56" rx="10" fill="#18181b" stroke="#27272a" stroke-width="1.4" />
+        <rect width="4" height="56" rx="2" fill="#10b981" />
+        <text x="16" y="22" class="font-mono" font-size="14" font-weight="900" fill="#34d399">PII RETENTION</text>
+        <text x="16" y="44" font-size="18" font-weight="900" fill="#ffffff">0 Bytes Stored</text>
       </g>
 
       <!-- Pill 2: Blake3 Merkle Ledger -->
       <g transform="translate(214, 0)">
-        <rect width="200" height="54" rx="10" fill="#18181b" stroke="#27272a" stroke-width="1.2" />
-        <rect width="4" height="54" rx="2" fill="#38bdf8" />
-        <text x="16" y="22" class="font-mono" font-size="11" font-weight="800" fill="#38bdf8">RECEIPT LEDGER</text>
-        <text x="16" y="42" font-size="15" font-weight="700" fill="#f4f4f5">Blake3 Merkle Chain</text>
+        <rect width="200" height="56" rx="10" fill="#18181b" stroke="#27272a" stroke-width="1.4" />
+        <rect width="4" height="56" rx="2" fill="#38bdf8" />
+        <text x="16" y="22" class="font-mono" font-size="14" font-weight="900" fill="#38bdf8">RECEIPT LEDGER</text>
+        <text x="16" y="44" font-size="18" font-weight="900" fill="#ffffff">Blake3 Merkle</text>
       </g>
 
       <!-- Pill 3: Zeroize RAM -->
       <g transform="translate(428, 0)">
-        <rect width="200" height="54" rx="10" fill="#18181b" stroke="#27272a" stroke-width="1.2" />
-        <rect width="4" height="54" rx="2" fill="#a78bfa" />
-        <text x="16" y="22" class="font-mono" font-size="11" font-weight="800" fill="#a78bfa">MEMORY GUARANTEE</text>
-        <text x="16" y="42" font-size="15" font-weight="700" fill="#f4f4f5">Instant `zeroize` Scrub</text>
+        <rect width="200" height="56" rx="10" fill="#18181b" stroke="#27272a" stroke-width="1.4" />
+        <rect width="4" height="56" rx="2" fill="#a78bfa" />
+        <text x="16" y="22" class="font-mono" font-size="14" font-weight="900" fill="#c084fc">MEMORY FORENSICS</text>
+        <text x="16" y="44" font-size="18" font-weight="900" fill="#ffffff">zeroize Scrub</text>
       </g>
     </g>
 
     <!-- Bottom Metadata Bar -->
-    <g transform="translate(0, 286)">
-      <text x="0" y="16" class="font-mono" font-size="12" fill="#94a3b8">
-        ARCHITECTURE: <tspan fill="#f4f4f5" font-weight="600">Rust 1.80+ (Axum)</tspan> + <tspan fill="#f4f4f5" font-weight="600">Next.js 15 App Router</tspan>
+    <g transform="translate(0, 288)">
+      <text x="0" y="16" class="font-mono" font-size="15" font-weight="700" fill="#e2e8f0">
+        CORE: <tspan fill="#34d399" font-weight="900">Rust 1.80+ (Axum)</tspan> + <tspan fill="#38bdf8" font-weight="900">Next.js 15 App Router</tspan>
       </text>
-      <text x="390" y="16" class="font-mono" font-size="12" fill="#94a3b8">
-        CREATED BY: <tspan fill="#10b981" font-weight="700">Rony M. (@ronderins)</tspan>
+      <text x="440" y="16" class="font-mono" font-size="15" font-weight="700" fill="#e2e8f0">
+        OPEN SOURCE: <tspan fill="#34d399" font-weight="900">MIT / Apache 2.0</tspan>
       </text>
-      <circle cx="378" cy="12" r="2.5" fill="#52525b" />
     </g>
   </g>
 </svg>

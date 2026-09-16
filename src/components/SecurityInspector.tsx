@@ -159,9 +159,7 @@ export const SecurityInspector: React.FC = () => {
       <div className="bg-zinc-900/70 border border-zinc-800 rounded-xl p-6 shadow-xl space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800/80">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-lg bg-teal-500/10 border border-teal-500/20 text-teal-400">
-              <Layers className="w-5 h-5" />
-            </div>
+            <Layers className="w-8 h-8 text-teal-400 shrink-0 filter drop-shadow-[0_0_10px_rgba(45,212,191,0.85)]" />
             <div>
               <h2 className="text-lg font-semibold text-zinc-100">Cryptographic Security & Verification Lab</h2>
               <p className="text-xs text-zinc-400">
@@ -283,7 +281,7 @@ export const SecurityInspector: React.FC = () => {
       <div className="bg-zinc-900/70 border border-emerald-900/50 rounded-xl p-6 shadow-xl space-y-5">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-zinc-800/80">
           <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
+            <div className="text-emerald-400">
               <Cpu className="w-5 h-5" />
             </div>
             <div>

@@ -2,42 +2,38 @@
   <defs>
     <!-- Background Gradient -->
     <linearGradient id="zkBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#09090b" />
-      <stop offset="50%" stop-color="#0b0f17" />
-      <stop offset="100%" stop-color="#090d16" />
+      <stop offset="0%" stop-color="#090a0f" />
+      <stop offset="100%" stop-color="#0f1219" />
     </linearGradient>
 
-    <!-- Traditional Danger Gradient -->
+    <!-- Danger Gradient (Legacy) -->
     <linearGradient id="dangerGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#450a0a" stop-opacity="0.4" />
-      <stop offset="100%" stop-color="#1c0505" stop-opacity="0.15" />
+      <stop offset="0%" stop-color="#450a0a" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#18181b" stop-opacity="0.4" />
     </linearGradient>
 
-    <!-- Aegis Success Gradient -->
+    <!-- Success Gradient (Aegis) -->
     <linearGradient id="successGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#064e3b" stop-opacity="0.4" />
-      <stop offset="100%" stop-color="#022c22" stop-opacity="0.15" />
+      <stop offset="0%" stop-color="#064e3b" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#18181b" stop-opacity="0.4" />
     </linearGradient>
-
-    <filter id="badgeGlow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="4" result="blur" />
-      <feComposite in="SourceGraphic" in2="blur" operator="over" />
-    </filter>
   </defs>
 
   <style>
     @keyframes alertPulse {
-      0%, 100% { opacity: 1; filter: drop-shadow(0 0 6px #ef4444); }
-      50% { opacity: 0.4; filter: none; }
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; filter: drop-shadow(0 0 8px #ef4444); }
     }
-    @keyframes greenShieldPulse {
-      0%, 100% { opacity: 1; filter: drop-shadow(0 0 8px #10b981); }
-      50% { opacity: 0.5; filter: drop-shadow(0 0 3px #10b981); }
+    @keyframes greenPulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; filter: drop-shadow(0 0 8px #34d399); }
     }
-
-    .alert-led { animation: alertPulse 2s ease-in-out infinite; }
-    .green-led { animation: greenShieldPulse 2.5s ease-in-out infinite; }
-
+    .alert-led {
+      animation: alertPulse 1.8s ease-in-out infinite;
+    }
+    .green-led {
+      animation: greenPulse 1.8s ease-in-out infinite;
+    }
     text {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     }
@@ -51,98 +47,92 @@
   <rect x="1" y="1" width="1078" height="498" fill="none" stroke="#27272a" stroke-width="1.5" rx="15" />
 
   <!-- Top Title & Subtitle -->
-  <g transform="translate(40, 42)">
-    <text x="0" y="0" font-size="24" font-weight="800" fill="#f4f4f5" letter-spacing="-0.5">
-      How Aegis Zero-Knowledge Verification Works Under The Hood
+  <g transform="translate(40, 46)">
+    <text x="0" y="0" font-size="32" font-weight="900" fill="#f4f4f5" letter-spacing="-0.5">
+      Zero-Knowledge vs. Traditional Identity Verification
     </text>
-    <text x="0" y="26" font-size="14" fill="#94a3b8">
-      Contrasting traditional centralized identity honeypots with Aegis mathematical predicate invariance.
+    <text x="0" y="28" font-size="17" font-weight="600" fill="#94a3b8">
+      Contrasting legacy centralized PII honeypots with Aegis mathematical zero-knowledge proofs.
     </text>
   </g>
 
   <!-- ================= LEFT COLUMN: TRADITIONAL IDENTITY VENDOR (HONEYPOT) ================= -->
   <g transform="translate(40, 92)">
-    <!-- Column Card Frame -->
-    <rect width="480" height="350" rx="14" fill="url(#dangerGrad)" stroke="#ef4444" stroke-width="1.5" stroke-opacity="0.4" />
+    <rect width="480" height="350" rx="14" fill="url(#dangerGrad)" stroke="#ef4444" stroke-width="1.8" stroke-opacity="0.6" />
     
     <!-- Header -->
-    <rect x="0" y="0" width="480" height="46" rx="14" fill="#450a0a" fill-opacity="0.7" />
-    <circle class="alert-led" cx="24" cy="23" r="5.5" fill="#ef4444" />
-    <text x="42" y="28" class="font-mono" font-size="13" font-weight="700" fill="#fca5a5">
-      TRADITIONAL IDENTITY VERIFICATION (HONEYPOT MODEL)
+    <rect x="0" y="0" width="480" height="50" rx="14" fill="#450a0a" fill-opacity="0.9" />
+    <circle class="alert-led" cx="22" cy="25" r="6" fill="#ef4444" />
+    <text x="38" y="32" class="font-mono" font-size="17" font-weight="900" fill="#fca5a5">
+      TRADITIONAL (HONEYPOT MODEL)
     </text>
 
     <!-- Sub-row 1: Data Submission -->
-    <g transform="translate(18, 62)">
-      <rect width="444" height="74" rx="8" fill="#18181b" stroke="#3f1414" stroke-width="1.2" />
-      <text x="14" y="24" font-size="13.5" font-weight="700" fill="#f87171">1. Full Raw Document Transmitted Over Network</text>
-      <text x="14" y="44" font-size="12" fill="#cbd5e1">User uploads high-resolution photo of Passport or Driver's License.</text>
-      <text x="14" y="62" class="font-mono" font-size="11" font-weight="600" fill="#ef4444">Contains: Full Legal Name, SSN, Home Address, Exact Date of Birth</text>
+    <g transform="translate(16, 60)">
+      <rect width="448" height="74" rx="8" fill="#18181b" stroke="#3f1414" stroke-width="1.2" />
+      <text x="14" y="28" font-size="18" font-weight="900" fill="#f87171">1. RAW PII OVER NETWORK</text>
+      <text x="14" y="54" class="font-mono" font-size="16" font-weight="800" fill="#fca5a5">Uploads: Full Name, SSN, Passport, Face</text>
     </g>
 
     <!-- Sub-row 2: Centralized Storage -->
-    <g transform="translate(18, 146)">
-      <rect width="444" height="88" rx="8" fill="#18181b" stroke="#3f1414" stroke-width="1.2" />
-      <text x="14" y="24" font-size="13.5" font-weight="700" fill="#f87171">2. Centralized PII Retention in Cloud Database</text>
-      <text x="14" y="44" font-size="12" fill="#cbd5e1">Vendor persists documents in S3 buckets &amp; PostgreSQL tables for "audit".</text>
-      <rect x="14" y="54" width="416" height="24" rx="5" fill="#7f1d1d" fill-opacity="0.6" stroke="#ef4444" stroke-width="1" />
-      <text x="22" y="70" class="font-mono" font-size="11" font-weight="700" fill="#fecaca">⚠️ HIGH VALUE TARGET FOR RANSOMWARE &amp; LEAKS</text>
+    <g transform="translate(16, 144)">
+      <rect width="448" height="92" rx="8" fill="#18181b" stroke="#3f1414" stroke-width="1.2" />
+      <text x="14" y="28" font-size="18" font-weight="900" fill="#f87171">2. CENTRALIZED PII DATABASE</text>
+      <text x="14" y="52" font-size="16" font-weight="700" fill="#e2e8f0">Stored in cloud disks indefinitely</text>
+      <rect x="12" y="60" width="424" height="26" rx="4" fill="#7f1d1d" fill-opacity="0.8" stroke="#ef4444" stroke-width="1.2" />
+      <text x="18" y="78" class="font-mono" font-size="15" font-weight="900" fill="#fee2e2">⚠️ HIGH TARGET FOR RANSOMWARE</text>
     </g>
 
     <!-- Sub-row 3: Repercussions -->
-    <g transform="translate(18, 244)">
-      <rect width="444" height="92" rx="8" fill="#260b0b" stroke="#7f1d1d" stroke-width="1.2" />
-      <text x="14" y="22" class="font-mono" font-size="12" font-weight="700" fill="#f87171">BUSINESS &amp; CONSUMER LIABILITIES:</text>
-      <text x="14" y="42" font-size="11.5" fill="#fca5a5">❌ Regulatory Fines: Up to €20M / 4% global turnover under GDPR.</text>
-      <text x="14" y="60" font-size="11.5" fill="#fca5a5">❌ User Identity Theft: Compromised credentials sold on dark web.</text>
-      <text x="14" y="78" font-size="11.5" fill="#fca5a5">❌ High Cart Abandonment: 40%+ drop-off when asked for raw ID photos.</text>
+    <g transform="translate(16, 246)">
+      <rect width="448" height="88" rx="8" fill="#260b0b" stroke="#7f1d1d" stroke-width="1.2" />
+      <text x="14" y="26" class="font-mono" font-size="16" font-weight="900" fill="#f87171">LEGAL &amp; BUSINESS RISKS:</text>
+      <text x="14" y="52" font-size="16" font-weight="800" fill="#fca5a5">❌ GDPR / CCPA 4% Global Fines</text>
+      <text x="14" y="74" font-size="16" font-weight="800" fill="#fca5a5">❌ 40%+ Customer Abandonment Rate</text>
     </g>
   </g>
 
   <!-- ================= RIGHT COLUMN: AEGIS ZERO-KNOWLEDGE ENGINE ================= -->
   <g transform="translate(560, 92)">
-    <!-- Column Card Frame -->
-    <rect width="480" height="350" rx="14" fill="url(#successGrad)" stroke="#10b981" stroke-width="1.5" stroke-opacity="0.4" />
+    <rect width="480" height="350" rx="14" fill="url(#successGrad)" stroke="#10b981" stroke-width="1.8" stroke-opacity="0.6" />
     
     <!-- Header -->
-    <rect x="0" y="0" width="480" height="46" rx="14" fill="#064e3b" fill-opacity="0.7" />
-    <circle class="green-led" cx="24" cy="23" r="5.5" fill="#34d399" />
-    <text x="42" y="28" class="font-mono" font-size="13" font-weight="700" fill="#a7f3d0">
-      AEGIS ZERO-KNOWLEDGE ATTESTATION (PREDICATE INVARIANCE)
+    <rect x="0" y="0" width="480" height="50" rx="14" fill="#064e3b" fill-opacity="0.9" />
+    <circle class="green-led" cx="22" cy="25" r="6" fill="#34d399" />
+    <text x="38" y="32" class="font-mono" font-size="17" font-weight="900" fill="#a7f3d0">
+      AEGIS ZERO-KNOWLEDGE (ZERO-PII)
     </text>
 
     <!-- Sub-row 1: Client Hashing -->
-    <g transform="translate(18, 62)">
-      <rect width="444" height="74" rx="8" fill="#18181b" stroke="#065f46" stroke-width="1.2" />
-      <text x="14" y="24" font-size="13.5" font-weight="700" fill="#34d399">1. Client-Side Hash + Salt (Raw ID Stays on Device)</text>
-      <text x="14" y="44" class="font-mono" font-size="11.5" font-weight="600" fill="#6ee7b7">doc_hash = Blake3(ID_bytes || salt_r) // 64-hex digest</text>
-      <text x="14" y="62" font-size="12" fill="#cbd5e1">Raw document photo is immediately discarded from device memory.</text>
+    <g transform="translate(16, 60)">
+      <rect width="448" height="74" rx="8" fill="#18181b" stroke="#065f46" stroke-width="1.2" />
+      <text x="14" y="28" font-size="18" font-weight="900" fill="#34d399">1. DEVICE-SIDE HASH &amp; BLIND</text>
+      <text x="14" y="54" class="font-mono" font-size="16" font-weight="800" fill="#6ee7b7">doc_hash = Blake3(ID) • 0 PII leaves device</text>
     </g>
 
     <!-- Sub-row 2: Cryptographic Predicate -->
-    <g transform="translate(18, 146)">
-      <rect width="444" height="88" rx="8" fill="#18181b" stroke="#065f46" stroke-width="1.2" />
-      <text x="14" y="24" font-size="13.5" font-weight="700" fill="#38bdf8">2. Arithmetic Circuit Evaluation &amp; RAM Zeroization</text>
-      <text x="14" y="44" class="font-mono" font-size="11.5" fill="#93c5fd">ZK Constraint: (age ≥ 21) = 1 • Groth16 / BN254</text>
-      <rect x="14" y="54" width="416" height="24" rx="5" fill="#064e3b" fill-opacity="0.7" stroke="#10b981" stroke-width="1" />
-      <text x="22" y="70" class="font-mono" font-size="11" font-weight="700" fill="#a7f3d0">⚡ RAM SCRUBBED: zeroize::Zeroize::zeroize(&amp;mut witness)</text>
+    <g transform="translate(16, 144)">
+      <rect width="448" height="92" rx="8" fill="#18181b" stroke="#065f46" stroke-width="1.2" />
+      <text x="14" y="28" font-size="18" font-weight="900" fill="#38bdf8">2. ZERO-KNOWLEDGE PROOF</text>
+      <text x="14" y="52" class="font-mono" font-size="16" font-weight="800" fill="#93c5fd">ZK Constraint: (Age ≥ 21) • Groth16</text>
+      <rect x="12" y="60" width="424" height="26" rx="4" fill="#064e3b" fill-opacity="0.85" stroke="#10b981" stroke-width="1.2" />
+      <text x="18" y="78" class="font-mono" font-size="15" font-weight="900" fill="#dcfce7">⚡ RAM ZEROIZED: zeroize(&amp;mut witness)</text>
     </g>
 
     <!-- Sub-row 3: Verifiable Receipt -->
-    <g transform="translate(18, 244)">
-      <rect width="444" height="92" rx="8" fill="#062e24" stroke="#059669" stroke-width="1.2" />
-      <text x="14" y="22" class="font-mono" font-size="12" font-weight="700" fill="#34d399">AEGIS GUARANTEES &amp; BUSINESS IMPACT:</text>
-      <text x="14" y="42" font-size="11.5" fill="#a7f3d0">🛡️ 0 Bytes PII Stored: Nothing exists to breach, subpoena, or ransom.</text>
-      <text x="14" y="60" font-size="11.5" fill="#a7f3d0">🛡️ Legal Non-Repudiation: Signed JWT token &amp; Blake3 Merkle block.</text>
-      <text x="14" y="78" font-size="11.5" fill="#a7f3d0">🛡️ 150µs Latency: Sub-millisecond attestation for instant conversions.</text>
+    <g transform="translate(16, 246)">
+      <rect width="448" height="88" rx="8" fill="#062e24" stroke="#059669" stroke-width="1.2" />
+      <text x="14" y="26" class="font-mono" font-size="16" font-weight="900" fill="#34d399">AEGIS ASSURANCE &amp; LATENCY:</text>
+      <text x="14" y="52" font-size="16" font-weight="800" fill="#a7f3d0">🛡️ 0 Bytes Stored: Zero Subpoena Target</text>
+      <text x="14" y="74" font-size="16" font-weight="800" fill="#a7f3d0">⚡ 150 µs Latency: Instant User Conversion</text>
     </g>
   </g>
 
   <!-- Bottom Divider Line -->
   <g transform="translate(40, 465)">
     <line x1="0" y1="0" x2="1000" y2="0" stroke="#27272a" stroke-width="1.2" />
-    <text x="0" y="20" class="font-mono" font-size="12" fill="#94a3b8">
-      MATHEMATICAL ASSURANCE: <tspan fill="#38bdf8" font-weight="700">ZK-SNARKs (Groth16/BN254)</tspan> • <tspan fill="#34d399" font-weight="700">Blake3 SIMD Receipts</tspan> • <tspan fill="#a78bfa" font-weight="700">Post-Quantum Lattice FIPS-204</tspan> • <tspan fill="#e4e4e7" font-weight="700">Memory Scrubbing (Zeroize)</tspan>
+    <text x="0" y="20" class="font-mono" font-size="16" font-weight="700" fill="#cbd5e1">
+      PROOF GUARANTEES: <tspan fill="#38bdf8" font-weight="900">ZK Groth16</tspan> • <tspan fill="#34d399" font-weight="900">Blake3 Receipts</tspan> • <tspan fill="#a78bfa" font-weight="900">Post-Quantum ML-DSA</tspan> • <tspan fill="#4ade80" font-weight="900">RAM Zeroize</tspan>
     </text>
   </g>
 </svg>

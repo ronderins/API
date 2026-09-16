@@ -49,12 +49,6 @@ export function AegisLogo({
       className={`relative flex items-center justify-center select-none ${animated ? "group" : ""} ${className}`}
       style={{ width: dimension, height: dimension }}
     >
-      {/* Ambient background glow */}
-      <div
-        className="absolute inset-0 rounded-2xl bg-emerald-500/20 blur-md transition-all duration-300 group-hover:bg-emerald-400/30"
-        style={{ transform: "scale(0.85)" }}
-      />
-
       <svg
         viewBox="0 0 100 100"
         fill="none"
@@ -67,12 +61,6 @@ export function AegisLogo({
             <stop offset="0%" stopColor="#34d399" />
             <stop offset="50%" stopColor="#10b981" />
             <stop offset="100%" stopColor="#0d9488" />
-          </linearGradient>
-
-          {/* Secondary Facet Gradient: Deep Shadowing */}
-          <linearGradient id={`${gradientId}-facet`} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#064e3b" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="#022c22" stopOpacity="0.95" />
           </linearGradient>
 
           {/* Inner Prism Core Gradient: Cyan to Emerald */}
@@ -88,71 +76,44 @@ export function AegisLogo({
           </filter>
         </defs>
 
-        {/* Outer Backing Shield Plate */}
+        {/* Pure Outline Shield Profile (Zero Background Fill) */}
         <path
           d="M50 8 L84 24 V52 C84 72 68 88 50 94 C32 88 16 72 16 52 V24 L50 8 Z"
-          fill={`url(#${gradientId}-facet)`}
-          stroke="#065f46"
-          strokeWidth="2.5"
-          strokeLinejoin="round"
-        />
-
-        {/* Left Protective Wing / Facet */}
-        <path
-          d="M50 8 L16 24 V52 C16 72 32 88 50 94 V8 Z"
-          fill="#047857"
-          fillOpacity="0.25"
-        />
-
-        {/* Right Protective Wing Highlight */}
-        <path
-          d="M50 8 L84 24 V52 C84 72 68 88 50 94 V8 Z"
-          fill="#10b981"
-          fillOpacity="0.1"
-        />
-
-        {/* Outer Shield Outline Accent with Gradient */}
-        <path
-          d="M50 11 L81 25.5 V50 C81 68 67 83 50 89 C33 83 19 68 19 50 V25.5 L50 11 Z"
+          fill="none"
           stroke={`url(#${gradientId})`}
-          strokeWidth="3"
+          strokeWidth="3.2"
           strokeLinecap="round"
           strokeLinejoin="round"
           filter={`url(#${glowId})`}
         />
 
-        {/* Dynamic Aegis Interlocking Cryptographic Core */}
+        {/* Dynamic Aegis Interlocking Cryptographic Core (Pure Outline, Zero Background Fill) */}
         {/* Upper Chevron / Keynode */}
         <path
           d="M50 25 L68 37 L50 49 L32 37 Z"
-          fill={`url(#${innerGradId})`}
+          fill="none"
           stroke="#a7f3d0"
-          strokeWidth="1.5"
+          strokeWidth="2"
           strokeLinejoin="round"
         />
 
         {/* Lower Prism / Zero-Knowledge Nexus */}
         <path
           d="M50 53 L66 41 V56 C66 67 59 74 50 78 C41 74 34 67 34 56 V41 L50 53 Z"
-          fill={`url(#${gradientId})`}
+          fill="none"
           stroke="#34d399"
-          strokeWidth="1.5"
+          strokeWidth="2"
           strokeLinejoin="round"
         />
 
-        {/* Central Core Attestation Diamond */}
+        {/* Central Core Attestation Node */}
         <circle
           cx="50"
           cy="49"
           r="4.5"
-          fill="#ffffff"
-          className="animate-pulse"
-        />
-        <circle
-          cx="50"
-          cy="49"
-          r="2"
-          fill="#065f46"
+          fill="none"
+          stroke="#6ee7b7"
+          strokeWidth="2"
         />
       </svg>
     </div>

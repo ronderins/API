@@ -206,9 +206,7 @@ export const RustZKPEcosystem: React.FC = () => {
       <div className="relative overflow-hidden bg-gradient-to-br from-zinc-900 via-zinc-900/90 to-amber-950/30 border border-amber-500/30 rounded-2xl p-6 sm:p-8 shadow-2xl space-y-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-zinc-800">
           <div className="flex items-start sm:items-center gap-3.5">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500/20 to-orange-500/10 border border-amber-500/40 flex items-center justify-center text-amber-400 shadow-lg shadow-amber-950/40">
-              <Cpu className="w-6 h-6 text-amber-400" />
-            </div>
+            <Cpu className="w-10 h-10 text-amber-400 shrink-0 filter drop-shadow-[0_0_12px_rgba(251,191,36,0.9)]" />
             <div>
               <div className="flex items-center gap-2">
                 <span className="px-2.5 py-0.5 rounded-full bg-amber-950 text-amber-300 border border-amber-700/60 font-mono text-[11px] font-semibold">
@@ -345,7 +343,7 @@ export const RustZKPEcosystem: React.FC = () => {
       <div className="bg-zinc-900/70 border border-zinc-800 rounded-xl p-6 shadow-xl space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800/80">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400">
+            <div className="text-indigo-400">
               <Terminal className="w-5 h-5" />
             </div>
             <div>
@@ -826,7 +824,7 @@ export const RustZKPEcosystem: React.FC = () => {
       <div className="bg-zinc-900/70 border border-zinc-800 rounded-xl p-6 shadow-xl space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800/80">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+            <div className="text-emerald-400">
               <Activity className="w-5 h-5" />
             </div>
             <div>
@@ -990,7 +988,7 @@ export const RustZKPEcosystem: React.FC = () => {
       <div className="bg-zinc-900/70 border border-zinc-800 rounded-xl p-6 shadow-xl space-y-5">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-zinc-800/80">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-400">
+            <div className="text-purple-400">
               <Lock className="w-5 h-5" />
             </div>
             <div>
@@ -1052,7 +1050,7 @@ export const RustZKPEcosystem: React.FC = () => {
       <div className="bg-zinc-900/70 border border-zinc-800 rounded-xl p-6 shadow-xl space-y-5">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800/80">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400">
+            <div className="text-blue-400">
               <Code2 className="w-5 h-5" />
             </div>
             <div>

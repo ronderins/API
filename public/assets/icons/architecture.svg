@@ -18,15 +18,16 @@
     .neon-arch { animation: archPulse 3s ease-in-out infinite; }
     .flow-link { stroke-dasharray: 4 3; animation: nodeFlow 2s linear infinite; }
   </style>
-  <g class="neon-arch" fill="none" stroke="url(#neonArchGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <!-- Top Node -->
-    <rect x="11" y="3" width="10" height="7" rx="2" fill="none" />
+  <g class="neon-arch" fill="none" stroke="url(#neonArchGrad)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Top Hub Node -->
+    <circle cx="16" cy="7" r="4.5" fill="none" stroke="#38bdf8" />
+    <circle cx="16" cy="7" r="1.5" fill="none" stroke="#818cf8" />
     <!-- Bottom Left Node -->
-    <rect x="3" y="22" width="10" height="7" rx="2" fill="none" />
+    <circle cx="7" cy="25" r="4.5" fill="none" stroke="#818cf8" />
     <!-- Bottom Right Node -->
-    <rect x="19" y="22" width="10" height="7" rx="2" fill="none" />
+    <circle cx="25" cy="25" r="4.5" fill="none" stroke="#c084fc" />
     <!-- Connection lines -->
-    <path d="M 16 10 L 16 16 L 8 16 L 8 22" class="flow-link" stroke="#38bdf8" />
-    <path d="M 16 16 L 24 16 L 24 22" class="flow-link" stroke="#c084fc" />
+    <path d="M 16 12 L 16 18 L 7 18 L 7 20" class="flow-link" stroke="#38bdf8" />
+    <path d="M 16 18 L 25 18 L 25 20" class="flow-link" stroke="#c084fc" />
   </g>
 </svg>

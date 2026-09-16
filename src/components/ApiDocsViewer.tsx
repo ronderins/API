@@ -57,9 +57,7 @@ export const ApiDocsViewer: React.FC = () => {
     <div id="api-docs-container" className="bg-zinc-900/70 border border-zinc-800 rounded-xl p-6 shadow-xl space-y-6">
       <div className="flex items-center justify-between pb-4 border-b border-zinc-800/80">
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400">
-            <BookOpen className="w-5 h-5" />
-          </div>
+          <BookOpen className="w-8 h-8 text-indigo-400 shrink-0 filter drop-shadow-[0_0_10px_rgba(129,140,248,0.85)]" />
           <div>
             <h2 className="text-lg font-semibold text-zinc-100">REST API Specification</h2>
             <p className="text-xs text-zinc-400">OpenAPI 3.1 compatible endpoints & schema definitions for Aegis engine</p>

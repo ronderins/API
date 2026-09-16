@@ -534,9 +534,7 @@ export default function HomePage() {
             <div id="download-panel" className="bg-zinc-900/70 border border-zinc-800 rounded-xl p-6 shadow-xl space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800/80">
                 <div className="flex items-center gap-3">
-                  <div className="p-2.5 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-400">
-                    <Download className="w-6 h-6" />
-                  </div>
+                  <Download className="w-8 h-8 text-amber-400 shrink-0 filter drop-shadow-[0_0_10px_rgba(251,191,36,0.85)]" />
                   <div>
                     <h2 className="text-lg font-semibold text-zinc-100">Download Ready-to-Run Full-Stack Project</h2>
                     <p className="text-xs text-zinc-400">Direct `.zip` package with no nested root folder wrapper — extracts directly to Next.js project root</p>

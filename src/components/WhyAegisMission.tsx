@@ -274,9 +274,7 @@ export const WhyAegisMission: React.FC = () => {
                 <div className="space-y-4">
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex items-center gap-3">
-                      <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
-                        <Icon className="w-6 h-6" />
-                      </div>
+                      <Icon className="w-8 h-8 text-emerald-400 shrink-0 filter drop-shadow-[0_0_10px_rgba(52,211,153,0.85)]" />
                       <div>
                         <h4 className="text-base font-bold text-zinc-100">{data.title}</h4>
                         <span className="text-[11px] font-mono text-emerald-400 block">{data.badge}</span>
@@ -369,9 +367,7 @@ export const WhyAegisMission: React.FC = () => {
             <div ref={useCaseRef} className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
               <div className="lg:col-span-2 space-y-4">
                 <div className="flex items-center gap-3">
-                  <div className="p-3 rounded-xl bg-teal-500/10 border border-teal-500/20 text-teal-400">
-                    <Icon className="w-6 h-6" />
-                  </div>
+                  <Icon className="w-8 h-8 text-teal-400 shrink-0 filter drop-shadow-[0_0_10px_rgba(45,212,191,0.85)]" />
                   <div>
                     <h4 className="text-base font-bold text-zinc-100">{item.title}</h4>
                     <span className="text-xs text-zinc-400 font-mono">Primary Stakeholders: {item.stakeholders}</span>

@@ -139,9 +139,7 @@ export const VisualFlowExplainer: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800/80">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
-            <Info className="w-5 h-5" />
-          </div>
+          <Info className="w-8 h-8 text-emerald-400 shrink-0 filter drop-shadow-[0_0_10px_rgba(52,211,153,0.85)]" />
           <div>
             <h2 className="text-lg font-semibold text-zinc-100">How Privacy-Preserving Identity Verification Works</h2>
             <p className="text-xs text-zinc-400">
@@ -217,9 +215,7 @@ export const VisualFlowExplainer: React.FC = () => {
           <div ref={cardRef} className="p-5 bg-zinc-950/80 border border-zinc-800/90 rounded-xl space-y-4 will-change-transform">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-zinc-850">
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
-                  <Icon className="w-5 h-5" />
-                </div>
+                <Icon className="w-8 h-8 text-emerald-400 shrink-0 filter drop-shadow-[0_0_10px_rgba(52,211,153,0.85)]" />
                 <div>
                   <h3 className="text-base font-semibold text-zinc-100">{current.title}</h3>
                   <p className="text-xs text-zinc-400">{current.subtitle}</p>

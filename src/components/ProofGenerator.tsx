@@ -269,9 +269,7 @@ bytes memory calldata = abi.encodeWithSelector(
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800/80">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
-            <Zap className="w-5 h-5" />
-          </div>
+          <Zap className="w-8 h-8 text-emerald-400 shrink-0 filter drop-shadow-[0_0_10px_rgba(52,211,153,0.85)]" />
           <div>
             <h2 className="text-lg font-semibold text-zinc-100">Privacy-Preserving Verification Playground</h2>
             <p className="text-xs text-zinc-400">

@@ -7,16 +7,26 @@
   </defs>
   <style>
     @keyframes docPulse {
-      0%, 100% { filter: drop-shadow(0 0 2px #38bdf8) drop-shadow(0 0 5px rgba(96, 165, 250, 0.5)); stroke-width: 2; }
-      50% { filter: drop-shadow(0 0 4px #60a5fa) drop-shadow(0 0 9px rgba(56, 189, 248, 0.8)); stroke-width: 2.3; }
+      0%, 100% { filter: drop-shadow(0 0 2px #38bdf8) drop-shadow(0 0 5px rgba(96, 165, 250, 0.5)); stroke-width: 2.2; }
+      50% { filter: drop-shadow(0 0 4px #60a5fa) drop-shadow(0 0 9px rgba(56, 189, 248, 0.8)); stroke-width: 2.5; }
     }
     .neon-doc { animation: docPulse 2.8s ease-in-out infinite; }
   </style>
   <g class="neon-doc" fill="none" stroke="url(#neonDocGrad)" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M 6 4 C 6 3, 7 2, 8 2 L 19 2 L 26 9 L 26 28 C 26 29, 25 30, 24 30 L 8 30 C 7 30, 6 29, 6 28 Z" fill="none" />
-    <path d="M 19 2 L 19 9 L 26 9" />
-    <line x1="10" y1="14" x2="21" y2="14" />
-    <line x1="10" y1="19" x2="21" y2="19" />
-    <line x1="10" y1="24" x2="17" y2="24" />
+    <!-- Balance Scales of Justice (Legal / MIT License) -->
+    <!-- Pillar -->
+    <line x1="16" y1="5" x2="16" y2="28" stroke-width="2.4" />
+    <line x1="10" y1="28" x2="22" y2="28" stroke-width="2.4" />
+    <circle cx="16" cy="5" r="2" stroke-width="2" />
+    <!-- Cross Beam -->
+    <line x1="6" y1="10" x2="26" y2="10" stroke-width="2.2" />
+    <!-- Left Pan -->
+    <line x1="6" y1="10" x2="3" y2="17" stroke-width="1.6" />
+    <line x1="6" y1="10" x2="9" y2="17" stroke-width="1.6" />
+    <path d="M 2 17 Q 6 21 10 17 Z" stroke-width="1.8" />
+    <!-- Right Pan -->
+    <line x1="26" y1="10" x2="23" y2="17" stroke-width="1.6" />
+    <line x1="26" y1="10" x2="29" y2="17" stroke-width="1.6" />
+    <path d="M 22 17 Q 26 21 30 17 Z" stroke-width="1.8" />
   </g>
 </svg>

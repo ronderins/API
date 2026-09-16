@@ -118,38 +118,28 @@ export function FooterModal({ type, onClose, onNavigateTab }: FooterModalProps) 
         <div className="px-6 py-4 border-b border-zinc-800 flex items-center justify-between bg-zinc-950/60 sticky top-0 z-10">
           <div className="flex items-center gap-3">
             {type === "how_it_works" && (
-              <AegisLogo size={32} animated id="modal-how-logo" />
+              <AegisLogo size={34} animated id="modal-how-logo" />
             )}
             {type === "mission" && (
-              <AegisLogo size={32} animated id="modal-mission-logo" />
+              <AegisLogo size={34} animated id="modal-mission-logo" />
             )}
             {type === "api_docs" && (
-              <div className="p-2 rounded-xl bg-indigo-500/10 border border-indigo-500/30 text-indigo-400">
-                <BookOpen className="w-5 h-5" />
-              </div>
+              <BookOpen className="w-8 h-8 text-indigo-400 shrink-0 filter drop-shadow-[0_0_8px_rgba(129,140,248,0.8)]" />
             )}
             {type === "security_lab" && (
-              <div className="p-2 rounded-xl bg-purple-500/10 border border-purple-500/30 text-purple-400">
-                <Lock className="w-5 h-5" />
-              </div>
+              <Lock className="w-8 h-8 text-purple-400 shrink-0 filter drop-shadow-[0_0_8px_rgba(192,132,252,0.8)]" />
             )}
             {type === "source_code" && (
-              <div className="p-2 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400">
-                <Download className="w-5 h-5" />
-              </div>
+              <Download className="w-8 h-8 text-amber-400 shrink-0 filter drop-shadow-[0_0_8px_rgba(251,191,36,0.8)]" />
             )}
             {type === "zero_pii" && (
-              <AegisLogo size={32} animated id="modal-zero-pii-logo" />
+              <AegisLogo size={34} animated id="modal-zero-pii-logo" />
             )}
             {type === "creator_profile" && (
-              <div className="p-2 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-400">
-                <User className="w-5 h-5" />
-              </div>
+              <User className="w-8 h-8 text-blue-400 shrink-0 filter drop-shadow-[0_0_8px_rgba(96,165,250,0.8)]" />
             )}
             {type === "public_testing_guide" && (
-              <div className="p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
-                <Zap className="w-5 h-5" />
-              </div>
+              <Zap className="w-8 h-8 text-emerald-400 shrink-0 filter drop-shadow-[0_0_8px_rgba(52,211,153,0.85)]" />
             )}
 
             <div>
