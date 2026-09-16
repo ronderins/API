@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="100%" height="100%">
+  <defs>
+    <linearGradient id="neonArchGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#818cf8" />
+      <stop offset="100%" stop-color="#c084fc" />
+    </linearGradient>
+  </defs>
+  <style>
+    @keyframes archPulse {
+      0%, 100% { filter: drop-shadow(0 0 2px #38bdf8) drop-shadow(0 0 6px rgba(129, 140, 248, 0.6)); }
+      50% { filter: drop-shadow(0 0 4px #c084fc) drop-shadow(0 0 10px rgba(56, 189, 248, 0.9)); }
+    }
+    @keyframes nodeFlow {
+      0% { stroke-dashoffset: 20; }
+      100% { stroke-dashoffset: 0; }
+    }
+    .neon-arch { animation: archPulse 3s ease-in-out infinite; }
+    .flow-link { stroke-dasharray: 4 3; animation: nodeFlow 2s linear infinite; }
+  </style>
+  <g class="neon-arch" fill="none" stroke="url(#neonArchGrad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Top Node -->
+    <rect x="11" y="3" width="10" height="7" rx="2" fill="#090d16" />
+    <!-- Bottom Left Node -->
+    <rect x="3" y="22" width="10" height="7" rx="2" fill="#090d16" />
+    <!-- Bottom Right Node -->
+    <rect x="19" y="22" width="10" height="7" rx="2" fill="#090d16" />
+    <!-- Connection lines -->
+    <path d="M 16 10 L 16 16 L 8 16 L 8 22" class="flow-link" stroke="#38bdf8" />
+    <path d="M 16 16 L 24 16 L 24 22" class="flow-link" stroke="#c084fc" />
+  </g>
+</svg>

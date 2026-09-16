@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="100%" height="100%">
+  <defs>
+    <linearGradient id="neonPersonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#818cf8" />
+    </linearGradient>
+  </defs>
+  <style>
+    @keyframes personShine {
+      0%, 100% { filter: drop-shadow(0 0 2px #38bdf8); }
+      50% { filter: drop-shadow(0 0 6px #818cf8); }
+    }
+    .neon-person { animation: personShine 2.5s ease-in-out infinite; }
+  </style>
+  <g class="neon-person" fill="none" stroke="url(#neonPersonGrad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="16" cy="9" r="5" fill="#091322" />
+    <path d="M 6 26 C 6 20, 10 17, 16 17 C 22 17, 26 20, 26 26" />
+    <circle cx="16" cy="9" r="2" fill="#38bdf8" />
+  </g>
+</svg>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="100%" height="100%">
+  <defs>
+    <linearGradient id="neonRocketGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#818cf8" />
+      <stop offset="100%" stop-color="#f43f5e" />
+    </linearGradient>
+  </defs>
+  <style>
+    @keyframes rocketShine {
+      0%, 100% { filter: drop-shadow(0 0 2px #38bdf8) drop-shadow(0 0 5px rgba(244, 63, 94, 0.5)); }
+      50% { filter: drop-shadow(0 0 4px #f43f5e) drop-shadow(0 0 9px rgba(56, 189, 248, 0.8)); }
+    }
+    @keyframes flameFlicker {
+      0%, 100% { transform: scale(1) translateY(0); opacity: 0.9; }
+      50% { transform: scale(1.15) translateY(1.5px); opacity: 1; }
+    }
+    .neon-rocket { animation: rocketShine 2.5s ease-in-out infinite; }
+    .rocket-flame { transform-origin: 10px 22px; animation: flameFlicker 0.6s ease-in-out infinite alternate; }
+  </style>
+  <g class="neon-rocket" fill="none" stroke="url(#neonRocketGrad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Fuselage -->
+    <path d="M 16 3 C 21 6, 26 13, 26 21 L 21 21 L 18 18 L 14 18 L 11 21 L 6 21 C 6 13, 11 6, 16 3 Z" fill="#0b0f19" />
+    <!-- Window -->
+    <circle cx="16" cy="11" r="3" stroke="#38bdf8" fill="#0284c7" />
+    <!-- Thruster Flame -->
+    <path d="M 13 22 Q 16 29 19 22" stroke="#f43f5e" class="rocket-flame" />
+  </g>
+</svg>

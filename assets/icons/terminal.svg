@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="100%" height="100%">
+  <defs>
+    <linearGradient id="neonTermGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4" />
+      <stop offset="100%" stop-color="#34d399" />
+    </linearGradient>
+  </defs>
+  <style>
+    @keyframes termGlow {
+      0%, 100% { filter: drop-shadow(0 0 2px #06b6d4) drop-shadow(0 0 6px rgba(52, 211, 153, 0.5)); }
+      50% { filter: drop-shadow(0 0 4px #34d399) drop-shadow(0 0 9px rgba(6, 182, 212, 0.8)); }
+    }
+    @keyframes cursorBlink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+    .neon-term { animation: termGlow 2.5s ease-in-out infinite; }
+    .term-cursor { animation: cursorBlink 0.9s steps(1) infinite; }
+  </style>
+  <g class="neon-term" fill="none" stroke="url(#neonTermGrad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="5" width="26" height="22" rx="3.5" fill="#071217" />
+    <path d="M 8 13 L 13 16 L 8 19" stroke="#34d399" />
+    <line x1="16" y1="19" x2="22" y2="19" class="term-cursor" stroke="#06b6d4" stroke-width="2.2" />
+  </g>
+</svg>
