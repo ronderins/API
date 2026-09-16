@@ -1,30 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="100%" height="100%" style="background: transparent;">
   <defs>
-    <linearGradient id="neonDocGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#38bdf8" />
-      <stop offset="100%" stop-color="#60a5fa" />
+    <linearGradient id="themeDocGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9ee2d6" />
+      <stop offset="100%" stop-color="#73C7B8" />
     </linearGradient>
   </defs>
   <style>
-    @keyframes docShine {
-      0%, 100% { filter: drop-shadow(0 0 2px #38bdf8); }
-      50% { filter: drop-shadow(0 0 5px #60a5fa); }
+    @keyframes docPulse {
+      0%, 100% { stroke-opacity: 0.82; }
+      50% { stroke-opacity: 1; }
     }
-    .neon-doc { animation: docShine 2.5s ease-in-out infinite; }
+    .theme-doc { animation: docPulse 2.5s ease-in-out infinite; }
   </style>
-  <g class="neon-doc" fill="none" stroke="url(#neonDocGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <!-- Balance Scales of Justice -->
-    <line x1="16" y1="5" x2="16" y2="27" />
-    <line x1="10" y1="27" x2="22" y2="27" />
-    <circle cx="16" cy="5" r="1.5" />
-    <line x1="6" y1="10" x2="26" y2="10" />
-    <!-- Left Pan -->
-    <line x1="6" y1="10" x2="3" y2="17" stroke-width="1.5" />
-    <line x1="6" y1="10" x2="9" y2="17" stroke-width="1.5" />
-    <path d="M 2 17 Q 6 21 10 17 Z" />
-    <!-- Right Pan -->
-    <line x1="26" y1="10" x2="23" y2="17" stroke-width="1.5" />
-    <line x1="26" y1="10" x2="29" y2="17" stroke-width="1.5" />
-    <path d="M 22 17 Q 26 21 30 17 Z" />
+  <g class="theme-doc" fill="none" stroke="url(#themeDocGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 6 4 C 6 2.9 6.9 2 8 2 L 20 2 L 26 8 L 26 28 C 26 29.1 25.1 30 24 30 L 8 30 C 6.9 30 6 29.1 6 28 Z" />
+    <polyline points="20 2 20 8 26 8" />
+    <line x1="10" y1="14" x2="22" y2="14" />
+    <line x1="10" y1="19" x2="22" y2="19" />
+    <line x1="10" y1="24" x2="17" y2="24" />
   </g>
 </svg>

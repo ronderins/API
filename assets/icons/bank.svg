@@ -1,24 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="100%" height="100%" style="background: transparent;">
   <defs>
-    <linearGradient id="neonBankGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#38bdf8" />
-      <stop offset="100%" stop-color="#0284c7" />
+    <linearGradient id="themeBankGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9ee2d6" />
+      <stop offset="100%" stop-color="#73C7B8" />
     </linearGradient>
   </defs>
   <style>
-    @keyframes bankShine {
-      0%, 100% { filter: drop-shadow(0 0 2px #38bdf8); }
-      50% { filter: drop-shadow(0 0 5px #0284c7); }
+    @keyframes bankPulse {
+      0%, 100% { stroke-opacity: 0.82; }
+      50% { stroke-opacity: 1; }
     }
-    .neon-bank { animation: bankShine 2.6s ease-in-out infinite; }
+    .theme-bank { animation: bankPulse 2.5s ease-in-out infinite; }
   </style>
-  <g class="neon-bank" fill="none" stroke="url(#neonBankGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M 3 10 L 16 3 L 29 10 Z" fill="none" />
-    <line x1="6" y1="10" x2="6" y2="23" />
-    <line x1="12" y1="10" x2="12" y2="23" />
-    <line x1="20" y1="10" x2="20" y2="23" />
-    <line x1="26" y1="10" x2="26" y2="23" />
-    <line x1="2" y1="23" x2="30" y2="23" />
-    <line x1="2" y1="27" x2="30" y2="27" />
+  <g class="theme-bank" fill="none" stroke="url(#themeBankGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 3 10 L 16 3 L 29 10 Z" />
+    <line x1="6" y1="10" x2="6" y2="24" />
+    <line x1="12" y1="10" x2="12" y2="24" />
+    <line x1="20" y1="10" x2="20" y2="24" />
+    <line x1="26" y1="10" x2="26" y2="24" />
+    <line x1="2" y1="24" x2="30" y2="24" />
+    <line x1="1" y1="28" x2="31" y2="28" />
   </g>
 </svg>

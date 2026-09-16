@@ -1,25 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="100%" height="100%" style="background: transparent;">
   <defs>
-    <linearGradient id="neonArchGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#38bdf8" />
-      <stop offset="100%" stop-color="#818cf8" />
+    <linearGradient id="themeArchGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9ee2d6" />
+      <stop offset="100%" stop-color="#73C7B8" />
     </linearGradient>
   </defs>
   <style>
-    @keyframes archShine {
-      0%, 100% { filter: drop-shadow(0 0 2px #38bdf8); }
-      50% { filter: drop-shadow(0 0 5px #818cf8); }
+    @keyframes archPulse {
+      0%, 100% { stroke-opacity: 0.82; }
+      50% { stroke-opacity: 1; }
     }
-    .neon-arch { animation: archShine 2.6s ease-in-out infinite; }
+    .theme-arch { animation: archPulse 2.5s ease-in-out infinite; }
   </style>
-  <g class="neon-arch" fill="none" stroke="url(#neonArchGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <!-- Top Hub Node -->
-    <rect x="12" y="4" width="8" height="6" rx="1.5" />
-    <!-- Bottom Nodes -->
-    <rect x="4" y="22" width="8" height="6" rx="1.5" />
-    <rect x="20" y="22" width="8" height="6" rx="1.5" />
-    <!-- Connectors -->
-    <path d="M 16 10 L 16 16 L 8 16 L 8 22" />
-    <path d="M 16 16 L 24 16 L 24 22" />
+  <g class="theme-arch" fill="none" stroke="url(#themeArchGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polygon points="16 3 28 9 16 15 4 9 16 3" />
+    <polyline points="4 15 16 21 28 15" />
+    <polyline points="4 21 16 27 28 21" />
   </g>
 </svg>

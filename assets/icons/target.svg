@@ -1,24 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="100%" height="100%" style="background: transparent;">
   <defs>
-    <linearGradient id="neonTargetGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#34d399" />
-      <stop offset="100%" stop-color="#06b6d4" />
+    <linearGradient id="themeTargetGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9ee2d6" />
+      <stop offset="100%" stop-color="#73C7B8" />
     </linearGradient>
   </defs>
   <style>
-    @keyframes targetShine {
-      0%, 100% { filter: drop-shadow(0 0 2px #34d399); }
-      50% { filter: drop-shadow(0 0 5px #06b6d4); }
+    @keyframes targetPulse {
+      0%, 100% { stroke-opacity: 0.82; }
+      50% { stroke-opacity: 1; }
     }
-    .neon-target { animation: targetShine 2.5s ease-in-out infinite; }
+    .theme-target { animation: targetPulse 2.5s ease-in-out infinite; }
   </style>
-  <g class="neon-target" fill="none" stroke="url(#neonTargetGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <g class="theme-target" fill="none" stroke="url(#themeTargetGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <circle cx="16" cy="16" r="12" />
-    <circle cx="16" cy="16" r="6.5" />
-    <circle cx="16" cy="16" r="1.5" stroke="#34d399" />
-    <line x1="16" y1="2" x2="16" y2="5" />
-    <line x1="16" y1="27" x2="16" y2="30" />
-    <line x1="2" y1="16" x2="5" y2="16" />
-    <line x1="27" y1="16" x2="30" y2="16" />
+    <circle cx="16" cy="16" r="7" />
+    <circle cx="16" cy="16" r="2" />
   </g>
 </svg>
