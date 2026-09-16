@@ -7,13 +7,13 @@
   </defs>
   <style>
     @keyframes checkShine {
-      0%, 100% { filter: drop-shadow(0 0 2px #34d399) drop-shadow(0 0 4px rgba(16, 185, 129, 0.4)); stroke-width: 2; }
-      50% { filter: drop-shadow(0 0 4px #10b981) drop-shadow(0 0 8px rgba(52, 211, 153, 0.8)); stroke-width: 2.3; }
+      0%, 100% { filter: drop-shadow(0 0 2px #34d399); }
+      50% { filter: drop-shadow(0 0 5px #10b981); }
     }
-    .neon-s-check { animation: checkShine 2.2s ease-in-out infinite; }
+    .neon-s-check { animation: checkShine 2.4s ease-in-out infinite; }
   </style>
-  <g class="neon-s-check" fill="none" stroke="url(#neonCheckGrad)" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M 16 3 C 22 5, 27 6, 27 13 C 27 21, 21 27, 16 29 C 11 27, 5 21, 5 13 C 5 6, 10 5, 16 3 Z" fill="none" />
-    <polyline points="10 15 14 19 22 11" stroke="#34d399" stroke-width="2.3" />
+  <g class="neon-s-check" fill="none" stroke="url(#neonCheckGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 16 3 C 22 5, 27 6, 27 13 C 27 21, 21 27, 16 29 C 11 27, 5 21, 5 13 C 5 6, 10 5, 16 3 Z" />
+    <polyline points="11 15 15 19 21 12" stroke="#34d399" stroke-width="2.2" />
   </g>
 </svg>

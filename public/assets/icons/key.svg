@@ -2,22 +2,21 @@
   <defs>
     <linearGradient id="neonKeyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#fbbf24" />
-      <stop offset="50%" stop-color="#f59e0b" />
-      <stop offset="100%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#f59e0b" />
     </linearGradient>
   </defs>
   <style>
-    @keyframes keyGlow {
-      0%, 100% { filter: drop-shadow(0 0 2px #fbbf24) drop-shadow(0 0 5px rgba(245, 158, 11, 0.5)); stroke-width: 2; }
-      50% { filter: drop-shadow(0 0 4px #10b981) drop-shadow(0 0 9px rgba(251, 191, 36, 0.8)); stroke-width: 2.3; }
+    @keyframes keyShine {
+      0%, 100% { filter: drop-shadow(0 0 2px #fbbf24); }
+      50% { filter: drop-shadow(0 0 5px #f59e0b); }
     }
-    .neon-key { animation: keyGlow 2.6s ease-in-out infinite; }
+    .neon-key { animation: keyShine 2.5s ease-in-out infinite; }
   </style>
-  <g class="neon-key" fill="none" stroke="url(#neonKeyGrad)" stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="11" cy="13" r="7" fill="none" stroke-width="2" />
-    <circle cx="11" cy="13" r="2.5" fill="none" stroke-width="1.8" />
-    <path d="M 16 18 L 27 29" stroke-width="2.2" />
-    <path d="M 23 25 L 26 22" stroke-width="2" />
-    <path d="M 20 28 L 23 25" stroke-width="2" />
+  <g class="neon-key" fill="none" stroke="url(#neonKeyGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="11" cy="13" r="6" />
+    <circle cx="11" cy="13" r="2" />
+    <path d="M 15.5 17.5 L 26 28" stroke-width="2" />
+    <path d="M 22 24 L 25 21" stroke-width="2" />
+    <path d="M 19 27 L 22 24" stroke-width="2" />
   </g>
 </svg>

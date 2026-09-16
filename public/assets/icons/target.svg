@@ -2,29 +2,23 @@
   <defs>
     <linearGradient id="neonTargetGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#34d399" />
-      <stop offset="50%" stop-color="#06b6d4" />
-      <stop offset="100%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#06b6d4" />
     </linearGradient>
   </defs>
   <style>
     @keyframes targetShine {
-      0%, 100% { filter: drop-shadow(0 0 2px #34d399) drop-shadow(0 0 5px rgba(6, 182, 212, 0.6)); }
-      50% { filter: drop-shadow(0 0 4px #06b6d4) drop-shadow(0 0 9px rgba(52, 211, 153, 0.9)); }
-    }
-    @keyframes spinCross {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      0%, 100% { filter: drop-shadow(0 0 2px #34d399); }
+      50% { filter: drop-shadow(0 0 5px #06b6d4); }
     }
     .neon-target { animation: targetShine 2.5s ease-in-out infinite; }
-    .neon-cross { transform-origin: 16px 16px; animation: spinCross 12s linear infinite; }
   </style>
-  <circle cx="16" cy="16" r="13.5" fill="none" stroke="url(#neonTargetGrad)" stroke-width="2" stroke-dasharray="8 3" class="neon-target" />
-  <circle cx="16" cy="16" r="8" fill="none" stroke="#34d399" stroke-width="1.8" class="neon-target" />
-  <circle cx="16" cy="16" r="2.8" fill="none" stroke="#06b6d4" stroke-width="2" class="neon-target" />
-  <g class="neon-cross">
-    <line x1="16" y1="1" x2="16" y2="6" stroke="#34d399" stroke-width="2" stroke-linecap="round" />
-    <line x1="16" y1="26" x2="16" y2="31" stroke="#34d399" stroke-width="2" stroke-linecap="round" />
-    <line x1="1" y1="16" x2="6" y2="16" stroke="#34d399" stroke-width="2" stroke-linecap="round" />
-    <line x1="26" y1="16" x2="31" y2="16" stroke="#34d399" stroke-width="2" stroke-linecap="round" />
+  <g class="neon-target" fill="none" stroke="url(#neonTargetGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="16" cy="16" r="12" />
+    <circle cx="16" cy="16" r="6.5" />
+    <circle cx="16" cy="16" r="1.5" stroke="#34d399" />
+    <line x1="16" y1="2" x2="16" y2="5" />
+    <line x1="16" y1="27" x2="16" y2="30" />
+    <line x1="2" y1="16" x2="5" y2="16" />
+    <line x1="27" y1="16" x2="30" y2="16" />
   </g>
 </svg>

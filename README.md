@@ -20,21 +20,22 @@
 </p>
 
 <p align="center">
-  <a href="#-what-is-aegis-api-goal--problem-statement"><img src="assets/icons/target.svg" width="26" height="26" align="absmiddle" /> API Goal</a> &nbsp;•&nbsp;
-  <a href="#-who-is-aegis-for--how-is-it-useful"><img src="assets/icons/users.svg" width="26" height="26" align="absmiddle" /> Who Is It For?</a> &nbsp;•&nbsp;
-  <a href="#-system-design--architecture"><img src="assets/icons/architecture.svg" width="26" height="26" align="absmiddle" /> System Design</a> &nbsp;•&nbsp;
-  <a href="#-how-it-works-under-the-hood"><img src="assets/icons/circuit.svg" width="26" height="26" align="absmiddle" /> How It Works</a> &nbsp;•&nbsp;
-  <a href="#-api-quickstart--code-examples"><img src="assets/icons/zap.svg" width="26" height="26" align="absmiddle" /> API Quickstart</a> &nbsp;•&nbsp;
-  <a href="#-contributing--open-source-collaboration"><img src="assets/icons/git-collab.svg" width="26" height="26" align="absmiddle" /> <strong>Contribute</strong></a> &nbsp;•&nbsp;
-  <a href="#-production-deployment"><img src="assets/icons/rocket.svg" width="26" height="26" align="absmiddle" /> Deployment</a> &nbsp;•&nbsp;
-  <a href="#-cryptographic-specifications"><img src="assets/icons/shield.svg" width="26" height="26" align="absmiddle" /> Security Spec</a>
+  <a href="#-what-is-aegis"><img src="assets/icons/target.svg" width="26" height="26" align="absmiddle" /> What Is Aegis</a> &nbsp;•&nbsp;
+  <a href="#-who-is-aegis-for"><img src="assets/icons/users.svg" width="26" height="26" align="absmiddle" /> Who Is It For</a> &nbsp;•&nbsp;
+  <a href="#-system-architecture"><img src="assets/icons/architecture.svg" width="26" height="26" align="absmiddle" /> Architecture</a> &nbsp;•&nbsp;
+  <a href="#-how-it-works"><img src="assets/icons/circuit.svg" width="26" height="26" align="absmiddle" /> How It Works</a> &nbsp;•&nbsp;
+  <a href="#-api-quickstart"><img src="assets/icons/zap.svg" width="26" height="26" align="absmiddle" /> Quickstart</a> &nbsp;•&nbsp;
+  <a href="#-api-reference"><img src="assets/icons/terminal.svg" width="26" height="26" align="absmiddle" /> API Reference</a> &nbsp;•&nbsp;
+  <a href="#-contributing"><img src="assets/icons/git-collab.svg" width="26" height="26" align="absmiddle" /> <strong>Contribute</strong></a> &nbsp;•&nbsp;
+  <a href="#-deployment"><img src="assets/icons/rocket.svg" width="26" height="26" align="absmiddle" /> Deployment</a> &nbsp;•&nbsp;
+  <a href="#-security-specifications"><img src="assets/icons/shield.svg" width="26" height="26" align="absmiddle" /> Security Spec</a>
 </p>
 
 ---
 
 </div>
 
-## <img src="assets/icons/target.svg" width="34" height="34" align="absmiddle" /> What Is Aegis? (API Goal & Problem Statement)
+## <img src="assets/icons/target.svg" width="34" height="34" align="absmiddle" /> What Is Aegis?
 
 ### What Does This API Do?
 **Aegis is an HTTP REST API for verifying user identity attributes (such as "Age ≥ 21", "Unexpired Passport", or "Sanctions-Free Entity") without ever collecting, inspecting, or storing the user's personal data (PII).**
@@ -76,7 +77,7 @@ Instead of forcing users to upload passport photos or driver's licenses to your 
 
 ---
 
-## <img src="assets/icons/users.svg" width="34" height="34" align="absmiddle" /> Who Is Aegis For & How Is It Useful?
+## <img src="assets/icons/users.svg" width="34" height="34" align="absmiddle" /> Who Is Aegis For?
 
 | Use Case / Domain | Typical Industry Problem | What You Implement With Aegis | Result & Developer Value |
 | :--- | :--- | :--- | :--- |
@@ -88,7 +89,7 @@ Instead of forcing users to upload passport photos or driver's licenses to your 
 
 ---
 
-## <img src="assets/icons/architecture.svg" width="34" height="34" align="absmiddle" /> System Design & Architecture
+## <img src="assets/icons/architecture.svg" width="34" height="34" align="absmiddle" /> System Architecture
 
 Aegis is structured into four secure execution tiers. The architectural pipeline below illustrates how an attestation flows from the user's browser down to the immutable cryptographic ledger:
 
@@ -136,7 +137,7 @@ Aegis is structured into four secure execution tiers. The architectural pipeline
 
 ---
 
-## <img src="assets/icons/circuit.svg" width="34" height="34" align="absmiddle" /> How It Works Under The Hood
+## <img src="assets/icons/circuit.svg" width="34" height="34" align="absmiddle" /> How It Works
 
 The diagram below contrasts the traditional, highly vulnerable KYC honeypot model with the Aegis zero-knowledge mathematical predicate pipeline:
 
@@ -185,7 +186,7 @@ Auditors can verify that a specific attestation was legally issued by querying `
 
 ---
 
-## <img src="assets/icons/zap.svg" width="34" height="34" align="absmiddle" /> API Quickstart & Code Examples
+## <img src="assets/icons/zap.svg" width="34" height="34" align="absmiddle" /> API Quickstart
 
 Aegis is completely self-sovereign. No credit cards or account registrations are required.
 
@@ -277,7 +278,7 @@ print(f"Merkle Block ID: {result['block_id']}")
 
 ---
 
-## <img src="assets/icons/terminal.svg" width="34" height="34" align="absmiddle" /> Complete API Endpoint Reference
+## <img src="assets/icons/terminal.svg" width="34" height="34" align="absmiddle" /> API Reference
 
 | Method | Endpoint | Description | Request Body / Parameters |
 | :--- | :--- | :--- | :--- |
@@ -294,7 +295,7 @@ print(f"Merkle Block ID: {result['block_id']}")
 
 ---
 
-## <img src="assets/icons/git-collab.svg" width="34" height="34" align="absmiddle" /> Contributing & Open Source Collaboration
+## <img src="assets/icons/git-collab.svg" width="34" height="34" align="absmiddle" /> Contributing
 
 > **Aegis is 100% Free & Open Source Software (FOSS).**  
 > We believe digital privacy and identity sovereignty belong to humanity, not private monopolies. Anyone—regardless of experience level—is warmly invited and encouraged to collaborate, propose architectural improvements, audit circuits, or contribute code.
@@ -368,7 +369,7 @@ Aegis is dedicated to providing a welcoming, respectful, and safe experience for
 
 ---
 
-## <img src="assets/icons/rocket.svg" width="34" height="34" align="absmiddle" /> Production Deployment
+## <img src="assets/icons/rocket.svg" width="34" height="34" align="absmiddle" /> Deployment
 
 Aegis is 100% self-hosted and autonomous. It requires no third-party SaaS accounts or external API keys.
 
@@ -421,7 +422,7 @@ cargo run --release
 
 ---
 
-## <img src="assets/icons/shield.svg" width="34" height="34" align="absmiddle" /> Cryptographic Specifications & Hardening
+## <img src="assets/icons/shield.svg" width="34" height="34" align="absmiddle" /> Security Specifications
 
 * **Zero-Knowledge Circuit Family**: Groth16 over the BN254 (alt_bn128) pairing-friendly elliptic curve, Bulletproofs for logarithmic range proofs, and Nova Incremental Verifiable Computation (IVC) for multi-predicate proof folding.
 * **Hashing Primitives**: Blake3 with SIMD vectorization (AVX2 / AVX-512 / ARM NEON) executing in <100ns per digest; NIST SHA-256 with domain separation prefixes (`zk-identity-proof-v1`).
@@ -432,7 +433,7 @@ cargo run --release
 
 ---
 
-## <img src="assets/icons/license.svg" width="34" height="34" align="absmiddle" /> License & Community Attribution
+## <img src="assets/icons/license.svg" width="34" height="34" align="absmiddle" /> License
 
 Maintained with <img src="assets/icons/git-collab.svg" width="26" height="26" align="absmiddle" /> by **Rony M. ([@ronderins](https://github.com/ronderins))** and the **Open Source Community**.
 

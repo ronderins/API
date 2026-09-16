@@ -7,14 +7,14 @@
   </defs>
   <style>
     @keyframes alertShine {
-      0%, 100% { filter: drop-shadow(0 0 2px #f87171) drop-shadow(0 0 5px rgba(239, 68, 68, 0.5)); stroke-width: 2; }
-      50% { filter: drop-shadow(0 0 5px #ef4444) drop-shadow(0 0 10px rgba(248, 113, 113, 0.9)); stroke-width: 2.3; }
+      0%, 100% { filter: drop-shadow(0 0 2px #f87171); }
+      50% { filter: drop-shadow(0 0 5px #ef4444); }
     }
-    .neon-s-alert { animation: alertShine 2s ease-in-out infinite; }
+    .neon-s-alert { animation: alertShine 2.4s ease-in-out infinite; }
   </style>
-  <g class="neon-s-alert" fill="none" stroke="url(#neonAlertGrad)" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M 16 3 C 22 5, 27 6, 27 13 C 27 21, 21 27, 16 29 C 11 27, 5 21, 5 13 C 5 6, 10 5, 16 3 Z" fill="none" />
-    <line x1="16" y1="10" x2="16" y2="18" stroke="#fca5a5" stroke-width="2.3" />
-    <circle cx="16" cy="22" r="1.5" fill="none" stroke="#fca5a5" stroke-width="1.8" />
+  <g class="neon-s-alert" fill="none" stroke="url(#neonAlertGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 16 3 C 22 5, 27 6, 27 13 C 27 21, 21 27, 16 29 C 11 27, 5 21, 5 13 C 5 6, 10 5, 16 3 Z" />
+    <line x1="16" y1="10" x2="16" y2="17" stroke="#fca5a5" stroke-width="2.2" />
+    <circle cx="16" cy="21" r="1.2" stroke="#fca5a5" stroke-width="1.8" />
   </g>
 </svg>

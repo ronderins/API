@@ -2,25 +2,21 @@
   <defs>
     <linearGradient id="neonCollabGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#f43f5e" />
-      <stop offset="50%" stop-color="#ec4899" />
-      <stop offset="100%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#ec4899" />
     </linearGradient>
   </defs>
   <style>
-    @keyframes branchPulse {
-      0%, 100% { filter: drop-shadow(0 0 2px #f43f5e) drop-shadow(0 0 5px rgba(236, 72, 153, 0.6)); stroke-width: 2; }
-      50% { filter: drop-shadow(0 0 5px #8b5cf6) drop-shadow(0 0 11px rgba(244, 63, 94, 0.9)); stroke-width: 2.4; }
+    @keyframes branchShine {
+      0%, 100% { filter: drop-shadow(0 0 2px #f43f5e); }
+      50% { filter: drop-shadow(0 0 5px #ec4899); }
     }
-    .neon-collab { animation: branchPulse 2.4s ease-in-out infinite; }
+    .neon-collab { animation: branchShine 2.5s ease-in-out infinite; }
   </style>
-  <g class="neon-collab" fill="none" stroke="url(#neonCollabGrad)" stroke-linecap="round" stroke-linejoin="round">
-    <!-- Git Branch / Merge Paths (100% Outlined, Zero Background) -->
-    <circle cx="8" cy="8" r="3.5" stroke-width="2.2" />
-    <circle cx="8" cy="24" r="3.5" stroke-width="2.2" />
-    <circle cx="24" cy="14" r="3.5" stroke="#ec4899" stroke-width="2.2" />
-    <!-- Main stem -->
-    <line x1="8" y1="11.5" x2="8" y2="20.5" stroke-width="2.2" />
-    <!-- Branching Curve -->
-    <path d="M 8 18 C 14 18, 17 14, 20.5 14" stroke="#ec4899" stroke-width="2.2" />
+  <g class="neon-collab" fill="none" stroke="url(#neonCollabGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="8" cy="8" r="3.5" />
+    <circle cx="8" cy="24" r="3.5" />
+    <circle cx="24" cy="14" r="3.5" />
+    <line x1="8" y1="11.5" x2="8" y2="20.5" />
+    <path d="M 8 18 C 14 18, 17 14, 20.5 14" />
   </g>
 </svg>

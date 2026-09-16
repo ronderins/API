@@ -2,32 +2,24 @@
   <defs>
     <linearGradient id="neonArchGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#38bdf8" />
-      <stop offset="50%" stop-color="#818cf8" />
-      <stop offset="100%" stop-color="#c084fc" />
+      <stop offset="100%" stop-color="#818cf8" />
     </linearGradient>
   </defs>
   <style>
-    @keyframes archPulse {
-      0%, 100% { filter: drop-shadow(0 0 2px #38bdf8) drop-shadow(0 0 6px rgba(129, 140, 248, 0.6)); }
-      50% { filter: drop-shadow(0 0 4px #c084fc) drop-shadow(0 0 10px rgba(56, 189, 248, 0.9)); }
+    @keyframes archShine {
+      0%, 100% { filter: drop-shadow(0 0 2px #38bdf8); }
+      50% { filter: drop-shadow(0 0 5px #818cf8); }
     }
-    @keyframes nodeFlow {
-      0% { stroke-dashoffset: 20; }
-      100% { stroke-dashoffset: 0; }
-    }
-    .neon-arch { animation: archPulse 3s ease-in-out infinite; }
-    .flow-link { stroke-dasharray: 4 3; animation: nodeFlow 2s linear infinite; }
+    .neon-arch { animation: archShine 2.6s ease-in-out infinite; }
   </style>
-  <g class="neon-arch" fill="none" stroke="url(#neonArchGrad)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+  <g class="neon-arch" fill="none" stroke="url(#neonArchGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <!-- Top Hub Node -->
-    <circle cx="16" cy="7" r="4.5" fill="none" stroke="#38bdf8" />
-    <circle cx="16" cy="7" r="1.5" fill="none" stroke="#818cf8" />
-    <!-- Bottom Left Node -->
-    <circle cx="7" cy="25" r="4.5" fill="none" stroke="#818cf8" />
-    <!-- Bottom Right Node -->
-    <circle cx="25" cy="25" r="4.5" fill="none" stroke="#c084fc" />
-    <!-- Connection lines -->
-    <path d="M 16 12 L 16 18 L 7 18 L 7 20" class="flow-link" stroke="#38bdf8" />
-    <path d="M 16 18 L 25 18 L 25 20" class="flow-link" stroke="#c084fc" />
+    <rect x="12" y="4" width="8" height="6" rx="1.5" />
+    <!-- Bottom Nodes -->
+    <rect x="4" y="22" width="8" height="6" rx="1.5" />
+    <rect x="20" y="22" width="8" height="6" rx="1.5" />
+    <!-- Connectors -->
+    <path d="M 16 10 L 16 16 L 8 16 L 8 22" />
+    <path d="M 16 16 L 24 16 L 24 22" />
   </g>
 </svg>

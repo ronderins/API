@@ -2,16 +2,17 @@
   <defs>
     <linearGradient id="neonZapGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#f59e0b" />
-      <stop offset="50%" stop-color="#10b981" />
-      <stop offset="100%" stop-color="#06b6d4" />
+      <stop offset="100%" stop-color="#10b981" />
     </linearGradient>
   </defs>
   <style>
-    @keyframes zapShimmer {
-      0%, 100% { filter: drop-shadow(0 0 2px #f59e0b) drop-shadow(0 0 5px rgba(16, 185, 129, 0.6)); stroke-width: 1.8; }
-      50% { filter: drop-shadow(0 0 5px #10b981) drop-shadow(0 0 10px rgba(245, 158, 11, 0.9)); stroke-width: 2.2; }
+    @keyframes zapShine {
+      0%, 100% { filter: drop-shadow(0 0 2px #f59e0b); }
+      50% { filter: drop-shadow(0 0 5px #10b981); }
     }
-    .neon-bolt { animation: zapShimmer 1.8s ease-in-out infinite; }
+    .neon-zap { animation: zapShine 2.4s ease-in-out infinite; }
   </style>
-  <polygon points="18,2 6,17 15,17 14,30 26,15 17,15" fill="none" stroke="url(#neonZapGrad)" stroke-linejoin="round" class="neon-bolt" />
+  <g class="neon-zap" fill="none" stroke="url(#neonZapGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polygon points="17 2 6 17 15 17 13 30 26 14 17 14" />
+  </g>
 </svg>
