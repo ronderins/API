@@ -17,8 +17,8 @@
     .neon-term { animation: termGlow 2.5s ease-in-out infinite; }
     .term-cursor { animation: cursorBlink 0.9s steps(1) infinite; }
   </style>
-  <g class="neon-term" fill="none" stroke="url(#neonTermGrad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="3" y="5" width="26" height="22" rx="3.5" fill="#071217" />
+  <g class="neon-term" fill="none" stroke="url(#neonTermGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="5" width="26" height="22" rx="3.5" fill="none" />
     <path d="M 8 13 L 13 16 L 8 19" stroke="#34d399" />
     <line x1="16" y1="19" x2="22" y2="19" class="term-cursor" stroke="#06b6d4" stroke-width="2.2" />
   </g>

@@ -20,21 +20,21 @@
 </p>
 
 <p align="center">
-  <a href="#-what-is-aegis-api-goal--problem-statement"><img src="assets/icons/target.svg" width="15" height="15" align="absmiddle" /> API Goal</a> &nbsp;•&nbsp;
-  <a href="#-who-is-aegis-for--how-is-it-useful"><img src="assets/icons/users.svg" width="15" height="15" align="absmiddle" /> Who Is It For?</a> &nbsp;•&nbsp;
-  <a href="#-system-design--architecture-animation"><img src="assets/icons/architecture.svg" width="15" height="15" align="absmiddle" /> System Design</a> &nbsp;•&nbsp;
-  <a href="#-how-it-works-under-the-hood"><img src="assets/icons/circuit.svg" width="15" height="15" align="absmiddle" /> How It Works</a> &nbsp;•&nbsp;
-  <a href="#-api-quickstart--code-examples"><img src="assets/icons/zap.svg" width="15" height="15" align="absmiddle" /> API Quickstart</a> &nbsp;•&nbsp;
-  <a href="#-contributing--open-source-collaboration"><img src="assets/icons/git-collab.svg" width="15" height="15" align="absmiddle" /> <strong>Contribute</strong></a> &nbsp;•&nbsp;
-  <a href="#-production-deployment"><img src="assets/icons/rocket.svg" width="15" height="15" align="absmiddle" /> Deployment</a> &nbsp;•&nbsp;
-  <a href="#-cryptographic-specifications"><img src="assets/icons/shield.svg" width="15" height="15" align="absmiddle" /> Security Spec</a>
+  <a href="#-what-is-aegis-api-goal--problem-statement"><img src="assets/icons/target.svg" width="22" height="22" align="absmiddle" /> API Goal</a> &nbsp;•&nbsp;
+  <a href="#-who-is-aegis-for--how-is-it-useful"><img src="assets/icons/users.svg" width="22" height="22" align="absmiddle" /> Who Is It For?</a> &nbsp;•&nbsp;
+  <a href="#-system-design--architecture-animation"><img src="assets/icons/architecture.svg" width="22" height="22" align="absmiddle" /> System Design</a> &nbsp;•&nbsp;
+  <a href="#-how-it-works-under-the-hood"><img src="assets/icons/circuit.svg" width="22" height="22" align="absmiddle" /> How It Works</a> &nbsp;•&nbsp;
+  <a href="#-api-quickstart--code-examples"><img src="assets/icons/zap.svg" width="22" height="22" align="absmiddle" /> API Quickstart</a> &nbsp;•&nbsp;
+  <a href="#-contributing--open-source-collaboration"><img src="assets/icons/git-collab.svg" width="22" height="22" align="absmiddle" /> <strong>Contribute</strong></a> &nbsp;•&nbsp;
+  <a href="#-production-deployment"><img src="assets/icons/rocket.svg" width="22" height="22" align="absmiddle" /> Deployment</a> &nbsp;•&nbsp;
+  <a href="#-cryptographic-specifications"><img src="assets/icons/shield.svg" width="22" height="22" align="absmiddle" /> Security Spec</a>
 </p>
 
 ---
 
 </div>
 
-## <img src="assets/icons/target.svg" width="24" height="24" align="absmiddle" /> What Is Aegis? (API Goal & Problem Statement)
+## <img src="assets/icons/target.svg" width="30" height="30" align="absmiddle" /> What Is Aegis? (API Goal & Problem Statement)
 
 ### The Fundamental Digital Identity Dilemma
 Every day, digital businesses and online platforms face a critical compliance paradox:
@@ -48,28 +48,28 @@ Every day, digital businesses and online platforms face a critical compliance pa
 
 The goal of the Aegis API is to enable applications to verify identity predicates—such as **"Is this user over 21?"**, **"Is this credential genuine and unexpired?"**, or **"Is this entity absent from an OFAC sanctions list?"**—**WITHOUT EVER collecting, transmitting, indexing, or storing the user's raw Personally Identifiable Information (PII).**
 
-* <img src="assets/icons/shield-check.svg" width="15" height="15" align="absmiddle" /> **0 Bytes PII Stored**: Neither raw photos, names, social security numbers, nor dates of birth ever touch server disks or databases.
-* <img src="assets/icons/shield-check.svg" width="15" height="15" align="absmiddle" /> **Mathematical Invariance**: Proofs are constructed using client-side cryptographic hashing, blinding nonces, and arithmetic predicate evaluation.
-* <img src="assets/icons/shield-check.svg" width="15" height="15" align="absmiddle" /> **Append-Only Merkle Block Ledger**: Every verification receipt is chained in an immutable Blake3 Merkle tree with $O(\log N)$ tamper-evident inclusion proof verification.
-* <img src="assets/icons/shield-check.svg" width="15" height="15" align="absmiddle" /> **Deterministic RAM Scrubbing (`zeroize`)**: Heap and stack witnesses are purged to zeroes immediately upon constraint evaluation.
+* <img src="assets/icons/shield-check.svg" width="22" height="22" align="absmiddle" /> **0 Bytes PII Stored**: Neither raw photos, names, social security numbers, nor dates of birth ever touch server disks or databases.
+* <img src="assets/icons/shield-check.svg" width="22" height="22" align="absmiddle" /> **Mathematical Invariance**: Proofs are constructed using client-side cryptographic hashing, blinding nonces, and arithmetic predicate evaluation.
+* <img src="assets/icons/shield-check.svg" width="22" height="22" align="absmiddle" /> **Append-Only Merkle Block Ledger**: Every verification receipt is chained in an immutable Blake3 Merkle tree with $O(\log N)$ tamper-evident inclusion proof verification.
+* <img src="assets/icons/shield-check.svg" width="22" height="22" align="absmiddle" /> **Deterministic RAM Scrubbing (`zeroize`)**: Heap and stack witnesses are purged to zeroes immediately upon constraint evaluation.
 
 ---
 
-## <img src="assets/icons/users.svg" width="24" height="24" align="absmiddle" /> Who Is Aegis For & How Is It Useful?
+## <img src="assets/icons/users.svg" width="30" height="30" align="absmiddle" /> Who Is Aegis For & How Is It Useful?
 
 Aegis was specifically architected to serve five distinct stakeholder groups, solving concrete operational, legal, and engineering bottlenecks:
 
 | Stakeholder / Persona | Their Core Pain Point | How Aegis Solves It | Tangible Business & Security Value |
 | :--- | :--- | :--- | :--- |
-| <img src="assets/icons/cart.svg" width="18" height="18" align="absmiddle" /> **Online Platforms & E-Commerce** | Mandated age verification (alcohol, adult content, regulated gaming) triggers 40%+ cart abandonment and massive data breach exposure. | Evaluates `Age >= Threshold` client-side. The platform receives a signed cryptographic token stating `verified: true`. | **100% regulatory compliance** with zero customer drop-off and zero minor data liability. |
-| <img src="assets/icons/bank.svg" width="18" height="18" align="absmiddle" /> **FinTech, DeFi & Web3 Protocols** | Need to verify KYC/AML compliance and sanctions non-membership without de-anonymizing wallet addresses or hosting toxic PII vaults. | Binds cryptographic commitments directly to user public keys or EVM calldata without public disclosure of private net worth or legal names. | **Auditable compliance** while preserving user pseudonymity and decentralized trust guarantees. |
-| <img src="assets/icons/code.svg" width="18" height="18" align="absmiddle" /> **Software Engineers & Dev Teams** | Building zero-knowledge circuits from scratch requires rare cryptographic expertise, complex math, and costly vendor lock-in. | Single-line HTTP REST API (`POST /api/v1/verify`), OpenAPI 3.1 specification, and sub-millisecond response latency (<150µs). | **5-minute integration** using standard JSON payloads, self-sovereign API keys, and zero vendor lock-in. |
-| <img src="assets/icons/audit.svg" width="18" height="18" align="absmiddle" /> **Compliance Officers, CISOs & Auditors** | Traditional vendors offer opaque marketing claims ("military-grade encryption") while secretly storing raw customer logs. | Tamper-evident Blake3 Merkle ledger, open-source Rust engine, and mathematical non-repudiation receipts (`POST /api/v1/verify-merkle`). | **Zero GDPR/CCPA data breach liability**; independent mathematical verification replaces blind trust. |
-| <img src="assets/icons/person.svg" width="18" height="18" align="absmiddle" /> **Everyday Citizens & Consumers** | Users must upload sensitive documents to unvetted websites, exposing them to identity theft, stalking, and credit fraud. | The physical document never leaves the device. WebCrypto calculates a one-way hash and blinding salt before any bytes touch the wire. | **Absolute digital sovereignty**: users prove their eligibility without surrendering their private lives. |
+| <img src="assets/icons/cart.svg" width="24" height="24" align="absmiddle" /> **Online Platforms & E-Commerce** | Mandated age verification (alcohol, adult content, regulated gaming) triggers 40%+ cart abandonment and massive data breach exposure. | Evaluates `Age >= Threshold` client-side. The platform receives a signed cryptographic token stating `verified: true`. | **100% regulatory compliance** with zero customer drop-off and zero minor data liability. |
+| <img src="assets/icons/bank.svg" width="24" height="24" align="absmiddle" /> **FinTech, DeFi & Web3 Protocols** | Need to verify KYC/AML compliance and sanctions non-membership without de-anonymizing wallet addresses or hosting toxic PII vaults. | Binds cryptographic commitments directly to user public keys or EVM calldata without public disclosure of private net worth or legal names. | **Auditable compliance** while preserving user pseudonymity and decentralized trust guarantees. |
+| <img src="assets/icons/code.svg" width="24" height="24" align="absmiddle" /> **Software Engineers & Dev Teams** | Building zero-knowledge circuits from scratch requires rare cryptographic expertise, complex math, and costly vendor lock-in. | Single-line HTTP REST API (`POST /api/v1/verify`), OpenAPI 3.1 specification, and sub-millisecond response latency (<150µs). | **5-minute integration** using standard JSON payloads, self-sovereign API keys, and zero vendor lock-in. |
+| <img src="assets/icons/audit.svg" width="24" height="24" align="absmiddle" /> **Compliance Officers, CISOs & Auditors** | Traditional vendors offer opaque marketing claims ("military-grade encryption") while secretly storing raw customer logs. | Tamper-evident Blake3 Merkle ledger, open-source Rust engine, and mathematical non-repudiation receipts (`POST /api/v1/verify-merkle`). | **Zero GDPR/CCPA data breach liability**; independent mathematical verification replaces blind trust. |
+| <img src="assets/icons/person.svg" width="24" height="24" align="absmiddle" /> **Everyday Citizens & Consumers** | Users must upload sensitive documents to unvetted websites, exposing them to identity theft, stalking, and credit fraud. | The physical document never leaves the device. WebCrypto calculates a one-way hash and blinding salt before any bytes touch the wire. | **Absolute digital sovereignty**: users prove their eligibility without surrendering their private lives. |
 
 ---
 
-## <img src="assets/icons/architecture.svg" width="24" height="24" align="absmiddle" /> System Design & Architecture (Animation)
+## <img src="assets/icons/architecture.svg" width="30" height="30" align="absmiddle" /> System Design & Architecture (Animation)
 
 Aegis is structured into four secure execution tiers. Watch the animated architectural pipeline below to understand how an attestation flows from the user's browser down to the immutable cryptographic ledger:
 
@@ -117,7 +117,7 @@ Aegis is structured into four secure execution tiers. Watch the animated archite
 
 ---
 
-## <img src="assets/icons/circuit.svg" width="24" height="24" align="absmiddle" /> How It Works Under The Hood
+## <img src="assets/icons/circuit.svg" width="30" height="30" align="absmiddle" /> How It Works Under The Hood
 
 The diagram below contrasts the traditional, highly vulnerable KYC honeypot model with the Aegis zero-knowledge mathematical predicate pipeline:
 
@@ -166,7 +166,7 @@ Auditors can verify that a specific attestation was legally issued by querying `
 
 ---
 
-## <img src="assets/icons/zap.svg" width="24" height="24" align="absmiddle" /> API Quickstart & Code Examples
+## <img src="assets/icons/zap.svg" width="30" height="30" align="absmiddle" /> API Quickstart & Code Examples
 
 Aegis is completely self-sovereign. No credit cards or account registrations are required.
 
@@ -258,7 +258,7 @@ print(f"Merkle Block ID: {result['block_id']}")
 
 ---
 
-## <img src="assets/icons/terminal.svg" width="24" height="24" align="absmiddle" /> Complete API Endpoint Reference
+## <img src="assets/icons/terminal.svg" width="30" height="30" align="absmiddle" /> Complete API Endpoint Reference
 
 | Method | Endpoint | Description | Request Body / Parameters |
 | :--- | :--- | :--- | :--- |
@@ -275,7 +275,7 @@ print(f"Merkle Block ID: {result['block_id']}")
 
 ---
 
-## <img src="assets/icons/git-collab.svg" width="24" height="24" align="absmiddle" /> Contributing & Open Source Collaboration
+## <img src="assets/icons/git-collab.svg" width="30" height="30" align="absmiddle" /> Contributing & Open Source Collaboration
 
 > **Aegis is 100% Free & Open Source Software (FOSS).**  
 > We believe digital privacy and identity sovereignty belong to humanity, not private monopolies. Anyone—regardless of experience level—is warmly invited and encouraged to collaborate, propose architectural improvements, audit circuits, or contribute code.
@@ -288,12 +288,12 @@ print(f"Merkle Block ID: {result['block_id']}")
 
 ### Where You Can Help & Good First Ideas
 There are many areas where your contributions make an immediate, global impact:
-* <img src="assets/icons/circuit.svg" width="16" height="16" align="absmiddle" /> **Zero-Knowledge Circuits (Rust)**: Add new zero-knowledge predicate circuits in `rust-api/src/circuits/` (e.g., citizenship residence proofs, income threshold verification, biometric embedding Hamming distance).
-* <img src="assets/icons/code.svg" width="16" height="16" align="absmiddle" /> **Client SDKs**: Help build and maintain lightweight, idiomatic SDKs for **Go**, **Python**, **Kotlin (Android)**, **Swift (iOS)**, or **React Native**.
-* <img src="assets/icons/audit.svg" width="16" height="16" align="absmiddle" /> **Compliance & Test Vectors**: Contribute test vectors for **eIDAS 2.0**, **W3C VC 2.0**, **ISO/IEC 18013-5 mDL**, or jurisdictional age requirements.
-* <img src="assets/icons/zap.svg" width="16" height="16" align="absmiddle" /> **Performance & SIMD Optimization**: Benchmark and optimize Blake3 / Groth16 multi-scalar multiplication routines for AVX-512, ARM NEON, and WebAssembly WebGPU backends.
-* <img src="assets/icons/shield.svg" width="16" height="16" align="absmiddle" /> **Formal Verification & Security Audits**: Review constant-time execution routines, memory isolation boundaries, and Linux Seccomp filter policies.
-* <img src="assets/icons/license.svg" width="16" height="16" align="absmiddle" /> **Documentation & Guides**: Improve API references, write integration tutorials for Next.js/Express/Django/Rails, or translate documentation.
+* <img src="assets/icons/circuit.svg" width="22" height="22" align="absmiddle" /> **Zero-Knowledge Circuits (Rust)**: Add new zero-knowledge predicate circuits in `rust-api/src/circuits/` (e.g., citizenship residence proofs, income threshold verification, biometric embedding Hamming distance).
+* <img src="assets/icons/code.svg" width="22" height="22" align="absmiddle" /> **Client SDKs**: Help build and maintain lightweight, idiomatic SDKs for **Go**, **Python**, **Kotlin (Android)**, **Swift (iOS)**, or **React Native**.
+* <img src="assets/icons/audit.svg" width="22" height="22" align="absmiddle" /> **Compliance & Test Vectors**: Contribute test vectors for **eIDAS 2.0**, **W3C VC 2.0**, **ISO/IEC 18013-5 mDL**, or jurisdictional age requirements.
+* <img src="assets/icons/zap.svg" width="22" height="22" align="absmiddle" /> **Performance & SIMD Optimization**: Benchmark and optimize Blake3 / Groth16 multi-scalar multiplication routines for AVX-512, ARM NEON, and WebAssembly WebGPU backends.
+* <img src="assets/icons/shield.svg" width="22" height="22" align="absmiddle" /> **Formal Verification & Security Audits**: Review constant-time execution routines, memory isolation boundaries, and Linux Seccomp filter policies.
+* <img src="assets/icons/license.svg" width="22" height="22" align="absmiddle" /> **Documentation & Guides**: Improve API references, write integration tutorials for Next.js/Express/Django/Rails, or translate documentation.
 
 ---
 
@@ -349,7 +349,7 @@ Aegis is dedicated to providing a welcoming, respectful, and safe experience for
 
 ---
 
-## <img src="assets/icons/rocket.svg" width="24" height="24" align="absmiddle" /> Production Deployment
+## <img src="assets/icons/rocket.svg" width="30" height="30" align="absmiddle" /> Production Deployment
 
 Aegis is 100% self-hosted and autonomous. It requires no third-party SaaS accounts or external API keys.
 
@@ -389,7 +389,7 @@ cargo run --release
 
 ---
 
-## <img src="assets/icons/key.svg" width="24" height="24" align="absmiddle" /> Environment Configuration
+## <img src="assets/icons/key.svg" width="30" height="30" align="absmiddle" /> Environment Configuration
 
 | Variable | Required | Description | Default |
 | :--- | :---: | :--- | :--- |
@@ -402,7 +402,7 @@ cargo run --release
 
 ---
 
-## <img src="assets/icons/shield.svg" width="24" height="24" align="absmiddle" /> Cryptographic Specifications & Hardening
+## <img src="assets/icons/shield.svg" width="30" height="30" align="absmiddle" /> Cryptographic Specifications & Hardening
 
 * **Zero-Knowledge Circuit Family**: Groth16 over the BN254 (alt_bn128) pairing-friendly elliptic curve, Bulletproofs for logarithmic range proofs, and Nova Incremental Verifiable Computation (IVC) for multi-predicate proof folding.
 * **Hashing Primitives**: Blake3 with SIMD vectorization (AVX2 / AVX-512 / ARM NEON) executing in <100ns per digest; NIST SHA-256 with domain separation prefixes (`zk-identity-proof-v1`).
@@ -413,8 +413,8 @@ cargo run --release
 
 ---
 
-## <img src="assets/icons/license.svg" width="24" height="24" align="absmiddle" /> License & Community Attribution
+## <img src="assets/icons/license.svg" width="30" height="30" align="absmiddle" /> License & Community Attribution
 
-Maintained with <img src="assets/icons/git-collab.svg" width="16" height="16" align="absmiddle" /> by **Rony M. ([@ronderins](https://github.com/ronderins))** and the **Open Source Community**.
+Maintained with <img src="assets/icons/git-collab.svg" width="22" height="22" align="absmiddle" /> by **Rony M. ([@ronderins](https://github.com/ronderins))** and the **Open Source Community**.
 
 Released under the **MIT License**. You are free to use, modify, distribute, and integrate Aegis into commercial and open-source applications without restriction.

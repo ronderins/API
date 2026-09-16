@@ -12,9 +12,9 @@
     }
     .neon-audit { animation: auditShine 2.5s ease-in-out infinite; }
   </style>
-  <g class="neon-audit" fill="none" stroke="url(#neonAuditGrad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M 12 3 L 20 3 C 21 3, 21 4, 21 5 L 21 6 L 11 6 L 11 5 C 11 4, 11 3, 12 3 Z" fill="#042f2e" />
-    <rect x="5" y="6" width="22" height="23" rx="3" fill="#061f1c" />
-    <polyline points="9 16 13 20 23 11" stroke="#34d399" stroke-width="2.2" />
+  <g class="neon-audit" fill="none" stroke="url(#neonAuditGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 12 3 L 20 3 C 21 3, 21 4, 21 5 L 21 6 L 11 6 L 11 5 C 11 4, 11 3, 12 3 Z" fill="none" />
+    <rect x="5" y="6" width="22" height="23" rx="3" fill="none" />
+    <polyline points="9 16 13 20 23 11" stroke="#34d399" stroke-width="2.3" />
   </g>
 </svg>

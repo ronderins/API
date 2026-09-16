@@ -18,13 +18,13 @@
     .neon-arch { animation: archPulse 3s ease-in-out infinite; }
     .flow-link { stroke-dasharray: 4 3; animation: nodeFlow 2s linear infinite; }
   </style>
-  <g class="neon-arch" fill="none" stroke="url(#neonArchGrad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <g class="neon-arch" fill="none" stroke="url(#neonArchGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <!-- Top Node -->
-    <rect x="11" y="3" width="10" height="7" rx="2" fill="#090d16" />
+    <rect x="11" y="3" width="10" height="7" rx="2" fill="none" />
     <!-- Bottom Left Node -->
-    <rect x="3" y="22" width="10" height="7" rx="2" fill="#090d16" />
+    <rect x="3" y="22" width="10" height="7" rx="2" fill="none" />
     <!-- Bottom Right Node -->
-    <rect x="19" y="22" width="10" height="7" rx="2" fill="#090d16" />
+    <rect x="19" y="22" width="10" height="7" rx="2" fill="none" />
     <!-- Connection lines -->
     <path d="M 16 10 L 16 16 L 8 16 L 8 22" class="flow-link" stroke="#38bdf8" />
     <path d="M 16 16 L 24 16 L 24 22" class="flow-link" stroke="#c084fc" />

@@ -8,14 +8,14 @@
   </defs>
   <style>
     @keyframes shieldShimmer {
-      0%, 100% { filter: drop-shadow(0 0 2px #34d399) drop-shadow(0 0 5px rgba(16, 185, 129, 0.6)); stroke-width: 1.8; }
-      50% { filter: drop-shadow(0 0 5px #06b6d4) drop-shadow(0 0 10px rgba(52, 211, 153, 0.9)); stroke-width: 2.2; }
+      0%, 100% { filter: drop-shadow(0 0 2px #34d399) drop-shadow(0 0 5px rgba(16, 185, 129, 0.6)); stroke-width: 2; }
+      50% { filter: drop-shadow(0 0 5px #06b6d4) drop-shadow(0 0 10px rgba(52, 211, 153, 0.9)); stroke-width: 2.3; }
     }
     .neon-shield { animation: shieldShimmer 2.6s ease-in-out infinite; }
   </style>
   <g class="neon-shield" fill="none" stroke="url(#neonShieldGrad)" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M 16 3 C 22 5, 27 6, 27 13 C 27 21, 21 27, 16 29 C 11 27, 5 21, 5 13 C 5 6, 10 5, 16 3 Z" fill="#041d16" />
-    <circle cx="16" cy="14" r="3.5" fill="#10b981" />
-    <path d="M 16 17.5 L 16 22" />
+    <path d="M 16 3 C 22 5, 27 6, 27 13 C 27 21, 21 27, 16 29 C 11 27, 5 21, 5 13 C 5 6, 10 5, 16 3 Z" fill="none" />
+    <circle cx="16" cy="14" r="3.5" fill="none" stroke="#10b981" stroke-width="2" />
+    <path d="M 16 17.5 L 16 22" stroke-width="2" />
   </g>
 </svg>

@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 320" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1020 340" width="100%" height="100%">
   <defs>
     <!-- Gradients -->
     <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -52,18 +52,9 @@
       0%, 100% { transform: scale(1); filter: drop-shadow(0 0 12px rgba(16, 185, 129, 0.4)); }
       50% { transform: scale(1.025); filter: drop-shadow(0 0 24px rgba(56, 189, 248, 0.65)); }
     }
-    @keyframes dataStream {
-      0% { stroke-dashoffset: 400; opacity: 0.2; }
-      50% { opacity: 0.8; }
-      100% { stroke-dashoffset: 0; opacity: 0.2; }
-    }
     @keyframes blinkLed {
       0%, 100% { opacity: 1; filter: drop-shadow(0 0 6px #10b981); }
       50% { opacity: 0.35; filter: none; }
-    }
-    @keyframes scanline {
-      0% { transform: translateY(-100px); }
-      100% { transform: translateY(400px); }
     }
     @keyframes floatParticle {
       0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.3; }
@@ -71,23 +62,19 @@
     }
 
     .orbital-ring {
-      transform-origin: 160px 160px;
+      transform-origin: 160px 170px;
       animation: pulseOrbital 24s linear infinite;
     }
     .orbital-ring-rev {
-      transform-origin: 160px 160px;
+      transform-origin: 160px 170px;
       animation: pulseReverse 18s linear infinite;
     }
     .shield-center {
-      transform-origin: 160px 160px;
+      transform-origin: 160px 170px;
       animation: breatheShield 5s ease-in-out infinite;
     }
     .status-led {
       animation: blinkLed 2.2s ease-in-out infinite;
-    }
-    .data-flow {
-      stroke-dasharray: 12, 12;
-      animation: dataStream 10s linear infinite;
     }
     .particle-1 { animation: floatParticle 4s ease-in-out infinite; }
     .particle-2 { animation: floatParticle 5.5s ease-in-out infinite 1s; }
@@ -102,146 +89,144 @@
   </style>
 
   <!-- Background Base -->
-  <rect width="960" height="320" fill="url(#bgGrad)" rx="16" />
-  <rect width="960" height="320" fill="url(#cyberGrid)" rx="16" />
+  <rect width="1020" height="340" fill="url(#bgGrad)" rx="16" />
+  <rect width="1020" height="340" fill="url(#cyberGrid)" rx="16" />
 
   <!-- Outer Border Frame -->
-  <rect x="1" y="1" width="958" height="318" fill="none" stroke="#27272a" stroke-width="1.5" rx="15" />
-  <rect x="6" y="6" width="948" height="308" fill="none" stroke="#10b981" stroke-width="0.5" stroke-opacity="0.2" rx="12" />
+  <rect x="1" y="1" width="1018" height="338" fill="none" stroke="#27272a" stroke-width="1.5" rx="15" />
+  <rect x="6" y="6" width="1008" height="328" fill="none" stroke="#10b981" stroke-width="0.5" stroke-opacity="0.2" rx="12" />
 
   <!-- Ambient Glow Behind Shield -->
-  <circle cx="160" cy="160" r="110" fill="#10b981" fill-opacity="0.08" filter="url(#glow)" />
-  <circle cx="160" cy="160" r="70" fill="#06b6d4" fill-opacity="0.1" filter="url(#glow)" />
+  <circle cx="160" cy="170" r="115" fill="#10b981" fill-opacity="0.08" filter="url(#glow)" />
+  <circle cx="160" cy="170" r="75" fill="#06b6d4" fill-opacity="0.1" filter="url(#glow)" />
 
   <!-- Left Side: Animated Cryptographic Shield System -->
   <g id="shield-system">
     <!-- Outer Orbital Ring -->
-    <circle class="orbital-ring" cx="160" cy="160" r="105" fill="none" stroke="#10b981" stroke-width="1" stroke-opacity="0.3" stroke-dasharray="14 8 4 8" />
-    <circle class="orbital-ring-rev" cx="160" cy="160" r="92" fill="none" stroke="#38bdf8" stroke-width="1.2" stroke-opacity="0.35" stroke-dasharray="24 12 6 12" />
+    <circle class="orbital-ring" cx="160" cy="170" r="110" fill="none" stroke="#10b981" stroke-width="1.2" stroke-opacity="0.3" stroke-dasharray="14 8 4 8" />
+    <circle class="orbital-ring-rev" cx="160" cy="170" r="95" fill="none" stroke="#38bdf8" stroke-width="1.2" stroke-opacity="0.35" stroke-dasharray="24 12 6 12" />
 
     <!-- Orbital Tracker Nodes -->
     <g class="orbital-ring">
-      <circle cx="160" cy="55" r="3.5" fill="#34d399" filter="url(#softGlow)" />
-      <circle cx="265" cy="160" r="2.5" fill="#38bdf8" filter="url(#softGlow)" />
-      <circle cx="160" cy="265" r="3" fill="#10b981" />
+      <circle cx="160" cy="60" r="4" fill="#34d399" filter="url(#softGlow)" />
+      <circle cx="270" cy="170" r="3" fill="#38bdf8" filter="url(#softGlow)" />
+      <circle cx="160" cy="280" r="3.5" fill="#10b981" />
     </g>
 
     <!-- Inner Shield Geometry -->
     <g class="shield-center">
-      <!-- Shield Outer Path -->
-      <path d="M 160 90 
-               Q 195 95 212 118 
-               Q 216 168 160 228 
-               Q 104 168 108 118 
-               Q 125 95 160 90 Z" 
+      <path d="M 160 95 
+               Q 198 100 216 125 
+               Q 220 178 160 242 
+               Q 100 178 104 125 
+               Q 122 100 160 95 Z" 
             fill="url(#shieldFill)" 
             stroke="url(#emeraldGlow)" 
-            stroke-width="2.5" />
+            stroke-width="2.8" />
 
-      <!-- Inner Holographic Shield Inset -->
-      <path d="M 160 102 
-               Q 187 106 200 124 
-               Q 203 162 160 212 
-               Q 117 162 120 124 
-               Q 133 106 160 102 Z" 
+      <path d="M 160 108 
+               Q 189 112 203 132 
+               Q 206 172 160 225 
+               Q 114 172 117 132 
+               Q 131 112 160 108 Z" 
             fill="none" 
             stroke="#38bdf8" 
-            stroke-width="1" 
+            stroke-width="1.2" 
             stroke-opacity="0.6" 
             stroke-dasharray="5 3" />
 
       <!-- Center Zero-Knowledge Keyhole / Circuit Symbol -->
-      <circle cx="160" cy="142" r="11" fill="none" stroke="#34d399" stroke-width="2.2" filter="url(#softGlow)" />
-      <path d="M 156 151 L 152 174 L 168 174 L 164 151 Z" fill="#10b981" fill-opacity="0.85" />
-      <circle cx="160" cy="142" r="4.5" fill="#38bdf8" />
+      <circle cx="160" cy="150" r="12" fill="none" stroke="#34d399" stroke-width="2.5" filter="url(#softGlow)" />
+      <path d="M 155 160 L 151 185 L 169 185 L 165 160 Z" fill="#10b981" fill-opacity="0.85" />
+      <circle cx="160" cy="150" r="5" fill="#38bdf8" />
     </g>
 
     <!-- Floating Hex / Particle Elements -->
     <g class="particle-1">
-      <circle cx="70" cy="90" r="2" fill="#34d399" />
-      <text x="50" y="80" class="font-mono" font-size="9" fill="#10b981" fill-opacity="0.5">0x7f4a</text>
+      <circle cx="65" cy="95" r="2.5" fill="#34d399" />
+      <text x="45" y="85" class="font-mono" font-size="11" font-weight="600" fill="#10b981" fill-opacity="0.7">0x7f4a</text>
     </g>
     <g class="particle-2">
-      <circle cx="250" cy="80" r="2" fill="#38bdf8" />
-      <text x="256" y="84" class="font-mono" font-size="9" fill="#38bdf8" fill-opacity="0.6">π=ZK</text>
+      <circle cx="260" cy="85" r="2.5" fill="#38bdf8" />
+      <text x="265" y="90" class="font-mono" font-size="11" font-weight="600" fill="#38bdf8" fill-opacity="0.8">π=ZK</text>
     </g>
     <g class="particle-3">
-      <circle cx="65" cy="230" r="1.5" fill="#a78bfa" />
-      <text x="55" y="244" class="font-mono" font-size="9" fill="#a78bfa" fill-opacity="0.5">FIPS-204</text>
+      <circle cx="60" cy="245" r="2" fill="#a78bfa" />
+      <text x="48" y="260" class="font-mono" font-size="11" font-weight="600" fill="#a78bfa" fill-opacity="0.7">FIPS-204</text>
     </g>
   </g>
 
   <!-- Divider Line (Vertical Glowing Axis) -->
-  <line x1="300" y1="35" x2="300" y2="285" stroke="#27272a" stroke-width="1.2" />
-  <line x1="300" y1="90" x2="300" y2="230" stroke="#10b981" stroke-width="1.5" stroke-opacity="0.35" />
+  <line x1="310" y1="35" x2="310" y2="305" stroke="#27272a" stroke-width="1.2" />
+  <line x1="310" y1="80" x2="310" y2="250" stroke="#10b981" stroke-width="1.8" stroke-opacity="0.4" />
 
   <!-- Right Side: Content & Typographic Information -->
-  <g id="header-content" transform="translate(330, 0)">
+  <g id="header-content" transform="translate(340, 0)">
     <!-- Top System State & Live Pill -->
-    <g transform="translate(0, 42)">
-      <rect x="0" y="0" width="138" height="24" rx="12" fill="#064e3b" fill-opacity="0.5" stroke="#059669" stroke-width="1" />
-      <circle class="status-led" cx="14" cy="12" r="4" fill="#34d399" />
-      <text x="26" y="16" class="font-mono" font-size="10.5" font-weight="600" fill="#a7f3d0" letter-spacing="0.5">ZERO-PII ACTIVE</text>
+    <g transform="translate(0, 36)">
+      <rect x="0" y="0" width="160" height="28" rx="14" fill="#064e3b" fill-opacity="0.6" stroke="#059669" stroke-width="1.2" />
+      <circle class="status-led" cx="16" cy="14" r="4.5" fill="#34d399" />
+      <text x="30" y="19" class="font-mono" font-size="11.5" font-weight="700" fill="#a7f3d0" letter-spacing="0.5">ZERO-PII ACTIVE</text>
       
-      <rect x="148" y="0" width="168" height="24" rx="12" fill="#1e1b4b" fill-opacity="0.4" stroke="#4338ca" stroke-width="0.8" />
-      <text x="160" y="16" class="font-mono" font-size="10.5" fill="#c7d2fe">RUST AXUM • 150µs LATENCY</text>
+      <rect x="172" y="0" width="195" height="28" rx="14" fill="#1e1b4b" fill-opacity="0.5" stroke="#4338ca" stroke-width="1" />
+      <text x="186" y="19" class="font-mono" font-size="11.5" font-weight="600" fill="#c7d2fe">RUST AXUM • 150µs LATENCY</text>
 
-      <rect x="326" y="0" width="156" height="24" rx="12" fill="#172554" fill-opacity="0.4" stroke="#1d4ed8" stroke-width="0.8" />
-      <text x="338" y="16" class="font-mono" font-size="10.5" fill="#bae6fd">POST-QUANTUM HYBRID</text>
+      <rect x="379" y="0" width="180" height="28" rx="14" fill="#172554" fill-opacity="0.5" stroke="#1d4ed8" stroke-width="1" />
+      <text x="393" y="19" class="font-mono" font-size="11.5" font-weight="600" fill="#bae6fd">POST-QUANTUM HYBRID</text>
     </g>
 
     <!-- Main Title & Branding -->
-    <g transform="translate(0, 106)">
-      <text x="0" y="0" font-size="38" font-weight="800" fill="#f4f4f5" letter-spacing="-1">
+    <g transform="translate(0, 108)">
+      <text x="0" y="0" font-size="42" font-weight="900" fill="#f4f4f5" letter-spacing="-1">
         AEGIS
       </text>
-      <text x="135" y="-3" class="font-mono" font-size="14" font-weight="500" fill="#10b981">
+      <text x="150" y="-4" class="font-mono" font-size="15" font-weight="700" fill="#10b981">
         // v0.2.0 • Cryptographic Engine
       </text>
-      <text x="0" y="26" font-size="15" font-weight="500" fill="#94a3b8">
+      <text x="0" y="28" font-size="17" font-weight="600" fill="#cbd5e1">
         Privacy-Preserving Identity &amp; Predicate Verification Architecture
       </text>
-      <text x="0" y="47" font-size="12.5" fill="#64748b">
+      <text x="0" y="52" font-size="13.5" fill="#94a3b8">
         Mathematical proof of age, sanctions, and credentials with zero PII retention or leakage.
       </text>
     </g>
 
     <!-- Feature Matrix Pills -->
-    <g transform="translate(0, 194)">
+    <g transform="translate(0, 204)">
       <!-- Pill 1: Zero PII -->
       <g transform="translate(0, 0)">
-        <rect width="182" height="48" rx="8" fill="#18181b" stroke="#27272a" stroke-width="1" />
-        <rect width="3" height="48" rx="1.5" fill="#10b981" />
-        <text x="14" y="20" class="font-mono" font-size="10" font-weight="700" fill="#10b981">PII RETENTION</text>
-        <text x="14" y="37" font-size="13" font-weight="700" fill="#f4f4f5">0 Bytes Stored</text>
+        <rect width="200" height="54" rx="10" fill="#18181b" stroke="#27272a" stroke-width="1.2" />
+        <rect width="4" height="54" rx="2" fill="#10b981" />
+        <text x="16" y="22" class="font-mono" font-size="11" font-weight="800" fill="#10b981">PII RETENTION</text>
+        <text x="16" y="42" font-size="15" font-weight="700" fill="#f4f4f5">0 Bytes Stored</text>
       </g>
 
       <!-- Pill 2: Blake3 Merkle Ledger -->
-      <g transform="translate(194, 0)">
-        <rect width="182" height="48" rx="8" fill="#18181b" stroke="#27272a" stroke-width="1" />
-        <rect width="3" height="48" rx="1.5" fill="#38bdf8" />
-        <text x="14" y="20" class="font-mono" font-size="10" font-weight="700" fill="#38bdf8">RECEIPT LEDGER</text>
-        <text x="14" y="37" font-size="13" font-weight="700" fill="#f4f4f5">Blake3 Merkle Chain</text>
+      <g transform="translate(214, 0)">
+        <rect width="200" height="54" rx="10" fill="#18181b" stroke="#27272a" stroke-width="1.2" />
+        <rect width="4" height="54" rx="2" fill="#38bdf8" />
+        <text x="16" y="22" class="font-mono" font-size="11" font-weight="800" fill="#38bdf8">RECEIPT LEDGER</text>
+        <text x="16" y="42" font-size="15" font-weight="700" fill="#f4f4f5">Blake3 Merkle Chain</text>
       </g>
 
       <!-- Pill 3: Zeroize RAM -->
-      <g transform="translate(388, 0)">
-        <rect width="182" height="48" rx="8" fill="#18181b" stroke="#27272a" stroke-width="1" />
-        <rect width="3" height="48" rx="1.5" fill="#a78bfa" />
-        <text x="14" y="20" class="font-mono" font-size="10" font-weight="700" fill="#a78bfa">MEMORY GUARANTEE</text>
-        <text x="14" y="37" font-size="13" font-weight="700" fill="#f4f4f5">Instant `zeroize` Scrub</text>
+      <g transform="translate(428, 0)">
+        <rect width="200" height="54" rx="10" fill="#18181b" stroke="#27272a" stroke-width="1.2" />
+        <rect width="4" height="54" rx="2" fill="#a78bfa" />
+        <text x="16" y="22" class="font-mono" font-size="11" font-weight="800" fill="#a78bfa">MEMORY GUARANTEE</text>
+        <text x="16" y="42" font-size="15" font-weight="700" fill="#f4f4f5">Instant `zeroize` Scrub</text>
       </g>
     </g>
 
     <!-- Bottom Metadata Bar -->
-    <g transform="translate(0, 268)">
-      <text x="0" y="14" class="font-mono" font-size="11" fill="#71717a">
-        ARCHITECTURE: <tspan fill="#e4e4e7">Rust 1.80+ (Axum)</tspan> + <tspan fill="#e4e4e7">Next.js 15 App Router</tspan>
+    <g transform="translate(0, 286)">
+      <text x="0" y="16" class="font-mono" font-size="12" fill="#94a3b8">
+        ARCHITECTURE: <tspan fill="#f4f4f5" font-weight="600">Rust 1.80+ (Axum)</tspan> + <tspan fill="#f4f4f5" font-weight="600">Next.js 15 App Router</tspan>
       </text>
-      <text x="360" y="14" class="font-mono" font-size="11" fill="#71717a">
-        CREATED BY: <tspan fill="#10b981">Rony M. (@ronderins)</tspan>
+      <text x="390" y="16" class="font-mono" font-size="12" fill="#94a3b8">
+        CREATED BY: <tspan fill="#10b981" font-weight="700">Rony M. (@ronderins)</tspan>
       </text>
-      <circle cx="348" cy="11" r="2" fill="#52525b" />
+      <circle cx="378" cy="12" r="2.5" fill="#52525b" />
     </g>
   </g>
 </svg>
