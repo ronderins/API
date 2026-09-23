@@ -1,0 +1,188 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 390" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="circuitBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080a0f" />
+      <stop offset="50%" stop-color="#0e1219" />
+      <stop offset="100%" stop-color="#090c12" />
+    </linearGradient>
+
+    <!-- Enclave Gradient -->
+    <linearGradient id="enclaveGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#064e3b" stop-opacity="0.45" />
+      <stop offset="100%" stop-color="#022c22" stop-opacity="0.2" />
+    </linearGradient>
+
+    <!-- Comparator Gradient -->
+    <linearGradient id="comparatorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c4a6e" />
+      <stop offset="100%" stop-color="#0369a1" />
+    </linearGradient>
+
+    <!-- Output Gradient -->
+    <linearGradient id="outputGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#065f46" stop-opacity="0.5" />
+      <stop offset="100%" stop-color="#064e3b" stop-opacity="0.2" />
+    </linearGradient>
+
+    <!-- Marker Arrow -->
+    <marker id="arrowCyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#38bdf8" />
+    </marker>
+    <marker id="arrowEmerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#34d399" />
+    </marker>
+  </defs>
+
+  <style>
+    @keyframes circuitScan {
+      0% { stroke-dashoffset: 40; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes enclavePulse {
+      0%, 100% { stroke: #10b981; stroke-opacity: 0.8; }
+      50% { stroke: #34d399; stroke-opacity: 1; filter: drop-shadow(0 0 8px rgba(52, 211, 153, 0.7)); }
+    }
+    @keyframes zeroizeFlash {
+      0%, 100% { opacity: 0.8; }
+      50% { opacity: 1; filter: drop-shadow(0 0 10px #4ade80); }
+    }
+    @keyframes travelingSignal {
+      0% { transform: translateX(0); opacity: 0; }
+      30% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { transform: translateX(80px); opacity: 0; }
+    }
+    .flow-wire {
+      stroke-dasharray: 6 5;
+      animation: circuitScan 1.5s linear infinite;
+    }
+    .enclave-border {
+      animation: enclavePulse 2.8s ease-in-out infinite;
+    }
+    .zeroize-box {
+      animation: zeroizeFlash 2.2s ease-in-out infinite;
+    }
+    .signal-particle {
+      animation: travelingSignal 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    text {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+    }
+  </style>
+
+  <!-- Background Base Container -->
+  <rect width="1080" height="390" fill="url(#circuitBg)" rx="16" />
+  <rect x="1" y="1" width="1078" height="388" fill="none" stroke="#27272a" stroke-width="1.5" rx="15" />
+
+  <!-- Top Title & Header -->
+  <g transform="translate(40, 38)">
+    <text x="0" y="0" font-size="24" font-weight="900" fill="#f4f4f5" letter-spacing="-0.5">
+      Zero-Knowledge Predicate Circuit &amp; Memory Isolation
+    </text>
+    <text x="580" y="-1" class="font-mono" font-size="14" font-weight="800" fill="#38bdf8">
+      // RUST GROTH16 BN254 / BULLETPROOFS
+    </text>
+    <text x="0" y="24" font-size="14" font-weight="500" fill="#94a3b8">
+      Proving "Age ≥ 21" algebraically without disclosing the birth year, birth date, or raw identity document.
+    </text>
+  </g>
+
+  <!-- Wire 1: Public Input to Enclave -->
+  <path d="M 270 148 L 340 148" fill="none" stroke="#38bdf8" stroke-width="2.5" class="flow-wire" marker-end="url(#arrowCyan)" />
+
+  <!-- Wire 2: Private Input to Enclave -->
+  <path d="M 270 262 L 340 262" fill="none" stroke="#f59e0b" stroke-width="2.5" class="flow-wire" />
+
+  <!-- Wire 3: Enclave to Output -->
+  <path d="M 760 205 L 825 205" fill="none" stroke="#34d399" stroke-width="2.5" class="flow-wire" marker-end="url(#arrowEmerald)" />
+  <circle class="signal-particle" cx="760" cy="205" r="4.5" fill="#34d399" filter="drop-shadow(0 0 6px #10b981)" />
+
+  <!-- ================= LEFT: INPUT SIGNALS ================= -->
+  <!-- Public Inputs Box -->
+  <g transform="translate(40, 92)">
+    <rect width="230" height="112" rx="10" fill="#18181b" stroke="#38bdf8" stroke-width="1.5" />
+    <rect x="0" y="0" width="230" height="32" rx="10" fill="#0c4a6e" fill-opacity="0.8" />
+    <text x="12" y="22" class="font-mono" font-size="12" font-weight="900" fill="#bae6fd">PUBLIC STATEMENT</text>
+
+    <g transform="translate(14, 46)">
+      <text x="0" y="16" class="font-mono" font-size="13" font-weight="700" fill="#cbd5e1">• current_year: 2026</text>
+      <text x="0" y="38" class="font-mono" font-size="13" font-weight="700" fill="#cbd5e1">• threshold: 21</text>
+      <text x="0" y="58" class="font-mono" font-size="12" font-weight="800" fill="#38bdf8">✓ Known to relying party</text>
+    </g>
+  </g>
+
+  <!-- Private Witness Box -->
+  <g transform="translate(40, 218)">
+    <rect width="230" height="112" rx="10" fill="#18181b" stroke="#d97706" stroke-width="1.5" />
+    <rect x="0" y="0" width="230" height="32" rx="10" fill="#78350f" fill-opacity="0.8" />
+    <text x="12" y="22" class="font-mono" font-size="12" font-weight="900" fill="#fde68a">PRIVATE WITNESS</text>
+
+    <g transform="translate(14, 46)">
+      <text x="0" y="16" class="font-mono" font-size="13" font-weight="700" fill="#cbd5e1">• birth_year: 2002</text>
+      <text x="0" y="38" class="font-mono" font-size="13" font-weight="700" fill="#f59e0b">• salt: 0x8f3c...10</text>
+      <text x="0" y="58" class="font-mono" font-size="12" font-weight="800" fill="#ef4444">🔒 NEVER DISCLOSED</text>
+    </g>
+  </g>
+
+  <!-- ================= CENTER: ZERO-KNOWLEDGE ENCLAVE ================= -->
+  <g transform="translate(345, 92)">
+    <rect class="enclave-border" width="415" height="238" rx="14" fill="url(#enclaveGrad)" stroke="#10b981" stroke-width="2" />
+    <rect x="0" y="0" width="415" height="38" rx="14" fill="#064e3b" fill-opacity="0.9" />
+    <circle cx="20" cy="19" r="5" fill="#34d399" />
+    <text x="36" y="24" class="font-mono" font-size="13" font-weight="900" fill="#a7f3d0">
+      RUST ZK CIRCUIT ENCLAVE (BN254 R1CS)
+    </text>
+
+    <!-- Arithmetic Constraint Box -->
+    <g transform="translate(20, 52)">
+      <rect width="375" height="74" rx="8" fill="#18181b" stroke="#27272a" stroke-width="1.2" />
+      <text x="14" y="24" font-size="14" font-weight="800" fill="#ffffff">Arithmetic Predicate Gate:</text>
+      <text x="14" y="48" class="font-mono" font-size="14" font-weight="900" fill="#38bdf8">
+        (current_year - birth_year ≥ threshold) == 1
+      </text>
+      <text x="14" y="66" class="font-mono" font-size="12" font-weight="700" fill="#34d399">
+        Evaluation: 2026 - 2002 = 24 ≥ 21 ➔ TRUE
+      </text>
+    </g>
+
+    <!-- Memory Zeroization Invariant -->
+    <g transform="translate(20, 138)">
+      <rect class="zeroize-box" width="375" height="82" rx="8" fill="#14532d" fill-opacity="0.8" stroke="#22c55e" stroke-width="1.5" />
+      <text x="14" y="24" class="font-mono" font-size="13" font-weight="900" fill="#dcfce7">
+        ⚡ ZEROIZE: Deterministic Witness Scrubbing
+      </text>
+      <text x="14" y="46" class="font-mono" font-size="12" font-weight="700" fill="#bbf7d0">
+        zeroize::Zeroize::zeroize(&amp;mut witness_buffer);
+      </text>
+      <text x="14" y="68" class="font-mono" font-size="12" font-weight="800" fill="#ffffff">
+        RAM purged to 0x00 • 0 memory dump residue
+      </text>
+    </g>
+  </g>
+
+  <!-- ================= RIGHT: VERIFIED ATTESTATION ================= -->
+  <g transform="translate(830, 92)">
+    <rect width="210" height="238" rx="14" fill="url(#outputGrad)" stroke="#10b981" stroke-width="1.8" />
+    <rect x="0" y="0" width="210" height="38" rx="14" fill="#064e3b" fill-opacity="0.9" />
+    <circle cx="18" cy="19" r="5" fill="#34d399" />
+    <text x="32" y="24" class="font-mono" font-size="13" font-weight="900" fill="#a7f3d0">PUBLIC PROOF</text>
+
+    <g transform="translate(14, 52)">
+      <text x="0" y="18" font-size="15" font-weight="900" fill="#34d399">Verified Access</text>
+      <text x="0" y="36" font-size="12" font-weight="500" fill="#cbd5e1">Attestation token minted.</text>
+      <text x="0" y="50" font-size="12" font-weight="500" fill="#cbd5e1">Zero PII exposed.</text>
+
+      <rect x="0" y="62" width="182" height="74" rx="6" fill="#18181b" stroke="#27272a" stroke-width="1" />
+      <text x="10" y="84" class="font-mono" font-size="12" font-weight="800" fill="#34d399">verified: true</text>
+      <text x="10" y="104" class="font-mono" font-size="12" font-weight="800" fill="#38bdf8">predicate: 21+</text>
+      <text x="10" y="124" class="font-mono" font-size="12" font-weight="800" fill="#a78bfa">leak_bytes: 0</text>
+
+      <rect x="0" y="146" width="182" height="32" rx="4" fill="#064e3b" stroke="#10b981" stroke-width="1" />
+      <text x="10" y="167" class="font-mono" font-size="12" font-weight="900" fill="#dcfce7">⚡ LATENCY: &lt;150 µs</text>
+    </g>
+  </g>
+</svg>
