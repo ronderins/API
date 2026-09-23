@@ -35,9 +35,28 @@ import { animateCardsStagger } from "@/lib/gsap-animations";
 type AudienceKey = "all" | "consumers" | "developers" | "enterprises" | "auditors";
 type UseCaseKey = "age_gating" | "fintech" | "gaming_social" | "healthcare" | "workplace";
 
-export const WhyAegisMission: React.FC = () => {
-  const [activeAudience, setActiveAudience] = useState<AudienceKey>("all");
+interface WhyAegisMissionProps {
+  selectedAudience?: AudienceKey;
+  onAudienceChange?: (audience: AudienceKey) => void;
+}
+
+export const WhyAegisMission: React.FC<WhyAegisMissionProps> = ({
+  selectedAudience,
+  onAudienceChange,
+}) => {
+  const [activeAudience, setActiveAudience] = useState<AudienceKey>(selectedAudience || "all");
   const [activeUseCase, setActiveUseCase] = useState<UseCaseKey>("age_gating");
+
+  useEffect(() => {
+    if (selectedAudience && selectedAudience !== activeAudience) {
+      setActiveAudience(selectedAudience);
+    }
+  }, [selectedAudience]);
+
+  const handleAudienceClick = (key: AudienceKey) => {
+    setActiveAudience(key);
+    onAudienceChange?.(key);
+  };
   
   // Interactive Liability & Risk Calculator State
   const [userVolume, setUserVolume] = useState<number>(50000);
@@ -254,7 +273,7 @@ export const WhyAegisMission: React.FC = () => {
               return (
                 <button
                   key={key}
-                  onClick={() => setActiveAudience(key)}
+                  onClick={() => handleAudienceClick(key)}
                   className={`px-3 py-1.5 rounded-lg text-xs font-medium transition duration-200 capitalize whitespace-nowrap cursor-pointer ${
                     isActive
                       ? "bg-emerald-600 text-white font-semibold shadow-md shadow-emerald-950/60"

@@ -8,7 +8,6 @@ import {
   ShieldCheck,
   Code2,
   Lock,
-  Download,
   Terminal,
   Cpu,
   Check,
@@ -130,7 +129,7 @@ export function FooterModal({ type, onClose, onNavigateTab }: FooterModalProps) 
               <Lock className="w-8 h-8 text-purple-400 shrink-0 filter drop-shadow-[0_0_8px_rgba(192,132,252,0.8)]" />
             )}
             {type === "source_code" && (
-              <Download className="w-8 h-8 text-amber-400 shrink-0 filter drop-shadow-[0_0_8px_rgba(251,191,36,0.8)]" />
+              <Code2 className="w-8 h-8 text-amber-400 shrink-0 filter drop-shadow-[0_0_8px_rgba(251,191,36,0.8)]" />
             )}
             {type === "zero_pii" && (
               <AegisLogo size={34} animated id="modal-zero-pii-logo" />
@@ -433,23 +432,14 @@ cd rust-api && cargo run --release`}
                 </pre>
               </div>
 
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
-                <a
-                  href="/zk-identity-fullstack.zip"
-                  download="zk-identity-fullstack.zip"
-                  className="w-full sm:w-auto px-4 py-2 rounded-lg bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-xs flex items-center justify-center gap-2 transition shadow-md"
-                >
-                  <Download className="w-4 h-4" />
-                  <span>Download zk-identity-fullstack.zip</span>
-                </a>
-
+              <div className="flex flex-col sm:flex-row items-center justify-end gap-3 pt-2">
                 <a
                   href="https://github.com/ronderins"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto px-4 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-semibold flex items-center justify-center gap-2 transition border border-zinc-700"
+                  className="w-full sm:w-auto px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold flex items-center justify-center gap-2 transition shadow-md"
                 >
-                  <Globe className="w-4 h-4 text-emerald-400" />
+                  <Globe className="w-4 h-4" />
                   <span>GitHub Repository</span>
                   <ExternalLink className="w-3 h-3" />
                 </a>

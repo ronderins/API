@@ -33,9 +33,10 @@ import type { VerifyResponse, ErrorResponse } from "../types";
 
 interface ProofGeneratorProps {
   onProofCreated: (proof: VerifyResponse) => void;
+  activePersona?: string;
 }
 
-export const ProofGenerator: React.FC<ProofGeneratorProps> = ({ onProofCreated }) => {
+export const ProofGenerator: React.FC<ProofGeneratorProps> = ({ onProofCreated, activePersona = "all" }) => {
   const [userId, setUserId] = useState("user-alice-9842");
   const [docHash, setDocHash] = useState("a1b2c3d4e5f60718293a4b5c6d7e8f90a1b2c3d4e5f60718293a4b5c6d7e8f90");
   const [ageThreshold, setAgeThreshold] = useState(18);
@@ -48,7 +49,7 @@ export const ProofGenerator: React.FC<ProofGeneratorProps> = ({ onProofCreated }
   const [error, setError] = useState<ErrorResponse | string | null>(null);
   const [copiedField, setCopiedField] = useState<string | null>(null);
   const [sampleDocumentText, setSampleDocumentText] = useState("");
-  const [codeLang, setCodeLang] = useState<"curl" | "rust" | "ts" | "python" | "solidity">("curl");
+  const [codeLang, setCodeLang] = useState<"curl" | "rust" | "ts" | "python">("curl");
   const [activeTabSubView, setActiveTabSubView] = useState<"response" | "calldata" | "audit">("response");
 
   const responseBoxRef = useRef<HTMLDivElement>(null);
@@ -246,21 +247,6 @@ print("Status:", response.status_code)
 print("Response:", response.json())`;
     }
 
-    if (codeLang === "solidity") {
-      return `// EVM Solidity On-Chain Verification Calldata
-// Function: verifyProof(uint256[2] a, uint256[2][2] b, uint256[2] c, uint256[4] input)
-// Precompile address: 0x08 (ecPairing)
-
-bytes4 selector = bytes4(keccak256("verifyProof(uint256[2],uint256[2][2],uint256[2],uint256[4])"));
-bytes memory calldata = abi.encodeWithSelector(
-    selector,
-    [0x1a8f...G1A_X, 0x2b4c...G1A_Y],
-    [[0x0f1e...G2B_X1, 0x1d2c...G2B_X2], [0x3a4b...G2B_Y1, 0x5c6d...G2B_Y2]],
-    [0x7e8f...G1C_X, 0x9a0b...G1C_Y],
-    [uint256(${ageThreshold}), uint256(2026), 0x${docHash.slice(0, 32)}, 0x${docHash.slice(32, 64)}]
-);`;
-    }
-
     return "";
   };
 
@@ -285,6 +271,40 @@ bytes memory calldata = abi.encodeWithSelector(
           </span>
         </div>
       </div>
+
+      {/* Dynamic Audience Perspective Banner */}
+      {activePersona !== "all" && (
+        <div className={`p-4 rounded-xl border flex items-start gap-3 text-xs leading-relaxed transition-all duration-300 ${
+          activePersona === "consumers"
+            ? "bg-emerald-950/40 border-emerald-800/60 text-emerald-200"
+            : activePersona === "developers"
+            ? "bg-blue-950/40 border-blue-800/60 text-blue-200"
+            : activePersona === "enterprises"
+            ? "bg-purple-950/40 border-purple-800/60 text-purple-200"
+            : "bg-amber-950/40 border-amber-800/60 text-amber-200"
+        }`}>
+          <div className="shrink-0 mt-0.5">
+            {activePersona === "consumers" && <UserCheck className="w-4 h-4 text-emerald-400" />}
+            {activePersona === "developers" && <Code2 className="w-4 h-4 text-blue-400" />}
+            {activePersona === "enterprises" && <ShieldCheck className="w-4 h-4 text-purple-400" />}
+            {activePersona === "auditors" && <Lock className="w-4 h-4 text-amber-400" />}
+          </div>
+          <div className="space-y-1">
+            <span className="font-semibold block font-mono text-[11px] uppercase tracking-wider">
+              {activePersona === "consumers" && "Audience Perspective: Everyday Consumer & Citizen"}
+              {activePersona === "developers" && "Audience Perspective: Developer & Systems Integrator"}
+              {activePersona === "enterprises" && "Audience Perspective: Enterprise & Compliance Officer"}
+              {activePersona === "auditors" && "Audience Perspective: Security Auditor & Cryptographer"}
+            </span>
+            <p className="text-zinc-300 text-xs">
+              {activePersona === "consumers" && "Test how you can prove you meet an age requirement without uploading clear passport scans or revealing your birthdate. The server only sees your cryptographic hash."}
+              {activePersona === "developers" && "Test the POST /api/v1/verify endpoint with simulated client digests. Notice the sub-millisecond execution, signed JWT proof token, and replay-preventing nonce."}
+              {activePersona === "enterprises" && "Simulate compliant user onboarding with zero PII retention. Eliminate data breach liability under GDPR Article 5(1)(c) while keeping conversion rates high."}
+              {activePersona === "auditors" && "Verify mathematical constraint evaluation, domain-separated commitment hashing, and the append-only Blake3 Merkle block ledger receipt."}
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* Quick Scenarios & Presets */}
       <div className="p-4 sm:p-4.5 bg-zinc-950/70 border border-zinc-800/80 rounded-xl space-y-3">
@@ -600,7 +620,7 @@ bytes memory calldata = abi.encodeWithSelector(
           </div>
 
           <div className="flex items-center gap-1 bg-zinc-950 p-1 rounded-lg border border-zinc-800">
-            {(["curl", "rust", "ts", "python", "solidity"] as const).map((lang) => (
+            {(["curl", "rust", "ts", "python"] as const).map((lang) => (
               <button
                 key={lang}
                 type="button"
@@ -611,7 +631,7 @@ bytes memory calldata = abi.encodeWithSelector(
                     : "text-zinc-400 hover:text-zinc-200"
                 }`}
               >
-                {lang === "ts" ? "TypeScript" : lang === "curl" ? "cURL" : lang === "solidity" ? "Solidity" : lang.toUpperCase()}
+                {lang === "ts" ? "TypeScript" : lang === "curl" ? "cURL" : lang.toUpperCase()}
               </button>
             ))}
           </div>
