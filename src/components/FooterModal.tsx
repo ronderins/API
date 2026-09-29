@@ -68,12 +68,12 @@ export function FooterModal({ type, onClose, onNavigateTab }: FooterModalProps) 
       gsap.fromTo(
         overlayRef.current,
         { opacity: 0 },
-        { opacity: 1, duration: 0.2, ease: "power2.out" }
+        { opacity: 1, duration: 0.18, ease: "power2.out" }
       );
       gsap.fromTo(
         modalRef.current,
-        { opacity: 0, scale: 0.95, y: 15 },
-        { opacity: 1, scale: 1, y: 0, duration: 0.26, ease: "back.out(1.4)" }
+        { opacity: 0, y: 6 },
+        { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }
       );
     }
 
@@ -84,12 +84,12 @@ export function FooterModal({ type, onClose, onNavigateTab }: FooterModalProps) 
 
   const handleClose = () => {
     if (overlayRef.current && modalRef.current) {
-      gsap.to(overlayRef.current, { opacity: 0, duration: 0.15 });
+      gsap.to(overlayRef.current, { opacity: 0, duration: 0.12, ease: "power2.out" });
       gsap.to(modalRef.current, {
         opacity: 0,
-        scale: 0.96,
-        y: 10,
-        duration: 0.15,
+        y: 4,
+        duration: 0.12,
+        ease: "power2.out",
         onComplete: onClose,
       });
     } else {
@@ -123,22 +123,22 @@ export function FooterModal({ type, onClose, onNavigateTab }: FooterModalProps) 
               <AegisLogo size={34} animated id="modal-mission-logo" />
             )}
             {type === "api_docs" && (
-              <BookOpen className="w-8 h-8 text-indigo-400 shrink-0 filter drop-shadow-[0_0_8px_rgba(129,140,248,0.8)]" />
+              <BookOpen className="w-7 h-7 text-indigo-400 shrink-0" />
             )}
             {type === "security_lab" && (
-              <Lock className="w-8 h-8 text-purple-400 shrink-0 filter drop-shadow-[0_0_8px_rgba(192,132,252,0.8)]" />
+              <Lock className="w-7 h-7 text-purple-400 shrink-0" />
             )}
             {type === "source_code" && (
-              <Code2 className="w-8 h-8 text-amber-400 shrink-0 filter drop-shadow-[0_0_8px_rgba(251,191,36,0.8)]" />
+              <Code2 className="w-7 h-7 text-amber-400 shrink-0" />
             )}
             {type === "zero_pii" && (
               <AegisLogo size={34} animated id="modal-zero-pii-logo" />
             )}
             {type === "creator_profile" && (
-              <User className="w-8 h-8 text-blue-400 shrink-0 filter drop-shadow-[0_0_8px_rgba(96,165,250,0.8)]" />
+              <User className="w-7 h-7 text-blue-400 shrink-0" />
             )}
             {type === "public_testing_guide" && (
-              <Zap className="w-8 h-8 text-emerald-400 shrink-0 filter drop-shadow-[0_0_8px_rgba(52,211,153,0.85)]" />
+              <Zap className="w-7 h-7 text-emerald-400 shrink-0" />
             )}
 
             <div>

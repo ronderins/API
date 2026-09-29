@@ -1,7 +1,10 @@
 import gsap from "gsap";
 
 /**
- * GSAP smooth animation utilities for navigation, tabs, view transitions, and micro-interactions.
+ * Senior Software Engineer animation utilities:
+ * Fast, dignified, compositor-friendly transitions (opacity & micro-displacement).
+ * Strictly NO elastic rubber-band bounces (`back.out`), NO fuzzy sub-pixel scaling,
+ * and sub-200ms latency budgets for crisp UI response.
  */
 
 export const animateViewTransition = (
@@ -10,12 +13,11 @@ export const animateViewTransition = (
 ) => {
   if (!container) return;
 
-  // Kill any running animations on container
   gsap.killTweensOf(container);
   gsap.killTweensOf(container.querySelectorAll(".gsap-reveal"));
 
   const tl = gsap.timeline({
-    defaults: { ease: "power3.out" },
+    defaults: { ease: "power2.out" },
     onComplete,
   });
 
@@ -23,14 +25,12 @@ export const animateViewTransition = (
     container,
     {
       opacity: 0,
-      y: 16,
-      scale: 0.995,
+      y: 6,
     },
     {
       opacity: 1,
       y: 0,
-      scale: 1,
-      duration: 0.4,
+      duration: 0.18,
       clearProps: "transform",
     }
   );
@@ -41,16 +41,16 @@ export const animateViewTransition = (
       revealElements,
       {
         opacity: 0,
-        y: 12,
+        y: 4,
       },
       {
         opacity: 1,
         y: 0,
-        stagger: 0.04,
-        duration: 0.35,
+        stagger: 0.02,
+        duration: 0.16,
         clearProps: "transform",
       },
-      "-=0.25"
+      "-=0.1"
     );
   }
 
@@ -74,17 +74,18 @@ export const animateNavPill = (
   gsap.to(pillElement, {
     x: xOffset,
     width: width,
-    duration: 0.35,
-    ease: "power3.out",
+    duration: 0.2,
+    ease: "power2.out",
   });
 };
 
 export const animateHoverButton = (el: HTMLElement | null, isEnter: boolean) => {
   if (!el) return;
+  // Natural subtle brightness/border transition instead of cartoon scaling
   gsap.to(el, {
-    scale: isEnter ? 1.025 : 1,
-    duration: 0.22,
-    ease: isEnter ? "back.out(2)" : "power2.out",
+    y: isEnter ? -1 : 0,
+    duration: 0.14,
+    ease: "power2.out",
   });
 };
 
@@ -93,31 +94,31 @@ export const animateHeaderEntrance = (
   navEl: HTMLElement | null,
   personaEl: HTMLElement | null
 ) => {
-  const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+  const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
 
   if (headerEl) {
     tl.fromTo(
       headerEl,
-      { y: -25, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.45 }
+      { y: -8, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.25 }
     );
   }
 
   if (personaEl) {
     tl.fromTo(
       personaEl,
-      { y: -10, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.35 },
-      "-=0.2"
+      { opacity: 0 },
+      { opacity: 1, duration: 0.2 },
+      "-=0.1"
     );
   }
 
   if (navEl) {
     tl.fromTo(
       navEl.children,
-      { y: 12, opacity: 0, scale: 0.96 },
-      { y: 0, opacity: 1, scale: 1, stagger: 0.035, duration: 0.4 },
-      "-=0.15"
+      { opacity: 0 },
+      { opacity: 1, stagger: 0.015, duration: 0.2 },
+      "-=0.1"
     );
   }
 
@@ -130,13 +131,13 @@ export const animateHeaderEntrance = (
 export const animateCryptoStream = (
   targetEl: HTMLElement | null,
   finalText: string,
-  duration = 0.6
+  duration = 0.4
 ) => {
   if (!targetEl) return;
   const chars = "0123456789abcdefABCDEF";
   const length = finalText.length;
   let frame = 0;
-  const totalFrames = Math.floor(duration * 60);
+  const totalFrames = Math.max(1, Math.floor(duration * 60));
 
   const interval = setInterval(() => {
     frame++;
@@ -163,7 +164,7 @@ export const animateMetricCounter = (
   targetEl: HTMLElement | null,
   startVal: number,
   endVal: number,
-  duration = 0.8,
+  duration = 0.4,
   suffix = ""
 ) => {
   if (!targetEl) return;
@@ -179,26 +180,26 @@ export const animateMetricCounter = (
 };
 
 /**
- * Glowing pulse wave on verification success
+ * Professional verification success flash (clean border highlight without neon blur)
  */
 export const animateVerificationSuccess = (container: HTMLElement | null) => {
   if (!container) return;
   gsap.fromTo(
     container,
-    { scale: 0.97, borderColor: "rgba(16, 185, 129, 0.9)", boxShadow: "0 0 35px rgba(16, 185, 129, 0.4)" },
-    { scale: 1, borderColor: "rgba(16, 185, 129, 0.4)", boxShadow: "0 0 0px rgba(16, 185, 129, 0)", duration: 0.6, ease: "back.out(1.5)" }
+    { borderColor: "rgba(52, 211, 153, 0.9)" },
+    { borderColor: "rgba(39, 39, 42, 0.8)", duration: 0.4, ease: "power2.out" }
   );
 };
 
 /**
- * High-precision cryptographic card hover interaction
+ * High-precision subtle card hover interaction
  */
 export const animateCardHover = (el: HTMLElement | null, isEnter: boolean) => {
   if (!el) return;
   gsap.to(el, {
-    y: isEnter ? -2.5 : 0,
-    duration: 0.24,
-    ease: isEnter ? "power2.out" : "power2.inOut",
+    y: isEnter ? -1.5 : 0,
+    duration: 0.16,
+    ease: "power2.out",
   });
 };
 
@@ -209,7 +210,7 @@ export interface StaggerOptions {
 }
 
 /**
- * Staggered entrance for cryptographic cards within a container or direct list
+ * Natural, fast entrance for cards - subtle 4px lift and crisp opacity without jarring scales
  */
 export const animateCardsStagger = (
   target: HTMLElement | HTMLElement[] | NodeListOf<Element> | null,
@@ -250,34 +251,33 @@ export const animateCardsStagger = (
 
   if (elements.length === 0) return;
 
-  const yOffset = opts.yOffset ?? 16;
-  const staggerDelay = opts.staggerDelay ?? 0.045;
-  const duration = opts.duration ?? 0.38;
+  const yOffset = opts.yOffset ?? 4;
+  const staggerDelay = opts.staggerDelay ?? 0.02;
+  const duration = opts.duration ?? 0.18;
 
   gsap.fromTo(
     elements,
-    { opacity: 0, y: yOffset, scale: 0.99 },
+    { opacity: 0, y: yOffset },
     {
       opacity: 1,
       y: 0,
-      scale: 1,
       stagger: staggerDelay,
       duration: duration,
-      ease: "power3.out",
+      ease: "power2.out",
       clearProps: "transform",
     }
   );
 };
 
 /**
- * Subtle cryptographic circuit scanning pulse on cards
+ * Clean hairline border highlight
  */
 export const animateCircuitPulse = (el: HTMLElement | null) => {
   if (!el) return;
   gsap.fromTo(
     el,
-    { borderColor: "rgba(52, 211, 153, 0.8)", boxShadow: "0 0 20px rgba(52, 211, 153, 0.25)" },
-    { borderColor: "rgba(39, 39, 42, 0.8)", boxShadow: "0 0 0px rgba(0, 0, 0, 0)", duration: 1.2, ease: "power2.out" }
+    { borderColor: "rgba(52, 211, 153, 0.7)" },
+    { borderColor: "rgba(39, 39, 42, 0.8)", duration: 0.5, ease: "power2.out" }
   );
 };
 

@@ -69,8 +69,8 @@ export const ProofGenerator: React.FC<ProofGeneratorProps> = ({ onProofCreated, 
     if (error && errorBoxRef.current) {
       gsap.fromTo(
         errorBoxRef.current,
-        { opacity: 0, y: 12, scale: 0.99 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.3, ease: "power3.out" }
+        { opacity: 0, y: 4 },
+        { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }
       );
     }
   }, [error]);
@@ -256,7 +256,7 @@ print("Response:", response.json())`;
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800/80">
         <div className="flex items-center gap-3.5">
           <div className="p-2.5 rounded-xl bg-emerald-950/50 border border-emerald-800/40">
-            <Zap className="w-6 h-6 text-emerald-400 shrink-0 filter drop-shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+            <Zap className="w-6 h-6 text-emerald-400 shrink-0" />
           </div>
           <div>
             <h2 className="text-lg font-semibold text-zinc-100 tracking-tight">Privacy-Preserving Verification Playground</h2>

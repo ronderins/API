@@ -105,10 +105,10 @@ export const SecurityInspector: React.FC = () => {
     if (containerRef.current) {
       gsap.fromTo(
         containerRef.current,
-        { opacity: 0, y: 15 },
-        { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }
+        { opacity: 0, y: 4 },
+        { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }
       );
-      animateCardsStagger(containerRef.current, ".aegis-card");
+      animateCardsStagger(containerRef.current, ".aegis-card", { staggerDelay: 0.015, duration: 0.16, yOffset: 4 });
     }
   }, []);
 
@@ -165,12 +165,12 @@ export const SecurityInspector: React.FC = () => {
   };
 
   return (
-    <div ref={containerRef} id="security-inspector-root" className="space-y-8 will-change-transform">
+    <div ref={containerRef} id="security-inspector-root" className="space-y-8">
       {/* Top Banner */}
-      <div className="aegis-card bg-zinc-900/70 border border-zinc-800 rounded-2xl p-6 sm:p-7 shadow-xl space-y-6">
+      <div className="aegis-card bg-zinc-900/70 border border-zinc-800 rounded-2xl p-6 sm:p-7 shadow-sm space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800/80">
           <div className="flex items-center gap-3">
-            <Layers className="w-8 h-8 text-teal-400 shrink-0 filter drop-shadow-[0_0_10px_rgba(45,212,191,0.85)]" />
+            <Layers className="w-7 h-7 text-teal-400 shrink-0" />
             <div>
               <h2 className="text-lg font-semibold text-zinc-100">Cryptographic Security & Verification Lab</h2>
               <p className="text-xs text-zinc-400">

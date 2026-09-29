@@ -202,9 +202,8 @@ export default function HomePage() {
     if (viewContentRef.current) {
       gsap.to(viewContentRef.current, {
         opacity: 0,
-        y: -10,
-        duration: 0.18,
-        ease: "power2.in",
+        duration: 0.12,
+        ease: "power2.out",
         onComplete: () => {
           setActiveView(tab);
         },
@@ -220,9 +219,9 @@ export default function HomePage() {
 
   const handleNavButtonHover = (e: React.MouseEvent<HTMLButtonElement>, isHover: boolean) => {
     gsap.to(e.currentTarget, {
-      scale: isHover ? 1.03 : 1,
-      duration: 0.22,
-      ease: isHover ? "back.out(2)" : "power2.out",
+      y: isHover ? -1 : 0,
+      duration: 0.15,
+      ease: "power2.out",
     });
   };
 

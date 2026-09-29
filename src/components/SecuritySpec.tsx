@@ -10,16 +10,17 @@ export const SecuritySpec: React.FC = () => {
   useEffect(() => {
     if (containerRef.current) {
       animateCardsStagger(containerRef.current, ".spec-card", {
-        yOffset: 16,
-        staggerDelay: 0.05,
+        yOffset: 4,
+        staggerDelay: 0.015,
+        duration: 0.16,
       });
     }
   }, []);
 
   return (
-    <div ref={containerRef} id="security-spec-container" className="aegis-card bg-zinc-900/70 border border-zinc-800 rounded-2xl p-6 sm:p-7 shadow-xl space-y-6">
+    <div ref={containerRef} id="security-spec-container" className="aegis-card bg-zinc-900/70 border border-zinc-800 rounded-2xl p-6 sm:p-7 shadow-sm space-y-6">
       <div className="flex items-center gap-3 pb-4 border-b border-zinc-800/80">
-        <Lock className="w-8 h-8 text-emerald-400 shrink-0 filter drop-shadow-[0_0_10px_rgba(52,211,153,0.85)]" />
+        <Lock className="w-7 h-7 text-emerald-400 shrink-0" />
         <div>
           <h2 className="text-lg font-semibold text-zinc-100">Privacy-Preserving Architecture &amp; Security Invariants</h2>
           <p className="text-xs text-zinc-400">Cryptographic isolation, formal invariants, and zero-trust memory security enforced in native Rust</p>

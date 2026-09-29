@@ -69,16 +69,17 @@ export const WhyAegisMission: React.FC<WhyAegisMissionProps> = ({
   useEffect(() => {
     if (containerRef.current) {
       const cards = containerRef.current.querySelectorAll(".aegis-card");
-      animateCardsStagger(Array.from(cards) as HTMLElement[], 0.07);
+      animateCardsStagger(Array.from(cards) as HTMLElement[], { staggerDelay: 0.015, duration: 0.18, yOffset: 4 });
     }
   }, []);
 
   useEffect(() => {
     if (cardRef.current) {
-      const cards = cardRef.current.querySelectorAll(".aegis-card");
-      if (cards.length > 0) {
-        animateCardsStagger(Array.from(cards) as HTMLElement[], 0.06);
-      }
+      gsap.fromTo(
+        cardRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.16, ease: "power2.out" }
+      );
     }
   }, [activeAudience]);
 
@@ -86,8 +87,8 @@ export const WhyAegisMission: React.FC<WhyAegisMissionProps> = ({
     if (useCaseRef.current) {
       gsap.fromTo(
         useCaseRef.current,
-        { opacity: 0, x: -10 },
-        { opacity: 1, x: 0, duration: 0.28, ease: "power2.out" }
+        { opacity: 0 },
+        { opacity: 1, duration: 0.16, ease: "power2.out" }
       );
     }
   }, [activeUseCase]);
@@ -295,13 +296,13 @@ export const WhyAegisMission: React.FC<WhyAegisMissionProps> = ({
             return (
               <div
                 key={key}
-                className="aegis-card p-6 sm:p-7 bg-zinc-900/60 border border-zinc-800 rounded-2xl flex flex-col justify-between space-y-6 hover:border-zinc-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-zinc-950/40"
+                className="aegis-card p-6 sm:p-7 bg-zinc-900/60 border border-zinc-800 rounded-2xl flex flex-col justify-between space-y-6 hover:border-zinc-700 transition-colors duration-150"
               >
                 <div className="space-y-4.5">
                   <div className="flex items-start justify-between gap-3 pb-2 border-b border-zinc-800/60">
                     <div className="flex items-center gap-3.5">
                       <div className="p-2.5 rounded-xl bg-emerald-950/40 border border-emerald-800/40">
-                        <Icon className="w-7 h-7 text-emerald-400 shrink-0 filter drop-shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+                        <Icon className="w-6 h-6 text-emerald-400 shrink-0" />
                       </div>
                       <div>
                         <h4 className="text-base font-bold text-zinc-100">{data.title}</h4>
@@ -396,7 +397,7 @@ export const WhyAegisMission: React.FC<WhyAegisMissionProps> = ({
               <div className="lg:col-span-2 space-y-4">
                 <div className="flex items-center gap-3.5 pb-2">
                   <div className="p-2.5 rounded-xl bg-teal-950/40 border border-teal-800/40">
-                    <Icon className="w-7 h-7 text-teal-400 shrink-0 filter drop-shadow-[0_0_8px_rgba(45,212,191,0.8)]" />
+                    <Icon className="w-6 h-6 text-teal-400 shrink-0" />
                   </div>
                   <div>
                     <h4 className="text-base font-bold text-zinc-100">{item.title}</h4>

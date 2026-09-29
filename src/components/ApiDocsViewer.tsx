@@ -30,8 +30,8 @@ export const ApiDocsViewer: React.FC = () => {
     if (contentRef.current) {
       gsap.fromTo(
         contentRef.current,
-        { opacity: 0, y: 10, scale: 0.995 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.25, ease: "power3.out" }
+        { opacity: 0 },
+        { opacity: 1, duration: 0.16, ease: "power2.out" }
       );
     }
   }, [activeTab]);
@@ -41,9 +41,8 @@ export const ApiDocsViewer: React.FC = () => {
     if (contentRef.current) {
       gsap.to(contentRef.current, {
         opacity: 0,
-        y: -6,
-        duration: 0.14,
-        ease: "power2.in",
+        duration: 0.1,
+        ease: "power2.out",
         onComplete: () => {
           setActiveTab(tab);
         },
@@ -54,10 +53,10 @@ export const ApiDocsViewer: React.FC = () => {
   };
 
   return (
-    <div id="api-docs-container" className="aegis-card bg-zinc-900/70 border border-zinc-800 rounded-2xl p-6 sm:p-7 shadow-xl space-y-6">
+    <div id="api-docs-container" className="aegis-card bg-zinc-900/70 border border-zinc-800 rounded-2xl p-6 sm:p-7 shadow-sm space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800/80">
         <div className="flex items-center gap-3">
-          <BookOpen className="w-8 h-8 text-indigo-400 shrink-0 filter drop-shadow-[0_0_10px_rgba(129,140,248,0.85)]" />
+          <BookOpen className="w-7 h-7 text-indigo-400 shrink-0" />
           <div>
             <h2 className="text-lg font-semibold text-zinc-100">REST API Specification</h2>
             <p className="text-xs text-zinc-400">OpenAPI 3.1 compatible endpoints & schema definitions for Aegis engine</p>

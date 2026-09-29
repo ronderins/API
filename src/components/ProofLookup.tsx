@@ -29,8 +29,8 @@ export const ProofLookup: React.FC<ProofLookupProps> = ({ initialProofId, refres
     if (proof && resultCardRef.current) {
       gsap.fromTo(
         resultCardRef.current,
-        { opacity: 0, y: 14, scale: 0.99 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "power3.out" }
+        { opacity: 0, y: 4 },
+        { opacity: 1, y: 0, duration: 0.16, ease: "power2.out" }
       );
     }
   }, [proof]);
@@ -84,7 +84,7 @@ export const ProofLookup: React.FC<ProofLookupProps> = ({ initialProofId, refres
     <div id="proof-lookup-container" className="aegis-card bg-zinc-900/70 border border-zinc-800 rounded-2xl p-6 sm:p-7 shadow-xl space-y-6">
       <div className="flex items-center justify-between pb-4 border-b border-zinc-800/80">
         <div className="flex items-center gap-3">
-          <Search className="w-8 h-8 text-blue-400 shrink-0 filter drop-shadow-[0_0_10px_rgba(96,165,250,0.85)]" />
+          <Search className="w-7 h-7 text-blue-400 shrink-0" />
           <div>
             <h2 className="text-lg font-semibold text-zinc-100">Proof & Audit Trail Query</h2>
             <p className="text-xs text-zinc-400">GET /api/v1/proofs/&#123;id&#125; — Retrieve audit events & commitment hash</p>

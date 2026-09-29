@@ -97,10 +97,10 @@ export const RustZKPEcosystem: React.FC = () => {
     if (panelRef.current) {
       gsap.fromTo(
         panelRef.current,
-        { opacity: 0, y: 15 },
-        { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }
+        { opacity: 0, y: 4 },
+        { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }
       );
-      animateCardsStagger(panelRef.current, ".aegis-card");
+      animateCardsStagger(panelRef.current, ".aegis-card", { staggerDelay: 0.015, duration: 0.16, yOffset: 4 });
     }
   }, []);
 
@@ -108,8 +108,8 @@ export const RustZKPEcosystem: React.FC = () => {
     if (codeContentRef.current) {
       gsap.fromTo(
         codeContentRef.current,
-        { opacity: 0, scale: 0.995 },
-        { opacity: 1, scale: 1, duration: 0.25, ease: "power2.out" }
+        { opacity: 0 },
+        { opacity: 1, duration: 0.15, ease: "power2.out" }
       );
     }
   }, [selectedCodeTab]);
@@ -203,12 +203,12 @@ export const RustZKPEcosystem: React.FC = () => {
   };
 
   return (
-    <div ref={panelRef} id="rust-zkp-ecosystem-root" className="space-y-8 will-change-transform">
+    <div ref={panelRef} id="rust-zkp-ecosystem-root" className="space-y-8">
       {/* Hero: The Cryptographic Reality */}
-      <div className="aegis-card relative overflow-hidden bg-gradient-to-br from-zinc-900 via-zinc-900/90 to-amber-950/30 border border-amber-500/30 rounded-2xl p-6 sm:p-8 shadow-2xl space-y-6">
+      <div className="aegis-card relative overflow-hidden bg-gradient-to-br from-zinc-900 via-zinc-900/90 to-amber-950/30 border border-amber-500/30 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-zinc-800">
           <div className="flex items-start sm:items-center gap-3.5">
-            <Cpu className="w-10 h-10 text-amber-400 shrink-0 filter drop-shadow-[0_0_12px_rgba(251,191,36,0.9)]" />
+            <Cpu className="w-8 h-8 text-amber-400 shrink-0" />
             <div>
               <div className="flex items-center gap-2">
                 <span className="px-2.5 py-0.5 rounded-full bg-amber-950 text-amber-300 border border-amber-700/60 font-mono text-[11px] font-semibold">

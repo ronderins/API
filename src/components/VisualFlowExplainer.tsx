@@ -87,8 +87,8 @@ export const VisualFlowExplainer: React.FC = () => {
     if (cardRef.current) {
       gsap.fromTo(
         cardRef.current,
-        { opacity: 0, y: 14, scale: 0.99 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "power3.out" }
+        { opacity: 0 },
+        { opacity: 1, duration: 0.16, ease: "power2.out" }
       );
     }
   }, [activeStep]);
@@ -140,7 +140,7 @@ export const VisualFlowExplainer: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800/80">
         <div className="flex items-center gap-3.5">
           <div className="p-2.5 rounded-xl bg-emerald-950/40 border border-emerald-800/40">
-            <Info className="w-7 h-7 text-emerald-400 shrink-0 filter drop-shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+            <Info className="w-6 h-6 text-emerald-400 shrink-0" />
           </div>
           <div>
             <h2 className="text-lg font-bold text-zinc-100">How Privacy-Preserving Identity Verification Works</h2>
@@ -152,7 +152,7 @@ export const VisualFlowExplainer: React.FC = () => {
         <div className="flex items-center gap-2.5">
           <button
             onClick={() => setIsPlaying(!isPlaying)}
-            className={`px-3.5 py-2 rounded-xl text-xs font-medium flex items-center gap-2 transition cursor-pointer border active:scale-95 ${
+            className={`px-3.5 py-2 rounded-xl text-xs font-medium flex items-center gap-2 transition-colors cursor-pointer border ${
               isPlaying
                 ? "bg-emerald-950 text-emerald-300 border-emerald-700 font-semibold"
                 : "bg-zinc-900 text-zinc-300 border-zinc-800 hover:text-white hover:border-zinc-700"
@@ -214,11 +214,11 @@ export const VisualFlowExplainer: React.FC = () => {
         const current = steps.find((s) => s.id === activeStep) || steps[0];
         const Icon = current.icon;
         return (
-          <div ref={cardRef} className="aegis-card p-6 sm:p-7 bg-zinc-950/90 border border-zinc-800/90 rounded-2xl space-y-5 will-change-transform shadow-xl">
+          <div ref={cardRef} className="aegis-card p-6 sm:p-7 bg-zinc-950/90 border border-zinc-800/90 rounded-2xl space-y-5 shadow-sm">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-zinc-850">
               <div className="flex items-center gap-3.5">
                 <div className="p-2.5 rounded-xl bg-emerald-950/40 border border-emerald-800/40">
-                  <Icon className="w-7 h-7 text-emerald-400 shrink-0 filter drop-shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+                  <Icon className="w-6 h-6 text-emerald-400 shrink-0" />
                 </div>
                 <div>
                   <h3 className="text-base font-bold text-zinc-100">{current.title}</h3>
