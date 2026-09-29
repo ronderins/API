@@ -10,8 +10,10 @@ pub mod gdpr_article32_encryption;
 pub mod iso_18013_5;
 pub mod iso18013_mdl;
 pub mod iso_29115_assurance;
+pub mod soc2_type2_controls;
 
 pub use eidas_vectors::{EidasComplianceSuite, EidasQeaaCredential};
 pub use gdpr_article32_encryption::{GdprArticle32Report, GdprComplianceAuditor};
 pub use iso18013_mdl::{IssuerSignedItem, MdlZkVerifier, MobileSecurityObject};
 pub use iso_29115_assurance::{AuthenticationEvidence, Iso29115AssertionToken, Iso29115AssuranceEngine, LevelOfAssurance};
+pub use soc2_type2_controls::{Soc2AttestationReport, Soc2ComplianceEngine, Soc2ControlEvaluation, Soc2ControlStatus};
