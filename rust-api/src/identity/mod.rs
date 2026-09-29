@@ -8,10 +8,12 @@
 
 pub mod anon_creds;
 pub mod did;
+pub mod nullifier_tree;
 pub mod revocation;
 pub mod w3c_vc;
 
 pub use anon_creds::{AnonCredentialPresentation, AnonCredentialSignature, AnonCredsVerifier};
 pub use did::{DidDocument, DidResolver, VerificationMethod};
+pub use nullifier_tree::{NullifierHash, NullifierNonMembershipProof, NullifierTree};
 pub use revocation::RevocationAccumulator;
 pub use w3c_vc::{SdJwtToken, W3cProofBlock, W3cVerifiableCredential, W3cVcEngine};

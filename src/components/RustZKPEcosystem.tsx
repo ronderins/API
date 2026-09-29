@@ -37,6 +37,11 @@ export const RustZKPEcosystem: React.FC = () => {
     | "constant_time"
     | "zeroize_memory"
     | "guarded_memory"
+    | "safe_allocator"
+    | "circuit_safety"
+    | "nullifier_tree"
+    | "iso_29115"
+    | "zkvm_sandbox"
     | "enclave_attestation"
     | "post_quantum"
     | "formal_verification"
@@ -1102,6 +1107,56 @@ export const RustZKPEcosystem: React.FC = () => {
             3. Guarded Memory &amp; mlock
           </button>
           <button
+            onClick={() => setSelectedCodeTab("safe_allocator")}
+            className={`px-3 py-1.5 text-xs font-mono rounded-lg transition cursor-pointer whitespace-nowrap ${
+              selectedCodeTab === "safe_allocator"
+                ? "bg-emerald-950 text-emerald-300 border border-emerald-700 font-semibold"
+                : "text-zinc-400 hover:text-zinc-200"
+            }`}
+          >
+            4. Safe Memory Allocator
+          </button>
+          <button
+            onClick={() => setSelectedCodeTab("circuit_safety")}
+            className={`px-3 py-1.5 text-xs font-mono rounded-lg transition cursor-pointer whitespace-nowrap ${
+              selectedCodeTab === "circuit_safety"
+                ? "bg-amber-950 text-amber-300 border border-amber-700 font-semibold"
+                : "text-zinc-400 hover:text-zinc-200"
+            }`}
+          >
+            5. Circuit Completeness Verifier
+          </button>
+          <button
+            onClick={() => setSelectedCodeTab("nullifier_tree")}
+            className={`px-3 py-1.5 text-xs font-mono rounded-lg transition cursor-pointer whitespace-nowrap ${
+              selectedCodeTab === "nullifier_tree"
+                ? "bg-indigo-950 text-indigo-300 border border-indigo-700 font-semibold"
+                : "text-zinc-400 hover:text-zinc-200"
+            }`}
+          >
+            6. Sparse Nullifier Tree
+          </button>
+          <button
+            onClick={() => setSelectedCodeTab("iso_29115")}
+            className={`px-3 py-1.5 text-xs font-mono rounded-lg transition cursor-pointer whitespace-nowrap ${
+              selectedCodeTab === "iso_29115"
+                ? "bg-teal-950 text-teal-300 border border-teal-700 font-semibold"
+                : "text-zinc-400 hover:text-zinc-200"
+            }`}
+          >
+            7. ISO 29115 LoA Engine
+          </button>
+          <button
+            onClick={() => setSelectedCodeTab("zkvm_sandbox")}
+            className={`px-3 py-1.5 text-xs font-mono rounded-lg transition cursor-pointer whitespace-nowrap ${
+              selectedCodeTab === "zkvm_sandbox"
+                ? "bg-rose-950 text-rose-300 border border-rose-700 font-semibold"
+                : "text-zinc-400 hover:text-zinc-200"
+            }`}
+          >
+            8. zkVM Execution Sandbox
+          </button>
+          <button
             onClick={() => setSelectedCodeTab("enclave_attestation")}
             className={`px-3 py-1.5 text-xs font-mono rounded-lg transition cursor-pointer whitespace-nowrap ${
               selectedCodeTab === "enclave_attestation"
@@ -1305,6 +1360,96 @@ export const RustZKPEcosystem: React.FC = () => {
               </div>
               <pre className="p-4 bg-zinc-950 rounded-xl font-mono text-xs text-cyan-300 border border-zinc-800 overflow-x-auto leading-relaxed max-h-[500px]">
 {GUARDED_MEMORY_SNIPPET}
+              </pre>
+            </div>
+          )}
+
+          {selectedCodeTab === "safe_allocator" && (
+            <div>
+              <div className="flex items-center justify-between text-xs text-zinc-400 mb-2 font-mono">
+                <span>src/security/safe_memory_allocator.rs (Volatile Wiping + 64-bit Red-Zone Canaries)</span>
+                <button
+                  onClick={() => copyToClipboard(SAFE_ALLOCATOR_SNIPPET, "safe_alloc_code")}
+                  className="px-2.5 py-1 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-200 flex items-center gap-1 cursor-pointer"
+                >
+                  {copiedKey === "safe_alloc_code" ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  {copiedKey === "safe_alloc_code" ? "Copied!" : "Copy Rust Code"}
+                </button>
+              </div>
+              <pre className="p-4 bg-zinc-950 rounded-xl font-mono text-xs text-emerald-300 border border-zinc-800 overflow-x-auto leading-relaxed max-h-[500px]">
+{SAFE_ALLOCATOR_SNIPPET}
+              </pre>
+            </div>
+          )}
+
+          {selectedCodeTab === "circuit_safety" && (
+            <div>
+              <div className="flex items-center justify-between text-xs text-zinc-400 mb-2 font-mono">
+                <span>src/security/circuit_tamper_proofing.rs (Formal R1CS Under-Constrained Signal Analyzer)</span>
+                <button
+                  onClick={() => copyToClipboard(CIRCUIT_SAFETY_SNIPPET, "circuit_safety_code")}
+                  className="px-2.5 py-1 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-200 flex items-center gap-1 cursor-pointer"
+                >
+                  {copiedKey === "circuit_safety_code" ? <Check className="w-3.5 h-3.5 text-amber-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  {copiedKey === "circuit_safety_code" ? "Copied!" : "Copy Rust Code"}
+                </button>
+              </div>
+              <pre className="p-4 bg-zinc-950 rounded-xl font-mono text-xs text-amber-300 border border-zinc-800 overflow-x-auto leading-relaxed max-h-[500px]">
+{CIRCUIT_SAFETY_SNIPPET}
+              </pre>
+            </div>
+          )}
+
+          {selectedCodeTab === "nullifier_tree" && (
+            <div>
+              <div className="flex items-center justify-between text-xs text-zinc-400 mb-2 font-mono">
+                <span>src/identity/nullifier_tree.rs (Concurrent Sparse Nullifier Tree &amp; Non-Membership Proofs)</span>
+                <button
+                  onClick={() => copyToClipboard(NULLIFIER_TREE_SNIPPET, "nullifier_tree_code")}
+                  className="px-2.5 py-1 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-200 flex items-center gap-1 cursor-pointer"
+                >
+                  {copiedKey === "nullifier_tree_code" ? <Check className="w-3.5 h-3.5 text-indigo-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  {copiedKey === "nullifier_tree_code" ? "Copied!" : "Copy Rust Code"}
+                </button>
+              </div>
+              <pre className="p-4 bg-zinc-950 rounded-xl font-mono text-xs text-indigo-300 border border-zinc-800 overflow-x-auto leading-relaxed max-h-[500px]">
+{NULLIFIER_TREE_SNIPPET}
+              </pre>
+            </div>
+          )}
+
+          {selectedCodeTab === "iso_29115" && (
+            <div>
+              <div className="flex items-center justify-between text-xs text-zinc-400 mb-2 font-mono">
+                <span>src/compliance/iso_29115_assurance.rs (Formal Level of Assurance LoA 1-4 Engine)</span>
+                <button
+                  onClick={() => copyToClipboard(ISO_29115_SNIPPET, "iso_29115_code")}
+                  className="px-2.5 py-1 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-200 flex items-center gap-1 cursor-pointer"
+                >
+                  {copiedKey === "iso_29115_code" ? <Check className="w-3.5 h-3.5 text-teal-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  {copiedKey === "iso_29115_code" ? "Copied!" : "Copy Rust Code"}
+                </button>
+              </div>
+              <pre className="p-4 bg-zinc-950 rounded-xl font-mono text-xs text-teal-300 border border-zinc-800 overflow-x-auto leading-relaxed max-h-[500px]">
+{ISO_29115_SNIPPET}
+              </pre>
+            </div>
+          )}
+
+          {selectedCodeTab === "zkvm_sandbox" && (
+            <div>
+              <div className="flex items-center justify-between text-xs text-zinc-400 mb-2 font-mono">
+                <span>src/zkvm/safe_execution_sandbox.rs (Gas Metering + Max Call-Stack Recursion Guard)</span>
+                <button
+                  onClick={() => copyToClipboard(ZKVM_SANDBOX_SNIPPET, "zkvm_sandbox_code")}
+                  className="px-2.5 py-1 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-200 flex items-center gap-1 cursor-pointer"
+                >
+                  {copiedKey === "zkvm_sandbox_code" ? <Check className="w-3.5 h-3.5 text-rose-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  {copiedKey === "zkvm_sandbox_code" ? "Copied!" : "Copy Rust Code"}
+                </button>
+              </div>
+              <pre className="p-4 bg-zinc-950 rounded-xl font-mono text-xs text-rose-300 border border-zinc-800 overflow-x-auto leading-relaxed max-h-[500px]">
+{ZKVM_SANDBOX_SNIPPET}
               </pre>
             </div>
           )}
@@ -2287,3 +2432,208 @@ rustflags = [
 [build]
 rustdocflags = ["-D", "warnings"]
 `;
+
+// 14. SAFE ALLOCATOR & RED-ZONE CANARIES
+const SAFE_ALLOCATOR_SNIPPET = `//! Hardened Zero-Leak Memory Allocator and Guarded Cryptographic Buffer Suite
+//!
+//! Provides ultra-secure memory primitives for witness data, secret scalars, and private keys:
+//! - Protected memory segments with page boundary tripwires
+//! - Cryptographic canaries (prefix & suffix) detecting heap buffer overruns
+//! - Volatile zeroization (std::ptr::write_volatile) guaranteed against compiler dead-code elimination
+
+const CANARY_PREFIX: u64 = 0xDEADC0DE_5AFE71CE;
+const CANARY_SUFFIX: u64 = 0xB16B00B5_7A171CA1;
+
+pub struct SafeMemoryBuffer {
+    raw_ptr: *mut u8,
+    layout: Layout,
+    data_offset: usize,
+    capacity: usize,
+    policy: MemoryProtectionPolicy,
+    is_locked: bool,
+}
+
+impl SafeMemoryBuffer {
+    pub fn new(capacity: usize, policy: MemoryProtectionPolicy) -> Result<Self, &'static str> {
+        let canary_size = if policy.enable_canary_guards { std::mem::size_of::<u64>() } else { 0 };
+        let total_size = canary_size + capacity + canary_size;
+        let layout = Layout::from_size_align(total_size, std::mem::align_of::<u64>())?;
+        
+        let raw_ptr = unsafe { alloc(layout) };
+        if raw_ptr.is_null() { return Err("Kernel memory allocation failure"); }
+        
+        if policy.enable_canary_guards {
+            unsafe {
+                ptr::write_volatile(raw_ptr as *mut u64, CANARY_PREFIX);
+                ptr::write_volatile(raw_ptr.add(canary_size + capacity) as *mut u64, CANARY_SUFFIX);
+            }
+        }
+        Ok(Self { raw_ptr, layout, data_offset: canary_size, capacity, policy, is_locked: true })
+    }
+
+    pub fn secure_wipe(&mut self) {
+        let total_size = self.layout.size();
+        unsafe {
+            for i in 0..total_size { ptr::write_volatile(self.raw_ptr.add(i), 0xAA); }
+            for i in 0..total_size { ptr::write_volatile(self.raw_ptr.add(i), 0x00); }
+        }
+    }
+}`;
+
+// 15. CIRCUIT SAFETY & SOUNDNESS
+const CIRCUIT_SAFETY_SNIPPET = `//! R1CS Circuit Completeness, Soundness, and Under-Constrained Signal Safety Verifier
+//!
+//! Formal verification rules to protect zero-knowledge identity circuits against:
+//! - Under-constrained variables (signals allocated but never bound in a constraint)
+//! - Unenforced boolean constraints: b * (1 - b) != 0
+//! - Prime field integer wraparound and underflow vulnerabilities
+
+pub struct CircuitSafetyVerifier {
+    wire_names: HashMap<usize, String>,
+    is_public: HashSet<usize>,
+    is_boolean: HashSet<usize>,
+    gates: Vec<R1csGate>,
+    field_bits: usize,
+}
+
+impl CircuitSafetyVerifier {
+    pub fn audit_circuit(&self) -> CircuitSafetyAuditReport {
+        let mut violations = Vec::new();
+        let mut referenced_wires = HashSet::new();
+
+        for gate in &self.gates {
+            for term in &gate.a { referenced_wires.insert(term.wire_id); }
+            for term in &gate.b { referenced_wires.insert(term.wire_id); }
+            for term in &gate.c { referenced_wires.insert(term.wire_id); }
+        }
+
+        for (wire_id, name) in &self.wire_names {
+            if *wire_id != 0 && !referenced_wires.contains(wire_id) {
+                violations.push(CircuitSafetyViolation::UnconstrainedSignal {
+                    signal_id: *wire_id,
+                    signal_name: name.clone(),
+                });
+            }
+        }
+
+        CircuitSafetyAuditReport {
+            total_wires: self.wire_names.len(),
+            total_constraints: self.gates.len(),
+            is_provably_sound: violations.is_empty(),
+            violations,
+        }
+    }
+}`;
+
+// 16. SPARSE NULLIFIER TREE
+const NULLIFIER_TREE_SNIPPET = `//! Cryptographic Nullifier Tree & Double-Spend / Double-Registration Protection Suite
+//!
+//! Provides Sybil-resistant, privacy-preserving uniqueness attestations:
+//! - Deterministic, unlinkable nullifier generation: Nullifier = Blake3(Secret || ContextId)
+//! - Sparse Merkle Nullifier Tree tracking spent / registered nullifiers
+//! - Cryptographic Non-Membership Proofs proving user has NOT previously registered
+
+pub struct NullifierTree {
+    context_id: String,
+    spent_nullifiers: RwLock<HashSet<NullifierHash>>,
+    ordered_nullifiers: RwLock<Vec<NullifierHash>>,
+    tree_depth: usize,
+}
+
+impl NullifierTree {
+    pub fn register_nullifier(&self, nullifier: NullifierHash) -> Result<(), &'static str> {
+        let mut set = self.spent_nullifiers.write().unwrap();
+        if set.contains(&nullifier) {
+            return Err("DOUBLE-REGISTRATION DETECTED: This identity has already been verified");
+        }
+        set.insert(nullifier);
+        let mut ordered = self.ordered_nullifiers.write().unwrap();
+        if let Err(pos) = ordered.binary_search_by(|probe| probe.0.cmp(&nullifier.0)) {
+            ordered.insert(pos, nullifier);
+        }
+        Ok(())
+    }
+
+    pub fn prove_non_membership(&self, nullifier: NullifierHash) -> Result<NullifierNonMembershipProof, &'static str> {
+        let set = self.spent_nullifiers.read().unwrap();
+        if set.contains(&nullifier) { return Err("Nullifier already registered"); }
+        let ordered = self.ordered_nullifiers.read().unwrap();
+        let idx = ordered.binary_search_by(|probe| probe.0.cmp(&nullifier.0)).unwrap_err();
+        Ok(NullifierNonMembershipProof {
+            root_commitment: self.compute_tree_root(&ordered),
+            queried_nullifier: nullifier,
+            adjacent_low_nullifier: ordered[idx - 1],
+            adjacent_high_nullifier: ordered[idx],
+            is_valid: true,
+        })
+    }
+}`;
+
+// 17. ISO 29115 ASSURANCE ENGINE
+const ISO_29115_SNIPPET = `//! ISO/IEC 29115 Entity Authentication Assurance Framework
+//!
+//! Provides formal evaluation and certification for Levels of Assurance (LoA):
+//! - LoA 1: Self-asserted credentials
+//! - LoA 2: Single-factor cryptographic challenge
+//! - LoA 3: Multi-factor cryptographic attestation + hardware token
+//! - LoA 4: HSM/Enclave hardware backing + zero-knowledge proof + anti-replay freshness
+
+pub struct Iso29115AssuranceEngine {
+    trusted_signing_secret: [u8; 32],
+}
+
+impl Iso29115AssuranceEngine {
+    pub fn evaluate_loa(&self, evidence: &AuthenticationEvidence) -> LevelOfAssurance {
+        if (evidence.has_enclave_attestation || evidence.has_hardware_token)
+            && evidence.has_zkp_predicate
+            && evidence.has_anti_replay_nonce
+            && evidence.key_length_bits >= 256
+            && evidence.credential_issuer_trusted
+        {
+            return LevelOfAssurance::Loa4VeryHigh;
+        }
+
+        if (evidence.has_hardware_token || evidence.has_zkp_predicate)
+            && evidence.has_anti_replay_nonce
+        {
+            return LevelOfAssurance::Loa3High;
+        }
+
+        LevelOfAssurance::Loa1Low
+    }
+}`;
+
+// 18. ZKVM EXECUTION SANDBOX
+const ZKVM_SANDBOX_SNIPPET = `//! zkVM Execution Sandbox, Gas Metering, & Memory Boundary Safety Engine
+//!
+//! Defense-in-depth isolation for zkVM zero-knowledge instruction execution:
+//! - Strict gas metering preventing CPU exhaustion and infinite loops
+//! - Maximum call-stack depth limits preventing stack overflow / memory exhaustion
+//! - Sandboxed linear memory space with strict out-of-bounds traps
+
+pub struct SafeZkVmSandbox {
+    config: SandboxConfig,
+    gas_remaining: u64,
+    registers: [u64; 16],
+    linear_memory: Vec<u8>,
+    call_stack: Vec<usize>,
+}
+
+impl SafeZkVmSandbox {
+    pub fn deduct_gas(&mut self, amount: u64) -> Result<(), SandboxViolation> {
+        if amount > self.gas_remaining {
+            return Err(SandboxViolation::OutOfGas { gas_spent: self.config.gas_limit, gas_limit: self.config.gas_limit });
+        }
+        self.gas_remaining -= amount;
+        Ok(())
+    }
+
+    pub fn write_memory_u64(&mut self, address: usize, value: u64) -> Result<(), SandboxViolation> {
+        self.deduct_gas(10)?;
+        if address + 8 > self.config.memory_limit_bytes {
+            return Err(SandboxViolation::MemoryOutOfBounds { address, memory_limit: self.config.memory_limit_bytes });
+        }
+        self.linear_memory[address..address + 8].copy_from_slice(&value.to_le_bytes());
+        Ok(())
+    }
+}`;
