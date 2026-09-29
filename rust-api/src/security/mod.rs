@@ -112,6 +112,70 @@ pub mod zk_rollup_batcher;
 pub mod zk_sanctions_fuzzy_trie;
 pub mod zk_verifiable_shuffle;
 
+// Advanced Ultra-Hardened Security Modules
+pub mod fhe_bfv_ckks;
+pub mod zkvm_jit_armor;
+pub mod threshold_bls_aggregation;
+pub mod verifiable_delay_function;
+pub mod stark_fri_engine;
+pub mod oblivious_keyword_search;
+pub mod falcon_fips206;
+pub mod w3c_did_vp_engine;
+pub mod bulletproofs_plus_range;
+pub mod pkcs11_session_armor;
+pub mod homomorphic_secret_sharing;
+pub mod confidential_query_guard;
+pub mod dynamic_vector_accumulator;
+pub mod zk_cross_chain_relayer;
+pub mod ring_signatures_clsag;
+pub mod oprf_blind_tokens;
+pub mod zk_kyc_compliance_matrix;
+pub mod kernel_memory_armor;
+pub mod zk_plonk_hypercube;
+pub mod threshold_oblivious_transfer_psi;
+pub mod zk_plonk_fri_composer;
+pub mod blind_zk_threshold_credentials;
+pub mod zk_confidential_state_channels;
+pub mod zk_fuzzy_commitment_biometrics;
+pub mod zk_adaptive_threat_response;
+pub mod asynchronous_vss_dkg;
+pub mod encrypted_identity_graph;
+pub mod plonkish_custom_gate_matrix;
+pub mod verifiable_random_function_ecvrf;
+pub mod sphincs_plus_fips205;
+pub mod psi_cardinality_paillier;
+pub mod zk_fair_lottery_shuffle;
+pub mod enclave_key_sealing;
+pub mod homomorphic_inner_product_argument;
+pub mod zk_graph_sanitization;
+pub mod zk_verifiable_shuffle_prover;
+pub mod threshold_key_recovery_engine;
+pub mod differential_privacy_advanced;
+pub mod homomorphic_vector_commitments;
+pub mod musig2_schnorr_threshold;
+pub mod enclave_protected_channel;
+pub mod path_oram_memory_engine;
+pub mod plonkish_logup_multi_table;
+pub mod single_server_private_information_retrieval;
+pub mod zk_compliance_decision_tree;
+pub mod smt_circuit_solver_bridge;
+pub mod threshold_schnorr_blind_sig;
+pub mod zk_attribute_based_encryption;
+pub mod blake3_incremental_streaming_tree;
+pub mod zk_multiset_hash_accumulator;
+pub mod dice_hardware_identity_pki;
+pub mod zk_batch_shuffle_verifier;
+pub mod confidential_calldata_evm;
+pub mod proactive_secret_sharing;
+pub mod verifiable_credential_federation;
+pub mod pq_session_key_exchange;
+pub mod zk_confidential_ot_extension;
+pub mod hardware_tee_keystore;
+pub mod zk_plonk_hyperplonk_prover;
+pub mod zk_confidential_multi_hop_settlement;
+pub mod zk_groth16_recursive_verifier;
+pub mod formal_invariant_arithmetic_fuzzer;
+
 pub use audit_logger::{CryptographicAuditLogger, SignedAuditEntry};
 pub use audit_merkle_mountain_range::{MerkleMountainRange, MmrInclusionProof, MmrNode};
 pub use biometric_liveness_vault::{BiometricEmbedding128, BiometricMatchReceipt, BiometricVault, BiometricVaultRecord};
@@ -173,3 +237,77 @@ pub use zk_rate_limiter_anonymous::{RlnIdentitySecret, RlnManager, RlnProofShare
 pub use zk_rollup_batcher::{RollupBatchReceipt, RollupBlockHeader, RollupStateDiff, RollupVerificationTx, ZkRollupBatcher};
 pub use zk_sanctions_fuzzy_trie::{FuzzyMatchReceipt, FuzzyNameMatchingEngine, FuzzyTrieNode};
 pub use zk_verifiable_shuffle::{ShuffleCiphertext, VerifiableShuffleEngine, VerifiableShuffleProof};
+
+// Ultra-Hardened Tier 2 Security Exports
+pub use fhe_bfv_ckks::{BfvContext, BlindedIdentityAttributeAggregator, FheCiphertext, FhePublicKey, FheRelinearizationKey, FheSecretKey};
+pub use zkvm_jit_armor::{ControlFlowIntegrityTable, HardenedZkvmSandbox, ZkOpcode, ZkvmExecutionTrace, ZkvmTraceVerifier};
+pub use threshold_bls_aggregation::{AggregatedBlsSignature, BlsG1Point, BlsG2Point, BlsScalar, BlsSignatureShare, BlsThresholdAggregator, ProofOfPossession};
+pub use verifiable_delay_function::{TimedCredentialEscrow, VdfConfig, VdfProof, WesolowskiVdf};
+pub use stark_fri_engine::{FriCommitmentLayer, GoldilocksField, StarkFriEngine, StarkFriProof};
+pub use oblivious_keyword_search::{BlindedSearchTrapdoor, EncryptedIndexEntry, SearchableSymmetricVault};
+pub use falcon_fips206::{FalconEngine, FalconPolynomial, FalconPublicKey, FalconSecretKey, FalconSignature};
+pub use w3c_did_vp_engine::{DidDocument, PresentationProof, VerifiableCredentialItem, VerifiablePresentation, W3cDidEngine};
+pub use bulletproofs_plus_range::{AggregateRangeProof, BulletproofsPlusEngine, BulletproofsPlusProof, PedersenCommitment};
+pub use pkcs11_session_armor::{HsmKeyClass, HsmSlotState, Pkcs11SessionArmor};
+pub use homomorphic_secret_sharing::{DpfCorrectionWord, DpfKeyShare, HomomorphicSecretSharingEngine};
+pub use confidential_query_guard::{ConfidentialQueryGuard, SafeParameterizedQuery, SafeSqlToken};
+pub use dynamic_vector_accumulator::{DynamicAccumulatorState, DynamicNonMembershipWitness, DynamicVectorAccumulator};
+pub use zk_cross_chain_relayer::{EvmBlockHeaderCommitment, MptNodeType, MptProofStep, ZkCrossChainIdentityReceipt, ZkCrossChainRelayer};
+pub use ring_signatures_clsag::{ClsagEngine, ClsagKeyImage, ClsagRingSignature, RingMemberPublicKey};
+pub use oprf_blind_tokens::{BlindedTokenRequest, EvaluatedTokenResponse, OprfBlindTokenEngine, UnblindedRedemptionToken};
+pub use zk_kyc_compliance_matrix::{CompliancePolicyRule, ConfidentialComplianceWitness, JurisdictionCode, ZkComplianceReceipt, ZkKycComplianceMatrix};
+pub use kernel_memory_armor::{AslrEntropyReport, GuardedMemoryAllocation, KernelMemoryArmor, PageProtectionStatus};
+pub use zk_plonk_hypercube::{HypercubeSumcheckEngine, MultilinearExtension, SumcheckProof, SumcheckRoundMessage};
+pub use threshold_oblivious_transfer_psi::{BlindedPsiElement, PsiPolynomialCommitment, PsiQueryRequest, PsiQueryResponse, ThresholdPsiEngine};
+pub use zk_plonk_fri_composer::{PlonkFriComposer, PlonkFriCompositeProof, PlonkGateConstraint};
+pub use blind_zk_threshold_credentials::{AnonymousMasterCredential, AnonymousPresentationProof, AuthoritySignatureShare, BlindThresholdCredentialsEngine, BlindedCredentialIssuanceRequest};
+pub use zk_confidential_state_channels::{ChannelDisputeProof, ChannelState, ChannelStateUpdate, ConfidentialStateChannel};
+pub use zk_fuzzy_commitment_biometrics::{FuzzyBiometricCommitment, FuzzyCommitmentEngine, FuzzyUnlockResult};
+pub use zk_adaptive_threat_response::{AdaptiveThreatConfig, AdaptiveThreatEngine, SecurityAnomalyEvent, ThreatSeverityLevel};
+
+// Ultra-Hardened Tier 3 Security Exports
+pub use asynchronous_vss_dkg::{AsynchronousVssEngine, AvssEchoVote, AvssFieldElement, AvssReadyCertificate, AvssSendProposal, BivariatePolynomial};
+pub use encrypted_identity_graph::{EncryptedGraphNode, EncryptedIdentityGraph, ZkGraphReachabilityProof, ZkPathStepWitness};
+pub use plonkish_custom_gate_matrix::{CustomGateExpression, PlonkishCell, PlonkishMatrix};
+pub use verifiable_random_function_ecvrf::{EcvrfEngine, EcvrfOutput, EcvrfProof};
+pub use sphincs_plus_fips205::{ForsSignature, SphincsEngine, SphincsPublicKey, SphincsSecretKey, SphincsSignature, WotsLeaf};
+pub use psi_cardinality_paillier::{PsiCaItem, PsiCaQuery, PsiCaResult, PsiCardinalityPaillierEngine};
+pub use zk_fair_lottery_shuffle::{FairLotteryShuffleEngine, NeffShuffleProof, ShuffleElGamalCiphertext};
+pub use enclave_key_sealing::{EnclaveKeySealingEngine, EnclaveSealingPolicy, SealedHardwarePayload};
+pub use homomorphic_inner_product_argument::{HomomorphicIpaEngine, IpaFoldingStep, IpaProof};
+pub use zk_graph_sanitization::{GraphSanitizationEngine, GraphSanitizationPolicy, GraphSanitizationReceipt, SanitizedGraphEdge};
+pub use zk_verifiable_shuffle_prover::{ElGamalPair, PermutationMatrixCommitment, VerifiableShuffleArgument, VerifiableShuffleProver};
+pub use threshold_key_recovery_engine::{GuardianKeyShare, KeyRecoveryResult, ThresholdKeyRecoveryEngine};
+pub use differential_privacy_advanced::{AdvancedDpEngine, DpMechanismKind, DpQueryRecord, PrivacyBudgetLedger};
+pub use homomorphic_vector_commitments::{SubvectorOpeningProof, VectorCommitment, VectorCommitmentEngine, VectorPositionOpening};
+pub use musig2_schnorr_threshold::{AggregatedMusig2PublicKey, Musig2Engine, Musig2FinalSignature, Musig2PartialSignature, Musig2PublicNonce, Musig2SecretNonce};
+pub use enclave_protected_channel::{EnclaveProtectedChannel, EnclaveSecureSession, NoiseHandshakeMessage, NoiseHandshakeState};
+pub use path_oram_memory_engine::{OramBlock, OramBucket, PathOramEngine};
+pub use plonkish_logup_multi_table::{LogupEngine, LogupFractionalTerm, LogupProof, LogupTable};
+pub use single_server_private_information_retrieval::{PirQueryVector, PirResponsePayload, SingleServerPirEngine};
+pub use zk_compliance_decision_tree::{ComplianceDecisionTree, DecisionBranchWitness, TreeNodeKind, ZkDecisionTreeProof};
+
+// Ultra-Hardened Tier 4 Security Exports
+pub use smt_circuit_solver_bridge::{SmtCircuitBridge, SmtLinearTerm, SmtR1csConstraint, SmtVerificationReport, SmtWireVar};
+pub use threshold_schnorr_blind_sig::{BlindedSchnorrRequest, PartialBlindSchnorrSignature, ThresholdSchnorrBlindEngine, UnblindedSchnorrSignature};
+pub use zk_attribute_based_encryption::{CpAbeCiphertext, CpAbeEngine, PolicyTreeNode, UserAttributeKeyBundle, ZkPolicySatisfactionProof};
+pub use blake3_incremental_streaming_tree::{Blake3StreamingTree, StreamingInclusionProof, StreamingTreeNode};
+pub use zk_multiset_hash_accumulator::{MSET_FIELD_PRIME, MultisetAccumulator, MultisetEqualityProof, MultisetHashEngine};
+pub use dice_hardware_identity_pki::{DiceCertificateLayer, DiceHardwareChain, DiceHardwareEngine};
+
+// Ultra-Hardened Tier 5 Security Exports
+pub use zk_batch_shuffle_verifier::{BatchShuffleOpening, BatchShuffleVerifier};
+pub use confidential_calldata_evm::{EvmCalldataEncoder, Groth16EvmCalldata};
+pub use proactive_secret_sharing::{ProactiveRenewedShare, ProactiveSecretSharingEngine, PssSubshareUpdate};
+pub use verifiable_credential_federation::{CredentialFederationEngine, FederatedBridgeProof, FederatedTrustAnchor};
+pub use pq_session_key_exchange::{HybridClientInitiation, HybridServerResponse, PqSessionContext, PqSessionKeyExchangeEngine};
+
+// Ultra-Hardened Tier 6 Security Exports
+pub use zk_confidential_ot_extension::{BaseOtKeyPair, EvaluatedExtendedOtBatch, OtExtensionColumnMessage, OtExtensionEngine};
+pub use hardware_tee_keystore::{HardwareTeeKeystore, HardwareTeeType, TeeAttestationReport, TeeKeySlot};
+pub use zk_plonk_hyperplonk_prover::{HyperplonkProof, HyperplonkProverEngine, MultilinearSelectorCommitments};
+
+
+
+
+
