@@ -179,3 +179,145 @@ pub struct VerifyMerkleInclusionResponse {
     pub path_depth: usize,
     pub timestamp: String,
 }
+
+/// Request for Rate-Limiting Nullifier (RLN) anonymous verification.
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct RlnVerifyRequest {
+    pub epoch: u64,
+    pub nullifier_hash: String,
+    pub share_x: u64,
+    pub share_y: u64,
+    pub membership_merkle_root: String,
+    pub zk_snark_proof: String,
+}
+
+/// Response for Rate-Limiting Nullifier (RLN) anonymous verification.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct RlnVerifyResponse {
+    pub is_accepted: bool,
+    pub is_slashed: bool,
+    pub epoch: u64,
+    pub nullifier_hash: String,
+    pub slashing_evidence: Option<crate::security::zk_rate_limiter_anonymous::SlashedIdentityEvidence>,
+    pub message: String,
+    pub timestamp: String,
+}
+
+/// Request for Selective Disclosure JWT verification.
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct SdJwtVerifyRequest {
+    pub presentation: crate::security::w3c_sd_jwt_vc::SdJwtPresentation,
+    pub issuer_public_key_or_secret: String,
+}
+
+/// Response for Selective Disclosure JWT verification.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SdJwtVerifyResponse {
+    pub is_valid: bool,
+    pub issuer_verified: bool,
+    pub holder_binding_verified: bool,
+    pub unmasked_claims: HashMap<String, serde_json::Value>,
+    pub hidden_claim_count: usize,
+    pub message: String,
+    pub timestamp: String,
+}
+
+/// Request for Hardware Enclave Attestation quote evaluation.
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct EnclaveAttestationRequest {
+    pub quote: crate::security::confidential_mpc_enclave::EnclaveAttestationQuote,
+    pub challenge: String,
+    pub policy: crate::security::confidential_mpc_enclave::EnclaveVerificationPolicy,
+}
+
+/// Response for Hardware Enclave Attestation verification.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct EnclaveAttestationResponse {
+    pub is_valid: bool,
+    pub enclave_type: String,
+    pub mr_enclave: String,
+    pub isv_svn: u32,
+    pub verification_receipt: String,
+    pub timestamp: String,
+}
+
+/// Request for NIST FIPS 204 ML-DSA post-quantum signature verification.
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct PqDilithiumVerifyRequest {
+    pub public_key: crate::security::dilithium_fips204::MlDsaPublicKey,
+    pub message: String,
+    pub signature: crate::security::dilithium_fips204::MlDsaSignature,
+}
+
+/// Response for NIST FIPS 204 ML-DSA post-quantum signature verification.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct PqDilithiumVerifyResponse {
+    pub is_valid: bool,
+    pub algorithm: String,
+    pub security_level: String,
+    pub signature_receipt: String,
+    pub timestamp: String,
+}
+
+/// Request for Blinded PSI Sanctions Non-Membership check.
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct SanctionsPsiRequest {
+    pub query: crate::security::zero_leakage_sanctions_engine::BlindedSanctionsQuery,
+    pub expected_epoch: u64,
+}
+
+/// Response for Blinded PSI Sanctions Non-Membership check.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SanctionsPsiResponse {
+    pub is_cleared: bool,
+    pub oracle_evaluated_point: String,
+    pub oracle_signature: String,
+    pub epoch: u64,
+    pub timestamp: String,
+}
+
+/// Request for Merkle Mountain Range audit proof verification.
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct MmrAuditVerifyRequest {
+    pub proof: crate::security::audit_merkle_mountain_range::MmrInclusionProof,
+}
+
+/// Response for Merkle Mountain Range audit proof verification.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct MmrAuditVerifyResponse {
+    pub is_valid: bool,
+    pub leaf_hash: String,
+    pub mmr_size: usize,
+    pub bagged_root: String,
+    pub timestamp: String,
+}
+
+/// Request for Circuit Formal Safety Audit.
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct FormalCircuitCheckRequest {
+    pub circuit: crate::security::formal_proof_verifier::CircuitDescription,
+}
+
+/// Response for Circuit Formal Safety Audit.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct FormalCircuitCheckResponse {
+    pub report: crate::security::formal_proof_verifier::FormalAuditReport,
+    pub smt_lib2_code: String,
+    pub timestamp: String,
+}
+
+/// Real-time cryptographic overview dashboard model.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SecurityOverviewResponse {
+    pub total_rust_loc: usize,
+    pub safety_and_hardening_loc: usize,
+    pub safety_percentage: f64,
+    pub security_modules_count: usize,
+    pub active_defenses: Vec<String>,
+    pub hardware_enclave_status: String,
+    pub post_quantum_status: String,
+    pub rln_rate_limiter_epoch: u64,
+    pub mmr_audit_tree_size: usize,
+    pub timestamp: String,
+}
+

@@ -61,6 +61,14 @@ async fn main() {
         .route("/api/v1/ledger", get(handlers::get_ledger))
         .route("/api/v1/metrics", get(handlers::get_metrics))
         .route("/api/v1/stats", get(handlers::get_stats))
+        .route("/api/v1/security/overview", get(handlers::get_security_overview))
+        .route("/api/v1/security/rln-verify", post(handlers::rln_verify))
+        .route("/api/v1/security/sd-jwt-verify", post(handlers::sd_jwt_verify))
+        .route("/api/v1/security/enclave-attestation", post(handlers::enclave_attestation_verify))
+        .route("/api/v1/security/pq-dilithium-verify", post(handlers::pq_dilithium_verify))
+        .route("/api/v1/security/sanctions-psi", post(handlers::sanctions_psi_check))
+        .route("/api/v1/security/mmr-audit-verify", post(handlers::mmr_audit_verify))
+        .route("/api/v1/security/circuit-formal-check", post(handlers::circuit_formal_check))
         .layer(cors)
         .with_state(state);
 
